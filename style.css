@@ -1,52 +1,110 @@
+:root {
+    --background-color: #000000; /* Черный фон */
+    --text-color: #ffffff; /* Белый текст */
+    --header-background-color: #000000; /* Черный фон для header */
+    --nav-background-color: #000000; /* Черный фон для навигации */
+    --section-background-color: #000000; /* Черный фон для секций */
+    --footer-background-color: #000000; /* Черный фон для footer */
+    --link-color: #ffffff; /* Белые ссылки */
+    --button-background-color: #0070ba; /* Синий для кнопок */
+    --button-text-color: #ffffff; /* Белый текст на кнопках */
+    --button-hover-background-color: #005ea6; /* Темно-синий при наведении на кнопку */
+}
+
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Lilita One', cursive;
+    font-weight: 900; /* Жирный шрифт */
     margin: 0;
     padding: 0;
-    background-color: #f4f4f4;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    transition: background-color 0.3s, color 0.3s;
 }
 
 header {
-    background-color: #333;
-    color: #fff;
-    padding: 10px 0;
+    background-color: var(--header-background-color);
+    color: var(--link-color);
+    padding: 20px 0;
     text-align: center;
+    transition: background-color 0.3s;
 }
 
 nav {
-    background-color: #444;
+    background-color: var(--nav-background-color);
+    transition: background-color 0.3s;
 }
 
 nav ul {
     list-style: none;
     padding: 0;
-    text-align: center;
+    margin: 0;
+    display: flex;
+    justify-content: center;
 }
 
 nav ul li {
-    display: inline;
-    margin-right: 10px;
+    margin: 0 10px;
 }
 
 nav ul li a {
-    color: #fff;
+    color: var(--link-color);
     text-decoration: none;
     padding: 10px 20px;
-    display: inline-block;
+    transition: background-color 0.3s;
+}
+
+nav ul li a:hover {
+    background-color: var(--button-hover-background-color);
 }
 
 section {
-    padding: 20px;
-    margin: 20px;
-    background-color: #fff;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 40px;
+    margin: 20px auto;
+    max-width: 800px;
+    background-color: var(--section-background-color);
+    color: var(--text-color);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s, color 0.3s;
 }
 
 footer {
-    background-color: #333;
-    color: #fff;
+    background-color: var(--footer-background-color);
+    color: var(--link-color);
     text-align: center;
-    padding: 10px 0;
+    padding: 20px 0;
     position: fixed;
     bottom: 0;
     width: 100%;
+    transition: background-color 0.3s;
+}
+
+form {
+    text-align: center;
+    margin-top: 20px;
+}
+
+form input[type="submit"] {
+    background-color: var(--button-background-color);
+    color: var(--button-text-color);
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+form input[type="submit"]:hover {
+    background-color: var(--button-hover-background-color);
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 16px;
+    margin-top: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: var(--button-hover-background-color);
 }

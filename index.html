@@ -1,40 +1,100 @@
 <!DOCTYPE html>
-<html lang="uk">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Мій Проект</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Мой сайт</title>
+    <style>
+        body {
+            background-color: black;
+            color: white;
+            font-family: "Poppins", sans-serif;
+            text-align: center;
+            padding: 50px;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            font-weight: bold;
+            position: relative;
+        }
+        h1, h2, h3, p, input[type="submit"] {
+            font-weight: bold;
+        }
+        h1 {
+            font-size: 2.5em;
+        }
+        h2 {
+            font-size: 2em;
+        }
+        h3 {
+            font-size: 1.5em;
+        }
+        p {
+            font-size: 1.2em;
+        }
+        section {
+            margin-top: 50px;
+        }
+        input[type="submit"] {
+            background-color: transparent;
+            color: white;
+            border: 2px solid white;
+            padding: 10px 20px;
+            font-size: 1em;
+            cursor: pointer;
+            border-radius: 10px;
+            transition: 0.3s;
+        }
+        input[type="submit"]:hover {
+            background-color: white;
+            color: black;
+        }
+        .footer {
+            margin-top: auto;
+            padding: 20px;
+        }
+        .profile {
+            position: absolute;
+            top: 50%;
+            right: 10%;
+            transform: translateY(-50%);
+            text-align: center;
+        }
+        .profile img {
+            width: 200px;
+            height: auto;
+            border-radius: 10px;
+            border: 2px solid white;
+        }
+        .profile h1 {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <header>
-        <h1>Ласкаво просимо на мій сайт</h1>
-    </header>
-    <nav>
-        <ul>
-            <li><a href="#about">Про проект</a></li>
-            <li><a href="#features">Особливості</a></li>
-            <li><a href="#contact">Контакти</a></li>
-        </ul>
-    </nav>
-    <section id="about">
-        <h2>Про проект</h2>
-        <p>Цей проект створено для демонстрації простого веб-сайту з використанням HTML та CSS.</p>
-    </section>
-    <section id="features">
-        <h2>Особливості</h2>
-        <ul>
-            <li>Простий і зрозумілий інтерфейс</li>
-            <li>Кросплатформена сумісність</li>
-            <li>Адаптивний дизайн</li>
-        </ul>
-    </section>
-    <section id="contact">
-        <h2>Контакти</h2>
-        <p>Email: example@example.com</p>
-    </section>
-    <footer>
-        <p>&copy; 2025 Мій Проект. Всі права захищені.</p>
-    </footer>
+    <h1>Hi, how are you?</h1>
+    <p></p>
+    
+    <div class="profile">
+        <h1>Toploardgg (Stas)</h1>
+        <img src="https://s.namemc.com/3d/skin/body.png?id=86f7e7addff80315&model=classic&theta=25&phi=18&time=90&width=600&height=800" alt="Profile Image">
+    </div>
+    
+    <div class="footer">
+        <section id="contact">
+            <h2>contacts</h2>
+            <p>Email: toploardgg@gmail.com & Telegram: loardstk</p>
+            <h3>support us:</h3>
+            <form action="https://www.paypal.com/donate" method="post" target="_top">
+                <input type="hidden" name="business" value="toploardgg@gmail.com" />
+                <input type="hidden" name="no_recurring" value="0" />
+                <input type="hidden" name="item_name" value="Підтримка проекту" />
+                <input type="hidden" name="currency_code" value="USD" />
+                <input type="submit" value="Donate with PayPal" />
+            </form>
+        </section>
+    </div>
 </body>
 </html>
