@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Мой сайт</title>
+    <title>Toploardgg</title>
     <style>
         body {
             background-color: black;
@@ -17,25 +17,21 @@
             font-weight: bold;
             position: relative;
         }
-        h1, h2, h3, p, input[type="submit"] {
+        h1, h2, h3, h4, p, input[type="submit"] {
             font-weight: bold;
         }
-        h1 {
-            font-size: 2.5em;
+        .header-controls {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            gap: 10px;
         }
-        h2 {
-            font-size: 2em;
+        .dropdown {
+            position: relative;
+            display: inline-block;
         }
-        h3 {
-            font-size: 1.5em;
-        }
-        p {
-            font-size: 1.2em;
-        }
-        section {
-            margin-top: 50px;
-        }
-        input[type="submit"] {
+        .dropbtn {
             background-color: transparent;
             color: white;
             border: 2px solid white;
@@ -45,19 +41,43 @@
             border-radius: 10px;
             transition: 0.3s;
         }
-        input[type="submit"]:hover {
+        .dropbtn:hover, .dropbtn:focus {
             background-color: white;
             color: black;
         }
-        .footer {
-            margin-top: auto;
-            padding: 20px;
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: black;
+            border: 2px solid white;
+            border-radius: 10px;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px rgba(255, 255, 255, 0.2);
+            z-index: 1;
+        }
+        .dropdown-content button {
+            background-color: transparent;
+            color: white;
+            border: none;
+            padding: 12px 16px;
+            width: 100%;
+            text-align: left;
+            cursor: pointer;
+            font-size: 1em;
+        }
+        .dropdown-content button:hover {
+            background-color: white;
+            color: black;
+        }
+        .dropdown:hover .dropdown-content {
+            display: block;
         }
         .profile {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin-top: 50px;
+            text-align: center;
+            position: absolute;
+            top: 50%;
+            right: 10%;
+            transform: translateY(-50%);
         }
         .profile img {
             width: 200px;
@@ -65,44 +85,101 @@
             border-radius: 10px;
             border: 2px solid white;
         }
-        .profile h1 {
-            font-size: 2em;
-            margin-bottom: 10px;
+        .footer {
+            margin-top: auto;
+            padding: 20px;
+            text-align: center;
         }
-        @media (min-width: 768px) {
-            .profile {
-                position: absolute;
-                top: 50%;
-                right: 10%;
-                transform: translateY(-50%);
-                text-align: center;
-            }
+        .paypal-button {
+            background-color: transparent;
+            color: white;
+            border: 2px solid white;
+            padding: 10px 20px;
+            font-size: 1em;
+            cursor: pointer;
+            border-radius: 10px;
+            transition: 0.3s;
+        }
+        .paypal-button:hover {
+            background-color: white;
+            color: black;
+        }
+        h4#contact {
+            font-size: 1.5em;
         }
     </style>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap" rel="stylesheet">
+    <script>
+        const translations = {
+            en: {
+                greeting: "Hi, how are you?",
+                support: "Support us:",
+                donate: "Donate with PayPal",
+                contact: "Contacts:",
+                contacts: "Gmail: Toploardgg@gmail.com & Telegram: Loardstk",
+                name: "Toploardgg (Stas)",
+                language: "English"
+            },
+            ru: {
+                greeting: "Привет, как дела?",
+                support: "Поддержать нас:",
+                donate: "Пожертвовать через PayPal",
+                contact: "Контакты:",
+                contacts: "Gmail: Toploardgg@gmail.com & Telegram: Loardstk",
+                name: "Toploardgg (Стас)",
+                language: "Русский"
+            },
+            uk: {
+                greeting: "Привіт, як справи?",
+                support: "Підтримайте нас:",
+                donate: "Пожертвувати через PayPal",
+                contact: "Контакти:",
+                contacts: "Gmail: Toploardgg@gmail.com & Telegram: Loardstk",
+                name: "Toploardgg (Стас)",
+                language: "Українська"
+            }
+        };
+        
+        function changeLanguage(lang) {
+            document.getElementById("greeting").textContent = translations[lang].greeting;
+            document.getElementById("support").textContent = translations[lang].support;
+            document.getElementById("donate").textContent = translations[lang].donate;
+            document.getElementById("name").textContent = translations[lang].name;
+            document.getElementById("contacts").textContent = translations[lang].contacts;
+            document.getElementById("contact").textContent = translations[lang].contact;
+            document.getElementById("language-button").textContent = translations[lang].language;
+        }
+    </script>
 </head>
 <body>
-    <h1>Hi, how are you?</h1>
-    <p></p>
+    <div class="header-controls">
+        <div class="dropdown">
+            <button class="dropbtn" id="language-button">English</button>
+            <div class="dropdown-content">
+                <button onclick="changeLanguage('en')">English</button>
+                <button onclick="changeLanguage('ru')">Русский</button>
+                <button onclick="changeLanguage('uk')">Українська</button>
+            </div>
+        </div>
+    </div>
+    
+    <h1 id="greeting">Hi, how are you?</h1>
     
     <div class="profile">
-        <h1>Toploardgg (Stas)</h1>
+        <h1 id="name">Toploardgg (Stas)</h1>
         <img src="https://s.namemc.com/3d/skin/body.png?id=86f7e7addff80315&model=classic&theta=30&phi=21&time=90&width=600&height=800" alt="Profile Image">
     </div>
     
     <div class="footer">
-        <section id="contact">
-            <h2>contacts</h2>
-            <p>Email: toploardgg@gmail.com</p>
-            <h3>support us:</h3>
-            <form action="https://www.paypal.com/donate" method="post" target="_top">
-                <input type="hidden" name="business" value="toploardgg@gmail.com" />
-                <input type="hidden" name="no_recurring" value="0" />
-                <input type="hidden" name="item_name" value="Підтримка проекту" />
-                <input type="hidden" name="currency_code" value="USD" />
-                <input type="submit" value="Donate with PayPal" />
-            </form>
-        </section>
+        <h4 id="contact">Contacts:</h4>
+        <h3 id="contacts">Gmail: Toploardgg@gmail.com & Telegram: Loardstk</h3>
+        <h2 id="support">Support us:</h2>
+        <form action="https://www.paypal.com/donate" method="post" target="_top">
+            <input type="hidden" name="business" value="toploardgg@gmail.com" />
+            <input type="hidden" name="no_recurring" value="0" />
+            <input type="hidden" name="item_name" value="Підтримка проекту" />
+            <input type="hidden" name="currency_code" value="USD" />
+            <button type="submit" class="paypal-button" id="donate">Donate with PayPal</button>
+        </form>
     </div>
 </body>
 </html>
