@@ -1,0 +1,71 @@
+@keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.5); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes neonGlow {
+    0% { text-shadow: 0 0 10px #ff1493, 0 0 20px #ff69b4, 0 0 30px #ff1493; }
+    50% { text-shadow: 0 0 20px #ff69b4, 0 0 30px #ff1493, 0 0 40px #ff69b4; }
+    100% { text-shadow: 0 0 10px #ff1493, 0 0 20px #ff69b4, 0 0 30px #ff1493; }
+}
+
+@keyframes heartbeat {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+}
+
+body {
+    background: linear-gradient(to right, #ff007f, #ff66b2);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    font-family: "Arial", sans-serif;
+    text-align: center;
+    margin: 0;
+    overflow: hidden;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.neon-text {
+    font-size: 48px;
+    color: #fff;
+    animation: fadeIn 2s ease-in-out, neonGlow 1.5s infinite alternate;
+}
+
+.heart {
+    position: relative;
+    width: 100px;
+    height: 100px;
+    margin-top: 20px;
+    background: radial-gradient(circle, #ff1493 30%, #ff007f 70%);
+    border-radius: 50%;
+    box-shadow: 0 0 20px #ff1493, 0 0 40px #ff69b4, 0 0 60px #ff1493;
+    animation: fadeIn 3s ease-in-out, heartbeat 1s infinite alternate;
+}
+
+.heart::before, .heart::after {
+    content: "";
+    position: absolute;
+    width: 100px;
+    height: 160px;
+    background: inherit;
+    border-radius: 50px 50px 0 0;
+}
+
+.heart::before {
+    top: -50px;
+    left: 0;  /* Було left: 50px; */
+    transform: rotate(-45deg);
+}
+
+.heart::after {
+    top: -50px;
+    left: 50px;  /* Було left: -50px; */
+    transform: rotate(45deg);
+}
