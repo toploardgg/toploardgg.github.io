@@ -54,11 +54,10 @@
             padding: 20px;
         }
         .profile {
-            position: absolute;
-            top: 50%;
-            right: 10%;
-            transform: translateY(-50%);
-            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 50px;
         }
         .profile img {
             width: 200px;
@@ -70,6 +69,15 @@
             font-size: 2em;
             margin-bottom: 10px;
         }
+        @media (min-width: 768px) {
+            .profile {
+                position: absolute;
+                top: 50%;
+                right: 10%;
+                transform: translateY(-50%);
+                text-align: center;
+            }
+        }
     </style>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap" rel="stylesheet">
 </head>
@@ -79,13 +87,13 @@
     
     <div class="profile">
         <h1>Toploardgg (Stas)</h1>
-        <img src="https://s.namemc.com/3d/skin/body.png?id=86f7e7addff80315&model=classic&theta=25&phi=18&time=90&width=600&height=800" alt="Profile Image">
+        <img src="https://s.namemc.com/3d/skin/body.png?id=86f7e7addff80315&model=classic&theta=30&phi=21&time=90&width=600&height=800" alt="Profile Image">
     </div>
     
     <div class="footer">
         <section id="contact">
             <h2>contacts</h2>
-            <p>Email: toploardgg@gmail.com & Telegram: loardstk</p>
+            <p>Email: toploardgg@gmail.com</p>
             <h3>support us:</h3>
             <form action="https://www.paypal.com/donate" method="post" target="_top">
                 <input type="hidden" name="business" value="toploardgg@gmail.com" />
