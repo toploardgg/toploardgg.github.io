@@ -1,15 +1,81 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>С 8 марта, Ксюша!</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Do You Love Me?</title>
+    <style>
+        body {
+            background-color: white;
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            text-align: center;
+        }
+        .question {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        .buttons {
+            display: flex;
+            gap: 20px;
+        }
+        .button {
+            padding: 10px 20px;
+            border: 2px solid black;
+            border-radius: 10px;
+            background-color: #f0f0f0;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .button:hover {
+            background-color: #e0e0e0;
+        }
+        .response {
+            margin-top: 20px;
+            font-size: 20px;
+            font-weight: bold;
+        }
+        .hidden {
+            display: none;
+        }
+        img {
+            width: 200px;
+            height: auto;
+            margin-top: 20px;
+        }
+    </style>
 </head>
 <body>
     <div class="container">
-        <h1 class="neon-text">С 8 марта, Ксюша!</h1>
-        <div class="heart"></div>
+        <div class="question">Ты меня любишь?</div>
+        <div class="buttons">
+            <button class="button" onclick="showLove()">Да</button>
+            <button class="button" onclick="showBebra()">Нет</button>
+        </div>
+        <div id="response" class="response hidden"></div>
+        <img id="loveImage" class="hidden" src="https://i.pinimg.com/736x/1c/ac/6d/1cac6d7a2ba397d5a02115ccf3c12817.jpg" alt="Love Image">
     </div>
+    <script>
+        function showLove() {
+            document.getElementById('response').classList.add('hidden');
+            document.getElementById('loveImage').classList.remove('hidden');
+        }
+
+        function showBebra() {
+            document.getElementById('response').innerText = 'ну и иди нахуй тогда';
+            document.getElementById('response').classList.remove('hidden');
+            document.getElementById('loveImage').classList.add('hidden');
+        }
+    </script>
 </body>
 </html>
