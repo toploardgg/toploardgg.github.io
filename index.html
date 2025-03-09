@@ -4,148 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Toploardgg</title>
-    <style>
-        body {
-            background-color: black;
-            color: white;
-            font-family: "Poppins", sans-serif;
-            text-align: center;
-            padding: 50px;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-            font-weight: bold;
-            position: relative;
-        }
-        h1, h2, h3, h4, p, input[type="submit"] {
-            font-weight: bold;
-        }
-        .header-controls {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            display: flex;
-            gap: 10px;
-        }
-        .dropdown {
-            position: relative;
-            display: inline-block;
-        }
-        .dropbtn {
-            background-color: transparent;
-            color: white;
-            border: 2px solid white;
-            padding: 10px 20px;
-            font-size: 1em;
-            cursor: pointer;
-            border-radius: 10px;
-            transition: 0.3s;
-        }
-        .dropbtn:hover, .dropbtn:focus {
-            background-color: white;
-            color: black;
-        }
-        .dropdown-content {
-            display: none;
-            position: absolute;
-            background-color: black;
-            border: 2px solid white;
-            border-radius: 10px;
-            min-width: 160px;
-            box-shadow: 0px 8px 16px rgba(255, 255, 255, 0.2);
-            z-index: 1;
-        }
-        .dropdown-content button {
-            background-color: transparent;
-            color: white;
-            border: none;
-            padding: 12px 16px;
-            width: 100%;
-            text-align: left;
-            cursor: pointer;
-            font-size: 1em;
-        }
-        .dropdown-content button:hover {
-            background-color: white;
-            color: black;
-        }
-        .dropdown:hover .dropdown-content {
-            display: block;
-        }
-        .profile {
-            margin: auto;
-            text-align: center;
-        }
-        .profile img {
-            width: 200px;
-            height: auto;
-            border-radius: 10px;
-            border: 2px solid white;
-        }
-        .footer {
-            margin-top: auto;
-            padding: 20px;
-            text-align: center;
-        }
-        .paypal-button {
-            background-color: transparent;
-            color: white;
-            border: 2px solid white;
-            padding: 10px 20px;
-            font-size: 1em;
-            cursor: pointer;
-            border-radius: 10px;
-            transition: 0.3s;
-        }
-        .paypal-button:hover {
-            background-color: white;
-            color: black;
-        }
-        h4#contact {
-            font-size: 1.5em;
-        }
-    </style>
-    <script>
-        const translations = {
-            en: {
-                greeting: "Hi, how are you?",
-                support: "Support us:",
-                donate: "Donate with PayPal",
-                contact: "Contacts:",
-                contacts: "Gmail: Toploardgg@gmail.com & Telegram: Loardstk",
-                name: "Toploardgg (Stas)",
-                language: "English"
-            },
-            ru: {
-                greeting: "Привет, как дела?",
-                support: "Поддержать нас:",
-                donate: "Пожертвовать через PayPal",
-                contact: "Контакты:",
-                contacts: "Gmail: Toploardgg@gmail.com & Telegram: Loardstk",
-                name: "Toploardgg (Стас)",
-                language: "Русский"
-            },
-            uk: {
-                greeting: "Привіт, як справи?",
-                support: "Підтримайте нас:",
-                donate: "Пожертвувати через PayPal",
-                contact: "Контакти:",
-                contacts: "Gmail: Toploardgg@gmail.com & Telegram: Loardstk",
-                name: "Toploardgg (Стас)",
-                language: "Українська"
-            }
-        };
-        
-        function changeLanguage(lang) {
-            document.getElementById("greeting").textContent = translations[lang].greeting;
-            document.getElementById("support").textContent = translations[lang].support;
-            document.getElementById("donate").textContent = translations[lang].donate;
-            document.getElementById("name").textContent = translations[lang].name;
-            document.getElementById("contacts").textContent = translations[lang].contacts;
-            document.getElementById("contact").textContent = translations[lang].contact;
-            document.getElementById("language-button").textContent = translations[lang].language;
-        }
-    </script>
+    <link rel="stylesheet" href="style.css"> <!-- Подключаем CSS -->
 </head>
 <body>
     <div class="header-controls">
@@ -158,26 +17,24 @@
             </div>
         </div>
     </div>
-    
     <h1 id="greeting">Hi, how are you?</h1>
-    
     <div class="profile">
         <h1 id="name">Toploardgg (Stas)</h1>
         <img src="https://s.namemc.com/3d/skin/body.png?id=86f7e7addff80315&model=classic&theta=30&phi=21&time=90&width=600&height=800" alt="Profile Image">
     </div>
-    
     <div class="footer">
-        <h4 id="contact">Contacts:</h4>
-        <h3 id="contacts">Gmail: Toploardgg@gmail.com & Telegram: Loardstk</h3>
-        <h2 id="support">Support us:</h2>
-        <form action="https://www.paypal.com/donate" method="post" target="_top">
-            <input type="hidden" name="business" value="toploardgg@gmail.com" />
-            <input type="hidden" name="no_recurring" value="0" />
-            <input type="hidden" name="item_name" value="Підтримка проекту" />
-            <input type="hidden" name="currency_code" value="USD" />
-            <button type="submit" class="paypal-button" id="donate">Donate with PayPal</button>
-        </form>
+        <div class="info-box">
+            <h4 id="contact">Contacts:</h4>
+            <h3 id="contacts">Gmail: Toploardgg@gmail.com & Telegram: Loardstk</h3>
+            <h2 id="support">Support us:</h2>
+            <form action="https://www.paypal.com/donate" method="post" target="_top">
+                <input type="hidden" name="business" value="toploardgg@gmail.com" />
+                <input type="hidden" name="no_recurring" value="0" />
+                <input type="hidden" name="item_name" value="Підтримка проекту" />
+                <input type="hidden" name="currency_code" value="USD" />
+                <button type="submit" class="paypal-button" id="donate">Donate with PayPal</button>
+            </form>
+        </div>
     </div>
-    <script src="dropdown.js"></script>
-</body>
-</html>
+    
+    <script src="dropdown.js"></script> <!-- Подключаем JS -->
