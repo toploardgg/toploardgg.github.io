@@ -5,8 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Toploardgg</title>
     <link rel="stylesheet" href="style.css"> <!-- Подключаем CSS -->
+    <link rel="icon" type="image/png" href="лол.png">
 </head>
 <body>
+    <img src="лол.png" alt="Logo" class="logo">
     <div class="header-controls">
         <div class="dropdown">
             <button class="dropbtn" id="language-button">English</button>
@@ -17,15 +19,22 @@
             </div>
         </div>
     </div>
-    <h1 id="greeting">Hi, how are you?</h1>
+    <h1 id="greeting">Hi.</h1>
     <div class="profile">
         <h1 id="name">Toploardgg (Stas)</h1>
         <img src="https://s.namemc.com/3d/skin/body.png?id=86f7e7addff80315&model=classic&theta=30&phi=21&time=90&width=600&height=800" alt="Profile Image">
     </div>
     <div class="footer">
         <div class="info-box">
-            <h4 id="contact">Contacts:</h4>
-            <h3 id="contacts">Gmail: Toploardgg@gmail.com & Telegram: Loardstk</h3>
+            <p id="link">
+                <h4 id="contact">Contacts:</h4>
+                <a href="https://mail.google.com/mail/?view=cm&fs=1&to=Toploardgg@gmail.com" style="text-decoration: underline; color: rgb(255, 255, 255);">Gmail: Toploardgg@gmail.com</a> &  
+                <a href="https://t.me/Loardstk" style="text-decoration: underline; color: rgb(255, 255, 255);">Telegram: Loardstk</a>
+            </p>
+            <script>
+    document.getElementById("gmailLink").href = document.getElementById("gmail").value;
+    document.getElementById("telegramLink").href = document.getElementById("telegram").value;
+</script>                 
             <h2 id="support">Support us:</h2>
             <form action="https://www.paypal.com/donate" method="post" target="_top">
                 <input type="hidden" name="business" value="toploardgg@gmail.com" />
@@ -36,5 +45,9 @@
             </form>
         </div>
     </div>
-    
-    <script src="dropdown.js"></script> <!-- Подключаем JS -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Импорт шрифта Roboto (Black) из Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@900&display=swap" rel="stylesheet">

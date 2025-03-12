@@ -30,11 +30,27 @@ document.addEventListener("DOMContentLoaded", function () {
             });
         });
     }
+
+    // Анимация при загрузке страницы
+    const allElements = document.querySelectorAll('*');
+    allElements.forEach(element => {
+        element.classList.add('animated');
+        element.style.opacity = 0;
+        element.style.transform = 'translateY(20px)';
+    });
+
+    window.addEventListener('load', () => {
+        allElements.forEach(element => {
+            element.style.transition = 'opacity 2s ease-out, transform 2s ease-out'; // Увеличено до 2 секунд
+            element.style.opacity = 1;
+            element.style.transform = 'translateY(0)';
+        });
+    });
 });
 
 const translations = {
     en: {
-        greeting: "Hi, how are you?",
+        greeting: "Hi.",
         support: "Support us:",
         donate: "Donate with PayPal",
         contact: "Contacts:",
@@ -43,7 +59,7 @@ const translations = {
         language: "English"
     },
     ru: {
-        greeting: "Привет, как дела?",
+        greeting: "Привет.",
         support: "Поддержать нас:",
         donate: "Пожертвовать через PayPal",
         contact: "Контакты:",
@@ -52,7 +68,7 @@ const translations = {
         language: "Русский"
     },
     uk: {
-        greeting: "Привіт, як справи?",
+        greeting: "Привіт.",
         support: "Підтримайте нас:",
         donate: "Пожертвувати через PayPal",
         contact: "Контакти:",

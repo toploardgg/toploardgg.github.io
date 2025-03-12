@@ -1,7 +1,7 @@
 body {
     background-color: #1a1a1a; /* Темно-серый фон */
     color: white;
-    font-family: "Poppins", sans-serif;
+    font-family: "Roboto", sans-serif;
     text-align: center;
     padding: 50px;
     display: flex;
@@ -160,3 +160,34 @@ h4#contact {
         color: black;
     }
 </style>
+body {
+    background-color: #1a1a1a;
+    color: white;
+    font-family: "Roboto", sans-serif;
+    text-align: center;
+    padding: 50px;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    font-weight: bold;
+    position: relative;
+}
+
+.header {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    width: 50px;  /* Размер логотипа */
+    height: auto;
+    margin-right: 15px;
+}
+
+.header-controls {
+    display: flex;
+    gap: 10px;
+}
