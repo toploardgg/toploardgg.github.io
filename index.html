@@ -530,8 +530,8 @@
                 versionLabel: "Version:",
                 motdLabel: "MOTD:",
                 refreshButton: "Refresh",
-                // Эти тексты ошибок зависят от API, но оставим общие
-                errorFetchingStatus: "Error getting status."
+                errorFetchingStatus: "Error getting status.",
+                statusOfflineMOTD: "Offline (Wrong MOTD)" // Новый текст для случая "Офлайн по MOTD"
                 // --- Конец переводов для статуса сервера ---
             },
             ru: {
@@ -570,7 +570,8 @@
                 versionLabel: "Версия:",
                 motdLabel: "MOTD:",
                 refreshButton: "Обновить",
-                errorFetchingStatus: "Ошибка получения статуса."
+                errorFetchingStatus: "Ошибка получения статуса.",
+                statusOfflineMOTD: "Офлайн (Неверный MOTD)"
                  // --- Конец переводов для статуса сервера ---
             },
             uk: {
@@ -609,7 +610,8 @@
                 versionLabel: "Версія:",
                 motdLabel: "MOTD:",
                 refreshButton: "Оновити",
-                errorFetchingStatus: "Помилка отримання статусу."
+                errorFetchingStatus: "Помилка отримання статусу.",
+                statusOfflineMOTD: "Офлайн (Невірний MOTD)"
                 // --- Конец переводов для статуса сервера ---
             }
         };
@@ -707,7 +709,14 @@
                 if (statusIndicator.classList.contains('status-online')) {
                     statusIndicator.textContent = currentTranslations.statusOnline;
                 } else if (statusIndicator.classList.contains('status-offline')) {
-                    statusIndicator.textContent = currentTranslations.statusOffline + (statusIndicator.textContent.includes('(') ? statusIndicator.textContent.substring(statusIndicator.textContent.indexOf('(')) : ''); // Сохраняем текст ошибки, если есть
+                     // Проверяем, является ли текущий текст индикатора "Офлайн (Неверный MOTD)"
+                     const offlineMotdText = translations['en'].statusOfflineMOTD; // Берем текст ошибки MOTD на английском для сравнения
+                     if (statusIndicator.textContent.includes(offlineMotdText)) {
+                         statusIndicator.textContent = currentTranslations.statusOfflineMOTD;
+                     } else {
+                        // Если это не ошибка MOTD, оставляем стандартный текст ошибки или "Офлайн"
+                         statusIndicator.textContent = currentTranslations.statusOffline + (statusIndicator.textContent.includes('(') ? statusIndicator.textContent.substring(statusIndicator.textContent.indexOf('(')) : '');
+                     }
                 } else { // Состояние загрузки
                      statusIndicator.textContent = currentTranslations.statusLoading;
                 }
@@ -721,7 +730,7 @@
         // === Конец функций для вкладок и языка ===
 
 
-        // === Функции для статуса сервера (Использование публичного API) ===
+        // === Функции для статуса сервера (Использование публичного API и логика по MOTD) ===
         const statusIndicator = document.getElementById('status-indicator');
         const serverOnlineInfo = document.getElementById('server-online-info');
         const playersOnline = document.getElementById('players-online');
@@ -733,6 +742,9 @@
         // !!! ЗАМЕНИТЕ НА АДРЕС ВАШЕГО ATERNOS СЕРВЕРА !!!
         // Адрес и порт в формате "адрес:порт"
         const ATERNOS_SERVER_ADDRESS_PORT = 'Toploardgg.aternos.me:39466'; // <--- Укажите адрес и порт вашего Aternos сервера через двоеточие
+
+        // Ожидаемый текст MOTD для статуса "Онлайн"
+        const EXPECTED_MOTD = 'Welcome to the server of Toploardgg!';
 
         // Используем публичный API от mcstatus.io
         const MCSTATUS_API_URL = `https://api.mcstatus.io/v2/status/java/${ATERNOS_SERVER_ADDRESS_PORT}`;
@@ -757,22 +769,38 @@
 
                 const data = await response.json();
 
-                if (data.online) {
+                // --- НОВАЯ ЛОГИКА ОПРЕДЕЛЕНИЯ СТАТУСА ПО MOTD ---
+                const receivedMotd = data.motd && data.motd.clean ? data.motd.clean : (data.motd || ''); // Получаем чистый текст MOTD
+                const isOnlineByMotd = data.online && receivedMotd === EXPECTED_MOTD; // Сервер онлайн только если API показало онлайн И MOTD совпадает
+
+                if (isOnlineByMotd) {
                     statusIndicator.textContent = currentTranslations.statusOnline;
                     statusIndicator.className = 'server-status-indicator status-online';
+                    // Отображаем информацию только если считаем сервер онлайн по нашей логике
                     playersOnline.textContent = data.players.online;
                     playersMax.textContent = data.players.max;
                     serverVersion.textContent = data.version.name;
-                    // mcstatus.io API обычно возвращает чистый текст MOTD или объект
-                    // Проверяем тип данных data.motd.clean и используем его
-                    serverMotd.textContent = data.motd && data.motd.clean ? data.motd.clean : (data.motd || ''); // Если clean нет, берем сам motd, если и его нет - пустая строка
+                    serverMotd.textContent = receivedMotd; // Показываем полученный MOTD
                     serverOnlineInfo.style.display = 'block';
                 } else {
-                    // API вернуло статус offline
-                    statusIndicator.textContent = currentTranslations.statusOffline + (data.error ? ` (${data.error})` : ''); // Добавляем ошибку, если API ее предоставило
+                    // Сервер считается офлайн по нашей логике (либо API сказало, что офлайн, либо MOTD не совпал)
+                    let offlineMessage = currentTranslations.statusOffline;
+                    if (data.online && receivedMotd !== EXPECTED_MOTD) {
+                         // Если API сказало, что онлайн, но MOTD не тот
+                         offlineMessage = currentTranslations.statusOfflineMOTD;
+                    } else if (data.error) {
+                         // Если API сказало, что офлайн и дало ошибку
+                          offlineMessage = `${currentTranslations.statusOffline} (${data.error})`;
+                    }
+                    // Если API сказало офлайн без ошибки, просто выведем "Офлайн"
+
+
+                    statusIndicator.textContent = offlineMessage;
                     statusIndicator.className = 'server-status-indicator status-offline';
                     serverOnlineInfo.style.display = 'none';
                 }
+                // --- КОНЕЦ НОВОЙ ЛОГИКИ ---
+
             } catch (error) {
                 console.error('Ошибка при получении статуса:', error);
                  const currentLang = localStorage.getItem('preferredLanguage') || 'en';
@@ -836,5 +864,7 @@
 
 
     </script>
+</body>
+</html>
 </body>
 </html>
