@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -109,7 +109,7 @@
         /* Исправляем, чтобы margin-bottom был у всех, кроме последней строки (для больших экранов) */
         @media (min-width: 768px) {
            .profile {
-             margin-bottom: 0; /* Remove margin when side-by-side */
+            margin-bottom: 0; /* Remove margin when side-by-side */
            }
         }
         /* --- КОНЕЦ СТИЛЕЙ ДЛЯ КОНТЕЙНЕРА FLEXBOX С ПРОФИЛЯМИ --- */
@@ -324,7 +324,7 @@
 
             .dropdown-content {
                  min-width: 120px; /* Adjusted dropdown width */
-            }
+             }
 
             .dropdown-content button {
                 padding: 10px 12px; /* Adjusted dropdown item padding */
@@ -385,7 +385,6 @@
         }
         /* --- END MOBILE OPTIMIZATIONS --- */
 
-
     </style>
 </head>
 <body>
@@ -445,6 +444,8 @@
                 <strong id="linkLabel">Link:</strong>
                 <a href="discord://discord.com/guilds/1359514665373401188" target="_blank" id="discord-link-text">discord group</a>
             </p>
+            <p id="application-message"></p>
+
 
             <div class="server-status-section">
                 <h3 id="server-status-heading">Server Status:</h3>
@@ -511,6 +512,8 @@
                 ipLabel: "IP Address:",
                 linkLabel: "Link:",
                 discordLinkText: "discord group",
+                // Добавлен новый ключ для перевода сообщения о заявке
+                applicationMessage: "To join the server, you need to apply in Discord; all details are in Toploardgg.",
                 rulesHeading: "Server Rules:",
                 rule_1: "Don't tell anyone about Fight Club.",
                 rule_2: "Do not destroy other players' bases, and do not build without permission. Violation - one week ban.",
@@ -551,6 +554,8 @@
                 ipLabel: "IP Адрес:",
                 linkLabel: "Ссылка:",
                 discordLinkText: "группа в Discord",
+                 // Добавлен новый ключ для перевода сообщения о заявке
+                applicationMessage: "Чтобы попасть на сервер, надо подать заявку в Discord; все детали в Toploardgg.",
                 rulesHeading: "Правила сервера:",
                 rule_1: "Никому не рассказывать о Бойцовском Клубе.",
                 rule_2: "Нельзя разрушать базы других игроков, а также строить без разрешения. Нарушение - неделя бана.",
@@ -591,6 +596,8 @@
                 ipLabel: "IP Адреса:",
                 linkLabel: "Посилання:",
                 discordLinkText: "група в Discord",
+                 // Добавлен новый ключ для перевода сообщения о заявке
+                applicationMessage: "Щоб потрапити на сервер, треба подати заявку в діскорд всі деталі в Toploardgg.",
                 rulesHeading: "Правила сервера:",
                 rule_1: "Нікому не розказувати за Бійцівський Клуб.",
                 rule_2: "Не можна руйнувати базу інших ігроків а також будувати без дозволу. Порушення - тиждень бану.",
@@ -600,7 +607,7 @@
                 rule_6: "Не можна засуджувати людину за її відмінності: вага, вік тощо. Порушення - 1 тиждень.",
                 rule_7: "Матюкатися у голосовому чаті краще не треба.",
                 rule_8: "Адміністрація не зобов'язана повідомляти про зміну правил.",
-                // --- Переводы для статуса сервера ---
+                 // --- Переводы для статуса сервера ---
                 serverStatusHeading: "Статус сервера:",
                 statusLabel: "Статус:",
                 statusOnline: "Онлайн",
@@ -612,7 +619,7 @@
                 refreshButton: "Оновити",
                 errorFetchingStatus: "Помилка отримання статусу.",
                 statusOfflineMOTD: "Офлайн"
-                // --- Конец переводов для статуса сервера ---
+                 // --- Конец переводов для статуса сервера ---
             }
         };
 
@@ -675,6 +682,11 @@
             document.getElementById("ip-label").textContent = currentTranslations.ipLabel;
             document.getElementById("linkLabel").textContent = currentTranslations.linkLabel;
             document.getElementById("discord-link-text").textContent = currentTranslations.discordLinkText;
+            // Обновляем элемент с сообщением о заявке
+            const applicationMessageElement = document.getElementById("application-message");
+            if (applicationMessageElement) {
+                applicationMessageElement.textContent = currentTranslations.applicationMessage;
+            }
 
 
             const rulesHeading = document.getElementById("rules-heading");
@@ -864,7 +876,5 @@
 
 
     </script>
-</body>
-</html>
 </body>
 </html>
