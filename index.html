@@ -6,6 +6,7 @@
     <title>Toploardgg</title>
     <link rel="icon" type="image/png" href="лол.png">
     <style>
+        /* Ваши оригинальные стили - НЕ ИЗМЕНЕНЫ */
         body {
             background-color: #1a1a1a;
             color: white;
@@ -17,9 +18,10 @@
             min-height: 100vh;
             font-weight: bold;
             position: relative;
+            box-sizing: border-box;
         }
 
-        h1, h2, h3, h4, p, input[type="submit"] {
+        h1, h2, h3, h4, h5, p, input[type="submit"], button {
             font-weight: bold;
         }
 
@@ -29,6 +31,7 @@
             right: 20px;
             display: flex;
             gap: 10px;
+            z-index: 10;
         }
 
         .dropdown {
@@ -45,6 +48,7 @@
             cursor: pointer;
             border-radius: 10px;
             transition: 0.3s;
+            font-weight: bold;
         }
 
         .dropbtn:hover, .dropbtn:focus {
@@ -55,6 +59,7 @@
         .dropdown-content {
             display: none;
             position: absolute;
+            right: 0;
             background-color: #2a2a2a;
             border: 2px solid white;
             border-radius: 10px;
@@ -72,6 +77,8 @@
             text-align: left;
             cursor: pointer;
             font-size: 1em;
+            font-weight: bold;
+            box-sizing: border-box;
         }
 
         .dropdown-content button:hover {
@@ -83,10 +90,28 @@
             display: block;
         }
 
-        .profile {
-            margin: auto;
-            text-align: center;
+        /* --- СТИЛИ ДЛЯ КОНТЕЙНЕРА FLEXBOX С ПРОФИЛЯМИ --- */
+        .profile-container {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+            margin-bottom: 20px;
         }
+
+        .profile {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        /* Исправляем, чтобы margin-bottom был у всех, кроме последней строки */
+        @media (min-width: 768px) {
+           .profile {
+              margin-bottom: 0;
+           }
+        }
+        /* --- КОНЕЦ СТИЛЕЙ ДЛЯ КОНТЕЙНЕРА FLEXBOX С ПРОФИЛЯМИ --- */
 
         .profile img {
             width: 200px;
@@ -97,8 +122,9 @@
 
         .footer {
             margin-top: auto;
-            padding: 20px;
+            padding-top: 20px;
             text-align: center;
+            width: 100%;
         }
 
         .info-box {
@@ -106,13 +132,52 @@
             padding: 20px;
             display: inline-block;
             border-radius: 10px;
-            margin-bottom: 20px;
             background-color: transparent;
+            max-width: 90%;
+            box-sizing: border-box;
+            margin-top: 20px;
+            margin-left: auto;
+            margin-right: auto;
+            text-align: left; /* Выравнивание текста внутри info-box по умолчанию */
+        }
+         /* Центрируем определенные элементы внутри info-box */
+         .info-box h2, .info-box h3, .info-box h4 {
+             text-align: center;
+         }
+
+         /* --- СТИЛЬ ДЛЯ ЦЕНТРИРОВАНИЯ ФОРМЫ PAYPAL В ФУТЕРЕ --- */
+         .footer .info-box form {
+             text-align: center; /* Центрируем содержимое формы (кнопку) */
+         }
+         /* --- КОНЕЦ СТИЛЯ ДЛЯ ЦЕНТРИРОВАНИЯ ФОРМЫ PAYPAL В ФУТЕРЕ --- */
+
+
+        .info-box p, .info-box ul {
+            color: white;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            word-wrap: break-word;
+        }
+         /* Стили для списка правил */
+        .info-box ol {
+            list-style-type: decimal;
+            padding-left: 20px;
+            margin-top: 15px;
+            margin-bottom: 15px;
         }
 
-        .info-box h4, .info-box h3, .info-box h2, .info-box a {
-            color: white;
+        .info-box li {
+            margin-bottom: 10px;
+            line-height: 1.4;
         }
+
+        .info-box a {
+            color: #87CEFA;
+            text-decoration: underline;
+            display: inline;
+            margin: 0;
+        }
+
 
         .paypal-button {
             background-color: transparent;
@@ -123,13 +188,62 @@
             cursor: pointer;
             border-radius: 10px;
             transition: 0.3s;
+            margin-top: 15px;
+            font-weight: bold;
         }
 
         .paypal-button:hover {
             background-color: white;
             color: black;
         }
+
+        /* === СТИЛИ ДЛЯ ВКЛАДОК === */
+        .tab-container {
+            text-align: center;
+            margin-bottom: 30px;
+            margin-top: 10px;
+        }
+
+        .tab-button {
+            background-color: transparent;
+            color: white;
+            border: 2px solid white;
+            padding: 10px 20px;
+            font-size: 1em;
+            cursor: pointer;
+            border-radius: 10px;
+            transition: 0.3s;
+            margin: 0 5px;
+            font-weight: bold;
+        }
+
+        .tab-button:hover {
+            background-color: #333;
+        }
+
+        .tab-button.active {
+            background-color: white;
+            color: black;
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.5s;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Анимация */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        /* === КОНЕЦ СТИЛЕЙ ДЛЯ ВКЛАДОК === */
+
     </style>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="header-controls">
@@ -143,17 +257,67 @@
         </div>
     </div>
 
-    <h1 id="greeting">Hi.</h1>
-    <div class="profile">
-        <h1 id="name">Toploardgg (Stas)</h1>
-        <img src="https://s.namemc.com/3d/skin/body.png?id=86f7e7addff80315&model=classic&theta=30&phi=21&time=90&width=600&height=800" alt="Profile Image">
+    <div class="tab-container">
+        <button class="tab-button active" onclick="showTab('profile')" id="tab-btn-profile">Profile</button>
+        <button class="tab-button" onclick="showTab('info')" id="tab-btn-info">Info</button>
     </div>
 
-    <div class="footer">
+    <div id="tab-content-profile" class="tab-content active">
+        <h1 id="greeting">Hi.</h1>
+        <h2 id="I-love-cookies">I love cookies)<🍪</h2>
+
+        <div class="profile-container">
+
+            <div class="profile">
+                <h1 id="name">Toploardgg (Stas)</h1>
+                <img src="https://s.namemc.com/3d/skin/body.png?id=8014acbb674adae5&model=classic&theta=30&phi=21&time=90&width=600&height=800" alt="Profile Image">
+            </div>
+
+            <div class="profile">
+                <h1 id="tyret-name">tyret (Artem)</h1>
+                <img src="https://s.namemc.com/3d/skin/body.png?id=01afe2e825ed4ec0&model=classic&theta=-36&phi=27&time=90&width=600&height=800" alt="Tyret Profile Image">
+            </div>
+
+            <div class="profile">
+                <h1 id="kapibara-name">KAPIBARA (Kolya)</h1>
+                <img src="https://s.namemc.com/3d/skin/body.png?id=0709e143bdf42842&model=slim&theta=30&phi=21&time=90&width=600&height=800" alt="KAPIBARA Profile Image">
+            </div>
+
+            <div class="profile">
+                <h1 id="ater-name">ater (Dinis)</h1>
+                <img src="https://s.namemc.com/3d/skin/body.png?id=fc27be0c0e0e7904&model=classic&theta=30&phi=21&time=90&width=600&height=800" alt="ater Profile Image">
+            </div>
+
+        </div>
+        </div>
+
+    <div id="tab-content-info" class="tab-content">
+        <h2 id="info-title">Information</h2>
+        <div class="info-box">
+            <p>
+                <strong id="ip-label">IP Address:</strong>
+                <span id="ip-address">Toploardgg.aternos.me:39466</span> </p>
+            <p>
+                <strong id="link-label">Link:</strong>
+                <a href="discord://discord.com/guilds/1359514665373401188" target="_blank" id="discord-link-text">discord group</a>
+            </p>
+
+            <h3 id="rules-heading">Server Rules:</h3>
+            <ol>
+                <li id="rule-1">Don't tell anyone about Fight Club.</li>
+                <li id="rule-2">Do not destroy other players' bases, and do not build without permission. Violation - one week ban.</li>
+                <li id="rule-3">Spam in Minecraft or on the Discord server, or posting irrelevant information in the Telegram group - 1 day mute (sending photos is allowed, as is any kind of information like coordinates or resource locations).</li>
+                <li id="rule-4">CHEATS ARE STRICTLY PROHIBITED in any form: resource packs or mods for ore visibility, or powerful cheats. Violation - ban from 1 day to permanent depending on the severity of the cheats. To clarify if a mod is a cheat, you need to ask the administrator (me). You can ask for unban, but you must write the reason in at least 3 sentences.</li>
+                <li id="rule-5">Do not provoke or be provoked. Violation - 1 day.</li>
+                <li id="rule-6">Do not judge a person based on their differences: weight, age, etc. Violation - 1 week.</li>
+                <li id="rule-7">Swearing in voice chat is not recommended.</li>
+                <li id="rule-8">The administration is not obligated to announce rule changes.</li>
+            </ol>
+            </div> </div> <div class="footer">
         <div class="info-box">
             <h4 id="contact">Contacts:</h4>
             <p>
-                <a id="gmailLink" href="https://mail.google.com/mail/?view=cm&fs=1&to=Toploardgg@gmail.com">Gmail: Toploardgg@gmail.com</a> &  
+                <a id="gmailLink" href="https://mail.google.com/mail/?view=cm&fs=1&to=Toploardgg@gmail.com">Gmail: Toploardgg@gmail.com</a> &
                 <a id="telegramLink" href="tg://user?id=1973152925">Telegram: Loardstk</a>
             </p>
             <h2 id="support">Support us:</h2>
@@ -163,25 +327,172 @@
                 <input type="hidden" name="item_name" value="Підтримка проекту" />
                 <input type="hidden" name="currency_code" value="USD" />
                 <button type="submit" class="paypal-button" id="donate">Donate with PayPal</button>
+                <h5 id="I-love-cookies-footer">I love cookies)<🍪</h5>
             </form>
         </div>
     </div>
 
     <script>
         const translations = {
-            en: { greeting: "Hi.", name: "Toploardgg (Stas)", contact: "Contacts:", support: "Support us:", donate: "Donate with PayPal", language: "English" },
-            ru: { greeting: "Привет.", name: "Toploardgg (Стас)", contact: "Контакты:", support: "Поддержите нас:", donate: "Пожертвовать через PayPal", language: "Русский" },
-            uk: { greeting: "Привіт.", name: "Toploardgg (Стаc)", contact: "Контакти:", support: "Підтримайте нас:", donate: "Пожертвувати через PayPal", language: "Українська" }
+            en: {
+                greeting: "Hi.",
+                cookies: "I love cookies)<🍪",
+                name: "Toploardgg (Stas)",
+                tyretName: "tyret (Artem)",
+                kapibaraName: "KAPIBARA (Kolya)",
+                aterName: "ater (Dinis)",
+                contact: "Contacts:",
+                support: "Support us:",
+                donate: "Donate with PayPal",
+                language: "English",
+                tabProfile: "Profile",
+                tabInfo: "Info",
+                infoTitle: "Information",
+                ipLabel: "IP Address:",
+                linkLabel: "Link:",
+                discordLinkText: "discord group",
+                rulesHeading: "Server Rules:",
+                rule_1: "Don't tell anyone about Fight Club.",
+                rule_2: "Do not destroy other players' bases, and do not build without permission. Violation - one week ban.",
+                rule_3: "Spam in Minecraft or on the Discord server, or posting irrelevant information in the Telegram group - 1 day mute (sending photos is allowed, as is any kind of information like coordinates or resource locations).",
+                rule_4: "CHEATS ARE STRICTLY PROHIBITED in any form: resource packs or mods for ore visibility, or powerful cheats. Violation - ban from 1 day to permanent depending on the severity of the cheats. To clarify if a mod is a cheat, you need to ask the administrator (me). You can ask for unban, but you must write the reason in at least 3 sentences.",
+                rule_5: "Do not provoke or be provoked. Violation - 1 day.",
+                rule_6: "Do not judge a person based on their differences: weight, age, etc. Violation - 1 week.",
+                rule_7: "Swearing in voice chat is not recommended.",
+                rule_8: "The administration is not obligated to announce rule changes."
+            },
+            ru: {
+                greeting: "Привет.",
+                cookies: "Я люблю печеньки)<🍪",
+                name: "Toploardgg (Стас)",
+                tyretName: "tyret (Артём)",
+                kapibaraName: "KAPIBARA (Коля)",
+                aterName: "ater (Денис)",
+                contact: "Контакты:",
+                support: "Поддержите нас:",
+                donate: "Пожертвовать через PayPal",
+                language: "Русский",
+                tabProfile: "Профиль",
+                tabInfo: "Инфо",
+                infoTitle: "Информация",
+                ipLabel: "IP Адрес:",
+                linkLabel: "Ссылка:",
+                discordLinkText: "группа в Discord",
+                rulesHeading: "Правила сервера:",
+                rule_1: "Никому не рассказывать о Бойцовском Клубе.",
+                rule_2: "Нельзя разрушать базы других игроков, а также строить без разрешения. Нарушение - неделя бана.",
+                rule_3: "Спам в Minecraft или на Discord сервере, или написание неважной информации в Telegram группу - мут на 1 день (фотографии отправлять можно, информацию любого вида - как координаты, так и нахождение ресурсов - тоже).",
+                rule_4: "ЧИТЫ СТРОГО ЗАПРЕЩЕНЫ в любом виде: ресурспаки или моды на видимость руд, или сильные читы. Нарушение - бан от 1 дня до навсегда в зависимости от силы читов. Чтобы уточнить, является ли мод читом, нужно спросить у администратора (у меня). Разбан можно попросить, но нужно написать причину минимум 3 предложения.",
+                rule_5: "Не провоцировать и не поддаваться на провокации. Нарушение - 1 день.",
+                rule_6: "Нельзя осуждать человека за его отличия: вес, возраст и т.д. Нарушение - 1 неделя.",
+                rule_7: "Нецензурная брань в голосовом чате нежелательна.",
+                rule_8: "Администрация не обязана сообщать об изменении правил."
+            },
+            uk: {
+                greeting: "Привіт.",
+                cookies: "Я обожнюю пряники)<🍪",
+                name: "Toploardgg (Стаc)",
+                tyretName: "tyret (Артем)",
+                kapibaraName: "KAPIBARA (Коля)",
+                aterName: "ater (Денис)",
+                contact: "Контакти:",
+                support: "Підтримайте нас:",
+                donate: "Пожертвувати через PayPal",
+                language: "Українська",
+                tabProfile: "Профіль",
+                tabInfo: "Інфо",
+                infoTitle: "Інформація",
+                ipLabel: "IP Адреса:",
+                linkLabel: "Посилання:",
+                discordLinkText: "група в Discord",
+                rulesHeading: "Правила сервера:",
+                rule_1: "Нікому не розказувати за Бійцівський Клуб.",
+                rule_2: "Не можна руйнувати базу інших ігроків а також будувати без дозволу. Порушення - тиждень бану.",
+                rule_3: "Спам у Minecraft або на Discord сервері, або надсилання неважливої інформації до Telegram групи - мут на 1 день (фотографії надсилати можна, інформацію будь-якого виду - як координати, так і знаходження ресурсів - також).",
+                rule_4: "ЧІТИ СУВОРО ЗАБОРОНЕНІ у будь-якому вигляді: ресурспаки або моди на видимість руд, або сильні чити. Порушення - бан від 1 дня до назавжди залежно від сили читів. Щоб уточнити, чи є мод читом, потрібно запитати у адміністратора (у мене). Розбан можна попросити, але потрібно написати причину мін. 3 речення.",
+                rule_5: "Не провокувати і не піддаватися на провокації. Порушення - 1 день.",
+                rule_6: "Не можна засуджувати людину за її відмінності: вага, вік тощо. Порушення - 1 тиждень.",
+                rule_7: "Матюкатися у голосовому чаті краще не треба.",
+                rule_8: "Адміністрація не зобов'язана повідомляти про зміну правил."
+            }
         };
+
+        function showTab(tabIdToShow) {
+            // Скрыть все вкладки
+            const contents = document.querySelectorAll('.tab-content');
+            contents.forEach(content => {
+                content.classList.remove('active');
+            });
+
+            // Деактивировать все кнопки вкладок
+            const buttons = document.querySelectorAll('.tab-button');
+            buttons.forEach(button => {
+                button.classList.remove('active');
+            });
+
+            // Показать выбранную вкладку
+            const contentToShow = document.getElementById(`tab-content-${tabIdToShow}`);
+            if (contentToShow) {
+                 contentToShow.classList.add('active');
+                 // После показа вкладки, обновить ее содержимое на текущем языке
+                 const currentLang = localStorage.getItem('preferredLanguage') || 'en';
+                 changeLanguage(currentLang);
+            }
+
+            // Активировать выбранную кнопку
+            const buttonToActivate = document.getElementById(`tab-btn-${tabIdToShow}`);
+            if (buttonToActivate) {
+                buttonToActivate.classList.add('active');
+            }
+        }
 
         function changeLanguage(lang) {
             document.getElementById("greeting").textContent = translations[lang].greeting;
+            document.getElementById("I-love-cookies").textContent = translations[lang].cookies;
             document.getElementById("name").textContent = translations[lang].name;
+            document.getElementById("tyret-name").textContent = translations[lang].tyretName;
+            document.getElementById("kapibara-name").textContent = translations[lang].kapibaraName;
+            document.getElementById("ater-name").textContent = translations[lang].aterName;
+
             document.getElementById("contact").textContent = translations[lang].contact;
             document.getElementById("support").textContent = translations[lang].support;
             document.getElementById("donate").textContent = translations[lang].donate;
+            document.getElementById("I-love-cookies-footer").textContent = translations[lang].cookies;
             document.getElementById("language-button").textContent = translations[lang].language;
+
+            document.getElementById("tab-btn-profile").textContent = translations[lang].tabProfile;
+            document.getElementById("tab-btn-info").textContent = translations[lang].tabInfo;
+
+            document.getElementById("info-title").textContent = translations[lang].infoTitle;
+            document.getElementById("ip-label").textContent = translations[lang].ipLabel;
+            document.getElementById("linkLabel").textContent = translations[lang].linkLabel;
+            // Обновление текста ссылки на Discord
+            document.getElementById("discord-link-text").textContent = translations[lang].discordLinkText;
+
+            // Обновление заголовка и пунктов правил
+            // Проверяем наличие элементов перед попыткой обновления (на всякий случай, если правила будут не на всех вкладках)
+            const rulesHeading = document.getElementById("rules-heading");
+            if (rulesHeading) {
+                rulesHeading.textContent = translations[lang].rulesHeading;
+            }
+            for (let i = 1; i <= 8; i++) {
+                const ruleElement = document.getElementById(`rule-${i}`);
+                if (ruleElement) {
+                    ruleElement.textContent = translations[lang][`rule_${i}`];
+                }
+            }
+
+
+            localStorage.setItem('preferredLanguage', lang);
         }
+
+        // Инициализация при загрузке страницы: установить язык и показать вкладку по умолчанию
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedLang = localStorage.getItem('preferredLanguage') || 'en'; // 'en' как язык по умолчанию
+            changeLanguage(savedLang);
+            showTab('profile'); // Показать вкладку 'profile' по умолчанию после установки языка
+        });
+
     </script>
 </body>
 </html>
