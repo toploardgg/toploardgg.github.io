@@ -387,7 +387,6 @@
 
 
     </style>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="header-controls">
@@ -531,9 +530,8 @@
                 versionLabel: "Version:",
                 motdLabel: "MOTD:",
                 refreshButton: "Refresh",
-                errorTimeout: "Timeout connecting to server",
-                errorConnectionRefused: "Connection refused",
-                errorFetchingStatus: "Failed to get status: " // добавится текст ошибки с бэкенда
+                // Эти тексты ошибок зависят от API, но оставим общие
+                errorFetchingStatus: "Error getting status."
                 // --- Конец переводов для статуса сервера ---
             },
             ru: {
@@ -572,9 +570,7 @@
                 versionLabel: "Версия:",
                 motdLabel: "MOTD:",
                 refreshButton: "Обновить",
-                errorTimeout: "Таймаут подключения к серверу",
-                errorConnectionRefused: "Отказано в подключении",
-                errorFetchingStatus: "Не удалось получить статус: "
+                errorFetchingStatus: "Ошибка получения статуса."
                  // --- Конец переводов для статуса сервера ---
             },
             uk: {
@@ -613,10 +609,8 @@
                 versionLabel: "Версія:",
                 motdLabel: "MOTD:",
                 refreshButton: "Оновити",
-                errorTimeout: "Таймаут підключення до сервера",
-                errorConnectionRefused: "Відмовлено у підключенні",
-                errorFetchingStatus: "Не вдалося отримати статус: "
-                 // --- Конец переводов для статуса сервера ---
+                errorFetchingStatus: "Помилка отримання статусу."
+                // --- Конец переводов для статуса сервера ---
             }
         };
 
@@ -641,7 +635,10 @@
 
                  // Если активирована вкладка "info", запустить получение статуса сервера
                  if (tabIdToShow === 'info') {
-                     fetchServerStatus();
+                     fetchServerStatus(); // Вызываем функцию получения статуса
+                     startStatusInterval(); // Запускаем интервал обновления
+                 } else {
+                     stopStatusInterval(); // Останавливаем интервал, если переключились с вкладки "Инфо"
                  }
             }
 
@@ -654,7 +651,7 @@
 
         function changeLanguage(lang) {
             const currentTranslations = translations[lang];
-            if (!currentTranslations) return; // Проверка на существование перевода
+            if (!currentTranslations) return;
 
             document.getElementById("greeting").textContent = currentTranslations.greeting;
             document.getElementById("I-love-cookies").textContent = currentTranslations.cookies;
@@ -675,10 +672,9 @@
             document.getElementById("info-title").textContent = currentTranslations.infoTitle;
             document.getElementById("ip-label").textContent = currentTranslations.ipLabel;
             document.getElementById("linkLabel").textContent = currentTranslations.linkLabel;
-            // Обновление текста ссылки на Discord
             document.getElementById("discord-link-text").textContent = currentTranslations.discordLinkText;
 
-            // Обновление заголовка и пунктов правил
+
             const rulesHeading = document.getElementById("rules-heading");
             if (rulesHeading) {
                 rulesHeading.textContent = currentTranslations.rulesHeading;
@@ -697,7 +693,7 @@
             const versionLabel = document.getElementById('version-label');
             const motdLabel = document.getElementById('motd-label');
             const refreshButton = document.getElementById('server-refresh-button');
-             const statusIndicator = document.getElementById('status-indicator'); // Получаем индикатор статуса
+            const statusIndicator = document.getElementById('status-indicator'); // Получаем индикатор статуса
 
             if (serverStatusHeading) serverStatusHeading.textContent = currentTranslations.serverStatusHeading;
             if (statusLabel) statusLabel.textContent = currentTranslations.statusLabel;
@@ -706,40 +702,26 @@
             if (motdLabel) motdLabel.textContent = currentTranslations.motdLabel;
             if (refreshButton) refreshButton.textContent = currentTranslations.refreshButton;
 
-             // Обновляем текст индикатора статуса только если он не "Загрузка..." или "Онлайн/Офлайн"
-             // При смене языка сохраняем текущее состояние (онлайн/офлайн/загрузка)
-             if (statusIndicator) {
-                 if (statusIndicator.classList.contains('status-online')) {
-                     statusIndicator.textContent = currentTranslations.statusOnline;
-                 } else if (statusIndicator.classList.contains('status-offline')) {
-                      // Если статус оффлайн, пытаемся найти соответствующий перевод ошибки
-                      const currentErrorText = statusIndicator.textContent.split('(')[1]?.slice(0, -1); // Извлекаем текст ошибки в скобках
-                       let translatedError = '';
-                       if (currentErrorText === translations['en'].errorTimeout) translatedError = currentTranslations.errorTimeout;
-                       else if (currentErrorText === translations['en'].errorConnectionRefused) translatedError = currentTranslations.errorConnectionRefused;
-                        // Добавьте сюда другие возможные ошибки из вашего Python бэкенда
-
-                       if (translatedError) {
-                           statusIndicator.textContent = `${currentTranslations.statusOffline} (${translatedError})`;
-                       } else {
-                           // Если перевод ошибки не найден, просто отображаем "Офлайн"
-                            statusIndicator.textContent = currentTranslations.statusOffline;
-                       }
-
-                 } else {
-                      statusIndicator.textContent = currentTranslations.statusLoading;
-                 }
-             }
+            // Обновляем текст индикатора статуса в зависимости от его текущего состояния
+            if (statusIndicator) {
+                if (statusIndicator.classList.contains('status-online')) {
+                    statusIndicator.textContent = currentTranslations.statusOnline;
+                } else if (statusIndicator.classList.contains('status-offline')) {
+                    statusIndicator.textContent = currentTranslations.statusOffline + (statusIndicator.textContent.includes('(') ? statusIndicator.textContent.substring(statusIndicator.textContent.indexOf('(')) : ''); // Сохраняем текст ошибки, если есть
+                } else { // Состояние загрузки
+                     statusIndicator.textContent = currentTranslations.statusLoading;
+                }
+            }
 
             // --- Конец обновления текстов для статуса сервера ---
 
 
             localStorage.setItem('preferredLanguage', lang);
         }
-         // === Конец функций для вкладок и языка ===
+        // === Конец функций для вкладок и языка ===
 
 
-        // === Функции для статуса сервера ===
+        // === Функции для статуса сервера (Использование публичного API) ===
         const statusIndicator = document.getElementById('status-indicator');
         const serverOnlineInfo = document.getElementById('server-online-info');
         const playersOnline = document.getElementById('players-online');
@@ -748,14 +730,12 @@
         const serverMotd = document.getElementById('server-motd');
         const serverRefreshButton = document.getElementById('server-refresh-button');
 
-        // !!! ЗАМЕНИТЕ НА АДРЕС И ПОРТ ВАШЕГО PYTHON БЭКЕНДА !!!
-        // Например: 'http://localhost:5000/status' если вы запускаете Python локально на порту 5000
-        // Если ваш сайт и бэкенд на одном сервере, возможно, достаточно будет относительного пути '/status'
-        const API_URL = 'https://toploardgg.github.io/';
-
         // !!! ЗАМЕНИТЕ НА АДРЕС ВАШЕГО ATERNOS СЕРВЕРА !!!
-        const ATERNOS_SERVER_ADDRESS = 'Toploardgg.aternos.me'; // Замените на реальный адрес
-        const ATERNOS_SERVER_PORT = 39466; // Замените на реальный порт
+        // Адрес и порт в формате "адрес:порт"
+        const ATERNOS_SERVER_ADDRESS_PORT = 'Toploardgg.aternos.me:39466'; // <--- Укажите адрес и порт вашего Aternos сервера через двоеточие
+
+        // Используем публичный API от mcstatus.io
+        const MCSTATUS_API_URL = `https://api.mcstatus.io/v2/status/java/${ATERNOS_SERVER_ADDRESS_PORT}`;
 
         async function fetchServerStatus() {
             const currentLang = localStorage.getItem('preferredLanguage') || 'en';
@@ -767,11 +747,12 @@
             serverRefreshButton.disabled = true; // Отключить кнопку во время загрузки
 
             try {
-                // Добавляем timestamp для предотвращения кэширования браузером
-                const response = await fetch(`${API_URL}?address=${ATERNOS_SERVER_ADDRESS}&port=${ATERNOS_SERVER_PORT}&_=${new Date().getTime()}`);
+                const response = await fetch(MCSTATUS_API_URL);
 
                  if (!response.ok) {
-                     throw new Error(`HTTP error! status: ${response.status}`);
+                     // API вернуло ошибку (например, сервер не найден или проблема с API)
+                     const errorData = await response.json(); // Попытаемся получить подробности ошибки от API
+                     throw new Error(errorData.error || `HTTP error! status: ${response.status}`);
                  }
 
                 const data = await response.json();
@@ -779,25 +760,16 @@
                 if (data.online) {
                     statusIndicator.textContent = currentTranslations.statusOnline;
                     statusIndicator.className = 'server-status-indicator status-online';
-                    playersOnline.textContent = data.players_online;
-                    playersMax.textContent = data.players_max;
-                    serverVersion.textContent = data.version;
-                    // Очистка MOTD от цветовых кодов Minecraft (символ §) и установка текста
-                    serverMotd.textContent = data.motd ? data.motd.replace(/§[0-9A-FK-ORa-fk-or]/gi, '') : '';
+                    playersOnline.textContent = data.players.online;
+                    playersMax.textContent = data.players.max;
+                    serverVersion.textContent = data.version.name;
+                    // mcstatus.io API обычно возвращает чистый текст MOTD или объект
+                    // Проверяем тип данных data.motd.clean и используем его
+                    serverMotd.textContent = data.motd && data.motd.clean ? data.motd.clean : (data.motd || ''); // Если clean нет, берем сам motd, если и его нет - пустая строка
                     serverOnlineInfo.style.display = 'block';
                 } else {
-                     let errorText = currentTranslations.errorFetchingStatus + (data.error || 'Unknown error');
-                      // Проверяем, есть ли конкретный перевод для известных ошибок с бэкенда
-                     if (data.error === "Таймаут подключения к серверу" || data.error === "Timeout connecting to server") {
-                         errorText = `${currentTranslations.statusOffline} (${currentTranslations.errorTimeout})`;
-                     } else if (data.error === "Отказано в подключении" || data.error === "Connection refused") {
-                         errorText = `${currentTranslations.statusOffline} (${currentTranslations.errorConnectionRefused})`;
-                     } else {
-                          // Если ошибка неизвестна, просто отображаем общий текст ошибки с бэкенда
-                         errorText = `${currentTranslations.statusOffline} (${data.error || 'Неизвестная ошибка'})`;
-                     }
-
-                    statusIndicator.textContent = errorText;
+                    // API вернуло статус offline
+                    statusIndicator.textContent = currentTranslations.statusOffline + (data.error ? ` (${data.error})` : ''); // Добавляем ошибку, если API ее предоставило
                     statusIndicator.className = 'server-status-indicator status-offline';
                     serverOnlineInfo.style.display = 'none';
                 }
@@ -805,6 +777,7 @@
                 console.error('Ошибка при получении статуса:', error);
                  const currentLang = localStorage.getItem('preferredLanguage') || 'en';
                  const currentTranslations = translations[currentLang];
+                 // Отображаем общую ошибку получения статуса + текст ошибки из fetch/response
                 statusIndicator.textContent = `${currentTranslations.statusOffline} (${currentTranslations.errorFetchingStatus} ${error.message || error})`;
                 statusIndicator.className = 'server-status-indicator status-offline';
                 serverOnlineInfo.style.display = 'none';
@@ -825,7 +798,7 @@
                      const activeTabElement = document.querySelector('.tab-content.active');
                      const activeTabId = activeTabElement ? activeTabElement.id.replace('tab-content-', '') : null;
                      if (activeTabId === 'info') {
-                         fetchServerStatus();
+                         fetchServerStatus(); // Вызываем получение статуса
                      }
                  }, refreshInterval);
              }
@@ -851,16 +824,11 @@
             const savedLang = localStorage.getItem('preferredLanguage') || 'en'; // 'en' как язык по умолчанию
             changeLanguage(savedLang);
 
-            // Определяем, какая вкладка должна быть активна по умолчанию или из URL
-            // (В вашем коде по умолчанию активна 'profile')
-            const initialTabId = 'profile'; // Или можно парсить из URL, если нужно
+            // Определяем, какая вкладка должна быть активна по умолчанию
+            const initialTabId = 'profile'; // У вас по умолчанию активна 'profile'
 
             showTab(initialTabId); // Показываем начальную вкладку
-
-            // Если начальная вкладка - "инфо", начинаем интервал
-             if (initialTabId === 'info') {
-                 startStatusInterval();
-             }
+            // showTab уже вызывает fetchServerStatus и startStatusInterval если initialTabId === 'info'
         });
 
          // Также убедимся, что интервал статуса останавливается, если пользователь уходит со страницы
