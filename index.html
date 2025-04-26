@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Toploardgg</title>
     <link rel="icon" type="image/png" href="лол.png">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap" rel="stylesheet">
     <style>
         /* Ваши оригинальные стили - НЕ ИЗМЕНЕНЫ */
         body {
@@ -244,6 +245,64 @@
         }
         /* === КОНЕЦ СТИЛЕЙ ДЛЯ ВКЛАДОК === */
 
+        /* === СТИЛИ ДЛЯ СТАТУСА СЕРВЕРА === */
+        .server-status-section {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px dashed #eee; /* Разделитель */
+            text-align: center; /* Центрируем содержимое блока статуса */
+        }
+
+        .server-status-section p {
+             margin: 5px 0; /* Уменьшаем отступы между параграфами статуса */
+             text-align: center; /* Центрируем текст в параграфах статуса */
+        }
+
+        .server-status-indicator {
+            font-weight: bold;
+        }
+
+        .status-online {
+            color: green;
+        }
+
+        .status-offline {
+            color: red;
+        }
+
+         .status-loading {
+            color: orange; /* Цвет для состояния загрузки */
+         }
+
+        #server-online-info {
+            margin-top: 10px;
+            /* display: none; - будет управляться JavaScript */
+        }
+
+        #server-refresh-button {
+            margin-top: 10px;
+            padding: 8px 15px;
+            cursor: pointer;
+             font-weight: bold;
+             background-color: transparent;
+             color: white;
+             border: 2px solid white;
+             border-radius: 10px;
+             transition: 0.3s;
+        }
+
+         #server-refresh-button:hover:not(:disabled) {
+             background-color: white;
+             color: black;
+         }
+
+         #server-refresh-button:disabled {
+             opacity: 0.5;
+             cursor: not-allowed;
+         }
+
+        /* === КОНЕЦ СТИЛЕЙ ДЛЯ СТАТУСА СЕРВЕРА === */
+
 
         /* --- MOBILE OPTIMIZATIONS (Media Query) --- */
         /* Apply styles when the screen width is 767px or less */
@@ -258,7 +317,7 @@
                 gap: 5px; /* Reduced gap in header controls */
             }
 
-            .dropbtn, .tab-button, .paypal-button {
+            .dropbtn, .tab-button, .paypal-button, #server-refresh-button { /* Add refresh button here */
                 padding: 8px 15px; /* Slightly smaller buttons */
                 font-size: 0.9em; /* Slightly smaller font size */
             }
@@ -388,6 +447,19 @@
                 <a href="discord://discord.com/guilds/1359514665373401188" target="_blank" id="discord-link-text">discord group</a>
             </p>
 
+            <div class="server-status-section">
+                <h3 id="server-status-heading">Server Status:</h3>
+                <p>
+                    <span id="status-label">Status:</span>
+                    <span id="status-indicator" class="server-status-indicator status-loading">Загрузка...</span>
+                </p>
+                <div id="server-online-info" style="display: none;">
+                    <p><span id="players-label">Players:</span> <span id="players-online">-</span> / <span id="players-max">-</span></p>
+                    <p><span id="version-label">Version:</span> <span id="server-version">-</span></p>
+                    <p><span id="motd-label">MOTD:</span> <span id="server-motd">-</span></p>
+                </div>
+                <button id="server-refresh-button">Refresh</button>
+            </div>
             <h3 id="rules-heading">Server Rules:</h3>
             <ol>
                 <li id="rule-1">Don't tell anyone about Fight Club.</li>
@@ -448,7 +520,21 @@
                 rule_5: "Do not provoke or be provoked. Violation - 1 day.",
                 rule_6: "Do not judge a person based on their differences: weight, age, etc. Violation - 1 week.",
                 rule_7: "Swearing in voice chat is not recommended.",
-                rule_8: "The administration is not obligated to announce rule changes."
+                rule_8: "The administration is not obligated to announce rule changes.",
+                // --- Переводы для статуса сервера ---
+                serverStatusHeading: "Server Status:",
+                statusLabel: "Status:",
+                statusOnline: "Online",
+                statusOffline: "Offline",
+                statusLoading: "Loading...",
+                playersLabel: "Players:",
+                versionLabel: "Version:",
+                motdLabel: "MOTD:",
+                refreshButton: "Refresh",
+                errorTimeout: "Timeout connecting to server",
+                errorConnectionRefused: "Connection refused",
+                errorFetchingStatus: "Failed to get status: " // добавится текст ошибки с бэкенда
+                // --- Конец переводов для статуса сервера ---
             },
             ru: {
                 greeting: "Привет.",
@@ -475,7 +561,21 @@
                 rule_5: "Не провоцировать и не поддаваться на провокации. Нарушение - 1 день.",
                 rule_6: "Нельзя осуждать человека за его отличия: вес, возраст и т.д. Нарушение - 1 неделя.",
                 rule_7: "Нецензурная брань в голосовом чате нежелательна.",
-                rule_8: "Администрация не обязана сообщать об изменении правил."
+                rule_8: "Администрация не обязана сообщать об изменении правил.",
+                 // --- Переводы для статуса сервера ---
+                serverStatusHeading: "Статус сервера:",
+                statusLabel: "Статус:",
+                statusOnline: "Онлайн",
+                statusOffline: "Офлайн",
+                statusLoading: "Загрузка...",
+                playersLabel: "Игроков:",
+                versionLabel: "Версия:",
+                motdLabel: "MOTD:",
+                refreshButton: "Обновить",
+                errorTimeout: "Таймаут подключения к серверу",
+                errorConnectionRefused: "Отказано в подключении",
+                errorFetchingStatus: "Не удалось получить статус: "
+                 // --- Конец переводов для статуса сервера ---
             },
             uk: {
                 greeting: "Привіт.",
@@ -502,10 +602,25 @@
                 rule_5: "Не провокувати і не піддаватися на провокації. Порушення - 1 день.",
                 rule_6: "Не можна засуджувати людину за її відмінності: вага, вік тощо. Порушення - 1 тиждень.",
                 rule_7: "Матюкатися у голосовому чаті краще не треба.",
-                rule_8: "Адміністрація не зобов'язана повідомляти про зміну правил."
+                rule_8: "Адміністрація не зобов'язана повідомляти про зміну правил.",
+                // --- Переводы для статуса сервера ---
+                serverStatusHeading: "Статус сервера:",
+                statusLabel: "Статус:",
+                statusOnline: "Онлайн",
+                statusOffline: "Офлайн",
+                statusLoading: "Завантаження...",
+                playersLabel: "Гравців:",
+                versionLabel: "Версія:",
+                motdLabel: "MOTD:",
+                refreshButton: "Оновити",
+                errorTimeout: "Таймаут підключення до сервера",
+                errorConnectionRefused: "Відмовлено у підключенні",
+                errorFetchingStatus: "Не вдалося отримати статус: "
+                 // --- Конец переводов для статуса сервера ---
             }
         };
 
+        // === Функции для вкладок и языка ===
         function showTab(tabIdToShow) {
             // Скрыть все вкладки
             const contents = document.querySelectorAll('.tab-content');
@@ -523,9 +638,11 @@
             const contentToShow = document.getElementById(`tab-content-${tabIdToShow}`);
             if (contentToShow) {
                  contentToShow.classList.add('active');
-                 // После показа вкладки, обновить ее содержимое на текущем языке
-                 const currentLang = localStorage.getItem('preferredLanguage') || 'en';
-                 changeLanguage(currentLang); // Call changeLanguage after showing the tab
+
+                 // Если активирована вкладка "info", запустить получение статуса сервера
+                 if (tabIdToShow === 'info') {
+                     fetchServerStatus();
+                 }
             }
 
             // Активировать выбранную кнопку
@@ -536,62 +653,218 @@
         }
 
         function changeLanguage(lang) {
-            document.getElementById("greeting").textContent = translations[lang].greeting;
-            document.getElementById("I-love-cookies").textContent = translations[lang].cookies;
-            document.getElementById("name").textContent = translations[lang].name;
-            document.getElementById("tyret-name").textContent = translations[lang].tyretName;
-            document.getElementById("kapibara-name").textContent = translations[lang].kapibaraName;
-            document.getElementById("ater-name").textContent = translations[lang].aterName;
+            const currentTranslations = translations[lang];
+            if (!currentTranslations) return; // Проверка на существование перевода
 
-            document.getElementById("contact").textContent = translations[lang].contact;
-            document.getElementById("support").textContent = translations[lang].support;
-            document.getElementById("donate").textContent = translations[lang].donate;
-            document.getElementById("I-love-cookies-footer").textContent = translations[lang].cookies;
-            document.getElementById("language-button").textContent = translations[lang].language;
+            document.getElementById("greeting").textContent = currentTranslations.greeting;
+            document.getElementById("I-love-cookies").textContent = currentTranslations.cookies;
+            document.getElementById("name").textContent = currentTranslations.name;
+            document.getElementById("tyret-name").textContent = currentTranslations.tyretName;
+            document.getElementById("kapibara-name").textContent = currentTranslations.kapibaraName;
+            document.getElementById("ater-name").textContent = currentTranslations.aterName;
 
-            document.getElementById("tab-btn-profile").textContent = translations[lang].tabProfile;
-            document.getElementById("tab-btn-info").textContent = translations[lang].tabInfo;
+            document.getElementById("contact").textContent = currentTranslations.contact;
+            document.getElementById("support").textContent = currentTranslations.support;
+            document.getElementById("donate").textContent = currentTranslations.donate;
+            document.getElementById("I-love-cookies-footer").textContent = currentTranslations.cookies;
+            document.getElementById("language-button").textContent = currentTranslations.language;
 
-            document.getElementById("info-title").textContent = translations[lang].infoTitle;
-            document.getElementById("ip-label").textContent = translations[lang].ipLabel;
-            document.getElementById("linkLabel").textContent = translations[lang].linkLabel;
+            document.getElementById("tab-btn-profile").textContent = currentTranslations.tabProfile;
+            document.getElementById("tab-btn-info").textContent = currentTranslations.tabInfo;
+
+            document.getElementById("info-title").textContent = currentTranslations.infoTitle;
+            document.getElementById("ip-label").textContent = currentTranslations.ipLabel;
+            document.getElementById("linkLabel").textContent = currentTranslations.linkLabel;
             // Обновление текста ссылки на Discord
-            document.getElementById("discord-link-text").textContent = translations[lang].discordLinkText;
+            document.getElementById("discord-link-text").textContent = currentTranslations.discordLinkText;
 
             // Обновление заголовка и пунктов правил
-            // Проверяем наличие элементов перед попыткой обновления (на всякий случай, если правила будут не на всех вкладках)
             const rulesHeading = document.getElementById("rules-heading");
             if (rulesHeading) {
-                rulesHeading.textContent = translations[lang].rulesHeading;
+                rulesHeading.textContent = currentTranslations.rulesHeading;
             }
             for (let i = 1; i <= 8; i++) {
                 const ruleElement = document.getElementById(`rule-${i}`);
                 if (ruleElement) {
-                    ruleElement.textContent = translations[lang][`rule_${i}`];
+                    ruleElement.textContent = currentTranslations[`rule_${i}`];
                 }
             }
 
+            // --- Обновление текстов для статуса сервера ---
+            const serverStatusHeading = document.getElementById('server-status-heading');
+            const statusLabel = document.getElementById('status-label');
+            const playersLabel = document.getElementById('players-label');
+            const versionLabel = document.getElementById('version-label');
+            const motdLabel = document.getElementById('motd-label');
+            const refreshButton = document.getElementById('server-refresh-button');
+             const statusIndicator = document.getElementById('status-indicator'); // Получаем индикатор статуса
+
+            if (serverStatusHeading) serverStatusHeading.textContent = currentTranslations.serverStatusHeading;
+            if (statusLabel) statusLabel.textContent = currentTranslations.statusLabel;
+            if (playersLabel) playersLabel.textContent = currentTranslations.playersLabel;
+            if (versionLabel) versionLabel.textContent = currentTranslations.versionLabel;
+            if (motdLabel) motdLabel.textContent = currentTranslations.motdLabel;
+            if (refreshButton) refreshButton.textContent = currentTranslations.refreshButton;
+
+             // Обновляем текст индикатора статуса только если он не "Загрузка..." или "Онлайн/Офлайн"
+             // При смене языка сохраняем текущее состояние (онлайн/офлайн/загрузка)
+             if (statusIndicator) {
+                 if (statusIndicator.classList.contains('status-online')) {
+                     statusIndicator.textContent = currentTranslations.statusOnline;
+                 } else if (statusIndicator.classList.contains('status-offline')) {
+                      // Если статус оффлайн, пытаемся найти соответствующий перевод ошибки
+                      const currentErrorText = statusIndicator.textContent.split('(')[1]?.slice(0, -1); // Извлекаем текст ошибки в скобках
+                       let translatedError = '';
+                       if (currentErrorText === translations['en'].errorTimeout) translatedError = currentTranslations.errorTimeout;
+                       else if (currentErrorText === translations['en'].errorConnectionRefused) translatedError = currentTranslations.errorConnectionRefused;
+                        // Добавьте сюда другие возможные ошибки из вашего Python бэкенда
+
+                       if (translatedError) {
+                           statusIndicator.textContent = `${currentTranslations.statusOffline} (${translatedError})`;
+                       } else {
+                           // Если перевод ошибки не найден, просто отображаем "Офлайн"
+                            statusIndicator.textContent = currentTranslations.statusOffline;
+                       }
+
+                 } else {
+                      statusIndicator.textContent = currentTranslations.statusLoading;
+                 }
+             }
+
+            // --- Конец обновления текстов для статуса сервера ---
+
+
             localStorage.setItem('preferredLanguage', lang);
         }
+         // === Конец функций для вкладок и языка ===
 
-        // Инициализация при загрузке страницы: установить язык и показать вкладку по умолчанию
+
+        // === Функции для статуса сервера ===
+        const statusIndicator = document.getElementById('status-indicator');
+        const serverOnlineInfo = document.getElementById('server-online-info');
+        const playersOnline = document.getElementById('players-online');
+        const playersMax = document.getElementById('players-max');
+        const serverVersion = document.getElementById('server-version');
+        const serverMotd = document.getElementById('server-motd');
+        const serverRefreshButton = document.getElementById('server-refresh-button');
+
+        // !!! ЗАМЕНИТЕ НА АДРЕС И ПОРТ ВАШЕГО PYTHON БЭКЕНДА !!!
+        // Например: 'http://localhost:5000/status' если вы запускаете Python локально на порту 5000
+        // Если ваш сайт и бэкенд на одном сервере, возможно, достаточно будет относительного пути '/status'
+        const API_URL = 'https://toploardgg.github.io/';
+
+        // !!! ЗАМЕНИТЕ НА АДРЕС ВАШЕГО ATERNOS СЕРВЕРА !!!
+        const ATERNOS_SERVER_ADDRESS = 'Toploardgg.aternos.me'; // Замените на реальный адрес
+        const ATERNOS_SERVER_PORT = 39466; // Замените на реальный порт
+
+        async function fetchServerStatus() {
+            const currentLang = localStorage.getItem('preferredLanguage') || 'en';
+            const currentTranslations = translations[currentLang];
+
+            statusIndicator.textContent = currentTranslations.statusLoading;
+            statusIndicator.className = 'server-status-indicator status-loading';
+            serverOnlineInfo.style.display = 'none';
+            serverRefreshButton.disabled = true; // Отключить кнопку во время загрузки
+
+            try {
+                // Добавляем timestamp для предотвращения кэширования браузером
+                const response = await fetch(`${API_URL}?address=${ATERNOS_SERVER_ADDRESS}&port=${ATERNOS_SERVER_PORT}&_=${new Date().getTime()}`);
+
+                 if (!response.ok) {
+                     throw new Error(`HTTP error! status: ${response.status}`);
+                 }
+
+                const data = await response.json();
+
+                if (data.online) {
+                    statusIndicator.textContent = currentTranslations.statusOnline;
+                    statusIndicator.className = 'server-status-indicator status-online';
+                    playersOnline.textContent = data.players_online;
+                    playersMax.textContent = data.players_max;
+                    serverVersion.textContent = data.version;
+                    // Очистка MOTD от цветовых кодов Minecraft (символ §) и установка текста
+                    serverMotd.textContent = data.motd ? data.motd.replace(/§[0-9A-FK-ORa-fk-or]/gi, '') : '';
+                    serverOnlineInfo.style.display = 'block';
+                } else {
+                     let errorText = currentTranslations.errorFetchingStatus + (data.error || 'Unknown error');
+                      // Проверяем, есть ли конкретный перевод для известных ошибок с бэкенда
+                     if (data.error === "Таймаут подключения к серверу" || data.error === "Timeout connecting to server") {
+                         errorText = `${currentTranslations.statusOffline} (${currentTranslations.errorTimeout})`;
+                     } else if (data.error === "Отказано в подключении" || data.error === "Connection refused") {
+                         errorText = `${currentTranslations.statusOffline} (${currentTranslations.errorConnectionRefused})`;
+                     } else {
+                          // Если ошибка неизвестна, просто отображаем общий текст ошибки с бэкенда
+                         errorText = `${currentTranslations.statusOffline} (${data.error || 'Неизвестная ошибка'})`;
+                     }
+
+                    statusIndicator.textContent = errorText;
+                    statusIndicator.className = 'server-status-indicator status-offline';
+                    serverOnlineInfo.style.display = 'none';
+                }
+            } catch (error) {
+                console.error('Ошибка при получении статуса:', error);
+                 const currentLang = localStorage.getItem('preferredLanguage') || 'en';
+                 const currentTranslations = translations[currentLang];
+                statusIndicator.textContent = `${currentTranslations.statusOffline} (${currentTranslations.errorFetchingStatus} ${error.message || error})`;
+                statusIndicator.className = 'server-status-indicator status-offline';
+                serverOnlineInfo.style.display = 'none';
+            } finally {
+                 serverRefreshButton.disabled = false; // Включить кнопку после загрузки
+            }
+        }
+
+        // Периодически обновлять статус (например, каждые 60 секунд),
+        // но только если активна вкладка "Инфо"
+        const refreshInterval = 60000; // 60 секунд
+        let statusIntervalId = null; // Переменная для хранения ID интервала
+
+         // Функция для запуска интервала обновления
+        function startStatusInterval() {
+             if (statusIntervalId === null) { // Избегаем создания нескольких интервалов
+                 statusIntervalId = setInterval(() => {
+                     const activeTabElement = document.querySelector('.tab-content.active');
+                     const activeTabId = activeTabElement ? activeTabElement.id.replace('tab-content-', '') : null;
+                     if (activeTabId === 'info') {
+                         fetchServerStatus();
+                     }
+                 }, refreshInterval);
+             }
+        }
+
+        // Функция для остановки интервала обновления
+        function stopStatusInterval() {
+            if (statusIntervalId !== null) {
+                clearInterval(statusIntervalId);
+                statusIntervalId = null;
+            }
+        }
+
+
+        // Обработчик клика по кнопке обновления
+        if (serverRefreshButton) {
+             serverRefreshButton.addEventListener('click', fetchServerStatus);
+        }
+
+
+        // === Инициализация при загрузке страницы ===
         document.addEventListener('DOMContentLoaded', () => {
             const savedLang = localStorage.getItem('preferredLanguage') || 'en'; // 'en' как язык по умолчанию
             changeLanguage(savedLang);
-            // Determine which tab is currently active (or default to 'profile')
-            const activeTabId = document.querySelector('.tab-content.active')?.id.replace('tab-content-', '') || 'profile';
-            showTab(activeTabId); // Show the correct tab after setting language
+
+            // Определяем, какая вкладка должна быть активна по умолчанию или из URL
+            // (В вашем коде по умолчанию активна 'profile')
+            const initialTabId = 'profile'; // Или можно парсить из URL, если нужно
+
+            showTab(initialTabId); // Показываем начальную вкладку
+
+            // Если начальная вкладка - "инфо", начинаем интервал
+             if (initialTabId === 'info') {
+                 startStatusInterval();
+             }
         });
 
-        // Ensure the correct tab is shown and language applied on initial load
-        document.addEventListener('DOMContentLoaded', () => {
-             const savedLang = localStorage.getItem('preferredLanguage') || 'en';
-             changeLanguage(savedLang);
-             // Check which tab is active or default to 'profile'
-             const activeTabElement = document.querySelector('.tab-content.active');
-             const activeTabId = activeTabElement ? activeTabElement.id.replace('tab-content-', '') : 'profile';
-             showTab(activeTabId); // Call showTab after language is set and initial tab is determined
-        });
+         // Также убедимся, что интервал статуса останавливается, если пользователь уходит со страницы
+         window.addEventListener('beforeunload', stopStatusInterval);
 
 
     </script>
