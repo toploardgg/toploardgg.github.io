@@ -7,383 +7,96 @@
     <link rel="icon" type="image/png" href="лол.png">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap" rel="stylesheet">
     <style>
-        /* Ваши оригинальные стили - НЕ ИЗМЕНЕНЫ */
         body {
-            background-color: #1a1a1a;
-            color: white;
-            font-family: "Roboto", sans-serif;
-            text-align: center;
-            padding: 50px; /* Will be adjusted for mobile */
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-            font-weight: bold;
-            position: relative;
-            box-sizing: border-box;
+            background-color: #1a1a1a;color: white;font-family: "Roboto", sans-serif;text-align: center;padding: 50px;display: flex;flex-direction: column;min-height: 100vh;font-weight: bold;position: relative;box-sizing: border-box;
         }
-
-        h1, h2, h3, h4, h5, p, input[type="submit"], button {
-            font-weight: bold;
-        }
-
-        .header-controls {
-            position: absolute;
-            top: 20px; /* Will be adjusted for mobile */
-            right: 20px; /* Will be adjusted for mobile */
-            display: flex;
-            gap: 10px; /* Will be adjusted for mobile */
-            z-index: 10;
-        }
-
-        .dropdown {
-            position: relative;
-            display: inline-block;
-        }
-
-        .dropbtn {
-            background-color: transparent;
-            color: white;
-            border: 2px solid white;
-            padding: 10px 20px; /* Will be adjusted for mobile */
-            font-size: 1em; /* Will be adjusted for mobile */
-            cursor: pointer;
-            border-radius: 10px;
-            transition: 0.3s;
-            font-weight: bold;
-        }
-
-        .dropbtn:hover, .dropbtn:focus {
-            background-color: white;
-            color: black;
-        }
-
-        .dropdown-content {
-            display: none;
-            position: absolute;
-            right: 0;
-            background-color: #2a2a2a;
-            border: 2px solid white;
-            border-radius: 10px;
-            min-width: 160px; /* Will be adjusted for mobile */
-            box-shadow: 0px 8px 16px rgba(255, 255, 255, 0.2);
-            z-index: 1;
-        }
-
-        .dropdown-content button {
-            background-color: transparent;
-            color: white;
-            border: none;
-            padding: 12px 16px; /* Will be adjusted for mobile */
-            width: 100%;
-            text-align: left;
-            cursor: pointer;
-            font-size: 1em; /* Will be adjusted for mobile */
-            font-weight: bold;
-            box-sizing: border-box;
-        }
-
-        .dropdown-content button:hover {
-            background-color: white;
-            color: black;
-        }
-
-        .dropdown:hover .dropdown-content {
-            display: block;
-        }
-
-        /* --- СТИЛИ ДЛЯ КОНТЕЙНЕРА FLEXBOX С ПРОФИЛЯМИ --- */
-        .profile-container {
-            display: flex;
-            justify-content: center;
-            gap: 40px; /* Will be adjusted for mobile */
-            flex-wrap: wrap;
-            margin-top: 20px;
-            margin-bottom: 20px;
-        }
-
-        .profile {
-            text-align: center;
-            margin-bottom: 20px; /* Margin when stacked on smaller screens */
-        }
-
-        /* Исправляем, чтобы margin-bottom был у всех, кроме последней строки (для больших экранов) */
-        @media (min-width: 768px) {
-           .profile {
-            margin-bottom: 0; /* Remove margin when side-by-side */
-           }
-        }
-        /* --- КОНЕЦ СТИЛЕЙ ДЛЯ КОНТЕЙНЕРА FLEXBOX С ПРОФИЛЯМИ --- */
-
-        .profile img {
-            width: 200px; /* Will be adjusted for mobile */
-            height: auto;
-            border-radius: 10px;
-            border: 2px solid white;
-        }
-
-        .footer {
-            margin-top: auto;
-            padding-top: 20px; /* Will be adjusted for mobile */
-            text-align: center;
-            width: 100%;
-        }
-
+        h1, h2, h3, h4, h5, p, input[type="submit"], button {font-weight: bold;}
+        .header-controls {position: absolute;top: 20px;right: 20px;display: flex;gap: 10px;z-index: 10;}
+        .dropdown {position: relative;display: inline-block;}
+        .dropbtn {background-color: transparent;color: white;border: 2px solid white;padding: 10px 20px;font-size: 1em;cursor: pointer;border-radius: 10px;transition: 0.3s;font-weight: bold;}
+        .dropbtn:hover, .dropbtn:focus {background-color: white;color: black;}
+        .dropdown-content {display: none;position: absolute;right: 0;background-color: #2a2a2a;border: 2px solid white;border-radius: 10px;min-width: 160px;box-shadow: 0px 8px 16px rgba(255, 255, 255, 0.2);z-index: 1;}
+        .dropdown-content button {background-color: transparent;color: white;border: none;padding: 12px 16px;width: 100%;text-align: left;cursor: pointer;font-size: 1em;font-weight: bold;box-sizing: border-box;}
+        .dropdown-content button:hover {background-color: white;color: black;}
+        .dropdown:hover .dropdown-content {display: block;}
+        .profile-container {display: flex;justify-content: center;gap: 40px;flex-wrap: wrap;margin-top: 20px;margin-bottom: 20px;}
+        .profile {text-align: center;margin-bottom: 20px;}
+        @media (min-width: 768px) {.profile {margin-bottom: 0;}}
+        .profile img {width: 200px;height: auto;border-radius: 10px;border: 2px solid white;}
+        .footer {margin-top: auto;padding-top: 20px;text-align: center;width: 100%;}
         .info-box {
-            border: 2px solid white;
-            padding: 20px; /* Will be adjusted for mobile */
-            display: inline-block;
-            border-radius: 10px;
-            background-color: transparent;
-            max-width: 90%; /* Will be adjusted for mobile */
-            box-sizing: border-box;
-            margin-top: 20px; /* Will be adjusted for mobile */
-            margin-left: auto;
-            margin-right: auto;
-            text-align: left; /* Выравнивание текста внутри info-box по умолчанию */
+            border: 2px solid white;padding: 20px;display: inline-block;border-radius: 10px;background-color: transparent;max-width: 90%;box-sizing: border-box;margin-top: 20px;margin-left: auto;margin-right: auto;
+            text-align: center; /* Этот стиль центрирует содержимое info-box */
         }
-         /* Центрируем определенные элементы внутри info-box */
-         .info-box h2, .info-box h3, .info-box h4 {
-             text-align: center;
-         }
+        .info-box h2, .info-box h3, .info-box h4 {text-align: center;}
+        /* Если вы хотите, чтобы параграфы и списки внутри info-box были слева, добавьте: */
+        /* .info-box p, .info-box ul, .info-box ol, .info-box li { text-align: left; } */
 
-         /* --- СТИЛЬ ДЛЯ ЦЕНТРИРОВАНИЯ ФОРМЫ PAYPAL В ФУТЕРЕ --- */
-         .footer .info-box form {
-             text-align: center; /* Центрируем содержимое формы (кнопку) */
-             margin-top: 20px; /* Add space above form */
-         }
-         /* --- КОНЕЦ СТИЛЯ ДЛЯ ЦЕНТРИРОВАНИЯ ФОРМЫ PAYPAL В ФУТЕРЕ --- */
-
-
-        .info-box p, .info-box ul, .info-box ol, .info-box li {
-            color: white;
-            margin-top: 10px; /* Will be adjusted for mobile */
-            margin-bottom: 10px; /* Will be adjusted for mobile */
-            word-wrap: break-word;
-            line-height: 1.4; /* Will be adjusted for mobile */
-        }
-         /* Стили для списка правил */
-        .info-box ol {
-            list-style-type: decimal;
-            padding-left: 20px; /* Will be adjusted for mobile */
-            margin-top: 15px; /* Will be adjusted for mobile */
-            margin-bottom: 15px; /* Will be adjusted for mobile */
-        }
-
-        .info-box li {
-            margin-bottom: 10px; /* Will be adjusted for mobile */
-            line-height: 1.4; /* Will be adjusted for mobile */
-        }
-
-        .info-box a {
-            color: #87CEFA;
-            text-decoration: underline;
-            display: inline;
-            margin: 0;
-        }
-
-
-        .paypal-button {
-            background-color: transparent;
-            color: white;
-            border: 2px solid white;
-            padding: 10px 20px; /* Will be adjusted for mobile */
-            font-size: 1em; /* Will be adjusted for mobile */
-            cursor: pointer;
-            border-radius: 10px;
-            transition: 0.3s;
-            margin-top: 15px; /* Will be adjusted for mobile */
-            font-weight: bold;
-        }
-
-        .paypal-button:hover {
-            background-color: white;
-            color: black;
-        }
-
-        /* === СТИЛИ ДЛЯ ВКЛАДОК === */
-        .tab-container {
-            text-align: center;
-            margin-bottom: 30px; /* Will be adjusted for mobile */
-            margin-top: 10px;
-        }
-
-        .tab-button {
-            background-color: transparent;
-            color: white;
-            border: 2px solid white;
-            padding: 10px 20px; /* Will be adjusted for mobile */
-            font-size: 1em; /* Will be adjusted for mobile */
-            cursor: pointer;
-            border-radius: 10px;
-            transition: 0.3s;
-            margin: 0 5px;
-            font-weight: bold;
-        }
-
-        .tab-button:hover {
-            background-color: #333;
-        }
-
-        .tab-button.active {
-            background-color: white;
-            color: black;
-        }
-
-        .tab-content {
-            display: none;
-            animation: fadeIn 0.5s;
-        }
-
-        .tab-content.active {
-            display: block;
-        }
-
-        /* Анимация */
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-        /* === КОНЕЦ СТИЛЕЙ ДЛЯ ВКЛАДОК === */
-
-        /* === СТИЛИ ДЛЯ СТАТУСА СЕРВЕРА === */
-        .server-status-section {
-            margin-top: 20px;
-            padding-top: 20px;
-            border-top: 1px dashed #eee; /* Разделитель */
-            text-align: center; /* Центрируем содержимое блока статуса */
-        }
-
-        .server-status-section p {
-             margin: 5px 0; /* Уменьшаем отступы между параграфами статуса */
-             text-align: center; /* Центрируем текст в параграфах статуса */
-        }
-
-        .server-status-indicator {
-            font-weight: bold;
-        }
-
-        .status-online {
-            color: green;
-        }
-
-        .status-offline {
-            color: red;
-        }
-
-         .status-loading {
-            color: orange; /* Цвет для состояния загрузки */
-         }
-
-        #server-online-info {
-            margin-top: 10px;
-            /* display: none; - будет управляться JavaScript */
-        }
-
-        #server-refresh-button {
-            margin-top: 10px;
-            padding: 8px 15px;
-            cursor: pointer;
-             font-weight: bold;
-             background-color: transparent;
-             color: white;
-             border: 2px solid white;
-             border-radius: 10px;
-             transition: 0.3s;
-        }
-
-         #server-refresh-button:hover:not(:disabled) {
-             background-color: white;
-             color: black;
-         }
-
-         #server-refresh-button:disabled {
-             opacity: 0.5;
-             cursor: not-allowed;
-         }
-
-        /* === КОНЕЦ СТИЛЕЙ ДЛЯ СТАТУСА СЕРВЕРА === */
-
-
-        /* --- MOBILE OPTIMIZATIONS (Media Query) --- */
-        /* Apply styles when the screen width is 767px or less */
+        .footer .info-box form {text-align: center;margin-top: 20px;}
+        .info-box p, .info-box ul, .info-box ol, .info-box li {color: white;margin-top: 10px;margin-bottom: 10px;word-wrap: break-word;line-height: 1.4;}
+        .info-box ol {list-style-type: decimal;padding-left: 20px;margin-top: 15px;margin-bottom: 15px;}
+        .info-box li {margin-bottom: 10px;line-height: 1.4;}
+        .info-box a {color: #87CEFA;text-decoration: underline;display: inline;margin: 0;}
+        .paypal-button {background-color: transparent;color: white;border: 2px solid white;padding: 10px 20px;font-size: 1em;cursor: pointer;border-radius: 10px;transition: 0.3s;margin-top: 15px;font-weight: bold;}
+        .paypal-button:hover {background-color: white;color: black;}
+        .tab-container {text-align: center;margin-bottom: 30px;margin-top: 10px;}
+        .tab-button {background-color: transparent;color: white;border: 2px solid white;padding: 10px 20px;font-size: 1em;cursor: pointer;border-radius: 10px;transition: 0.3s;margin: 0 5px;font-weight: bold;}
+        .tab-button:hover {background-color: #333;}
+        .tab-button.active {background-color: white;color: black;}
+        .tab-content {display: none;animation: fadeIn 0.5s;}
+        .tab-content.active {display: block;}
+        @keyframes fadeIn {from { opacity: 0; }to { opacity: 1; }}
+        .server-status-section {margin-top: 20px;padding-top: 20px;border-top: 1px dashed #eee;text-align: center;}
+        .server-status-section p {margin: 5px 0;text-align: center;}
+        .server-status-indicator {font-weight: bold;}
+        .status-online {color: green;}
+        .status-offline {color: red;}
+        .status-loading {color: orange;}
+        #server-online-info {margin-top: 10px;}
+        #server-refresh-button {margin-top: 10px;padding: 8px 15px;cursor: pointer;font-weight: bold;background-color: transparent;color: white;border: 2px solid white;border-radius: 10px;transition: 0.3s;}
+        #server-refresh-button:hover:not(:disabled) {background-color: white;color: black;}
+        #server-refresh-button:disabled {opacity: 0.5;cursor: not-allowed;}
         @media (max-width: 767px) {
-            body {
-                padding: 15px; /* Reduced padding for smaller screens */
+            body {padding: 15px;}
+            .header-controls {top: 10px;right: 10px;gap: 5px;}
+            .dropbtn, .tab-button, .paypal-button, #server-refresh-button {padding: 8px 15px;font-size: 0.9em;}
+            .dropdown-content {min-width: 120px;}
+            .dropdown-content button {padding: 10px 12px;font-size: 0.9em;}
+            .tab-container {margin-bottom: 20px;display: flex;flex-wrap: wrap;justify-content: center;gap: 5px;}
+            .tab-button {margin: 5px;}
+            .profile-container {flex-direction: column;gap: 20px;align-items: center;}
+            .profile img {width: 80%;max-width: 200px;height: auto;}
+            .info-box {padding: 15px;margin-top: 15px;max-width: 95%;}
+            .info-box p, .info-box ul, .info-box ol, .info-box li {margin-top: 8px;margin-bottom: 8px;line-height: 1.5;}
+            .info-box ol {padding-left: 15px;margin-top: 10px;margin-bottom: 10px;}
+            .info-box li {margin-bottom: 8px;}
+            .footer {padding-top: 15px;}
+            .footer .info-box form {margin-top: 15px;}
+             /* На мобильных - кнопки скачивания переносятся и выстраиваются вертикально */
+            .resourcepack-buttons-container {
+                 flex-direction: column; /* Stack buttons vertically */
+                 align-items: center; /* Center stacked buttons */
+                 gap: 10px; /* Adjust gap for stacked buttons */
             }
-
-            .header-controls {
-                top: 10px; /* Adjusted header position */
-                right: 10px;
-                gap: 5px; /* Reduced gap in header controls */
+            .download-button {
+                 margin: 0 !important; /* Remove horizontal margin when stacked */
+                 margin-top: 5px; /* Add a small vertical margin */
             }
-
-            .dropbtn, .tab-button, .paypal-button, #server-refresh-button { /* Add refresh button here */
-                padding: 8px 15px; /* Slightly smaller buttons */
-                font-size: 0.9em; /* Slightly smaller font size */
-            }
-
-            .dropdown-content {
-                 min-width: 120px; /* Adjusted dropdown width */
-             }
-
-            .dropdown-content button {
-                padding: 10px 12px; /* Adjusted dropdown item padding */
-                font-size: 0.9em; /* Slightly smaller font size */
-            }
-
-            .tab-container {
-                margin-bottom: 20px; /* Adjusted spacing below tabs */
-            }
-
-            .profile-container {
-                flex-direction: column; /* Stack profiles vertically on mobile */
-                gap: 20px; /* Reduced gap between stacked profiles */
-                align-items: center; /* Center profiles when stacked */
-            }
-
-            .profile {
-                 /* margin-bottom: 20px is handled by the base style and is good for stacking */
-            }
-
-            .profile img {
-                width: 80%; /* Make image width responsive */
-                max-width: 200px; /* Prevent images from becoming too large on slightly bigger mobile screens */
-                height: auto; /* Maintain aspect ratio */
-            }
-
-            .info-box {
-                padding: 15px; /* Reduced info box padding */
-                margin-top: 15px; /* Reduced top margin */
-                max-width: 95%; /* Allow info box to use more screen width */
-            }
-
-            /* Adjust spacing and line height within info box for readability */
-            .info-box p, .info-box ul, .info-box ol, .info-box li {
-                margin-top: 8px;
-                margin-bottom: 8px;
-                line-height: 1.5; /* Slightly increased line height for better readability */
-            }
-
-             .info-box ol {
-                 padding-left: 15px; /* Reduced list padding */
-                 margin-top: 10px;
-                 margin-bottom: 10px;
-             }
-
-             .info-box li {
-                margin-bottom: 8px; /* Adjusted list item margin */
-             }
-
-            .footer {
-                padding-top: 15px; /* Adjusted footer top padding */
-            }
-
-             .footer .info-box form {
-                 margin-top: 15px; /* Add some space above the PayPal button in the footer */
-             }
+             .download-button:first-child { margin-top: 0; } /* No top margin for the very first stacked button */
 
         }
-        /* --- END MOBILE OPTIMIZATIONS --- */
+        .download-button {display: inline-block;background-color: transparent;color: white;border: 2px solid white;padding: 10px 20px;font-size: 1em;cursor: pointer;border-radius: 10px;transition: 0.3s;text-decoration: none;font-weight: bold; /* Убран margin-top, будет управляться контейнером */}
+        .download-button:hover {background-color: white;color: black;}
+
+        /* Контейнер для обеих кнопок ресурспака */
+        .resourcepack-buttons-container {
+            display: flex; /* Включаем Flexbox */
+            justify-content: center; /* Центрируем группу кнопок по горизонтали */
+            align-items: center; /* Выравниваем кнопки по центру вертикали (если их высота разная) */
+            gap: 20px; /* Расстояние между кнопками */
+            flex-wrap: wrap; /* Позволяет кнопкам переноситься на новую строку на маленьких экранах */
+            margin-top: 15px; /* Отступ сверху от описания */
+        }
 
     </style>
 </head>
@@ -398,61 +111,42 @@
             </div>
         </div>
     </div>
-
     <div class="tab-container">
         <button class="tab-button active" onclick="showTab('profile')" id="tab-btn-profile">Profile</button>
         <button class="tab-button" onclick="showTab('info')" id="tab-btn-info">Info</button>
+        <button class="tab-button" onclick="showTab('resourcepack')" id="tab-btn-resourcepack">Resource Pack</button>
     </div>
-
     <div id="tab-content-profile" class="tab-content active">
         <h1 id="greeting">Hi.</h1>
         <h2 id="I-love-cookies">I love cookies)<🍪</h2>
-
         <div class="profile-container">
-
             <div class="profile">
                 <h1 id="name">Toploardgg (Stas)</h1>
                 <img src="https://s.namemc.com/3d/skin/body.png?id=8014acbb674adae5&model=classic&theta=30&phi=21&time=90&width=600&height=800" alt="Profile Image">
             </div>
-
             <div class="profile">
                 <h1 id="tyret-name">tyret (Artem)</h1>
                 <img src="https://s.namemc.com/3d/skin/body.png?id=01afe2e825ed4ec0&model=classic&theta=-36&phi=27&time=90&width=600&height=800" alt="Tyret Profile Image">
             </div>
-
             <div class="profile">
                 <h1 id="kapibara-name">KAPIBARA (Kolya)</h1>
                 <img src="https://s.namemc.com/3d/skin/body.png?id=0709e143bdf42842&model=slim&theta=30&phi=21&time=90&width=600&height=800" alt="KAPIBARA Profile Image">
             </div>
-
             <div class="profile">
                 <h1 id="ater-name">ater (Dinis)</h1>
                 <img src="https://s.namemc.com/3d/skin/body.png?id=fc27be0c0e0e7904&model=classic&theta=30&phi=21&time=90&width=600&height=800" alt="ater Profile Image">
             </div>
-
         </div>
-        </div>
-
+    </div>
     <div id="tab-content-info" class="tab-content">
         <h2 id="info-title">Information</h2>
         <div class="info-box">
-            <p>
-                <strong id="ip-label">IP Address:</strong>
-                <span id="ip-address">Toploardgg.aternos.me:39466</span>
-            </p>
-            <p>
-                <strong id="linkLabel">Link:</strong>
-                <a href="discord://discord.com/guilds/1359514665373401188" target="_blank" id="discord-link-text">discord group</a>
-            </p>
+            <p><strong id="ip-label">IP Address:</strong> <span id="ip-address">Toploardgg.aternos.me:39466</span></p>
+            <p><strong id="linkLabel">Link:</strong> <a href="discord://discord.com/guilds/1359514665373401188" target="_blank" id="discord-link-text">discord group</a></p>
             <p id="application-message"></p>
-
-
             <div class="server-status-section">
                 <h3 id="server-status-heading">Server Status:</h3>
-                <p>
-                    <span id="status-label">Status:</span>
-                    <span id="status-indicator" class="server-status-indicator status-loading">Загрузка...</span>
-                </p>
+                <p><span id="status-label">Status:</span> <span id="status-indicator" class="server-status-indicator status-loading">Loading...</span></p>
                 <div id="server-online-info" style="display: none;">
                     <p><span id="players-label">Players:</span> <span id="players-online">-</span> / <span id="players-max">-</span></p>
                     <p><span id="version-label">Version:</span> <span id="server-version">-</span></p>
@@ -471,16 +165,24 @@
                 <li id="rule-7">Swearing in voice chat is not recommended.</li>
                 <li id="rule-8">The administration is not obligated to announce rule changes.</li>
             </ol>
-            </div>
+        </div>
     </div>
+    <div id="tab-content-resourcepack" class="tab-content">
+        <h2 id="resourcepack-title">Resource Pack</h2>
+        <div class="info-box">
+            <p id="resourcepack-description">Here you can download the server's official resourcepack.</p>
 
+            <div class="resourcepack-buttons-container">
+                 <a href="toploardggop.zip" class="download-button" id="resourcepack-download-optifine" download>toploardgg-optifine</a>
+                <a href="toploardgg.zip" class="download-button" id="resourcepack-download-nonoptifine" download>toploardgg</a>
+            </div>
+
+        </div>
+    </div>
     <div class="footer">
         <div class="info-box">
             <h4 id="contact">Contacts:</h4>
-            <p>
-                <a id="gmailLink" href="https://mail.google.com/mail/?view=cm&fs=1&to=Toploardgg@gmail.com">Gmail: Toploardgg@gmail.com</a> &
-                <a id="telegramLink" href="tg://user?id=1973152925">Telegram: Loardstk</a>
-            </p>
+            <p><a id="gmailLink" href="https://mail.google.com/mail/?view=cm&fs=1&to=Toploardgg@gmail.com">Gmail: Toploardgg@gmail.com</a> & <a id="telegramLink" href="tg://user?id=1973152925">Telegram: Loardstk</a></p>
             <h2 id="support">Support us:</h2>
             <form action="https://www.paypal.com/donate" method="post" target="_top">
                 <input type="hidden" name="business" value="toploardgg@gmail.com" />
@@ -492,257 +194,126 @@
             </form>
         </div>
     </div>
-
     <script>
         const translations = {
             en: {
-                greeting: "Hi.",
-                cookies: "I love cookies)<🍪",
-                name: "Toploardgg (Stas)",
-                tyretName: "tyret (Artem)",
-                kapibaraName: "KAPIBARA (Kolya)",
-                aterName: "ater (Dinis)",
-                contact: "Contacts:",
-                support: "Support us:",
-                donate: "Donate with PayPal",
-                language: "English",
-                tabProfile: "Profile",
-                tabInfo: "Info",
-                infoTitle: "Information",
-                ipLabel: "IP Address:",
-                linkLabel: "Link:",
-                discordLinkText: "discord group",
-                // Добавлен новый ключ для перевода сообщения о заявке
-                applicationMessage: "To join the server, you need to apply in Discord; all details are in Toploardgg.",
-                rulesHeading: "Server Rules:",
-                rule_1: "Don't tell anyone about Fight Club.",
-                rule_2: "Do not destroy other players' bases, and do not build without permission. Violation - one week ban.",
-                rule_3: "Spam in Minecraft or on the Discord server, or posting irrelevant information in the Telegram group - 1 day mute (sending photos is allowed, as is any kind of information like coordinates or resource locations).",
-                rule_4: "CHEATS ARE STRICTLY PROHIBITED in any form: resource packs or mods for ore visibility, or powerful cheats. Violation - ban from 1 day to permanent depending on the severity of the cheats. To clarify if a mod is a cheat, you need to ask the administrator (me). You can ask for unban, but you must write the reason in at least 3 sentences.",
-                rule_5: "Do not provoke or be provoked. Violation - 1 day.",
-                rule_6: "Do not judge a person based on their differences: weight, age, etc. Violation - 1 week.",
-                rule_7: "Swearing in voice chat is not recommended.",
-                rule_8: "The administration is not obligated to announce rule changes.",
-                // --- Переводы для статуса сервера ---
-                serverStatusHeading: "Server Status:",
-                statusLabel: "Status:",
-                statusOnline: "Online",
-                statusOffline: "Offline",
-                statusLoading: "Loading...",
-                playersLabel: "Players:",
-                versionLabel: "Version:",
-                motdLabel: "MOTD:",
-                refreshButton: "Refresh",
-                errorFetchingStatus: "Error getting status.",
-                statusOfflineMOTD: "Offline" // Новый текст для случая "Офлайн по MOTD"
-                // --- Конец переводов для статуса сервера ---
+                greeting:"Hi.",cookies:"I love cookies)<🍪",name:"Toploardgg (Stas)",tyretName:"tyret (Artem)",kapibaraName:"KAPIBARA (Kolya)",aterName:"ater (Dinis)",contact:"Contacts:",support:"Support us:",donate:"Donate with PayPal",language:"English",tabProfile:"Profile",tabInfo:"Info",tabResourcepack:"Resource Pack",infoTitle:"Information",ipLabel:"IP Address:",linkLabel:"Link:",discordLinkText:"discord group",applicationMessage:"To join the server, you need to apply in Discord; all details are in Toploardgg.",rulesHeading:"Server Rules:",rule_1:"Don't tell anyone about Fight Club.",rule_2:"Do not destroy other players' bases, and do not build without permission. Violation - one week ban.",rule_3:"Spam in Minecraft or on the Discord server, or posting irrelevant information in the Telegram group - 1 day mute (sending photos is allowed, as is any kind of information like coordinates or resource locations).",rule_4:"CHEATS ARE STRICTLY PROHIBITED in any form: resource packs or mods for ore visibility, or powerful cheats. Violation - ban from 1 day to permanent depending on the severity of the cheats. To clarify if a mod is a cheat, you need to ask the administrator (me). You can ask for unban, but you must write the reason in at least 3 sentences.",rule_5:"Do not provoke or be provoked. Violation - 1 day.",rule_6:"Do not judge a person based on their differences: weight, age, etc. Violation - 1 week.",rule_7:"Swearing in voice chat is not recommended.",rule_8:"The administration is not obligated to announce rule changes.",serverStatusHeading:"Server Status:",statusLabel:"Status:",statusOnline:"Online",statusOffline:"Offline",statusLoading:"Loading...",playersLabel:"Players:",versionLabel:"Version:",motdLabel:"MOTD:",refreshButton:"Refresh",errorFetchingStatus:"Error getting status.",statusOfflineMOTD:"Offline (Invalid MOTD)",
+                // Переводы для вкладки Ресурспак
+                resourcepackTitle:"Resource Pack",
+                resourcepackDescription:"Here you can download the server's official resourcepack.",
+                // optifineLabel: "Only OptiFine", // <-- Удален
+                resourcepackDownloadOptifine:"toploardgg-optifine", // <-- Изменен текст
+                resourcepackDownloadNonOptifine:"toploardgg" // <-- Изменен текст
             },
             ru: {
-                greeting: "Привет.",
-                cookies: "Я люблю печеньки)<🍪",
-                name: "Toploardgg (Стас)",
-                tyretName: "tyret (Артём)",
-                kapibaraName: "KAPIBARA (Коля)",
-                aterName: "ater (Денис)",
-                contact: "Контакты:",
-                support: "Поддержите нас:",
-                donate: "Пожертвовать через PayPal",
-                language: "Русский",
-                tabProfile: "Профиль",
-                tabInfo: "Инфо",
-                infoTitle: "Информация",
-                ipLabel: "IP Адрес:",
-                linkLabel: "Ссылка:",
-                discordLinkText: "группа в Discord",
-                 // Добавлен новый ключ для перевода сообщения о заявке
-                applicationMessage: "Чтобы попасть на сервер, надо подать заявку в Discord; все детали в Toploardgg.",
-                rulesHeading: "Правила сервера:",
-                rule_1: "Никому не рассказывать о Бойцовском Клубе.",
-                rule_2: "Нельзя разрушать базы других игроков, а также строить без разрешения. Нарушение - неделя бана.",
-                rule_3: "Спам в Minecraft или на Discord сервере, или написание неважной информации в Telegram группу - мут на 1 день (фотографии отправлять можно, информацию любого вида - как координаты, так и нахождение ресурсов - тоже).",
-                rule_4: "ЧИТЫ СТРОГО ЗАПРЕЩЕНЫ в любом виде: ресурспаки или моды на видимость руд, или сильные читы. Нарушение - бан от 1 дня до навсегда в зависимости от силы читов. Чтобы уточнить, является ли мод читом, нужно спросить у администратора (у меня). Разбан можно попросить, но нужно написать причину минимум 3 предложения.",
-                rule_5: "Не провоцировать и не поддаваться на провокации. Нарушение - 1 день.",
-                rule_6: "Нельзя осуждать человека за его отличия: вес, возраст и т.д. Нарушение - 1 неделя.",
-                rule_7: "Нецензурная брань в голосовом чате нежелательна.",
-                rule_8: "Администрация не обязана сообщать об изменении правил.",
-                 // --- Переводы для статуса сервера ---
-                serverStatusHeading: "Статус сервера:",
-                statusLabel: "Статус:",
-                statusOnline: "Онлайн",
-                statusOffline: "Офлайн",
-                statusLoading: "Загрузка...",
-                playersLabel: "Игроков:",
-                versionLabel: "Версия:",
-                motdLabel: "MOTD:",
-                refreshButton: "Обновить",
-                errorFetchingStatus: "Ошибка получения статуса.",
-                statusOfflineMOTD: "Офлайн"
-                 // --- Конец переводов для статуса сервера ---
+                greeting:"Привет.",cookies:"Я люблю печеньки)<🍪",name:"Toploardgg (Стас)",tyretName:"tyret (Артём)",kapibaraName:"KAPIBARA (Коля)",aterName:"ater (Денис)",contact:"Контакты:",support:"Поддержите нас:",donate:"Пожертвовать через PayPal",language:"Русский",tabProfile:"Профиль",tabInfo:"Инфо",tabResourcepack:"Ресурспак",infoTitle:"Информация",ipLabel:"IP Адрес:",linkLabel:"Ссылка:",discordLinkText:"группа в Discord",applicationMessage:"Чтобы попасть на сервер, надо подать заявку в Discord; все детали в Toploardgg.",rulesHeading:"Правила сервера:",rule_1:"Никому не рассказывать о Бойцовском Клубе.",rule_2:"Нельзя разрушать базы других игроков, а также строить без разрешения. Нарушение - неделя бана.",rule_3:"Спам в Minecraft или на Discord сервере, или написание неважной информации в Telegram группу - мут на 1 день (фотографии отправлять можно, информацию любого вида - как координаты, так и нахождение ресурсов - тоже).",rule_4:"ЧИТЫ СТРОГО ЗАПРЕЩЕНЫ в любом виде: ресурспаки или моды на видимость руд, или сильные читы. Нарушение - бан от 1 дня до навсегда в зависимости от силы читов. Чтобы уточнить, является ли мод читом, нужно спросить у администратора (у меня). Разбан можно попросить, но нужно написать причину минимум 3 предложения.",rule_5:"Не провоцировать и не поддаваться на провокации. Нарушение - 1 день.",rule_6:"Нельзя осуждать человека за его отличия: вес, возраст и т.д. Нарушение - 1 неделя.",rule_7:"Нецензурная брань в голосовом чате нежелательна.",rule_8:"Администрация не обязана сообщать об изменении правил.",serverStatusHeading:"Статус сервера:",statusLabel:"Статус:",statusOnline:"Онлайн",statusOffline:"Офлайн",statusLoading:"Загрузка...",playersLabel:"Игроков:",versionLabel:"Версия:",motdLabel:"MOTD:",refreshButton:"Обновить",errorFetchingStatus:"Ошибка получения статуса.",statusOfflineMOTD:"Офлайн (Неверный MOTD)",
+                // Переводы для вкладки Ресурспак
+                resourcepackTitle:"Ресурспак",
+                resourcepackDescription:"Здесь вы можете скачать официальный ресурспак сервера.",
+                // optifineLabel: "Только для OptiFine", // <-- Удален
+                resourcepackDownloadOptifine:"toploardgg-optifine", // <-- Изменен текст
+                resourcepackDownloadNonOptifine:"toploardgg" // <-- Изменен текст
             },
             uk: {
-                greeting: "Привіт.",
-                cookies: "Я обожнюю пряники)<🍪",
-                name: "Toploardgg (Стаc)",
-                tyretName: "tyret (Артем)",
-                kapibaraName: "KAPIBARA (Коля)",
-                aterName: "ater (Денис)",
-                contact: "Контакти:",
-                support: "Підтримайте нас:",
-                donate: "Пожертвувати через PayPal",
-                language: "Українська",
-                tabProfile: "Профіль",
-                tabInfo: "Інфо",
-                infoTitle: "Інформація",
-                ipLabel: "IP Адреса:",
-                linkLabel: "Посилання:",
-                discordLinkText: "група в Discord",
-                 // Добавлен новый ключ для перевода сообщения о заявке
-                applicationMessage: "Щоб потрапити на сервер, треба подати заявку в діскорд всі деталі в Toploardgg.",
-                rulesHeading: "Правила сервера:",
-                rule_1: "Нікому не розказувати за Бійцівський Клуб.",
-                rule_2: "Не можна руйнувати базу інших ігроків а також будувати без дозволу. Порушення - тиждень бану.",
-                rule_3: "Спам у Minecraft або на Discord сервері, або надсилання неважливої інформації до Telegram групи - мут на 1 день (фотографії надсилати можна, інформацію будь-якого виду - як координати, так і знаходження ресурсів - також).",
-                rule_4: "ЧІТИ СУВОРО ЗАБОРОНЕНІ у будь-якому вигляді: ресурспаки або моди на видимість руд, або сильні чити. Порушення - бан від 1 дня до назавжди залежно від сили читів. Щоб уточнити, чи є мод читом, потрібно запитати у адміністратора (у мене). Розбан можна попросити, але потрібно написати причину мін. 3 речення.",
-                rule_5: "Не провокувати і не піддаватися на провокації. Порушення - 1 день.",
-                rule_6: "Не можна засуджувати людину за її відмінності: вага, вік тощо. Порушення - 1 тиждень.",
-                rule_7: "Матюкатися у голосовому чаті краще не треба.",
-                rule_8: "Адміністрація не зобов'язана повідомляти про зміну правил.",
-                 // --- Переводы для статуса сервера ---
-                serverStatusHeading: "Статус сервера:",
-                statusLabel: "Статус:",
-                statusOnline: "Онлайн",
-                statusOffline: "Офлайн",
-                statusLoading: "Завантаження...",
-                playersLabel: "Гравців:",
-                versionLabel: "Версія:",
-                motdLabel: "MOTD:",
-                refreshButton: "Оновити",
-                errorFetchingStatus: "Помилка отримання статусу.",
-                statusOfflineMOTD: "Офлайн"
-                 // --- Конец переводов для статуса сервера ---
+                greeting:"Привіт.",cookies:"Я обожнюю пряники)<🍪",name:"Toploardgg (Стаc)",tyretName:"tyret (Артем)",kapibaraName:"KAPIBARA (Коля)",aterName:"ater (Денис)",contact:"Контакти:",support:"Підтримайте нас:",donate:"Пожертвувати через PayPal",language:"Українська",tabProfile:"Профіль",tabInfo:"Інформація",tabResourcepack:"Ресурспак",infoTitle:"Інформація",ipLabel:"IP Адреса:",linkLabel:"Посилання:",discordLinkText:"група в Discord",applicationMessage:"Щоб потрапити на сервер, треба подати заявку в діскорд всі деталі в Toploardgg.",rulesHeading:"Правила сервера:",rule_1:"Нікому не розказувати за Бійцівський Клуб.",rule_2:"Не можна руйнувати базу інших ігроків а також будувати без дозволу. Порушення - тиждень бану.",rule_3:"Спам у Minecraft або на Discord сервері, або надсилання неважливої інформації до Telegram групи - мут на 1 день (фотографії надсилати можна, інформацію будь-якого виду - як координати, так і знаходження ресурсів - також).",rule_4:"ЧІТИ СУВОРО ЗАБОРОНЕНІ у будь-якому вигляді: ресурспаки або моди на видимість руд, або сильні чити. Порушення - бан від 1 дня до назавжди залежно від сили читів. Щоб уточнити, чи є мод читом, потрібно запитати у адміністратора (у мене). Розбан можна попросити, але потрібно написати причину мін. 3 речення.",rule_5:"Не провокувати і не піддаватися на провокації. Порушення - 1 день.",rule_6:"Не можна засуджувати людину за її відмінності: вага, вік тощо. Порушення - 1 тиждень.",rule_7:"Матюкатися у голосовому чаті краще не треба.",rule_8:"Адміністрація не зобов'язана повідомляти про зміну правил.",serverStatusHeading:"Статус сервера:",statusLabel:"Статус:",statusOnline:"Онлайн",statusOffline:"Офлайн",statusLoading:"Завантаження...",playersLabel:"Гравців:",versionLabel:"Версія:",motdLabel:"MOTD:",refreshButton:"Оновити",errorFetchingStatus:"Помилка отримання статусу.",statusOfflineMOTD:"Офлайн (Невірний MOTD)",
+                // Переводы для вкладки Ресурспак
+                resourcepackTitle:"Ресурспак",
+                resourcepackDescription:"Тут ви можете завантажити офіційний ресурспак сервера.",
+                // optifineLabel: "Тільки для OptiFine", // <-- Удален
+                resourcepackDownloadOptifine:"toploardgg-optifine", // <-- Изменен текст
+                resourcepackDownloadNonOptifine:"toploardgg" // <-- Изменен текст
             }
         };
-
-        // === Функции для вкладок и языка ===
         function showTab(tabIdToShow) {
-            // Скрыть все вкладки
             const contents = document.querySelectorAll('.tab-content');
-            contents.forEach(content => {
-                content.classList.remove('active');
-            });
-
-            // Деактивировать все кнопки вкладок
+            contents.forEach(content => {content.classList.remove('active');});
             const buttons = document.querySelectorAll('.tab-button');
-            buttons.forEach(button => {
-                button.classList.remove('active');
-            });
-
-            // Показать выбранную вкладку
+            buttons.forEach(button => {button.classList.remove('active');});
             const contentToShow = document.getElementById(`tab-content-${tabIdToShow}`);
             if (contentToShow) {
                  contentToShow.classList.add('active');
-
-                 // Если активирована вкладка "info", запустить получение статуса сервера
                  if (tabIdToShow === 'info') {
-                     fetchServerStatus(); // Вызываем функцию получения статуса
-                     startStatusInterval(); // Запускаем интервал обновления
+                     fetchServerStatus();
+                     startStatusInterval();
                  } else {
-                     stopStatusInterval(); // Останавливаем интервал, если переключились с вкладки "Инфо"
+                     stopStatusInterval();
                  }
             }
-
-            // Активировать выбранную кнопку
             const buttonToActivate = document.getElementById(`tab-btn-${tabIdToShow}`);
-            if (buttonToActivate) {
-                buttonToActivate.classList.add('active');
-            }
+            if (buttonToActivate) {buttonToActivate.classList.add('active');}
         }
-
         function changeLanguage(lang) {
             const currentTranslations = translations[lang];
             if (!currentTranslations) return;
-
             document.getElementById("greeting").textContent = currentTranslations.greeting;
             document.getElementById("I-love-cookies").textContent = currentTranslations.cookies;
             document.getElementById("name").textContent = currentTranslations.name;
             document.getElementById("tyret-name").textContent = currentTranslations.tyretName;
             document.getElementById("kapibara-name").textContent = currentTranslations.kapibaraName;
             document.getElementById("ater-name").textContent = currentTranslations.aterName;
-
             document.getElementById("contact").textContent = currentTranslations.contact;
             document.getElementById("support").textContent = currentTranslations.support;
             document.getElementById("donate").textContent = currentTranslations.donate;
             document.getElementById("I-love-cookies-footer").textContent = currentTranslations.cookies;
             document.getElementById("language-button").textContent = currentTranslations.language;
-
             document.getElementById("tab-btn-profile").textContent = currentTranslations.tabProfile;
             document.getElementById("tab-btn-info").textContent = currentTranslations.tabInfo;
-
+            const tabResourcepackButton = document.getElementById("tab-btn-resourcepack");
+            if (tabResourcepackButton) {tabResourcepackButton.textContent = currentTranslations.tabResourcepack;}
             document.getElementById("info-title").textContent = currentTranslations.infoTitle;
             document.getElementById("ip-label").textContent = currentTranslations.ipLabel;
             document.getElementById("linkLabel").textContent = currentTranslations.linkLabel;
             document.getElementById("discord-link-text").textContent = currentTranslations.discordLinkText;
-            // Обновляем элемент с сообщением о заявке
             const applicationMessageElement = document.getElementById("application-message");
-            if (applicationMessageElement) {
-                applicationMessageElement.textContent = currentTranslations.applicationMessage;
-            }
-
-
+            if (applicationMessageElement) {applicationMessageElement.textContent = currentTranslations.applicationMessage;}
             const rulesHeading = document.getElementById("rules-heading");
-            if (rulesHeading) {
-                rulesHeading.textContent = currentTranslations.rulesHeading;
-            }
+            if (rulesHeading) {rulesHeading.textContent = currentTranslations.rulesHeading;}
             for (let i = 1; i <= 8; i++) {
                 const ruleElement = document.getElementById(`rule-${i}`);
-                if (ruleElement) {
-                    ruleElement.textContent = currentTranslations[`rule_${i}`];
-                }
+                if (ruleElement) {ruleElement.textContent = currentTranslations[`rule_${i}`];}
             }
-
-            // --- Обновление текстов для статуса сервера ---
             const serverStatusHeading = document.getElementById('server-status-heading');
             const statusLabel = document.getElementById('status-label');
             const playersLabel = document.getElementById('players-label');
             const versionLabel = document.getElementById('version-label');
             const motdLabel = document.getElementById('motd-label');
             const refreshButton = document.getElementById('server-refresh-button');
-            const statusIndicator = document.getElementById('status-indicator'); // Получаем индикатор статуса
-
+            const statusIndicator = document.getElementById('status-indicator');
             if (serverStatusHeading) serverStatusHeading.textContent = currentTranslations.serverStatusHeading;
             if (statusLabel) statusLabel.textContent = currentTranslations.statusLabel;
             if (playersLabel) playersLabel.textContent = currentTranslations.playersLabel;
             if (versionLabel) versionLabel.textContent = currentTranslations.versionLabel;
             if (motdLabel) motdLabel.textContent = currentTranslations.motdLabel;
             if (refreshButton) refreshButton.textContent = currentTranslations.refreshButton;
-
-            // Обновляем текст индикатора статуса в зависимости от его текущего состояния
             if (statusIndicator) {
                 if (statusIndicator.classList.contains('status-online')) {
                     statusIndicator.textContent = currentTranslations.statusOnline;
                 } else if (statusIndicator.classList.contains('status-offline')) {
-                     // Проверяем, является ли текущий текст индикатора "Офлайн (Неверный MOTD)"
-                     const offlineMotdText = translations['en'].statusOfflineMOTD; // Берем текст ошибки MOTD на английском для сравнения
-                     if (statusIndicator.textContent.includes(offlineMotdText)) {
-                         statusIndicator.textContent = currentTranslations.statusOfflineMOTD;
+                     const offlineMotdTextCurrentLang = currentTranslations.statusOfflineMOTD;
+                     const currentIndicatorText = statusIndicator.textContent;
+                     if (currentIndicatorText.includes('(') && currentIndicatorText.substring(0, currentIndicatorText.indexOf('(')).trim() === currentTranslations.statusOfflineMOTD.substring(0, currentTranslations.statusOfflineMOTD.indexOf('(')).trim()) {
+                          statusIndicator.textContent = offlineMotdTextCurrentLang;
                      } else {
-                        // Если это не ошибка MOTD, оставляем стандартный текст ошибки или "Офлайн"
-                         statusIndicator.textContent = currentTranslations.statusOffline + (statusIndicator.textContent.includes('(') ? statusIndicator.textContent.substring(statusIndicator.textContent.indexOf('(')) : '');
+                        statusIndicator.textContent = currentTranslations.statusOffline + (currentIndicatorText.includes('(') ? currentIndicatorText.substring(currentIndicatorText.indexOf('(')) : '');
                      }
-                } else { // Состояние загрузки
+                } else {
                      statusIndicator.textContent = currentTranslations.statusLoading;
                 }
             }
+            const resourcepackTitleElement = document.getElementById('resourcepack-title');
+            const resourcepackDescriptionElement = document.getElementById('resourcepack-description');
+            // optifineLabelElement удален
+            const resourcepackDownloadOptifineElement = document.getElementById('resourcepack-download-optifine'); // <-- Элемент кнопки
+            const resourcepackDownloadNonOptifineElement = document.getElementById('resourcepack-download-nonoptifine'); // <-- Элемент кнопки
 
-            // --- Конец обновления текстов для статуса сервера ---
-
+            if(resourcepackTitleElement) resourcepackTitleElement.textContent = currentTranslations.resourcepackTitle;
+            if(resourcepackDescriptionElement) resourcepackDescriptionElement.textContent = currentTranslations.resourcepackDescription;
+            // Обновление текста для optifineLabelElement удалено
+            if(resourcepackDownloadOptifineElement) resourcepackDownloadOptifineElement.textContent = currentTranslations.resourcepackDownloadOptifine; // <-- Обновление текста кнопки
+            if(resourcepackDownloadNonOptifineElement) resourcepackDownloadNonOptifineElement.textContent = currentTranslations.resourcepackDownloadNonOptifine; // <-- Обновление текста кнопки
 
             localStorage.setItem('preferredLanguage', lang);
         }
-        // === Конец функций для вкладок и языка ===
-
-
-        // === Функции для статуса сервера (Использование публичного API и логика по MOTD) ===
         const statusIndicator = document.getElementById('status-indicator');
         const serverOnlineInfo = document.getElementById('server-online-info');
         const playersOnline = document.getElementById('players-online');
@@ -750,131 +321,84 @@
         const serverVersion = document.getElementById('server-version');
         const serverMotd = document.getElementById('server-motd');
         const serverRefreshButton = document.getElementById('server-refresh-button');
-
-        // !!! ЗАМЕНИТЕ НА АДРЕС ВАШЕГО ATERNOS СЕРВЕРА !!!
-        // Адрес и порт в формате "адрес:порт"
-        const ATERNOS_SERVER_ADDRESS_PORT = 'Toploardgg.aternos.me:39466'; // <--- Укажите адрес и порт вашего Aternos сервера через двоеточие
-
-        // Ожидаемый текст MOTD для статуса "Онлайн"
-        const EXPECTED_MOTD = 'Welcome to the server of Toploardgg!';
-
-        // Используем публичный API от mcstatus.io
+        const ATERNOS_SERVER_ADDRESS_PORT = 'Toploardgg.aternos.me:39466'; // <-- Проверьте и измените, если нужно
+        const EXPECTED_MOTD = 'Welcome to the server of Toploardgg!'; // <-- Проверьте и измените, если нужно
         const MCSTATUS_API_URL = `https://api.mcstatus.io/v2/status/java/${ATERNOS_SERVER_ADDRESS_PORT}`;
-
         async function fetchServerStatus() {
             const currentLang = localStorage.getItem('preferredLanguage') || 'en';
             const currentTranslations = translations[currentLang];
-
             statusIndicator.textContent = currentTranslations.statusLoading;
             statusIndicator.className = 'server-status-indicator status-loading';
             serverOnlineInfo.style.display = 'none';
-            serverRefreshButton.disabled = true; // Отключить кнопку во время загрузки
-
+            serverRefreshButton.disabled = true;
             try {
                 const response = await fetch(MCSTATUS_API_URL);
-
                  if (!response.ok) {
-                     // API вернуло ошибку (например, сервер не найден или проблема с API)
-                     const errorData = await response.json(); // Попытаемся получить подробности ошибки от API
+                     const errorData = await response.json();
                      throw new Error(errorData.error || `HTTP error! status: ${response.status}`);
                  }
-
                 const data = await response.json();
-
-                // --- НОВАЯ ЛОГИКА ОПРЕДЕЛЕНИЯ СТАТУСА ПО MOTD ---
-                const receivedMotd = data.motd && data.motd.clean ? data.motd.clean : (data.motd || ''); // Получаем чистый текст MOTD
-                const isOnlineByMotd = data.online && receivedMotd === EXPECTED_MOTD; // Сервер онлайн только если API показало онлайн И MOTD совпадает
-
-                if (isOnlineByMotd) {
+                const receivedMotdRaw = data.motd ? (data.motd.clean || data.motd.raw || '') : '';
+                const receivedMotdClean = receivedMotdRaw.replace(/§[0-9a-fk-or]/gi, '');
+                const isOnlineByApi = data.online === true;
+                const isMotdMatching = receivedMotdClean.trim() === EXPECTED_MOTD.trim();
+                if (isOnlineByApi && isMotdMatching) {
                     statusIndicator.textContent = currentTranslations.statusOnline;
                     statusIndicator.className = 'server-status-indicator status-online';
-                    // Отображаем информацию только если считаем сервер онлайн по нашей логике
-                    playersOnline.textContent = data.players.online;
-                    playersMax.textContent = data.players.max;
-                    serverVersion.textContent = data.version.name;
-                    serverMotd.textContent = receivedMotd; // Показываем полученный MOTD
+                    playersOnline.textContent = data.players ? data.players.online : 0;
+                    playersMax.textContent = data.players ? data.players.max : 0;
+                    serverVersion.textContent = data.version ? data.version.name : 'N/A';
+                    serverMotd.textContent = receivedMotdClean;
                     serverOnlineInfo.style.display = 'block';
                 } else {
-                    // Сервер считается офлайн по нашей логике (либо API сказало, что офлайн, либо MOTD не совпал)
                     let offlineMessage = currentTranslations.statusOffline;
-                    if (data.online && receivedMotd !== EXPECTED_MOTD) {
-                         // Если API сказало, что онлайн, но MOTD не тот
+                    if (isOnlineByApi && !isMotdMatching) {
                          offlineMessage = currentTranslations.statusOfflineMOTD;
                     } else if (data.error) {
-                         // Если API сказало, что офлайн и дало ошибку
                           offlineMessage = `${currentTranslations.statusOffline} (${data.error})`;
                     }
-                    // Если API сказало офлайн без ошибки, просто выведем "Офлайн"
-
-
                     statusIndicator.textContent = offlineMessage;
                     statusIndicator.className = 'server-status-indicator status-offline';
                     serverOnlineInfo.style.display = 'none';
                 }
-                // --- КОНЕЦ НОВОЙ ЛОГИКИ ---
-
             } catch (error) {
                 console.error('Ошибка при получении статуса:', error);
                  const currentLang = localStorage.getItem('preferredLanguage') || 'en';
                  const currentTranslations = translations[currentLang];
-                 // Отображаем общую ошибку получения статуса + текст ошибки из fetch/response
                 statusIndicator.textContent = `${currentTranslations.statusOffline} (${currentTranslations.errorFetchingStatus} ${error.message || error})`;
                 statusIndicator.className = 'server-status-indicator status-offline';
                 serverOnlineInfo.style.display = 'none';
             } finally {
-                 serverRefreshButton.disabled = false; // Включить кнопку после загрузки
+                 serverRefreshButton.disabled = false;
             }
         }
-
-        // Периодически обновлять статус (например, каждые 60 секунд),
-        // но только если активна вкладка "Инфо"
-        const refreshInterval = 60000; // 60 секунд
-        let statusIntervalId = null; // Переменная для хранения ID интервала
-
-         // Функция для запуска интервала обновления
+        const refreshInterval = 60000;
+        let statusIntervalId = null;
         function startStatusInterval() {
-             if (statusIntervalId === null) { // Избегаем создания нескольких интервалов
+             if (statusIntervalId === null) {
                  statusIntervalId = setInterval(() => {
                      const activeTabElement = document.querySelector('.tab-content.active');
                      const activeTabId = activeTabElement ? activeTabElement.id.replace('tab-content-', '') : null;
                      if (activeTabId === 'info') {
-                         fetchServerStatus(); // Вызываем получение статуса
+                         fetchServerStatus();
                      }
                  }, refreshInterval);
              }
         }
-
-        // Функция для остановки интервала обновления
         function stopStatusInterval() {
             if (statusIntervalId !== null) {
                 clearInterval(statusIntervalId);
                 statusIntervalId = null;
             }
         }
-
-
-        // Обработчик клика по кнопке обновления
-        if (serverRefreshButton) {
-             serverRefreshButton.addEventListener('click', fetchServerStatus);
-        }
-
-
-        // === Инициализация при загрузке страницы ===
+        if (serverRefreshButton) {serverRefreshButton.addEventListener('click', fetchServerStatus);}
         document.addEventListener('DOMContentLoaded', () => {
-            const savedLang = localStorage.getItem('preferredLanguage') || 'en'; // 'en' как язык по умолчанию
+            const savedLang = localStorage.getItem('preferredLanguage') || 'en';
             changeLanguage(savedLang);
-
-            // Определяем, какая вкладка должна быть активна по умолчанию
-            const initialTabId = 'profile'; // У вас по умолчанию активна 'profile'
-
-            showTab(initialTabId); // Показываем начальную вкладку
-            // showTab уже вызывает fetchServerStatus и startStatusInterval если initialTabId === 'info'
+            const initialTabId = 'profile';
+            showTab(initialTabId);
         });
-
-         // Также убедимся, что интервал статуса останавливается, если пользователь уходит со страницы
-         window.addEventListener('beforeunload', stopStatusInterval);
-
-
+        window.addEventListener('beforeunload', stopStatusInterval);
     </script>
 </body>
 </html>
