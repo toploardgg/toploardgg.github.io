@@ -1,106 +1,246 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="uk">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Toploardgg</title>
-    <link rel="icon" type="image/png" href="лол.png">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <title>Все про Баскетбол - Глибоке Занурення</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #f89c33; /* Помаранчевий - колір м'яча */
+            --secondary-color: #0047ab; /* Синій - часто асоціюється зі спортом */
+            --dark-overlay: rgba(0, 0, 0, 0.75); /* Темніший оверлей для кращої читабельності */
+            --text-light: #ffffff;
+            --text-dark: #333333;
+            --transition-speed: 1s;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Roboto', sans-serif; /* Використовуємо Roboto для основного тексту */
+            line-height: 1.8; /* Більший міжрядковий інтервал для довшого тексту */
+            color: var(--text-light); /* Білий текст за замовчуванням */
+            background-color: #000; /* Чорний фон між секціями, якщо вони не 100vh */
+            overflow-x: hidden; /* Запобігає горизонтальному скролу */
+        }
+
+        h1, h2 {
+            font-family: 'Oswald', sans-serif; /* Використовуємо Oswald для заголовків */
+            font-weight: 700;
+            color: var(--text-light);
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.9); /* Більш виразні тіні */
+        }
+
+        h1 {
+            font-size: 4.5em; /* Більший заголовок для першої секції */
+            margin-bottom: 20px;
+            animation: fadeInUp 1s ease-out forwards; /* Анімація появи */
+            opacity: 0; /* Приховуємо спочатку для анімації */
+        }
+
+        h2 {
+            font-size: 3em;
+            margin-bottom: 25px; /* Більший відступ знизу */
+            text-transform: uppercase; /* Заголовки великими літерами */
+            border-bottom: 3px solid var(--primary-color); /* Лінія під заголовком */
+            padding-bottom: 10px; /* Відступ над лінією */
+            display: inline-block; /* Щоб лінія була тільки під текстом заголовка */
+        }
+
+        p {
+            font-size: 1.3em; /* Трохи більший розмір тексту */
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+            margin-bottom: 20px; /* Відступ між абзацами */
+        }
+
+        .section {
+            position: relative;
+            min-height: 100vh; /* Займає мінімум всю висоту екрана */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed; /* Паралакс ефект для фону */
+            transition: background-image var(--transition-speed) ease-in-out;
+            padding: 80px 20px; /* Більший внутрішній відступ зверху та знизу */
+            box-sizing: border-box; /* Включаємо padding в розмір елемента */
+        }
+
+        .section::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--dark-overlay); /* Темний оверлей */
+            z-index: 1;
+        }
+
+        .section-content {
+            position: relative;
+            z-index: 2;
+            max-width: 1000px; /* Ще збільшена максимальна ширина контенту */
+            margin: 0 auto; /* Центруємо контентний блок */
+            animation: fadeInUp 1s ease-out forwards; /* Анімація появи для контенту */
+            opacity: 0; /* Приховуємо спочатку для анімації */
+            background-color: rgba(0, 0, 0, 0.3); /* Легкий напівпрозорий фон для контенту */
+            padding: 30px;
+            border-radius: 10px; /* Закруглені кути */
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5); /* Тінь для блоку контенту */
+        }
+
+         /* Затримка анімації для наступних секцій */
+        .section:nth-child(n+2) .section-content {
+             animation-delay: 0.3s;
+        }
+
+
+        /* Стилі для переходів та фонових зображень */
+        /* Додайте більше правил, якщо у вас є більше зображень */
+        .section:nth-child(1) { background-image: url('image1.jpg'); }
+        .section:nth-child(2) { background-image: url('image2.jpg'); }
+        .section:nth-child(3) { background-image: url('image3.jpg'); }
+        .section:nth-child(4) { background-image: url('image4.jpg'); } /* Додайте більше зображень */
+        .section:nth-child(5) { background-image: url('image5.jpg'); }
+        /* Можна повторювати зображення, якщо їх менше, ніж секцій */
+        .section:nth-child(6) { background-image: url('image1.jpg'); }
+        .section:nth-child(7) { background-image: url('image2.jpg'); }
+
+
+        /* Стилі для першої секції (героя) */
+        .section:first-child {
+            justify-content: center; /* Вирівнювання по центру для Hero */
+            padding-bottom: 50px; /* Відступ знизу */
+            padding-top: 150px; /* Відступ зверху, щоб вміст не був надто високо */
+        }
+
+         .section:first-child h1 {
+            font-size: 6em; /* Ще більший заголовок */
+            margin-bottom: 15px;
+            animation-delay: 0.2s; /* Затримка анімації */
+         }
+
+         .section:first-child h2 {
+            font-size: 2.5em; /* Менший підзаголовок */
+            color: var(--primary-color); /* Колір підзаголовка */
+            border-bottom: none; /* Прибираємо лінію під заголовком у першій секції */
+            padding-bottom: 0;
+            animation-delay: 0.4s; /* Затримка анімації */
+         }
+
+         .section:first-child .section-content {
+             background: none; /* Прибираємо фон для блоку контенту в Hero */
+             box-shadow: none; /* Прибираємо тінь */
+             padding: 20px;
+         }
+
+
+        /* Анімація появи знизу */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Медіа запити для адаптивності */
+        @media (max-width: 1024px) {
+             .section-content {
+                 max-width: 800px;
+             }
+             h1 { font-size: 3.8em; }
+             h2 { font-size: 2.5em; }
+             p { font-size: 1.2em; }
+             .section:first-child h1 { font-size: 4.5em; }
+             .section:first-child h2 { font-size: 2em; }
+        }
+
+        @media (max-width: 768px) {
+            .section-content {
+                max-width: 95%; /* Ширший блок на мобільних */
+            }
+            h1 { font-size: 3em; }
+            h2 { font-size: 2em; }
+            p { font-size: 1.1em; }
+            .section:first-child h1 { font-size: 3.5em; }
+            .section:first-child h2 { font-size: 1.8em; }
+            .section { padding: 60px 15px; }
+            h2 { border-bottom-width: 2px; } /* Тонша лінія */
+        }
+
+        @media (max-width: 480px) {
+             h1 { font-size: 2.2em; }
+             h2 { font-size: 1.6em; }
+             p { font-size: 1em; }
+             .section:first-child h1 { font-size: 2.8em; }
+             .section:first-child h2 { font-size: 1.4em; }
+             .section { padding: 40px 10px; }
+        }
+
+    </style>
 </head>
 <body>
-    <div class="header-controls">
-        <div class="dropdown">
-            <button class="dropbtn" id="language-button">English</button>
-            <div class="dropdown-content">
-                <button onclick="changeLanguage('en')">English</button>
-                <button onclick="changeLanguage('ru')">Русский</button>
-                <button onclick="changeLanguage('uk')">Українська</button>
-            </div>
+
+    <div class="section">
+        <div class="section-content">
+            <h1>Баскетбол</h1>
+            <h2>Світ Гри, Енергії та Командного Духу</h2>
         </div>
     </div>
-    <div class="tab-container">
-        <button class="tab-button active" onclick="showTab('profile')" id="tab-btn-profile">Profile</button>
-        <button class="tab-button" onclick="showTab('info')" id="tab-btn-info">Info</button>
-        <button class="tab-button" onclick="showTab('resourcepack')" id="tab-btn-resourcepack">Resource Pack</button>
-    </div>
-    <div id="tab-content-profile" class="tab-content active">
-        <h1 id="greeting">Hi.</h1>
-        <h2 id="I-love-cookies">I love cookies)<🍪</h2>
-        <div class="profile-container">
-            <div class="profile">
-                <h1 id="name">Toploardgg (Stas)</h1>
-                <img src="https://s.namemc.com/3d/skin/body.png?id=8014acbb674adae5&model=classic&theta=30&phi=21&time=90&width=600&height=800" alt="Profile Image">
-            </div>
-            <div class="profile">
-                <h1 id="tyret-name">tyret (Artem)</h1>
-                <img src="https://s.namemc.com/3d/skin/body.png?id=01afe2e825ed4ec0&model=classic&theta=-36&phi=27&time=90&width=600&height=800" alt="Tyret Profile Image">
-            </div>
-            <div class="profile">
-                <h1 id="kapibara-name">KAPIBARA (Kolya)</h1>
-                <img src="https://s.namemc.com/3d/skin/body.png?id=0709e143bdf42842&model=slim&theta=30&phi=21&time=90&width=600&height=800" alt="KAPIBARA Profile Image">
-            </div>
-            <div class="profile">
-                <h1 id="ater-name">ater (Dinis)</h1>
-                <img src="https://s.namemc.com/3d/skin/body.png?id=fc27be0c0e0e7904&model=classic&theta=30&phi=21&time=90&width=600&height=800" alt="ater Profile Image">
-            </div>
+
+    <div class="section">
+        <div class="section-content">
+            <h2>Історія та Витоки Гри</h2>
+            <p>Баскетбол — це одна з небагатьох сучасних спортивних ігор, точна дата і місце народження якої добре відомі. Її створив викладач фізичної культури Джеймс Нейсміт у грудні 1891 року в місті Спрінгфілд, штат Массачусетс, США. Нейсміт шукав нову гру, яка б допомогла студентам підтримувати фізичну форму в зимовий період, коли погода не дозволяла грати на вулиці. Йому була потрібна гра з мінімальним контактом, щоб уникнути травм, яка б розвивала спритність та координацію. Він взяв елементи з інших видів спорту і розробив 13 основних правил. Перші кошики були звичайними фруктовими кошиками, закріпленими на перилах балкона спортивної зали, а замість щитів використовували звичайний м'яч для футболу. Цей скромний початок поклав основу глобального явища.</p>
+            <p>Гра швидко набула популярності в США, а згодом і по всьому світу. Міжнародна федерація баскетболу (FIBA) була заснована в 1932 році, що стало значним кроком для поширення спорту на міжнародній арені. Баскетбол був включений до програми Олімпійських ігор у 1936 році в Берліні. Жіночий баскетбол розвивався паралельно і був включений до Олімпійських ігор пізніше, у 1976 році. Еволюція правил, інвентарю та технік зробила гру швидшою, динамічнішою та видовищнішою.</p>
         </div>
     </div>
-    <div id="tab-content-info" class="tab-content">
-        <h2 id="info-title">Information</h2>
-        <div class="info-box">
-            <p><strong id="ip-label">IP Address:</strong> <span id="ip-address">Toploardgg.aternos.me:39466</span></p>
-            <p><strong id="linkLabel">Link:</strong> <a href="discord://discord.com/guilds/1359514665373401188" target="_blank" id="discord-link-text">discord group</a></p>
-            <p id="application-message"></p>
-            <div class="server-status-section">
-                <h3 id="server-status-heading">Server Status:</h3>
-                <p><span id="status-label">Status:</span> <span id="status-indicator" class="server-status-indicator status-loading">Loading...</span></p>
-                <div id="server-online-info" style="display:none;">
-                    <p><span id="players-label">Players:</span> <span id="players-online">-</span> / <span id="players-max">-</span></p>
-                    <p><span id="version-label">Version:</span> <span id="server-version">-</span></p>
-                    <p><span id="motd-label">MOTD:</span> <span id="server-motd">-</span></p>
-                </div>
-                <button id="server-refresh-button">Refresh</button>
-            </div>
-            <h3 id="rules-heading">Server Rules:</h3>
-            <ol>
-                <li id="rule-1">Don't tell anyone about Fight Club.</li>
-                <li id="rule-2">Do not destroy other players' bases or build without permission. Violation - one week ban.</li>
-                <li id="rule-3">Spam in Minecraft or on the Discord server, or posting irrelevant information in the Telegram group - 1 day mute (sending photos is allowed, as is any kind of information like coordinates or resource locations).</li>
-                <li id="rule-4">CHEATS ARE STRICTLY PROHIBITED in any form: resource packs or mods for ore visibility, or powerful cheats. Violation - ban from 1 day to permanent depending on the severity of the cheats. To clarify if a mod is a cheat, you need to ask the administrator (me). You can ask for unban, but you must write the reason in at least 3 sentences.</li>
-                <li id="rule-5">Do not provoke or be provoked. Violation - 1 day.</li>
-                <li id="rule-6">Do not judge a person based on their differences: weight, age, etc. Violation - 1 week.</li>
-                <li id="rule-7">Swearing in voice chat is not recommended.</li>
-                <li id="rule-8">You cannot build lag machines or other mechanisms that interfere with the server and reduce TPS.</li>
-                <li id="rule-9">You can only speak Ukrainian or at least Surzhyk.</li>
-            </ol>
+
+    <div class="section">
+        <div class="section-content">
+            <h2>Ключові Правила та Основи Гри</h2>
+            <p>Грають дві команди, по п'ять гравців на майданчику від кожної команди одночасно. Мета — закинути м'яч у кошик суперника, який розташований на висоті 3.05 метра. Очки нараховуються залежно від відстані кидка: 1 очко за штрафний кидок, 2 очки за кидок з гри ближче до кошика, і 3 очки за кидок з-за триочкової лінії. Перемагає команда, яка набрала більше очок за встановлений час.</p>
+            <p>Баскетбол має чітко визначені правила щодо ведення м'яча (дріблінг), передач, кидків, а також обмежень, таких як правило "трьох секунд" (заборона перебувати в зоні під кошиком суперника більше трьох секунд, якщо ваша команда володіє м'ячем), "восьми секунд" (час на переведення м'яча через центральну лінію) та "двадцяти чотирьох секунд" (час на виконання атаки). Порушення правил (фоли та пробіжки) призводять до втрати володіння м'ячем або призначення штрафних кидків. Знання та розуміння цих правил є фундаментальним для гравців, тренерів та вболівальників.</p>
+            <p>Майданчик для гри має стандартні розміри (28 метрів у довжину та 15 метрів у ширину за правилами FIBA). Важливими елементами є лінії (центральна, триочкова, штрафної лінії), зони (обмежена зона, зони для кидків з гри) та, звичайно, кошики зі щитами та сітками. Все це створює унікальне ігрове поле, де розгортаються події.</p>
         </div>
     </div>
-    <div id="tab-content-resourcepack" class="tab-content">
-        <h2 id="resourcepack-title">Resource Pack</h2>
-        <div class="info-box">
-            <p id="resourcepack-description">Here you can download the server's official resourcepack.</p>
-            <div class="resourcepack-buttons-container">
-                <a href="toploardggop.zip" class="download-button" id="resourcepack-download-optifine" download>toploardgg-optifine</a>
-                <a href="toploardgg.zip" class="download-button" id="resourcepack-download-nonoptifine" download>toploardgg</a>
-            </div>
+
+     <div class="section">
+        <div class="section-content">
+            <h2>Відомі Ліги та Турніри Світу</h2>
+            <p>Найвідомішою та найпрестижнішою професійною баскетбольною лігою у світі є Національна баскетбольна асоціація (NBA) в Північній Америці. Зі своїми зірковими гравцями, вражаючими данками та високим рівнем конкуренції, НБА привертає увагу мільйонів фанатів. Команди, такі як Лос-Анджелес Лейкерс, Бостон Селтікс, Чикаго Буллз та Голден Стейт Ворріорз, мають багату історію та величезну фан-базу.</p>
+            <p>Проте баскетбол процвітає і за межами НБА. В Європі провідною лігою є Євроліга (EuroLeague), де змагаються найкращі клуби континенту. Такі команди, як Реал Мадрид, Барселона, ЦСКА Москва та Фенербахче, є постійними претендентами на титул. Також існують сильні національні чемпіонати в Іспанії (ACB), Туреччині, Італії, Греції та багатьох інших країнах.</p>
+            <p>На міжнародній арені найважливішими турнірами є Чемпіонат світу з баскетболу під егідою FIBA та баскетбольний турнір на Олімпійських іграх. Ці змагання збирають національні збірні з усього світу і дають можливість гравцям представляти свої країни та змагатися за світове визнання. Це моменти, коли баскетбол об'єднує нації.</p>
         </div>
     </div>
-    <div class="footer">
-        <div class="info-box">
-            <h4 id="contact">Contacts:</h4>
-            <p><a id="gmailLink" href="https://mail.google.com/mail/?view=cm&fs=1&to=Toploardgg@gmail.com">Gmail: Toploardgg@gmail.com</a> & <a id="telegramLink" href="tg://user?id=1973152925">Telegram: Loardstk</a></p>
-            <h2 id="support">Support us:</h2>
-            <form action="https://www.paypal.com/donate" method="post" target="_top">
-                <input type="hidden" name="business" value="toploardgg@gmail.com"/>
-                <input type="hidden" name="no_recurring" value="0"/>
-                <input type="hidden" name="item_name" value="Підтримка проекту"/>
-                <input type="hidden" name="currency_code" value="USD"/>
-                <button type="submit" class="paypal-button" id="donate">Donate with PayPal</button>
-                <h5 id="I-love-cookies-footer">I love cookies)<🍪</h5>
-            </form>
+
+     <div class="section">
+        <div class="section-content">
+            <h2>Легенди Баскетболу</h2>
+            <p>Історія баскетболу багата на видатних гравців, чий талант та досягнення назавжди вписані в аннали спорту. Майкл Джордан вважається багатьма найкращим гравцем усіх часів, його виступи за "Чикаго Буллз" і шість чемпіонських титулів стали епохальними. Леброн Джеймс, який досі виступає, вже закріпив за собою місце серед великих, демонструючи неймовірну довговічність та універсальність.</p>
+            <p>Серед інших легенд варто згадати Каріма Абдул-Джаббара з його неповторним "скай-хуком", Меджика Джонсона з його унікальним баченням гри та пасами, Ларрі Берда, який був втіленням інтелекту на майданчику, та Кобі Браянта, чия відданість грі та "мамба менталітет" надихали мільйони. Ці гравці не просто грали в баскетбол, вони змінювали його, встановлювали нові стандарти та залишали незабутній слід.</p>
+            <p>Легенди є не тільки серед чоловіків. Жіночий баскетбол також має своїх ікон, таких як Діана Тауразі, Сью Берд, Ліза Леслі, чиї досягнення в WNBA та на міжнародній арені є не менш значущими. Ці спортсмени та спортсменки стали прикладами для наслідування і продовжують мотивувати нові покоління баскетболістів.</p>
         </div>
     </div>
-    <script src="script.js"></script>
-</body>
+
+    <div class="section">
+        <div class="section-content">
+            <h2>Баскетбол як Спосіб Життя</h2>
+            <p>Баскетбол - це більше, ніж просто гра з м'ячем і кошиками. Для мільйонів людей по всьому світу це стиль життя, пристрасть та джерело натхнення. Він вчить командній роботі, дисципліні, наполегливості та вмінню долати труднощі. Гра розвиває фізичні якості: швидкість, силу, витривалість, координацію.</p>
+            <p>Баскетбол об'єднує людей різних культур та національностей. Він грається на шкільних майданчиках, у дворах, професійних аренах по всьому світу. Його прості правила і доступність роблять його популярним серед дітей та дорослих. Перегляд ігор, колекціонування атрибутики, обговорення тактик та гравців - все це частина великої баскетбольної культури.</p>
+            <p>Від локальних аматорських ліг до багатомільярдної індустрії професійного спорту, баскетбол продовжує зростати та еволюціонувати. Це спорт, який постійно дарує емоції, непередбачувані моменти та історії успіху. Він залишається однією з найулюбленіших ігор на планеті.</p>
+        </div>
+    </div>
+
+    </body>
 </html>
