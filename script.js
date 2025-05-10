@@ -38,14 +38,13 @@ const translations = {
         motdLabel: "MOTD:",
         refreshButton: "Refresh",
         errorFetchingStatus: "Error fetching status.",
-        statusOfflineMOTD: "Offline (Invalid MOTD)",
+        statusOfflineMOTD: "Offline",
         filesTitle: "Files",
         filesDescription: "Here you can download server-related files, including the official resource packs and the build.",
         resourcepackDownloadOptifine: "Resource Pack (OptiFine)",
         resourcepackDownloadNonOptifine: "Resource Pack (Non-OptiFine)",
         filesDownloadBuild: "My Build",
-        filesDownloadWorld: "Minecraft World (Not available yet)",
-        // Changed text for the theme toggle button
+        filesDownloadWorld: "Minecraft 1 season (Not available yet)",
         switchToDarkTheme: "Dark Theme",
         switchToLightTheme: "Light Theme"
     },
@@ -88,14 +87,13 @@ const translations = {
         motdLabel: "MOTD:",
         refreshButton: "Обновить",
         errorFetchingStatus: "Ошибка получения статуса.",
-        statusOfflineMOTD: "Офлайн (Неверный MOTD)",
+        statusOfflineMOTD: "Офлайн",
         filesTitle: "Файлы",
         filesDescription: "Здесь вы можете скачать файлы, относящиеся к серверу, включая официальные ресурспаки и сборку.",
         resourcepackDownloadOptifine: "Ресурспак (OptiFine)",
         resourcepackDownloadNonOptifine: "Ресурспак (Non-OptiFine)",
         filesDownloadBuild: "Моя Сборка",
-        filesDownloadWorld: "Мир Minecraft (Пока что нельзя)",
-        // Changed text for the theme toggle button
+        filesDownloadWorld: "Мир 1 сезону (Пока что нельзя)",
         switchToDarkTheme: "Темная тема",
         switchToLightTheme: "Светлая тема"
     },
@@ -138,14 +136,13 @@ const translations = {
         motdLabel: "MOTD:",
         refreshButton: "Оновити",
         errorFetchingStatus: "Помилка отримання статусу.",
-        statusOfflineMOTD: "Офлайн (Невірний MOTD)",
+        statusOfflineMOTD: "Офлайн",
         filesTitle: "Файли",
         filesDescription: "Тут ви можете завантажити файли, що стосуються сервера, включаючи офіційні ресурспаки та збірку.",
         resourcepackDownloadOptifine: "Ресурспак (OptiFine)",
         resourcepackDownloadNonOptifine: "Ресурспак (Non-OptiFine)",
         filesDownloadBuild: "Моя Збірка",
-        filesDownloadWorld: "Світ Minecraft (Поки що не можна)",
-        // Changed text for the theme toggle button
+        filesDownloadWorld: "Світ 1 сезону (Поки що не можна)",
         switchToDarkTheme: "Темна тема",
         switchToLightTheme: "Світла тема"
     }
@@ -162,12 +159,9 @@ const bodyElement = document.body;
 const themeToggle = document.getElementById('theme-toggle');
 const languageButton = document.getElementById('language-button');
 
-// Константы для сервера
 const ATERNOS_SERVER_ADDRESS_PORT = 'Toploardgg.aternos.me:39466';
 const EXPECTED_MOTD = 'Welcome to the server of Toploardgg!';
 const MCSTATUS_API_URL = `https://api.mcstatus.io/v2/status/java/${ATERNOS_SERVER_ADDRESS_PORT}`;
-
-// --- Theme Switcher Logic ---
 
 function setTheme(theme) {
     const currentLang = localStorage.getItem('preferredLanguage') || 'en';
@@ -175,12 +169,11 @@ function setTheme(theme) {
 
     if (theme === 'light') {
         bodyElement.classList.add('light-theme');
-        if (themeToggle) themeToggle.textContent = currentTranslations.switchToDarkTheme; // Use "Dark Theme"
+        if (themeToggle) themeToggle.textContent = currentTranslations.switchToDarkTheme;
     } else {
         bodyElement.classList.remove('light-theme');
-        if (themeToggle) themeToggle.textContent = currentTranslations.switchToLightTheme; // Use "Light Theme"
+        if (themeToggle) themeToggle.textContent = currentTranslations.switchToLightTheme;
     }
-    // Save preference
     try {
         localStorage.setItem('theme', theme);
     } catch (e) {
@@ -198,7 +191,6 @@ if (themeToggle) {
 
 function loadThemePreference() {
     let savedTheme = null;
-    // Load preference
     try {
         savedTheme = localStorage.getItem('theme');
     } catch (e) {
@@ -208,15 +200,11 @@ function loadThemePreference() {
     if (savedTheme) {
         setTheme(savedTheme);
     } else {
-        // Default to dark theme
         setTheme('dark');
     }
 }
 
-// --- End Theme Switcher Logic ---
 
-
-// Функция для переключения вкладок
 function showTab(tabIdToShow) {
     const contents = document.querySelectorAll('.tab-content');
     contents.forEach(content => {
@@ -230,12 +218,10 @@ function showTab(tabIdToShow) {
     const contentToShow = document.getElementById(`tab-content-${tabIdToShow}`);
     if (contentToShow) {
         contentToShow.classList.add('active');
-        // Если переключились на вкладку "Инфо", начинаем обновлять статус сервера
         if (tabIdToShow === 'info') {
             fetchServerStatus();
             startStatusInterval();
         } else {
-            // Если переключились на другую вкладку, останавливаем обновление статуса
             stopStatusInterval();
         }
     }
@@ -246,7 +232,6 @@ function showTab(tabIdToShow) {
     }
 }
 
-// Функция для смены языка
 function changeLanguage(lang) {
     const currentTranslations = translations[lang];
     if (!currentTranslations) {
@@ -254,7 +239,6 @@ function changeLanguage(lang) {
         return;
     }
 
-    // Save the preferred language
     try {
         localStorage.setItem('preferredLanguage', lang);
     } catch (e) {
@@ -320,7 +304,6 @@ function changeLanguage(lang) {
     if (motdLabel) motdLabel.textContent = currentTranslations.motdLabel;
     if (refreshButton) refreshButton.textContent = currentTranslations.refreshButton;
 
-    // Update Server Status Indicator Text
     if (statusIndicator) {
         if (statusIndicator.classList.contains('status-online')) {
              statusIndicator.textContent = currentTranslations.statusOnline;
@@ -329,7 +312,7 @@ function changeLanguage(lang) {
             let errorPart = '';
             const errorMatch = currentText.match(/\s?\(.+\)$/);
              if (errorMatch) {
-                errorPart = errorMatch[0];
+                 errorPart = errorMatch[0];
              }
 
             let baseOfflineText = currentTranslations.statusOffline;
@@ -353,8 +336,6 @@ function changeLanguage(lang) {
              statusIndicator.textContent = currentTranslations.statusLoading;
         }
     }
-    // End Update Server Status Indicator Text
-
 
     const filesTitleElement = document.getElementById('files-title');
     const filesDescriptionElement = document.getElementById('files-description');
@@ -370,7 +351,6 @@ function changeLanguage(lang) {
     if (filesDownloadBuildElement) filesDownloadBuildElement.textContent = currentTranslations.filesDownloadBuild;
     if (filesDownloadWorldElement) filesDownloadWorldElement.textContent = currentTranslations.filesDownloadWorld;
 
-    // Re-apply the current theme to update the theme toggle button text with the new language
     const currentTheme = bodyElement.classList.contains('light-theme') ? 'light' : 'dark';
     setTheme(currentTheme);
 }
@@ -393,7 +373,7 @@ async function fetchServerStatus() {
                  if (errorData && errorData.error) {
                       errorDetail = errorData.error;
                  } else if (errorData) {
-                     errorDetail = JSON.stringify(errorData);
+                      errorDetail = JSON.stringify(errorData);
                  }
             } catch (e) {
             }
@@ -446,12 +426,12 @@ async function fetchServerStatus() {
     }
 }
 
-const refreshInterval = 60000; // 60 seconds
+const refreshInterval = 60000;
 let statusIntervalId = null;
 
 function startStatusInterval() {
     if (statusIntervalId === null) {
-        fetchServerStatus(); // Fetch status immediately when starting
+        fetchServerStatus();
         statusIntervalId = setInterval(() => {
             const activeTabElement = document.querySelector('.tab-content.active');
             const activeTabId = activeTabElement ? activeTabElement.id.replace('tab-content-', '') : null;
@@ -474,7 +454,6 @@ if (serverRefreshButton) {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    // Load language preference first
     let savedLang = 'en';
     try {
         const savedLangPref = localStorage.getItem('preferredLanguage');
@@ -486,13 +465,10 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     changeLanguage(savedLang);
 
-    // Load theme preference after language is set
     loadThemePreference();
 
-    // Show the initial tab
     const initialTabId = 'profile';
     showTab(initialTabId);
-
 });
 
 window.addEventListener('beforeunload', stopStatusInterval);
