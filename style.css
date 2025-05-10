@@ -1,3 +1,6 @@
+/* Полный CSS код из предыдущего ответа остается без изменений для структуры dropdown */
+/* Убедитесь, что у вас нет правил только для #theme-toggle, которые могут конфликтовать */
+
 body {
     background-color: #1a1a1a;
     color: white;
@@ -12,6 +15,23 @@ body {
     box-sizing: border-box;
 }
 
+body.light-theme {
+    background-color: #fff;
+    color: #000;
+}
+
+body.light-theme h1,
+body.light-theme h2,
+body.light-theme h3,
+body.light-theme h4,
+body.light-theme h5,
+body.light-theme p,
+body.light-theme input[type="submit"],
+body.light-theme button {
+    font-weight: bold;
+    color: #000;
+}
+
 h1, h2, h3, h4, h5, p, input[type="submit"], button {
     font-weight: bold;
 }
@@ -23,6 +43,11 @@ h1, h2, h3, h4, h5, p, input[type="submit"], button {
     display: flex;
     gap: 10px;
     z-index: 10;
+}
+
+#theme-switcher {
+    right: auto;
+    left: 20px;
 }
 
 .dropdown {
@@ -42,9 +67,22 @@ h1, h2, h3, h4, h5, p, input[type="submit"], button {
     font-weight: bold;
 }
 
+body.light-theme .dropbtn {
+    color: #000;
+    border-color: #000;
+    background-color: transparent;
+}
+
 .dropbtn:hover, .dropbtn:focus {
     background-color: white;
     color: black;
+}
+
+body.light-theme .dropbtn:hover,
+body.light-theme .dropbtn:focus {
+     background-color: #eee;
+     color: #000;
+     border-color: #000;
 }
 
 .dropdown-content {
@@ -57,6 +95,12 @@ h1, h2, h3, h4, h5, p, input[type="submit"], button {
     min-width: 160px;
     box-shadow: 0 8px 16px rgba(255, 255, 255, .2);
     z-index: 1;
+}
+
+body.light-theme .dropdown-content {
+    background-color: #eee;
+    border-color: #000;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, .2);
 }
 
 .dropdown-content button {
@@ -72,9 +116,18 @@ h1, h2, h3, h4, h5, p, input[type="submit"], button {
     box-sizing: border-box;
 }
 
+body.light-theme .dropdown-content button {
+    color: #000;
+}
+
 .dropdown-content button:hover {
     background-color: white;
     color: black;
+}
+
+body.light-theme .dropdown-content button:hover {
+    background-color: #000;
+    color: white;
 }
 
 .dropdown:hover .dropdown-content {
@@ -92,12 +145,12 @@ h1, h2, h3, h4, h5, p, input[type="submit"], button {
 
 .profile {
     text-align: center;
-    margin-bottom: 20px; /* Для мобильных */
+    margin-bottom: 20px;
 }
 
 @media (min-width: 768px) {
     .profile {
-        margin-bottom: 0; /* Убираем отступ снизу на больших экранах */
+        margin-bottom: 0;
     }
 }
 
@@ -108,21 +161,24 @@ h1, h2, h3, h4, h5, p, input[type="submit"], button {
     border: 2px solid white;
 }
 
+body.light-theme .profile img {
+    border-color: #000;
+}
+
 .footer {
-    margin-top: auto; /* Прижимает футер к низу, если контента мало */
+    margin-top: auto;
     padding-top: 20px;
     text-align: center;
     width: 100%;
 }
 
-/* Стили для info-box по умолчанию (на вкладках) - возвращены к предыдущему размеру и плотности текста */
 .info-box {
     border: 2px solid white;
-    padding: 20px; /* Возвращено к 20px */
+    padding: 20px;
     display: inline-block;
     border-radius: 10px;
     background-color: transparent;
-    max-width: 90%; /* Возвращено к 90% */
+    max-width: 90%;
     box-sizing: border-box;
     margin-top: 20px;
     margin-left: auto;
@@ -130,38 +186,52 @@ h1, h2, h3, h4, h5, p, input[type="submit"], button {
     text-align: center;
 }
 
-.info-box h2, .info-box h3, .info-box h4 {
-    text-align: center; /* Заголовки по центру */
+body.light-theme .info-box {
+    border-color: #000;
 }
 
-/* Стили текста для info-box по умолчанию (на вкладках) - возвращены к предыдущей плотности */
+.info-box h2, .info-box h3, .info-box h4 {
+    text-align: center;
+}
+
 .info-box p, .info-box ul, .info-box ol, .info-box li {
     color: white;
-    font-size: 1em; /* Возвращено к 1em */
-    margin-top: 10px; /* Возвращено к 10px */
-    margin-bottom: 10px; /* Возвращено к 10px */
-    word-wrap: break-word; /* Перенос длинных слов */
-    line-height: 1.4; /* Возвращено к 1.4 */
-    text-align: left; /* Текст по левому краю внутри блока */
+    font-size: 1em;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    word-wrap: break-word;
+    line-height: 1.4;
+    text-align: left;
+}
+
+body.light-theme .info-box p,
+body.light-theme .info-box ul,
+body.light-theme .info-box ol,
+body.light-theme .info-box li {
+    color: #000;
 }
 
 .info-box ol {
     list-style-type: decimal;
     padding-left: 20px;
-    margin-top: 15px; /* Возвращено к 15px */
-    margin-bottom: 15px; /* Возвращено к 15px */
+    margin-top: 15px;
+    margin-bottom: 15px;
 }
 
 .info-box li {
-    margin-bottom: 10px; /* Возвращено к 10px */
-    line-height: 1.4; /* Возвращено к 1.4 */
+    margin-bottom: 10px;
+    line-height: 1.4;
 }
 
 .info-box a {
     color: #87CEFA;
     text-decoration: underline;
-    display: inline; /* Ссылки как обычный текст */
-    margin: 0; /* Убираем лишние отступы */
+    display: inline;
+    margin: 0;
+}
+
+body.light-theme .info-box a {
+    color: #0000EE;
 }
 
 .paypal-button {
@@ -177,15 +247,25 @@ h1, h2, h3, h4, h5, p, input[type="submit"], button {
     font-weight: bold;
 }
 
+body.light-theme .paypal-button {
+    color: #000;
+    border-color: #000;
+}
+
 .paypal-button:hover {
     background-color: white;
     color: black;
 }
 
+body.light-theme .paypal-button:hover {
+    background-color: #eee;
+    color: #000;
+}
+
 .tab-container {
     text-align: center;
     margin-bottom: 30px;
-    margin-top: 10px; /* Изначальный отступ сверху */
+    margin-top: 10px;
 }
 
 .tab-button {
@@ -197,12 +277,21 @@ h1, h2, h3, h4, h5, p, input[type="submit"], button {
     cursor: pointer;
     border-radius: 10px;
     transition: .3s;
-    margin: 0 5px; /* Отступы между кнопками */
+    margin: 0 5px;
     font-weight: bold;
+}
+
+body.light-theme .tab-button {
+    color: #000;
+    border-color: #000;
 }
 
 .tab-button:hover {
     background-color: #333;
+}
+
+body.light-theme .tab-button:hover {
+    background-color: #eee;
 }
 
 .tab-button.active {
@@ -210,13 +299,18 @@ h1, h2, h3, h4, h5, p, input[type="submit"], button {
     color: black;
 }
 
+body.light-theme .tab-button.active {
+    background-color: #000;
+    color: white;
+}
+
 .tab-content {
-    display: none; /* По умолчанию скрыто */
-    animation: fadeIn .5s; /* Плавное появление */
+    display: none;
+    animation: fadeIn .5s;
 }
 
 .tab-content.active {
-    display: block; /* Активная вкладка отображается */
+    display: block;
 }
 
 @keyframes fadeIn {
@@ -231,13 +325,17 @@ h1, h2, h3, h4, h5, p, input[type="submit"], button {
 .server-status-section {
     margin-top: 20px;
     padding-top: 20px;
-    border-top: 1px dashed #eee; /* Разделитель */
+    border-top: 1px dashed #eee;
     text-align: center;
+}
+
+body.light-theme .server-status-section {
+     border-color: #333;
 }
 
 .server-status-section p {
     margin: 5px 0;
-    text-align: center; /* Текст статуса по центру */
+    text-align: center;
 }
 
 .server-status-indicator {
@@ -272,9 +370,19 @@ h1, h2, h3, h4, h5, p, input[type="submit"], button {
     transition: .3s;
 }
 
+body.light-theme #server-refresh-button {
+    color: #000;
+    border-color: #000;
+}
+
 #server-refresh-button:hover:not(:disabled) {
     background-color: white;
     color: black;
+}
+
+body.light-theme #server-refresh-button:hover:not(:disabled) {
+    background-color: #eee;
+    color: #000;
 }
 
 #server-refresh-button:disabled {
@@ -282,122 +390,157 @@ h1, h2, h3, h4, h5, p, input[type="submit"], button {
     cursor: not-allowed;
 }
 
-/* Стили для info-box ВНУТРИ ФУТЕРА (.footer .info-box) - уменьшенные и с плотным текстом */
 .footer .info-box {
-    padding: 10px; /* Уменьшили внутренние отступы */
-    max-width: 40%; /* <-- Установлена максимальная ширина 40% */
+    padding: 10px;
+    max-width: 40%;
+}
+
+body.light-theme .footer .info-box {
+    border-color: #000;
 }
 
 .footer .info-box p, .footer .info-box ul, .footer .info-box ol, .footer .info-box li {
-    font-size: 0.9em; /* <-- Уменьшили размер текста */
-    margin-top: 3px; /* <-- Уменьшили верхний отступ */
-    margin-bottom: 3px; /* <-- Уменьшили нижний отступ */
-    line-height: 1.1; /* <-- Уменьшили межстрочный интервал */
+    font-size: 0.9em;
+    margin-top: 3px;
+    margin-bottom: 3px;
+    line-height: 1.1;
+    color: white;
+}
+
+body.light-theme .footer .info-box p,
+body.light-theme .footer .info-box ul,
+body.light-theme .footer .info-box ol,
+body.light-theme .footer .info-box li {
+     color: #000;
 }
 
 .footer .info-box ol {
     padding-left: 15px;
-    margin-top: 8px; /* Немного больше отступ сверху для списка */
-    margin-bottom: 8px; /* Немного больше отступ снизу для списка */
+    margin-top: 8px;
+    margin-bottom: 8px;
 }
 
 .footer .info-box li {
-    margin-bottom: 3px; /* <-- Уменьшили отступ снизу для пунктов списка */
-    line-height: 1.1; /* <-- Уменьшили межстрочный интервал */
+    margin-bottom: 3px;
+    line-height: 1.2;
 }
 
+body.light-theme .footer .info-box a {
+     color: #0000EE;
+}
 
-/* Стили для мобильных устройств */
 @media (max-width: 767px) {
     body {
-        padding: 15px; /* Уменьшаем отступы по краям */
+        padding: 15px;
     }
 
     .header-controls {
         top: 10px;
         right: 10px;
-        gap: 5px; /* Уменьшаем расстояние между элементами */
+        gap: 5px;
+    }
+
+    #theme-switcher {
+        left: 10px;
+        right: auto;
     }
 
     .dropbtn, .tab-button, .paypal-button, #server-refresh-button {
-        padding: 8px 15px; /* Уменьшаем размер кнопок */
+        padding: 8px 15px;
         font-size: .9em;
     }
 
     .dropdown-content {
-        min-width: 120px; /* Уменьшаем минимальную ширину выпадающего списка */
+        min-width: 120px;
     }
 
     .dropdown-content button {
-        padding: 10px 12px; /* Уменьшаем отступы внутри кнопок выпадающего списка */
+        padding: 10px 12px;
         font-size: .9em;
     }
 
     .tab-container {
-        margin-top: 60px; /* <-- ВОТ ЗДЕСЬ ДОБАВЛЕН ОТСТУП */
+        margin-top: 60px;
         margin-bottom: 20px;
         display: flex;
-        flex-wrap: wrap; /* Перенос кнопок на новую строку, если не помещаются */
+        flex-wrap: wrap;
         justify-content: center;
-        gap: 5px; /* Расстояние между кнопками в контейнере */
+        gap: 5px;
     }
 
     .tab-button {
-        margin: 5px; /* Небольшой отступ вокруг кнопок вкладок */
+        margin: 5px;
     }
 
     .profile-container {
-        display: flex; /* Включаем flexbox для контейнера профилей */
-        flex-wrap: wrap; /* Разрешаем перенос элементов */
-        justify-content: center; /* Центрируем элементы по горизонтали */
-        gap: 20px; /* Расстояние между профилями */
-        align-items: center; /* Центрируем элементы по вертикали */
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 20px;
+        align-items: center;
     }
 
     .profile {
-        width: calc(50% - 10px); /* Каждый профиль занимает половину ширины минус отступы */
-        max-width: 200px; /* Ограничиваем максимальную ширину профиля */
-        margin-bottom: 20px; /* Отступ снизу для каждого профиля */
+        width: calc(50% - 10px);
+        max-width: 200px;
+        margin-bottom: 20px;
     }
 
-    /* Для очень маленьких экранов выводим по одному профилю */
     @media (max-width: 400px) {
         .profile {
-            width: 100%; /* Каждый профиль занимает всю ширину */
+            width: 100%;
         }
     }
 
     .profile img {
-        width: 100%; /* Картинки профилей занимают 100% ширины родителя */
+        width: 100%;
         height: auto;
         border-radius: 10px;
         border: 2px solid white;
     }
 
-    /* Стили для info-box по умолчанию на мобильных (на вкладках) - возвращены к предыдущему размеру и плотности текста */
+     body.light-theme .profile img {
+        border-color: #000;
+     }
+
     .info-box {
-        padding: 15px; /* Возвращено к 15px */
+        padding: 15px;
         margin-top: 15px;
-        max-width: 95%; /* Возвращено к 95% */
+        max-width: 95%;
     }
 
-    /* Стили текста для info-box по умолчанию на мобильных (на вкладках) - возвращены к предыдущей плотности */
-    .info-box p, .info-box ul, .info-box ol, .info-box li {
-        margin-top: 8px; /* Возвращено к 8px */
-        margin-bottom: 8px; /* Возвращено к 8px */
-        line-height: 1.5; /* Возвращено к 1.5 */
-        font-size: 1em; /* Возвращено к 1em */
+    body.light-theme .info-box {
+        border-color: #000;
     }
+
+    .info-box p, .info-box ul, .info-box ol, .info-box li {
+        margin-top: 8px;
+        margin-bottom: 8px;
+        line-height: 1.5;
+        font-size: 1em;
+        color: white;
+    }
+
+     body.light-theme .info-box p,
+     body.light-theme .info-box ul,
+     body.light-theme .info-box ol,
+     body.light-theme .info-box li {
+         color: #000;
+     }
 
      .info-box ol {
         padding-left: 15px;
-        margin-top: 10px; /* Возвращено к 10px */
-        margin-bottom: 10px; /* Возвращено к 10px */
+        margin-top: 10px;
+        margin-bottom: 10px;
     }
 
     .info-box li {
-        margin-bottom: 8px; /* Возвращено к 8px */
-        line-height: 1.5; /* Возвращено к 1.5 */
+        margin-bottom: 8px;
+        line-height: 1.5;
+    }
+
+    body.light-theme .info-box a {
+         color: #0000EE;
     }
 
     .footer {
@@ -409,33 +552,57 @@ h1, h2, h3, h4, h5, p, input[type="submit"], button {
     }
 
     .resourcepack-buttons-container {
-        flex-direction: column; /* Кнопки ресурспаков в столбец */
+        flex-direction: column;
         align-items: center;
-        gap: 10px; /* Расстояние между кнопками */
+        gap: 10px;
+        margin-top: 15px;
     }
 
     .download-button {
-        margin: 0 !important; /* Убираем горизонтальные margin */
-        margin-top: 5px; /* Добавляем отступ сверху */
+        margin: 0 !important;
+        margin-top: 5px;
+        width: 80%;
+        box-sizing: border-box;
     }
+
+     body.light-theme .download-button {
+        color: #000;
+        border-color: #000;
+     }
+
+     body.light-theme .download-button:hover {
+        background-color: #eee;
+        color: #000;
+     }
 
     .download-button:first-child {
-        margin-top: 0; /* У первой кнопки отступ сверху не нужен */
+        margin-top: 0;
     }
 
-    /* Стили для info-box ВНУТРИ ФУТЕРА на мобильных (.footer .info-box) - уменьшенные и с плотным текстом */
     .footer .info-box {
-        padding: 10px; /* Уменьшенные внутренние отступы на мобильных */
+        padding: 10px;
         margin-top: 15px;
-        max-width: 65%; /* <-- Максимальная ширина 65% на мобильных */
+        max-width: 65%;
     }
+
+     body.light-theme .footer .info-box {
+        border-color: #000;
+     }
 
     .footer .info-box p, .footer .info-box ul, .footer .info-box ol, .footer .info-box li {
-        font-size: 0.85em; /* <-- Уменьшили размер текста */
-        margin-top: 2px; /* <-- Уменьшили верхний отступ */
-        margin-bottom: 2px; /* <-- Уменьшили нижний отступ */
-        line-height: 1.2; /* <-- Уменьшили межстрочный интервал */
+        font-size: 0.85em;
+        margin-top: 2px;
+        margin-bottom: 2px;
+        line-height: 1.2;
+         color: white;
     }
+
+     body.light-theme .footer .info-box p,
+     body.light-theme .footer .info-box ul,
+     body.light-theme .footer .info-box ol,
+     body.light-theme .footer .info-box li {
+         color: #000;
+     }
 
      .footer .info-box ol {
         padding-left: 15px;
@@ -444,8 +611,12 @@ h1, h2, h3, h4, h5, p, input[type="submit"], button {
     }
 
     .footer .info-box li {
-        margin-bottom: 2px; /* <-- Уменьшили отступ снизу для пунктов списка */
-        line-height: 1.2; /* <-- Уменьшили межстрочный интервал */
+        margin-bottom: 2px;
+        line-height: 1.2;
+    }
+
+    body.light-theme .footer .info-box a {
+         color: #0000EE;
     }
 }
 
@@ -459,8 +630,14 @@ h1, h2, h3, h4, h5, p, input[type="submit"], button {
     cursor: pointer;
     border-radius: 10px;
     transition: .3s;
-    text-decoration: none; /* Убираем подчеркивание у ссылки */
+    text-decoration: none;
     font-weight: bold;
+}
+
+body.light-theme .download-button {
+     color: #000;
+     border-color: #000;
+     background-color: transparent;
 }
 
 .download-button:hover {
@@ -468,11 +645,16 @@ h1, h2, h3, h4, h5, p, input[type="submit"], button {
     color: black;
 }
 
+body.light-theme .download-button:hover {
+    background-color: #eee;
+    color: #000;
+}
+
 .resourcepack-buttons-container {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 20px; /* Расстояние между кнопками */
-    flex-wrap: wrap; /* Перенос кнопок, если не помещаются */
+    gap: 20px;
+    flex-wrap: wrap;
     margin-top: 15px;
 }
