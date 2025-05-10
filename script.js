@@ -44,7 +44,7 @@ const translations = {
         resourcepackDownloadOptifine: "Resource Pack (OptiFine)",
         resourcepackDownloadNonOptifine: "Resource Pack (Non-OptiFine)",
         filesDownloadBuild: "My Build",
-        filesDownloadWorld: "Minecraft 1 season (Not available yet)",
+        filesDownloadWorld: "world 1 season (Not available yet)",
         switchToDarkTheme: "Dark Theme",
         switchToLightTheme: "Light Theme"
     },
