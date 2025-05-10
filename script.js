@@ -2,7 +2,7 @@ const translations = {
     en: {
         greeting:"Hi.", cookies:"I love cookies)<🍪", name:"Toploardgg (Stas)", tyretName:"tyret (Artem)", kapibaraName:"KAPIBARA (Kolya)", aterName:"ater (Dinis)",
         contact:"Contacts:", support:"Support us:", donate:"Donate with PayPal", language:"English",
-        tabProfile:"Profile", tabInfo:"Info", tabFiles:"Files", infoTitle:"Information", // Changed tabResourcepack to tabFiles
+        tabProfile:"Profile", tabInfo:"Info", tabFiles:"Files", infoTitle:"Information",
         ipLabel:"IP Address:", linkLabel:"Link:", discordLinkText:"discord group",
         applicationMessage:"To join the server, you need to apply in Discord; all details are in Toploardgg.",
         rulesHeading:"Server Rules:",
@@ -18,16 +18,17 @@ const translations = {
         serverStatusHeading:"Server Status:", statusLabel:"Status:", statusOnline:"Online", statusOffline:"Offline", statusLoading:"Loading...",
         playersLabel:"Players:", versionLabel:"Version:", motdLabel:"MOTD:", refreshButton:"Refresh",
         errorFetchingStatus:"Error fetching status.", statusOfflineMOTD:"Offline (Invalid MOTD)",
-        filesTitle:"Files", // Changed resourcepackTitle to filesTitle
-        filesDescription:"Here you can download server-related files, including the official resource packs and the build.", // Adjusted description
-        resourcepackDownloadOptifine:"Resource Pack (OptiFine)", // Kept resource pack names, adjusted slightly for clarity
-        resourcepackDownloadNonOptifine:"Resource Pack (Non-OptiFine)", // Kept resource pack names, adjusted slightly for clarity
-        filesDownloadBuild:"My Build" // New translation key for the build
+        filesTitle:"Files",
+        filesDescription:"Here you can download server-related files, including the official resource packs and the build.",
+        resourcepackDownloadOptifine:"Resource Pack (OptiFine)",
+        resourcepackDownloadNonOptifine:"Resource Pack (Non-OptiFine)",
+        filesDownloadBuild:"My Build",
+        filesDownloadWorld:"Minecraft World (Not available yet)" // NEW translation
     },
     ru: {
         greeting:"Привет.", cookies:"Я люблю печеньки)<🍪", name:"Toploardgg (Стас)", tyretName:"tyret (Артём)", kapibaraName:"KAPIBARA (Коля)", aterName:"ater (Денис)",
         contact:"Контакты:", support:"Поддержите нас:", donate:"Пожертвовать через PayPal", language:"Русский",
-        tabProfile:"Профиль", tabInfo:"Инфо", tabFiles:"Файлы", infoTitle:"Информация", // Changed tabResourcepack to tabFiles
+        tabProfile:"Профиль", tabInfo:"Инфо", tabFiles:"Файлы", infoTitle:"Информация",
         ipLabel:"IP Адрес:", linkLabel:"Ссылка:", discordLinkText:"группа в Discord",
         applicationMessage:"Чтобы попасть на сервер, надо подать заявку в Discord; все детали в Toploardgg.",
         rulesHeading:"Правила сервера:",
@@ -43,16 +44,17 @@ const translations = {
         serverStatusHeading:"Статус сервера:", statusLabel:"Статус:", statusOnline:"Онлайн", statusOffline:"Офлайн", statusLoading:"Загрузка...",
         playersLabel:"Игроков:", versionLabel:"Версия:", motdLabel:"MOTD:", refreshButton:"Обновить",
         errorFetchingStatus:"Ошибка получения статуса.", statusOfflineMOTD:"Офлайн (Неверный MOTD)",
-        filesTitle:"Файлы", // Changed resourcepackTitle to filesTitle
-        filesDescription:"Здесь вы можете скачать файлы, относящиеся к серверу, включая официальные ресурспаки и сборку.", // Adjusted description
-        resourcepackDownloadOptifine:"Ресурспак (OptiFine)", // Kept resource pack names, adjusted slightly for clarity
-        resourcepackDownloadNonOptifine:"Ресурспак (Non-OptiFine)", // Kept resource pack names, adjusted slightly for clarity
-        filesDownloadBuild:"Моя Сборка" // New translation key for the build
+        filesTitle:"Файлы",
+        filesDescription:"Здесь вы можете скачать файлы, относящиеся к серверу, включая официальные ресурспаки и сборку.",
+        resourcepackDownloadOptifine:"Ресурспак (OptiFine)",
+        resourcepackDownloadNonOptifine:"Ресурспак (Non-OptiFine)",
+        filesDownloadBuild:"Моя Сборка",
+        filesDownloadWorld:"Мир Minecraft (Пока что нельзя)" // NEW translation
     },
     uk: {
         greeting:"Привіт.", cookies:"Я обожнюю пряники)<🍪", name:"Toploardgg (Стаc)", tyretName:"tyret (Артем)", kapibaraName:"KAPIBARA (Коля)", aterName:"ater (Денис)",
         contact:"Контакти:", support:"Підтримайте нас:", donate:"Пожертвувати через PayPal", language:"Українська",
-        tabProfile:"Профіль", tabInfo:"Інформація", tabFiles:"Файли", infoTitle:"Інформація", // Changed tabResourcepack to tabFiles
+        tabProfile:"Профіль", tabInfo:"Інформація", tabFiles:"Файли", infoTitle:"Інформація",
         ipLabel:"IP Адреса:", linkLabel:"Посилання:", discordLinkText:"група в Discord",
         applicationMessage:"Щоб потрапити на сервер, треба подати заявку в діскорд всі деталі в Toploardgg.",
         rulesHeading:"Правила сервера:",
@@ -68,11 +70,12 @@ const translations = {
         serverStatusHeading:"Статус сервера:", statusLabel:"Статус:", statusOnline:"Онлайн", statusOffline:"Офлайн", statusLoading:"Завантаження...",
         playersLabel:"Гравців:", versionLabel:"Версія:", motdLabel:"MOTD:", refreshButton:"Оновити",
         errorFetchingStatus:"Помилка отримання статусу.", statusOfflineMOTD:"Офлайн (Невірний MOTD)",
-        filesTitle:"Файли", // Changed resourcepackTitle to filesTitle
-        filesDescription:"Тут ви можете завантажити файли, що стосуються сервера, включаючи офіційні ресурспаки та збірку.", // Adjusted description
-        resourcepackDownloadOptifine:"Ресурспак (OptiFine)", // Kept resource pack names, adjusted slightly for clarity
-        resourcepackDownloadNonOptifine:"Ресурспак (Non-OptiFine)", // Kept resource pack names, adjusted slightly for clarity
-        filesDownloadBuild:"Моя Збірка" // New translation key for the build
+        filesTitle:"Файли",
+        filesDescription:"Тут ви можете завантажити файли, що стосуються сервера, включаючи офіційні ресурспаки та збірку.",
+        resourcepackDownloadOptifine:"Ресурспак (OptiFine)",
+        resourcepackDownloadNonOptifine:"Ресурспак (Non-OptiFine)",
+        filesDownloadBuild:"Моя Збірка",
+        filesDownloadWorld:"Світ Minecraft (Поки що не можна)" // NEW translation
     }
 };
 
@@ -134,9 +137,9 @@ function changeLanguage(lang) {
     document.getElementById("tab-btn-profile").textContent = currentTranslations.tabProfile;
     document.getElementById("tab-btn-info").textContent = currentTranslations.tabInfo;
 
-    // Update the new "Files" tab button text
-    const tabFilesButton = document.getElementById("tab-btn-files"); // Changed ID
-    if (tabFilesButton) { tabFilesButton.textContent = currentTranslations.tabFiles; } // Changed key
+    // Update the "Files" tab button text
+    const tabFilesButton = document.getElementById("tab-btn-files");
+    if (tabFilesButton) { tabFilesButton.textContent = currentTranslations.tabFiles; }
 
     // Update "Info" tab specific elements (already present, keep for completeness)
     document.getElementById("info-title").textContent = currentTranslations.infoTitle;
@@ -217,17 +220,19 @@ function changeLanguage(lang) {
 
 
     // Update the "Files" tab content elements
-    const filesTitleElement = document.getElementById('files-title'); // Changed ID
-    const filesDescriptionElement = document.getElementById('files-description'); // Added ID in HTML and lookup here
+    const filesTitleElement = document.getElementById('files-title');
+    const filesDescriptionElement = document.getElementById('files-description');
     const resourcepackDownloadOptifineElement = document.getElementById('resourcepack-download-optifine');
-    const resourcepackDownloadNonOptifineElement = document.getElementById('resourcepack-download-nonoptifine'); // Corrected ID
-    const filesDownloadBuildElement = document.getElementById('files-download-build'); // New ID lookup
+    const resourcepackDownloadNonOptifineElement = document.getElementById('resourcepack-download-nonoptifine');
+    const filesDownloadBuildElement = document.getElementById('files-download-build');
+    const filesDownloadWorldElement = document.getElementById('files-download-world'); // NEW: Get the world link element
 
-    if (filesTitleElement) filesTitleElement.textContent = currentTranslations.filesTitle; // Changed key
-    if (filesDescriptionElement) filesDescriptionElement.textContent = currentTranslations.filesDescription; // New lookup
+    if (filesTitleElement) filesTitleElement.textContent = currentTranslations.filesTitle;
+    if (filesDescriptionElement) filesDescriptionElement.textContent = currentTranslations.filesDescription;
     if (resourcepackDownloadOptifineElement) resourcepackDownloadOptifineElement.textContent = currentTranslations.resourcepackDownloadOptifine;
     if (resourcepackDownloadNonOptifineElement) resourcepackDownloadNonOptifineElement.textContent = currentTranslations.resourcepackDownloadNonOptifine;
-    if (filesDownloadBuildElement) filesDownloadBuildElement.textContent = currentTranslations.filesDownloadBuild; // New lookup
+    if (filesDownloadBuildElement) filesDownloadBuildElement.textContent = currentTranslations.filesDownloadBuild;
+    if (filesDownloadWorldElement) filesDownloadWorldElement.textContent = currentTranslations.filesDownloadWorld; // NEW: Update world link text
 }
 
 // Функция для получения статуса сервера
