@@ -22,7 +22,7 @@
     <div class="tab-container">
         <button class="tab-button active" onclick="showTab('profile')" id="tab-btn-profile">Profile</button>
         <button class="tab-button" onclick="showTab('info')" id="tab-btn-info">Info</button>
-        <button class="tab-button" onclick="showTab('resourcepack')" id="tab-btn-resourcepack">Resource Pack</button>
+        <button class="tab-button" onclick="showTab('files')" id="tab-btn-files">Files</button>
     </div>
     <div id="tab-content-profile" class="tab-content active">
         <h1 id="greeting">Hi.</h1>
@@ -76,13 +76,14 @@
             </ol>
         </div>
     </div>
-    <div id="tab-content-resourcepack" class="tab-content">
-        <h2 id="resourcepack-title">Resource Pack</h2>
+    <div id="tab-content-files" class="tab-content">
+        <h2 id="files-title">Files</h2>
         <div class="info-box">
-            <p id="resourcepack-description">Here you can download the server's official resourcepack.</p>
+            <p id="files-description">Here you can download the server's official resourcepack.</p>
             <div class="resourcepack-buttons-container">
                 <a href="toploardggop.zip" class="download-button" id="resourcepack-download-optifine" download>toploardgg-optifine</a>
                 <a href="toploardgg.zip" class="download-button" id="resourcepack-download-nonoptifine" download>toploardgg</a>
+                <a href="https://drive.google.com/file/d/1D4Q-vE7J5TO2meCOF8FvrXLwGoIVwiLQ/view?usp=sharing" class="download-button" id="files-download-build" target="_blank">My Build</a>
             </div>
         </div>
     </div>

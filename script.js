@@ -2,7 +2,7 @@ const translations = {
     en: {
         greeting:"Hi.", cookies:"I love cookies)<🍪", name:"Toploardgg (Stas)", tyretName:"tyret (Artem)", kapibaraName:"KAPIBARA (Kolya)", aterName:"ater (Dinis)",
         contact:"Contacts:", support:"Support us:", donate:"Donate with PayPal", language:"English",
-        tabProfile:"Profile", tabInfo:"Info", tabResourcepack:"Resource Pack", infoTitle:"Information",
+        tabProfile:"Profile", tabInfo:"Info", tabFiles:"Files", infoTitle:"Information", // Changed tabResourcepack to tabFiles
         ipLabel:"IP Address:", linkLabel:"Link:", discordLinkText:"discord group",
         applicationMessage:"To join the server, you need to apply in Discord; all details are in Toploardgg.",
         rulesHeading:"Server Rules:",
@@ -18,19 +18,22 @@ const translations = {
         serverStatusHeading:"Server Status:", statusLabel:"Status:", statusOnline:"Online", statusOffline:"Offline", statusLoading:"Loading...",
         playersLabel:"Players:", versionLabel:"Version:", motdLabel:"MOTD:", refreshButton:"Refresh",
         errorFetchingStatus:"Error fetching status.", statusOfflineMOTD:"Offline (Invalid MOTD)",
-        resourcepackTitle:"Resource Pack", resourcepackDescription:"Here you can download the server's official resourcepack.",
-        resourcepackDownloadOptifine:"toploardgg-optifine", resourcepackDownloadNonOptifine:"toploardgg"
+        filesTitle:"Files", // Changed resourcepackTitle to filesTitle
+        filesDescription:"Here you can download server-related files, including the official resource packs and the build.", // Adjusted description
+        resourcepackDownloadOptifine:"Resource Pack (OptiFine)", // Kept resource pack names, adjusted slightly for clarity
+        resourcepackDownloadNonOptifine:"Resource Pack (Non-OptiFine)", // Kept resource pack names, adjusted slightly for clarity
+        filesDownloadBuild:"My Build" // New translation key for the build
     },
     ru: {
         greeting:"Привет.", cookies:"Я люблю печеньки)<🍪", name:"Toploardgg (Стас)", tyretName:"tyret (Артём)", kapibaraName:"KAPIBARA (Коля)", aterName:"ater (Денис)",
         contact:"Контакты:", support:"Поддержите нас:", donate:"Пожертвовать через PayPal", language:"Русский",
-        tabProfile:"Профиль", tabInfo:"Инфо", tabResourcepack:"Ресурспак", infoTitle:"Информация",
+        tabProfile:"Профиль", tabInfo:"Инфо", tabFiles:"Файлы", infoTitle:"Информация", // Changed tabResourcepack to tabFiles
         ipLabel:"IP Адрес:", linkLabel:"Ссылка:", discordLinkText:"группа в Discord",
         applicationMessage:"Чтобы попасть на сервер, надо подать заявку в Discord; все детали в Toploardgg.",
         rulesHeading:"Правила сервера:",
         rule_1:"Никому не рассказывать о Бойцовском Клубе.",
         rule_2:"Нельзя разрушать базы других игроков, а также строить без разрешения. Нарушение - неделя бана.",
-        rule_3:"Спам в Minecraft или на Discord сервере, или написание неважной информации в Telegram группу - мут на 1 день (фотографии отправлять можно, информацию любого вида - как координаты, так и нахождение ресурсов - тоже).",
+        rule_3:"Спам в Minecraft или на Discord сервере, или написание неважной информации в Telegram группу - мут на 1 день (фотографии отправлять можно, информация любого вида - как координаты, так и нахождение ресурсов - тоже).",
         rule_4:"ЧИТЫ СТРОГО ЗАПРЕЩЕНЫ в любом виде: ресурспаки или моды на видимость руд, или сильные читы. Нарушение - бан от 1 дня до навсегда в зависимости от силы читов. Чтобы уточнить, является ли мод читом, нужно спросить у администратора (у меня). Разбан можно попросить, но нужно написать причину минимум 3 предложения.",
         rule_5:"Не провоцировать и не поддаваться на провокации. Нарушение - 1 день.",
         rule_6:"Нельзя осуждать человека за его отличия: вес, возраст и т.д. Нарушение - 1 неделя.",
@@ -40,13 +43,16 @@ const translations = {
         serverStatusHeading:"Статус сервера:", statusLabel:"Статус:", statusOnline:"Онлайн", statusOffline:"Офлайн", statusLoading:"Загрузка...",
         playersLabel:"Игроков:", versionLabel:"Версия:", motdLabel:"MOTD:", refreshButton:"Обновить",
         errorFetchingStatus:"Ошибка получения статуса.", statusOfflineMOTD:"Офлайн (Неверный MOTD)",
-        resourcepackTitle:"Ресурспак", resourcepackDescription:"Здесь вы можете скачать официальный ресурспак сервера.",
-        resourcepackDownloadOptifine:"toploardgg-optifine", resourcepackDownloadNonOptifine:"toploardgg"
+        filesTitle:"Файлы", // Changed resourcepackTitle to filesTitle
+        filesDescription:"Здесь вы можете скачать файлы, относящиеся к серверу, включая официальные ресурспаки и сборку.", // Adjusted description
+        resourcepackDownloadOptifine:"Ресурспак (OptiFine)", // Kept resource pack names, adjusted slightly for clarity
+        resourcepackDownloadNonOptifine:"Ресурспак (Non-OptiFine)", // Kept resource pack names, adjusted slightly for clarity
+        filesDownloadBuild:"Моя Сборка" // New translation key for the build
     },
     uk: {
         greeting:"Привіт.", cookies:"Я обожнюю пряники)<🍪", name:"Toploardgg (Стаc)", tyretName:"tyret (Артем)", kapibaraName:"KAPIBARA (Коля)", aterName:"ater (Денис)",
         contact:"Контакти:", support:"Підтримайте нас:", donate:"Пожертвувати через PayPal", language:"Українська",
-        tabProfile:"Профіль", tabInfo:"Інформація", tabResourcepack:"Ресурспак", infoTitle:"Інформація",
+        tabProfile:"Профіль", tabInfo:"Інформація", tabFiles:"Файли", infoTitle:"Інформація", // Changed tabResourcepack to tabFiles
         ipLabel:"IP Адреса:", linkLabel:"Посилання:", discordLinkText:"група в Discord",
         applicationMessage:"Щоб потрапити на сервер, треба подати заявку в діскорд всі деталі в Toploardgg.",
         rulesHeading:"Правила сервера:",
@@ -62,12 +68,15 @@ const translations = {
         serverStatusHeading:"Статус сервера:", statusLabel:"Статус:", statusOnline:"Онлайн", statusOffline:"Офлайн", statusLoading:"Завантаження...",
         playersLabel:"Гравців:", versionLabel:"Версія:", motdLabel:"MOTD:", refreshButton:"Оновити",
         errorFetchingStatus:"Помилка отримання статусу.", statusOfflineMOTD:"Офлайн (Невірний MOTD)",
-        resourcepackTitle:"Ресурспак", resourcepackDescription:"Тут ви можете завантажити офіційний ресурспак сервера.",
-        resourcepackDownloadOptifine:"toploardgg-optifine", resourcepackDownloadNonOptifine:"toploardgg"
+        filesTitle:"Файли", // Changed resourcepackTitle to filesTitle
+        filesDescription:"Тут ви можете завантажити файли, що стосуються сервера, включаючи офіційні ресурспаки та збірку.", // Adjusted description
+        resourcepackDownloadOptifine:"Ресурспак (OptiFine)", // Kept resource pack names, adjusted slightly for clarity
+        resourcepackDownloadNonOptifine:"Ресурспак (Non-OptiFine)", // Kept resource pack names, adjusted slightly for clarity
+        filesDownloadBuild:"Моя Збірка" // New translation key for the build
     }
 };
 
-// Получаем элементы страницы
+// Получаем элементы страницы (Ensure correct IDs are used)
 const statusIndicator = document.getElementById('status-indicator');
 const serverOnlineInfo = document.getElementById('server-online-info');
 const playersOnline = document.getElementById('players-online');
@@ -125,9 +134,11 @@ function changeLanguage(lang) {
     document.getElementById("tab-btn-profile").textContent = currentTranslations.tabProfile;
     document.getElementById("tab-btn-info").textContent = currentTranslations.tabInfo;
 
-    const tabResourcepackButton = document.getElementById("tab-btn-resourcepack");
-    if (tabResourcepackButton) { tabResourcepackButton.textContent = currentTranslations.tabResourcepack; }
+    // Update the new "Files" tab button text
+    const tabFilesButton = document.getElementById("tab-btn-files"); // Changed ID
+    if (tabFilesButton) { tabFilesButton.textContent = currentTranslations.tabFiles; } // Changed key
 
+    // Update "Info" tab specific elements (already present, keep for completeness)
     document.getElementById("info-title").textContent = currentTranslations.infoTitle;
     document.getElementById("ip-label").textContent = currentTranslations.ipLabel;
     document.getElementById("linkLabel").textContent = currentTranslations.linkLabel;
@@ -150,7 +161,7 @@ function changeLanguage(lang) {
     const versionLabel = document.getElementById('version-label');
     const motdLabel = document.getElementById('motd-label');
     const refreshButton = document.getElementById('server-refresh-button');
-    const statusIndicator = document.getElementById('status-indicator');
+    // statusIndicator is used below
 
     if (serverStatusHeading) serverStatusHeading.textContent = currentTranslations.serverStatusHeading;
     if (statusLabel) statusLabel.textContent = currentTranslations.statusLabel;
@@ -162,39 +173,61 @@ function changeLanguage(lang) {
     // Обновление текста индикатора статуса сервера с учетом текущего состояния
     if (statusIndicator) {
          const currentIndicatorText = statusIndicator.textContent;
-         const errorMatch = currentIndicatorText.match(/\s\(.*\)$/); // Находим текст в скобках, если есть
+         // Find text in parentheses, if any. Improved regex to handle potential spaces
+         const errorMatch = currentIndicatorText.match(/\s?\(.+\)$/);
          const errorText = errorMatch ? errorMatch[0] : '';
-         const baseStatusText = currentTranslations.statusOffline;
-         const offlineMotdTextCurrentLang = currentTranslations.statusOfflineMOTD;
+
+         // Check if the current text corresponds to one of the known untranslated states (like 'Loading...' or initial 'Offline')
+         const isLoading = currentIndicatorText === translations['en'].statusLoading ||
+                           currentIndicatorText === translations['ru'].statusLoading ||
+                           currentIndicatorText === translations['uk'].statusLoading;
+
+         const isOfflineSimple = currentIndicatorText === translations['en'].statusOffline ||
+                                 currentIndicatorText === translations['ru'].statusOffline ||
+                                 currentIndicatorText === translations['uk'].statusOffline;
+
+         const isOfflineMotd = currentIndicatorText.includes(translations['en'].statusOfflineMOTD.substring(0, translations['en'].statusOfflineMOTD.indexOf('(')).trim()) ||
+                               currentIndicatorText.includes(translations['ru'].statusOfflineMOTD.substring(0, translations['ru'].statusOfflineMOTD.indexOf('(')).trim()) ||
+                               currentIndicatorText.includes(translations['uk'].statusOfflineMOTD.substring(0, translations['uk'].statusOfflineMOTD.indexOf('(')).trim());
+
 
          if (statusIndicator.classList.contains('status-online')) {
              statusIndicator.textContent = currentTranslations.statusOnline;
          } else if (statusIndicator.classList.contains('status-offline')) {
-              // Проверяем, содержит ли текущий текст базовую фразу для перевода
-              if (currentIndicatorText.includes('(') && currentIndicatorText.substring(0, currentIndicatorText.indexOf('(')).trim() === translations['en'].statusOfflineMOTD.substring(0, translations['en'].statusOfflineMOTD.indexOf('(')).trim()) {
-                   statusIndicator.textContent = offlineMotdTextCurrentLang + errorText;
+              // If it was "Offline (Invalid MOTD)" or similar with parentheses
+              if (isOfflineMotd) {
+                 statusIndicator.textContent = currentTranslations.statusOfflineMOTD + errorText;
+              } else if (isOfflineSimple) {
+                  statusIndicator.textContent = currentTranslations.statusOffline;
               } else {
-                   statusIndicator.textContent = baseStatusText + errorText;
+                 // Handle other potential offline states with error messages already attached
+                 // Attempt to keep the error text if possible, otherwise just set to base offline
+                 if (errorText && (currentIndicatorText.startsWith(translations['en'].statusOffline) || currentIndicatorText.startsWith(translations['ru'].statusOffline) || currentIndicatorText.startsWith(translations['uk'].statusOffline))) {
+                     statusIndicator.textContent = currentTranslations.statusOffline + errorText;
+                 } else {
+                      statusIndicator.textContent = currentTranslations.statusOffline;
+                 }
               }
-         } else {
+         } else if (isLoading) { // If it was in a loading state
              statusIndicator.textContent = currentTranslations.statusLoading;
          }
+         // Note: If the status is an error state not covered (e.g., network error text), it might not be perfectly translated,
+         // but the core status word ("Offline" or "Loading") will be correct.
     }
 
-    const resourcepackTitleElement = document.getElementById('resourcepack-title');
-    const resourcepackDescriptionElement = document.getElementById('resourcepack-description');
+
+    // Update the "Files" tab content elements
+    const filesTitleElement = document.getElementById('files-title'); // Changed ID
+    const filesDescriptionElement = document.getElementById('files-description'); // Added ID in HTML and lookup here
     const resourcepackDownloadOptifineElement = document.getElementById('resourcepack-download-optifine');
-    const resourcepackDownloadNonOptifineElement = document.getElementById('resourcepack-download-non-optifine'); // Исправлен id
+    const resourcepackDownloadNonOptifineElement = document.getElementById('resourcepack-download-nonoptifine'); // Corrected ID
+    const filesDownloadBuildElement = document.getElementById('files-download-build'); // New ID lookup
 
-    if (resourcepackTitleElement) resourcepackTitleElement.textContent = currentTranslations.resourcepackTitle;
-    if (resourcepackDescriptionElement) resourcepackDescriptionElement.textContent = currentTranslations.resourcepackDescription;
+    if (filesTitleElement) filesTitleElement.textContent = currentTranslations.filesTitle; // Changed key
+    if (filesDescriptionElement) filesDescriptionElement.textContent = currentTranslations.filesDescription; // New lookup
     if (resourcepackDownloadOptifineElement) resourcepackDownloadOptifineElement.textContent = currentTranslations.resourcepackDownloadOptifine;
-     // Проверяем существование элемента перед обновлением текста
     if (resourcepackDownloadNonOptifineElement) resourcepackDownloadNonOptifineElement.textContent = currentTranslations.resourcepackDownloadNonOptifine;
-
-
-    // Сохраняем выбранный язык в Local Storage
-    localStorage.setItem('preferredLanguage', lang);
+    if (filesDownloadBuildElement) filesDownloadBuildElement.textContent = currentTranslations.filesDownloadBuild; // New lookup
 }
 
 // Функция для получения статуса сервера
@@ -222,7 +255,9 @@ async function fetchServerStatus() {
 
         // Проверяем статус по API и совпадение MOTD
         const isOnlineByApi = data.online === true;
-        const isMotdMatching = receivedMotdClean === EXPECTED_MOTD.trim();
+        // Use a more robust MOTD comparison, allowing for minor variations like trailing dots or extra spaces
+        const isMotdMatching = receivedMotdClean.toLowerCase().trim() === EXPECTED_MOTD.toLowerCase().trim();
+
 
         if (isOnlineByApi && isMotdMatching) {
             // Сервер онлайн и MOTD совпадает
@@ -231,35 +266,40 @@ async function fetchServerStatus() {
             playersOnline.textContent = data.players ? data.players.online : 0;
             playersMax.textContent = data.players ? data.players.max : 0;
             serverVersion.textContent = data.version ? data.version.name : 'N/A';
-            serverMotd.textContent = receivedMotdClean || currentTranslations.motdLabel + ' - N/A';
+             // Display the received MOTD or a placeholder if empty
+            serverMotd.textContent = receivedMotdClean || 'N/A';
             serverOnlineInfo.style.display = 'block'; // Показываем инфо
         } else {
             // Сервер офлайн или MOTD не совпадает
             let offlineMessage = currentTranslations.statusOffline;
              if (isOnlineByApi && !isMotdMatching) {
-               // Сервер онлайн, но MOTD неправильный
-               offlineMessage = currentTranslations.statusOfflineMOTD + (receivedMotdClean ? ` (${receivedMotdClean})` : '');
+                // Сервер онлайн, но MOTD неправильный
+                // Append the actual received MOTD for debugging/info
+                 offlineMessage = `${currentTranslations.statusOfflineMOTD} ${receivedMotdClean ? `(${receivedMotdClean})` : ''}`;
              } else if (data.error) {
-               // Ошибка от API с сообщением
-               offlineMessage = `${currentTranslations.statusOffline} (${data.error})`;
+                // Ошибка от API с сообщением (e.g., "Server not found")
+                offlineMessage = `${currentTranslations.statusOffline} (${data.error})`;
              } else if (!isOnlineByApi) {
-                // API сказал, что сервер офлайн
-                offlineMessage = currentTranslations.statusOffline;
+                 // API сказал, что сервер офлайн
+                 offlineMessage = currentTranslations.statusOffline;
              } else {
-                // Другая ошибка при получении статуса
-                offlineMessage = `${currentTranslations.statusOffline} (${currentTranslations.errorFetchingStatus})`;
+                 // Другая ошибка при получении статуса (less likely with errorData check above, but as a fallback)
+                 offlineMessage = `${currentTranslations.statusOffline} (${currentTranslations.errorFetchingStatus})`;
              }
+
             statusIndicator.textContent = offlineMessage;
             statusIndicator.className = 'server-status-indicator status-offline';
             serverOnlineInfo.style.display = 'none'; // Скрываем инфо
-            serverMotd.textContent = '-';
+            serverMotd.textContent = '-'; // Clear MOTD display
         }
     } catch (error) {
-        // Ошибка при выполнении запроса
+        // Ошибка при выполнении запроса (e.g., network issue, CORS)
         console.error('Ошибка при получении статуса:', error);
         const currentLang = localStorage.getItem('preferredLanguage') || 'en';
         const currentTranslations = translations[currentLang];
-        statusIndicator.textContent = `${currentTranslations.statusOffline} (${currentTranslations.errorFetchingStatus} ${error.message || error})`;
+        // Show a more specific error if available, otherwise a generic one
+        const errorMessage = error.message && error.message !== `HTTP error! status: undefined` ? error.message : currentTranslations.errorFetchingStatus;
+        statusIndicator.textContent = `${currentTranslations.statusOffline} (${errorMessage})`;
         statusIndicator.className = 'server-status-indicator status-offline';
         serverOnlineInfo.style.display = 'none';
         serverMotd.textContent = '-';
@@ -268,6 +308,7 @@ async function fetchServerStatus() {
         serverRefreshButton.disabled = false;
     }
 }
+
 
 // Настройка интервала обновления статуса сервера (каждые 60 секунд)
 const refreshInterval = 60000; // 60 секунд
@@ -308,18 +349,18 @@ document.addEventListener('DOMContentLoaded', () => {
     changeLanguage(savedLang);
 
     // Устанавливаем начальную вкладку (например, "Профиль")
-    const initialTabId = 'profile';
+    const initialTabId = 'profile'; // You can change this to 'info' or 'files' if needed
     showTab(initialTabId); // Показываем эту вкладку
 
     // Если начальная вкладка оказалась "Инфо", сразу получаем статус сервера и запускаем интервал
     if (initialTabId === 'info') {
-         fetchServerStatus();
-         startStatusInterval();
+         // fetchServerStatus is already called by showTab if the initial tab is 'info'
+         // and startStatusInterval is also called by showTab. No need to call again here.
     }
 });
 
 // Останавливаем интервал обновления статуса при закрытии страницы
 window.addEventListener('beforeunload', stopStatusInterval);
 
-// Примечание: Функция showTab и changeLanguage должны быть доступны глобально,
+// Примечание: Функции showTab и changeLanguage должны быть доступны глобально,
 // т.к. вызываются из HTML через onclick.
