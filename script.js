@@ -6,6 +6,7 @@ const translations = {
         tyretName: "tyret (Artem)",
         kapibaraName: "KAPIBARA (Kolya)",
         aterName: "ater (Dinis)",
+        artfixName: "Artfix (artem)",
         contact: "Contacts:",
         support: "Support us:",
         donate: "Donate with PayPal",
@@ -55,6 +56,7 @@ const translations = {
         tyretName: "tyret (Артём)",
         kapibaraName: "KAPIBARA (Коля)",
         aterName: "ater (Денис)",
+        artfixName: "Artfix (Артём)",
         contact: "Контакты:",
         support: "Поддержите нас:",
         donate: "Пожертвовать через PayPal",
@@ -104,6 +106,7 @@ const translations = {
         tyretName: "tyret (Артем)",
         kapibaraName: "KAPIBARA (Коля)",
         aterName: "ater (Денис)",
+        artfixName: "Artfix (Артем)",
         contact: "Контакти:",
         support: "Підтримайте нас:",
         donate: "Пожертвувати через PayPal",
@@ -251,6 +254,11 @@ function changeLanguage(lang) {
     document.getElementById("tyret-name").textContent = currentTranslations.tyretName;
     document.getElementById("kapibara-name").textContent = currentTranslations.kapibaraName;
     document.getElementById("ater-name").textContent = currentTranslations.aterName;
+    const artfixNameElement = document.getElementById("artfix-name");
+    if (artfixNameElement) {
+        artfixNameElement.textContent = currentTranslations.artfixName;
+    }
+
     document.getElementById("contact").textContent = currentTranslations.contact;
     document.getElementById("support").textContent = currentTranslations.support;
     document.getElementById("donate").textContent = currentTranslations.donate;
@@ -306,7 +314,7 @@ function changeLanguage(lang) {
 
     if (statusIndicator) {
         if (statusIndicator.classList.contains('status-online')) {
-             statusIndicator.textContent = currentTranslations.statusOnline;
+            statusIndicator.textContent = currentTranslations.statusOnline;
         } else if (statusIndicator.classList.contains('status-offline')) {
             const currentText = statusIndicator.textContent;
             let errorPart = '';

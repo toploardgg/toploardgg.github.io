@@ -1,6 +1,3 @@
-/* Полный CSS код из предыдущего ответа остается без изменений для структуры dropdown */
-/* Убедитесь, что у вас нет правил только для #theme-toggle, которые могут конфликтовать */
-
 body {
     background-color: #1a1a1a;
     color: white;
@@ -548,9 +545,9 @@ body.light-theme .footer .info-box a {
         line-height: 1.5;
     }
 
-    body.light-theme .info-box a {
+     body.light-theme .info-box a {
          color: #0000EE;
-    }
+     }
 
     .footer {
         padding-top: 15px;
@@ -577,6 +574,7 @@ body.light-theme .footer .info-box a {
      body.light-theme .download-button {
         color: #000;
         border-color: #000;
+        background-color: transparent;
      }
 
      body.light-theme .download-button:hover {
@@ -594,9 +592,9 @@ body.light-theme .footer .info-box a {
         max-width: 65%;
     }
 
-     body.light-theme .footer .info-box {
+    body.light-theme .footer .info-box {
         border-color: #000;
-     }
+    }
 
     .footer .info-box p, .footer .info-box ul, .footer .info-box ol, .footer .info-box li {
         font-size: 0.85em;
@@ -624,9 +622,9 @@ body.light-theme .footer .info-box a {
         line-height: 1.2;
     }
 
-    body.light-theme .footer .info-box a {
+     body.light-theme .footer .info-box a {
          color: #0000EE;
-    }
+     }
 }
 
 .download-button {
@@ -668,4 +666,54 @@ body.light-theme .download-button:hover {
     gap: 20px;
     flex-wrap: wrap;
     margin-top: 15px;
+}
+
+.contact-icons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.contact-icons img {
+    width: 30px;
+    height: 30px;
+    vertical-align: middle;
+    border: none;
+    transition: transform 0.3s ease;
+}
+
+.contact-icons a:hover img {
+    transform: scale(1.1);
+}
+
+body.light-theme .contact-icons img {
+
+}
+
+/* Стили для ссылки-иконки Discord */
+.contact-icons a {
+    text-decoration: none;
+}
+
+.contact-icons .discord-icon-link {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    background-image: url('discord_icon.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    vertical-align: middle;
+    transition: transform 0.3s ease;
+}
+
+.contact-icons a:hover .discord-icon-link {
+     transform: scale(1.1);
+}
+
+body.light-theme .contact-icons .discord-icon-link {
+    background-image: url('discord_icon1.png');
 }
