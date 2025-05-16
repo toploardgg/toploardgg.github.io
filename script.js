@@ -151,44 +151,61 @@ const translations = {
     }
 };
 
-const statusIndicator = document.getElementById('status-indicator');
+let greetingElement, cookiesElement, nameElement, tyretNameElement, kapibaraNameElement, aterNameElement, artfixNameElement,
+    contactElement, supportElement, donateElement, cookiesFooterElement, langButtonElement,
+    tabBtnProfileElement, tabBtnInfoElement, tabBtnFilesElement, infoTitleElement, ipLabelElement,
+    linkLabelElement, discordLinkTextElement, applicationMessageElement, rulesHeadingElement,
+    serverStatusHeadingElement, statusLabelElement, playersLabelElement, versionLabelElement,
+    motdLabelElement, refreshButtonElement, filesTitleElement, filesDescriptionElement,
+    resourcepackDownloadOptifineElement, resourcepackDownloadNonOptifineElement, filesDownloadBuildElement, filesDownloadWorldElement;
+
+const ruleElements = {};
 const serverOnlineInfo = document.getElementById('server-online-info');
 const playersOnline = document.getElementById('players-online');
 const playersMax = document.getElementById('players-max');
 const serverVersion = document.getElementById('server-version');
 const serverMotd = document.getElementById('server-motd');
+const statusIndicator = document.getElementById('status-indicator');
 const serverRefreshButton = document.getElementById('server-refresh-button');
-const bodyElement = document.body;
 const themeToggle = document.getElementById('theme-toggle');
 const languageButton = document.getElementById('language-button');
+const bodyElement = document.body;
 
 const ATERNOS_SERVER_ADDRESS_PORT = 'Toploardgg.aternos.me:39466';
 const EXPECTED_MOTD = 'Welcome to the server of Toploardgg!';
 const MCSTATUS_API_URL = `https://api.mcstatus.io/v2/status/java/${ATERNOS_SERVER_ADDRESS_PORT}`;
 
+function smoothTextChange(element, newText) {
+    if (!element) return;
+    element.style.transition = 'opacity 0.28s';
+    element.style.opacity = '0';
+    setTimeout(() => {
+        element.textContent = newText;
+        element.style.opacity = '1';
+    }, 170);
+}
+
 function setTheme(theme) {
+    document.documentElement.style.setProperty('--transition-theme', 'background-color 0.6s, color 0.6s');
+    bodyElement.style.transition = 'background-color 0.6s, color 0.6s';
     const currentLang = localStorage.getItem('preferredLanguage') || 'en';
     const currentTranslations = translations[currentLang];
-
     if (theme === 'light') {
         bodyElement.classList.add('light-theme');
-        if (themeToggle) themeToggle.textContent = currentTranslations.switchToDarkTheme;
+        if (themeToggle) smoothTextChange(themeToggle, currentTranslations.switchToDarkTheme);
     } else {
         bodyElement.classList.remove('light-theme');
-        if (themeToggle) themeToggle.textContent = currentTranslations.switchToLightTheme;
+        if (themeToggle) smoothTextChange(themeToggle, currentTranslations.switchToLightTheme);
     }
     try {
         localStorage.setItem('theme', theme);
-    } catch (e) {
-        console.error('Failed to save theme preference to localStorage:', e);
-    }
+    } catch (e) {}
 }
 
 if (themeToggle) {
     themeToggle.addEventListener('click', () => {
         const currentTheme = bodyElement.classList.contains('light-theme') ? 'light' : 'dark';
-        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-        setTheme(newTheme);
+        setTheme(currentTheme === 'dark' ? 'light' : 'dark');
     });
 }
 
@@ -196,10 +213,7 @@ function loadThemePreference() {
     let savedTheme = null;
     try {
         savedTheme = localStorage.getItem('theme');
-    } catch (e) {
-        console.error('Failed to load theme preference from localStorage:', e);
-    }
-
+    } catch (e) {}
     if (savedTheme) {
         setTheme(savedTheme);
     } else {
@@ -207,158 +221,109 @@ function loadThemePreference() {
     }
 }
 
-
 function showTab(tabIdToShow) {
     const contents = document.querySelectorAll('.tab-content');
-    contents.forEach(content => {
-        content.classList.remove('active');
-    });
     const buttons = document.querySelectorAll('.tab-button');
-    buttons.forEach(button => {
-        button.classList.remove('active');
-    });
-
-    const contentToShow = document.getElementById(`tab-content-${tabIdToShow}`);
-    if (contentToShow) {
-        contentToShow.classList.add('active');
-        if (tabIdToShow === 'info') {
-            fetchServerStatus();
-            startStatusInterval();
+    contents.forEach(content => {
+        if (content.id === `tab-content-${tabIdToShow}`) {
+            content.classList.add('fadein', 'active');
+            setTimeout(() => {
+                content.classList.remove('fadein');
+            }, 420);
         } else {
-            stopStatusInterval();
+            if (content.classList.contains('active')) {
+                content.classList.add('fadeout');
+                setTimeout(() => {
+                    content.classList.remove('active', 'fadeout');
+                }, 420);
+            }
         }
-    }
-
-    const buttonToActivate = document.getElementById(`tab-btn-${tabIdToShow}`);
-    if (buttonToActivate) {
-        buttonToActivate.classList.add('active');
+    });
+    buttons.forEach(button => {
+        if (button.id === `tab-btn-${tabIdToShow}`) {
+            button.classList.add('active');
+        } else {
+            button.classList.remove('active');
+        }
+    });
+    if (tabIdToShow === 'info') {
+        fetchServerStatus();
+        startStatusInterval();
+    } else {
+        stopStatusInterval();
     }
 }
 
 function changeLanguage(lang) {
     const currentTranslations = translations[lang];
-    if (!currentTranslations) {
-        console.warn(`Translations for language '${lang}' not found.`);
-        return;
-    }
-
+    if (!currentTranslations) return;
     try {
         localStorage.setItem('preferredLanguage', lang);
-    } catch (e) {
-        console.error('Failed to save language preference to localStorage:', e);
-    }
-
-    document.getElementById("greeting").textContent = currentTranslations.greeting;
-    document.getElementById("I-love-cookies").textContent = currentTranslations.cookies;
-    document.getElementById("name").textContent = currentTranslations.name;
-    document.getElementById("tyret-name").textContent = currentTranslations.tyretName;
-    document.getElementById("kapibara-name").textContent = currentTranslations.kapibaraName;
-    document.getElementById("ater-name").textContent = currentTranslations.aterName;
-    const artfixNameElement = document.getElementById("artfix-name");
-    if (artfixNameElement) {
-        artfixNameElement.textContent = currentTranslations.artfixName;
-    }
-
-    document.getElementById("contact").textContent = currentTranslations.contact;
-    document.getElementById("support").textContent = currentTranslations.support;
-    document.getElementById("donate").textContent = currentTranslations.donate;
-    document.getElementById("I-love-cookies-footer").textContent = currentTranslations.cookies;
-
-    if (languageButton) {
-        languageButton.textContent = currentTranslations.language;
-    }
-
-    document.getElementById("tab-btn-profile").textContent = currentTranslations.tabProfile;
-    document.getElementById("tab-btn-info").textContent = currentTranslations.tabInfo;
-
-    const tabFilesButton = document.getElementById("tab-btn-files");
-    if (tabFilesButton) {
-        tabFilesButton.textContent = currentTranslations.tabFiles;
-    }
-
-    document.getElementById("info-title").textContent = currentTranslations.infoTitle;
-    document.getElementById("ip-label").textContent = currentTranslations.ipLabel;
-    document.getElementById("linkLabel").textContent = currentTranslations.linkLabel;
-    document.getElementById("discord-link-text").textContent = currentTranslations.discordLinkText;
-
-    const applicationMessageElement = document.getElementById("application-message");
-    if (applicationMessageElement) {
-        applicationMessageElement.textContent = currentTranslations.applicationMessage;
-    }
-
-    const rulesHeading = document.getElementById("rules-heading");
-    if (rulesHeading) {
-        rulesHeading.textContent = currentTranslations.rulesHeading;
-    }
-
+    } catch (e) {}
+    [
+        [greetingElement, currentTranslations.greeting],
+        [cookiesElement, currentTranslations.cookies],
+        [nameElement, currentTranslations.name],
+        [tyretNameElement, currentTranslations.tyretName],
+        [kapibaraNameElement, currentTranslations.kapibaraName],
+        [aterNameElement, currentTranslations.aterName],
+        [artfixNameElement, currentTranslations.artfixName],
+        [contactElement, currentTranslations.contact],
+        [supportElement, currentTranslations.support],
+        [donateElement, currentTranslations.donate],
+        [cookiesFooterElement, currentTranslations.cookies],
+        [langButtonElement, currentTranslations.language],
+        [tabBtnProfileElement, currentTranslations.tabProfile],
+        [tabBtnInfoElement, currentTranslations.tabInfo],
+        [tabBtnFilesElement, currentTranslations.tabFiles],
+        [infoTitleElement, currentTranslations.infoTitle],
+        [ipLabelElement, currentTranslations.ipLabel],
+        [linkLabelElement, currentTranslations.linkLabel],
+        [discordLinkTextElement, currentTranslations.discordLinkText],
+        [applicationMessageElement, currentTranslations.applicationMessage],
+        [rulesHeadingElement, currentTranslations.rulesHeading],
+        [serverStatusHeadingElement, currentTranslations.serverStatusHeading],
+        [statusLabelElement, currentTranslations.statusLabel],
+        [playersLabelElement, currentTranslations.playersLabel],
+        [versionLabelElement, currentTranslations.versionLabel],
+        [motdLabelElement, currentTranslations.motdLabel],
+        [refreshButtonElement, currentTranslations.refreshButton],
+        [filesTitleElement, currentTranslations.filesTitle],
+        [filesDescriptionElement, currentTranslations.filesDescription],
+        [resourcepackDownloadOptifineElement, currentTranslations.resourcepackDownloadOptifine],
+        [resourcepackDownloadNonOptifineElement, currentTranslations.resourcepackDownloadNonOptifine],
+        [filesDownloadBuildElement, currentTranslations.filesDownloadBuild],
+        [filesDownloadWorldElement, currentTranslations.filesDownloadWorld]
+    ].forEach(([el, txt]) => smoothTextChange(el, txt));
     for (let i = 1; i <= 9; i++) {
-        const ruleElement = document.getElementById(`rule-${i}`);
-        if (ruleElement) {
-            ruleElement.textContent = currentTranslations[`rule_${i}`];
+        if (ruleElements[`rule-${i}`]) {
+            smoothTextChange(ruleElements[`rule-${i}`], currentTranslations[`rule_${i}`]);
         }
     }
-
-    const serverStatusHeading = document.getElementById('server-status-heading');
-    const statusLabel = document.getElementById('status-label');
-    const playersLabel = document.getElementById('players-label');
-    const versionLabel = document.getElementById('version-label');
-    const motdLabel = document.getElementById('motd-label');
-    const refreshButton = document.getElementById('server-refresh-button');
-
-    if (serverStatusHeading) serverStatusHeading.textContent = currentTranslations.serverStatusHeading;
-    if (statusLabel) statusLabel.textContent = currentTranslations.statusLabel;
-    if (playersLabel) playersLabel.textContent = currentTranslations.playersLabel;
-    if (versionLabel) versionLabel.textContent = currentTranslations.versionLabel;
-    if (motdLabel) motdLabel.textContent = currentTranslations.motdLabel;
-    if (refreshButton) refreshButton.textContent = currentTranslations.refreshButton;
-
     if (statusIndicator) {
         if (statusIndicator.classList.contains('status-online')) {
-            statusIndicator.textContent = currentTranslations.statusOnline;
+            smoothTextChange(statusIndicator, currentTranslations.statusOnline);
         } else if (statusIndicator.classList.contains('status-offline')) {
-            const currentText = statusIndicator.textContent;
             let errorPart = '';
-            const errorMatch = currentText.match(/\s?\(.+\)$/);
-             if (errorMatch) {
-                 errorPart = errorMatch[0];
-             }
-
+            const errorMatch = statusIndicator.textContent.match(/\s?\(.+\)$/);
+            if (errorMatch) errorPart = errorMatch[0];
             let baseOfflineText = currentTranslations.statusOffline;
-            const oldLangs = ['en', 'ru', 'uk'];
             let wasOfflineMotd = false;
-            for (const langKey of oldLangs) {
-                 const oldMotdOfflineText = translations[langKey].statusOfflineMOTD;
-                 if (currentText.trim().startsWith(oldMotdOfflineText.substring(0, oldMotdOfflineText.indexOf('(')).trim())) {
-                      wasOfflineMotd = true;
-                      break;
-                 }
+            for (const langKey of ['en', 'ru', 'uk']) {
+                const oldMotdOfflineText = translations[langKey].statusOfflineMOTD;
+                if (statusIndicator.textContent.trim().startsWith(oldMotdOfflineText.substring(0, oldMotdOfflineText.indexOf('(')).trim())) {
+                    wasOfflineMotd = true;
+                    break;
+                }
             }
-
             if (wasOfflineMotd) {
                 baseOfflineText = currentTranslations.statusOfflineMOTD;
             }
-
-            statusIndicator.textContent = baseOfflineText + errorPart;
-
+            smoothTextChange(statusIndicator, baseOfflineText + errorPart);
         } else if (statusIndicator.classList.contains('status-loading')) {
-             statusIndicator.textContent = currentTranslations.statusLoading;
+            smoothTextChange(statusIndicator, currentTranslations.statusLoading);
         }
     }
-
-    const filesTitleElement = document.getElementById('files-title');
-    const filesDescriptionElement = document.getElementById('files-description');
-    const resourcepackDownloadOptifineElement = document.getElementById('resourcepack-download-optifine');
-    const resourcepackDownloadNonOptifineElement = document.getElementById('resourcepack-download-nonoptifine');
-    const filesDownloadBuildElement = document.getElementById('files-download-build');
-    const filesDownloadWorldElement = document.getElementById('files-download-world');
-
-    if (filesTitleElement) filesTitleElement.textContent = currentTranslations.filesTitle;
-    if (filesDescriptionElement) filesDescriptionElement.textContent = currentTranslations.filesDescription;
-    if (resourcepackDownloadOptifineElement) resourcepackDownloadOptifineElement.textContent = currentTranslations.resourcepackDownloadOptifine;
-    if (resourcepackDownloadNonOptifineElement) resourcepackDownloadNonOptifineElement.textContent = currentTranslations.resourcepackDownloadNonOptifine;
-    if (filesDownloadBuildElement) filesDownloadBuildElement.textContent = currentTranslations.filesDownloadBuild;
-    if (filesDownloadWorldElement) filesDownloadWorldElement.textContent = currentTranslations.filesDownloadWorld;
-
     const currentTheme = bodyElement.classList.contains('light-theme') ? 'light' : 'dark';
     setTheme(currentTheme);
 }
@@ -366,37 +331,20 @@ function changeLanguage(lang) {
 async function fetchServerStatus() {
     const currentLang = localStorage.getItem('preferredLanguage') || 'en';
     const currentTranslations = translations[currentLang];
-
-    statusIndicator.textContent = currentTranslations.statusLoading;
+    smoothTextChange(statusIndicator, currentTranslations.statusLoading);
     statusIndicator.className = 'server-status-indicator status-loading';
     serverOnlineInfo.style.display = 'none';
     serverRefreshButton.disabled = true;
-
     try {
         const response = await fetch(MCSTATUS_API_URL);
-        if (!response.ok) {
-            let errorDetail = `HTTP error! status: ${response.status}`;
-            try {
-                 const errorData = await response.json();
-                 if (errorData && errorData.error) {
-                      errorDetail = errorData.error;
-                 } else if (errorData) {
-                      errorDetail = JSON.stringify(errorData);
-                 }
-            } catch (e) {
-            }
-            throw new Error(errorDetail);
-        }
+        if (!response.ok) throw new Error();
         const data = await response.json();
-
         const receivedMotdRaw = data.motd ? (data.motd.clean || data.motd.raw || '') : '';
         const receivedMotdClean = receivedMotdRaw.replace(/§[0-9a-fk-or]/gi, '').trim();
-
         const isOnlineByApi = data.online === true;
         const isMotdMatching = receivedMotdClean.toLowerCase().trim() === EXPECTED_MOTD.toLowerCase().trim();
-
         if (isOnlineByApi && isMotdMatching) {
-            statusIndicator.textContent = currentTranslations.statusOnline;
+            smoothTextChange(statusIndicator, currentTranslations.statusOnline);
             statusIndicator.className = 'server-status-indicator status-online';
             playersOnline.textContent = data.players ? data.players.online : 0;
             playersMax.textContent = data.players ? data.players.max : 0;
@@ -404,28 +352,15 @@ async function fetchServerStatus() {
             serverMotd.textContent = receivedMotdClean || 'N/A';
             serverOnlineInfo.style.display = 'block';
         } else {
-            let offlineMessage = currentTranslations.statusOffline;
-            if (isOnlineByApi && !isMotdMatching) {
-                offlineMessage = `${currentTranslations.statusOfflineMOTD} ${receivedMotdClean ? `(${receivedMotdClean})` : ''}`;
-            } else if (data.error) {
-                 offlineMessage = `${currentTranslations.statusOffline} (${data.error})`;
-            } else if (!isOnlineByApi) {
-                 offlineMessage = currentTranslations.statusOffline;
-            } else {
-                 offlineMessage = `${currentTranslations.statusOffline} (${currentTranslations.errorFetchingStatus})`;
-            }
-
-            statusIndicator.textContent = offlineMessage;
+            smoothTextChange(statusIndicator, currentTranslations.statusOffline);
             statusIndicator.className = 'server-status-indicator status-offline';
             serverOnlineInfo.style.display = 'none';
             serverMotd.textContent = '-';
         }
     } catch (error) {
-        console.error('Ошибка при получении статуса:', error);
         const currentLang = localStorage.getItem('preferredLanguage') || 'en';
         const currentTranslations = translations[currentLang];
-        const errorMessage = error.message && !error.message.includes('HTTP error! status: undefined') ? error.message : currentTranslations.errorFetchingStatus;
-        statusIndicator.textContent = `${currentTranslations.statusOffline} (${errorMessage})`;
+        smoothTextChange(statusIndicator, currentTranslations.statusOffline);
         statusIndicator.className = 'server-status-indicator status-offline';
         serverOnlineInfo.style.display = 'none';
         serverMotd.textContent = '-';
@@ -462,21 +397,80 @@ if (serverRefreshButton) {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+    greetingElement = document.getElementById("greeting");
+    cookiesElement = document.getElementById("I-love-cookies");
+    nameElement = document.getElementById("name");
+    tyretNameElement = document.getElementById("tyret-name");
+    kapibaraNameElement = document.getElementById("kapibara-name");
+    aterNameElement = document.getElementById("ater-name");
+    artfixNameElement = document.getElementById("artfix-name");
+    contactElement = document.getElementById("contact");
+    supportElement = document.getElementById("support");
+    donateElement = document.getElementById("donate");
+    cookiesFooterElement = document.getElementById("I-love-cookies-footer");
+    langButtonElement = document.getElementById('language-button');
+    tabBtnProfileElement = document.getElementById("tab-btn-profile");
+    tabBtnInfoElement = document.getElementById("tab-btn-info");
+    tabBtnFilesElement = document.getElementById("tab-btn-files");
+    infoTitleElement = document.getElementById("info-title");
+    ipLabelElement = document.getElementById("ip-label");
+    linkLabelElement = document.getElementById("linkLabel");
+    discordLinkTextElement = document.getElementById("discord-link-text");
+    applicationMessageElement = document.getElementById("application-message");
+    rulesHeadingElement = document.getElementById("rules-heading");
+    for (let i = 1; i <= 9; i++) {
+        ruleElements[`rule-${i}`] = document.getElementById(`rule-${i}`);
+    }
+    serverStatusHeadingElement = document.getElementById('server-status-heading');
+    statusLabelElement = document.getElementById('status-label');
+    playersLabelElement = document.getElementById('players-label');
+    versionLabelElement = document.getElementById('version-label');
+    motdLabelElement = document.getElementById('motd-label');
+    refreshButtonElement = document.getElementById('server-refresh-button');
+    filesTitleElement = document.getElementById('files-title');
+    filesDescriptionElement = document.getElementById('files-description');
+    resourcepackDownloadOptifineElement = document.getElementById('resourcepack-download-optifine');
+    resourcepackDownloadNonOptifineElement = document.getElementById('resourcepack-download-nonoptifine');
+    filesDownloadBuildElement = document.getElementById('files-download-build');
+    filesDownloadWorldElement = document.getElementById('files-download-world');
     let savedLang = 'en';
     try {
         const savedLangPref = localStorage.getItem('preferredLanguage');
         if (savedLangPref && translations[savedLangPref]) {
             savedLang = savedLangPref;
         }
-    } catch (e) {
-        console.error('Failed to load language preference from localStorage:', e);
-    }
+    } catch (e) {}
     changeLanguage(savedLang);
-
     loadThemePreference();
-
     const initialTabId = 'profile';
     showTab(initialTabId);
+    const tabButtons = document.querySelectorAll('.tab-button');
+    tabButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const tabId = button.id.replace('tab-btn-', '');
+            showTab(tabId);
+        });
+    });
+    if (languageButton) {
+        languageButton.addEventListener('click', () => {
+            const currentLang = localStorage.getItem('preferredLanguage') || 'en';
+            const availableLangs = Object.keys(translations);
+            const currentIndex = availableLangs.indexOf(currentLang);
+            const nextIndex = (currentIndex + 1) % availableLangs.length;
+            const nextLang = availableLangs[nextIndex];
+            changeLanguage(nextLang);
+        });
+    }
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        });
+    });
+    document.documentElement.style.scrollBehavior = 'smooth';
 });
 
 window.addEventListener('beforeunload', stopStatusInterval);

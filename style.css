@@ -1,3 +1,8 @@
+html, body {
+    scroll-behavior: smooth;
+    transition: background-color 0.6s, color 0.6s;
+}
+
 body {
     background-color: #1a1a1a;
     color: white;
@@ -10,6 +15,7 @@ body {
     font-weight: bold;
     position: relative;
     box-sizing: border-box;
+    transition: background-color 0.6s, color 0.6s;
 }
 
 body.light-theme {
@@ -221,15 +227,36 @@ body.light-theme .info-box li {
     line-height: 1.4;
 }
 
-.info-box a {
-    color: #87CEFA;
+/* Все ссылки вне .contact-icons */
+.info-box a,
+.tab-content a,
+.resourcepack-buttons-container a:not(.contact-icons a),
+.download-button:not(.contact-icons a) {
+    color: white;
     text-decoration: underline;
-    display: inline;
-    margin: 0;
+    transition: color 0.3s;
 }
 
-body.light-theme .info-box a {
-    color: #0000EE;
+body.light-theme .info-box a,
+body.light-theme .tab-content a,
+body.light-theme .resourcepack-buttons-container a:not(.contact-icons a),
+body.light-theme .download-button:not(.contact-icons a) {
+    color: #000;
+}
+
+/* При наведении: если темная тема — черный текст, если светлая — белый */
+.info-box a:hover,
+.tab-content a:hover,
+.resourcepack-buttons-container a:not(.contact-icons a):hover,
+.download-button:not(.contact-icons a):hover {
+    color: #000;
+}
+
+body.light-theme .info-box a:hover,
+body.light-theme .tab-content a:hover,
+body.light-theme .resourcepack-buttons-container a:not(.contact-icons a):hover,
+body.light-theme .download-button:not(.contact-icons a):hover {
+    color: #fff;
 }
 
 .paypal-button {
@@ -310,20 +337,35 @@ body.light-theme .tab-button.active {
 
 .tab-content {
     display: none;
-    animation: fadeIn .5s;
+    opacity: 0;
+    transition: opacity 0.5s;
+    position: relative;
+    z-index: 0;
 }
 
 .tab-content.active {
     display: block;
+    opacity: 1;
+    z-index: 1;
+}
+
+.tab-content.fadein {
+    animation: fadeIn 0.4s;
+    opacity: 1;
+}
+
+.tab-content.fadeout {
+    animation: fadeOut 0.4s;
+    opacity: 0;
 }
 
 @keyframes fadeIn {
-    from {
-        opacity: 0
-    }
-    to {
-        opacity: 1
-    }
+    from { opacity: 0 }
+    to { opacity: 1 }
+}
+@keyframes fadeOut {
+    from { opacity: 1 }
+    to { opacity: 0 }
 }
 
 .server-status-section {
@@ -435,36 +477,40 @@ body.light-theme .footer .info-box a {
      color: #0000EE;
 }
 
+@media (max-width: 1200px) {
+    .profile-container {
+        gap: 18px;
+    }
+}
+@media (max-width: 900px) {
+    .profile-container {
+        gap: 8px;
+    }
+}
 @media (max-width: 767px) {
     body {
         padding: 15px;
     }
-
     .header-controls {
         top: 10px;
         right: 10px;
         gap: 5px;
     }
-
     #theme-switcher {
         left: 10px;
         right: auto;
     }
-
     .dropbtn, .tab-button, .paypal-button, #server-refresh-button {
         padding: 8px 15px;
         font-size: .9em;
     }
-
     .dropdown-content {
         min-width: 120px;
     }
-
     .dropdown-content button {
         padding: 10px 12px;
         font-size: .9em;
     }
-
     .tab-container {
         margin-top: 60px;
         margin-bottom: 20px;
@@ -473,52 +519,43 @@ body.light-theme .footer .info-box a {
         justify-content: center;
         gap: 5px;
     }
-
     .tab-button {
         margin: 5px;
     }
-
     .profile-container {
         display: flex;
         flex-wrap: wrap;
         justify-content: center;
-        gap: 20px;
+        gap: 10px;
         align-items: center;
     }
-
     .profile {
         width: calc(50% - 10px);
         max-width: 200px;
         margin-bottom: 20px;
     }
-
     @media (max-width: 400px) {
         .profile {
             width: 100%;
         }
     }
-
     .profile img {
         width: 100%;
         height: auto;
         border-radius: 10px;
         border: 2px solid white;
     }
-
      body.light-theme .profile img {
         border-color: #000;
      }
-
     .info-box {
         padding: 15px;
         margin-top: 15px;
         max-width: 95%;
     }
-
     body.light-theme .info-box {
         border-color: #000;
     }
-
     .info-box p, .info-box ul, .info-box ol, .info-box li {
         margin-top: 8px;
         margin-bottom: 8px;
@@ -526,76 +563,62 @@ body.light-theme .footer .info-box a {
         font-size: 1em;
         color: white;
     }
-
      body.light-theme .info-box p,
      body.light-theme .info-box ul,
      body.light-theme .info-box ol,
      body.light-theme .info-box li {
          color: #000;
      }
-
      .info-box ol {
         padding-left: 15px;
         margin-top: 10px;
         margin-bottom: 10px;
     }
-
     .info-box li {
         margin-bottom: 8px;
         line-height: 1.5;
     }
-
      body.light-theme .info-box a {
          color: #0000EE;
      }
-
     .footer {
         padding-top: 15px;
     }
-
     .footer .info-box form {
         margin-top: 15px;
     }
-
     .resourcepack-buttons-container {
         flex-direction: column;
         align-items: center;
         gap: 10px;
         margin-top: 15px;
     }
-
     .download-button {
         margin: 0 !important;
         margin-top: 5px;
         width: 80%;
         box-sizing: border-box;
     }
-
      body.light-theme .download-button {
         color: #000;
         border-color: #000;
         background-color: transparent;
      }
-
      body.light-theme .download-button:hover {
         background-color: #eee;
         color: #000;
      }
-
     .download-button:first-child {
         margin-top: 0;
     }
-
     .footer .info-box {
         padding: 10px;
         margin-top: 15px;
         max-width: 65%;
     }
-
     body.light-theme .footer .info-box {
         border-color: #000;
     }
-
     .footer .info-box p, .footer .info-box ul, .footer .info-box ol, .footer .info-box li {
         font-size: 0.85em;
         margin-top: 2px;
@@ -603,25 +626,21 @@ body.light-theme .footer .info-box a {
         line-height: 1.2;
          color: white;
     }
-
      body.light-theme .footer .info-box p,
      body.light-theme .footer .info-box ul,
      body.light-theme .footer .info-box ol,
      body.light-theme .footer .info-box li {
          color: #000;
      }
-
      .footer .info-box ol {
         padding-left: 15px;
         margin-top: 8px;
         margin-bottom: 8px;
     }
-
     .footer .info-box li {
         margin-bottom: 2px;
         line-height: 1.2;
     }
-
      body.light-theme .footer .info-box a {
          color: #0000EE;
      }
@@ -693,7 +712,6 @@ body.light-theme .contact-icons img {
 
 }
 
-/* Стили для ссылки-иконки Discord */
 .contact-icons a {
     text-decoration: none;
 }
