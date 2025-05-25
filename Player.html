@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Мой MP3-плеер</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            flex-direction: column;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .player-container {
+            background-color: #fff;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 450px;
+            text-align: center;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        #audio-player {
+            width: 100%;
+            margin-bottom: 20px;
+        }
+
+        .controls {
+            margin-bottom: 20px;
+        }
+
+        .controls button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 0 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .controls button:hover {
+            background-color: #0056b3;
+        }
+
+        #file-input {
+            margin-top: 15px;
+            display: block;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .playlist-container {
+            margin-top: 25px;
+            width: 100%;
+            max-width: 450px;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            text-align: left;
+        }
+
+        .playlist-container h2 {
+            color: #555;
+            margin-bottom: 15px;
+        }
+
+        #playlist {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            max-height: 250px;
+            overflow-y: auto;
+            border: 1px solid #eee;
+            border-radius: 5px;
+            padding: 10px;
+        }
+
+        #playlist li {
+            padding: 10px;
+            border-bottom: 1px solid #eee;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background-color 0.2s ease;
+            font-size: 15px;
+        }
+
+        #playlist li:last-child {
+            border-bottom: none;
+        }
+
+        #playlist li.active {
+            background-color: #e6f2ff;
+            color: #007bff;
+            font-weight: bold;
+        }
+
+        #playlist li:hover:not(.active) {
+            background-color: #f9f9f9;
+        }
+
+        .remove-btn {
+            background-color: #dc3545;
+            color: white;
+            border: none;
+            padding: 5px 8px;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 12px;
+            margin-left: 10px;
+            transition: background-color 0.3s ease;
+        }
+
+        .remove-btn:hover {
+            background-color: #c82333;
+        }
+
+        .empty-playlist-message {
+            text-align: center;
+            color: #777;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="player-container">
+        <h1>Мой MP3-плеер</h1>
+        <audio id="audio-player" controls></audio>
+        <div class="controls">
+            <button id="prev-btn">Пред.</button>
+            <button id="play-pause-btn">Играть</button>
+            <button id="next-btn">След.</button>
+        </div>
+        <input type="file" id="file-input" accept="audio/*" multiple>
+        <p style="font-size: 12px; color: #666; margin-top: 10px;">
+            * Музыка загружается только в ваш браузер и не сохраняется на сайте.
+        </p>
+    </div>
+
+    <div class="playlist-container">
+        <h2>Плейлист</h2>
+        <ul id="playlist">
+            <li class="empty-playlist-message">Добавьте музыку с помощью кнопки выше.</li>
+        </ul>
+    </div>
+
+    <script>
+        const audioPlayer = document.getElementById('audio-player');
+        const fileInput = document.getElementById('file-input');
+        const playlistElement = document.getElementById('playlist');
+        const playPauseBtn = document.getElementById('play-pause-btn');
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+
+        let playlist = [];
+        let currentSongIndex = -1;
+        let isPlaying = false;
+
+        // --- Функции для управления плейлистом ---
+
+        function updatePlaylistDisplay() {
+            playlistElement.innerHTML = ''; // Очищаем текущий список
+            if (playlist.length === 0) {
+                playlistElement.innerHTML = '<li class="empty-playlist-message">Добавьте музыку с помощью кнопки выше.</li>';
+                audioPlayer.src = ''; // Очищаем плеер, если плейлист пуст
+                playPauseBtn.textContent = 'Играть';
+                isPlaying = false;
+                return;
+            }
+
+            playlist.forEach((song, index) => {
+                const listItem = document.createElement('li');
+                listItem.textContent = song.name;
+                listItem.dataset.index = index; // Сохраняем индекс для воспроизведения
+
+                const removeBtn = document.createElement('button');
+                removeBtn.textContent = 'Удалить';
+                removeBtn.className = 'remove-btn';
+                removeBtn.onclick = (e) => {
+                    e.stopPropagation(); // Предотвращаем срабатывание клика по пункту плейлиста
+                    removeSong(index);
+                };
+                listItem.appendChild(removeBtn);
+
+                if (index === currentSongIndex) {
+                    listItem.classList.add('active');
+                }
+
+                listItem.addEventListener('click', () => {
+                    playSong(index);
+                });
+                playlistElement.appendChild(listItem);
+            });
+        }
+
+        function addSongs(files) {
+            Array.from(files).forEach(file => {
+                if (file.type.startsWith('audio/')) {
+                    // Создаем временный URL для файла, доступный только в браузере
+                    const url = URL.createObjectURL(file);
+                    playlist.push({ name: file.name, url: url });
+                }
+            });
+            updatePlaylistDisplay();
+            // Если это первые добавленные песни, автоматически начинаем воспроизведение первой
+            if (playlist.length > 0 && currentSongIndex === -1) {
+                playSong(0);
+            }
+        }
+
+        function removeSong(indexToRemove) {
+            // Освобождаем URL перед удалением, чтобы избежать утечек памяти
+            if (playlist[indexToRemove] && playlist[indexToRemove].url) {
+                 URL.revokeObjectURL(playlist[indexToRemove].url);
+            }
+
+            playlist.splice(indexToRemove, 1); // Удаляем песню из массива
+
+            // Корректируем currentSongIndex, если удаленная песня была активной или до неё
+            if (currentSongIndex === indexToRemove) {
+                currentSongIndex = -1; // Сбрасываем, так как текущая песня удалена
+                audioPlayer.src = '';
+                isPlaying = false;
+                playPauseBtn.textContent = 'Играть';
+            } else if (currentSongIndex > indexToRemove) {
+                currentSongIndex--; // Сдвигаем индекс текущей песни, если удаленная была до неё
+            }
+
+            updatePlaylistDisplay(); // Обновляем отображение плейлиста
+
+            // Если текущая песня была удалена, и есть другие песни, запускаем следующую (или первую)
+            if (audioPlayer.src === '' && playlist.length > 0) {
+                playSong(Math.max(0, currentSongIndex)); // Играем текущую или первую, если текущей нет
+            } else if (playlist.length === 0) {
+                audioPlayer.pause();
+                audioPlayer.src = '';
+            }
+        }
+
+        function playSong(index) {
+            if (index >= 0 && index < playlist.length) {
+                currentSongIndex = index;
+                audioPlayer.src = playlist[currentSongIndex].url;
+                audioPlayer.play();
+                isPlaying = true;
+                playPauseBtn.textContent = 'Пауза';
+                updatePlaylistDisplay(); // Обновить активный класс
+            } else {
+                // Если индекс некорректен (например, плейлист пуст)
+                audioPlayer.pause();
+                audioPlayer.src = '';
+                isPlaying = false;
+                playPauseBtn.textContent = 'Играть';
+            }
+        }
+
+        function togglePlayPause() {
+            if (isPlaying) {
+                audioPlayer.pause();
+                playPauseBtn.textContent = 'Играть';
+            } else {
+                // Если плеер пуст, но плейлист нет, пробуем сыграть первую песню
+                if (!audioPlayer.src && playlist.length > 0) {
+                    playSong(0);
+                } else if (audioPlayer.src) { // Если есть что играть
+                    audioPlayer.play();
+                }
+                playPauseBtn.textContent = 'Пауза';
+            }
+            isPlaying = !isPlaying;
+        }
+
+        function playNext() {
+            if (playlist.length > 0) {
+                currentSongIndex = (currentSongIndex + 1) % playlist.length;
+                playSong(currentSongIndex);
+            }
+        }
+
+        function playPrev() {
+            if (playlist.length > 0) {
+                currentSongIndex = (currentSongIndex - 1 + playlist.length) % playlist.length;
+                playSong(currentSongIndex);
+            }
+        }
+
+        // --- Обработчики событий ---
+
+        fileInput.addEventListener('change', (event) => {
+            addSongs(event.target.files);
+            // Очищаем input, чтобы можно было снова добавить те же файлы (если нужно)
+            event.target.value = '';
+        });
+
+        audioPlayer.addEventListener('ended', () => {
+            playNext(); // Автоматически переключаться на следующую песню
+        });
+
+        playPauseBtn.addEventListener('click', togglePlayPause);
+        prevBtn.addEventListener('click', playPrev);
+        nextBtn.addEventListener('click', playNext);
+
+        // Инициализация при загрузке страницы
+        updatePlaylistDisplay();
+    </script>
+</body>
+</html>
