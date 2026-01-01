@@ -1,0 +1,619 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Toploardgg</title>
+<link rel="icon" href="icon.png" type="image/png">
+
+<!-- Security Headers -->
+<meta http-equiv="X-Content-Type-Options" content="nosniff">
+<meta http-equiv="X-Frame-Options" content="DENY">
+<meta http-equiv="X-XSS-Protection" content="1; mode=block">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+
+<style>
+/* ===== CSS Variables ===== */
+:root {
+  --max-width: 1200px;
+  --glass-bg: rgba(255,255,255,0.06);
+  --glass-border: rgba(255,255,255,0.18);
+  --text: #e9eef8;
+  --text-muted: rgba(233,238,248,0.7);
+  --accent: #88d0ff;
+}
+
+/* ===== Reset & Base ===== */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+  overflow-x: hidden;
+}
+
+body {
+  font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+  color: var(--text);
+  background: #071328;
+  line-height: 1.6;
+}
+
+/* ===== Background Scene ===== */
+.scene {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.bg {
+  position: absolute;
+  inset: 0;
+  background-image: url('background.png');
+  background-size: cover;
+  background-position: center;
+  filter: blur(8px);
+  opacity: 0.5;
+}
+
+.bg-fallback {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, #0b1220, #1b2330);
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(8,10,14,0.3), rgba(8,10,14,0.7));
+}
+
+/* ===== Container ===== */
+.container {
+  position: relative;
+  z-index: 1;
+  max-width: var(--max-width);
+  margin: 40px auto;
+  padding: 20px;
+  display: grid;
+  grid-template-columns: 1fr 380px;
+  gap: 20px;
+}
+
+/* ===== Card Component ===== */
+.card {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: 16px;
+  padding: 18px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  transition: transform 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+}
+
+/* ===== Header ===== */
+.header {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.profile {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+
+.avatar {
+  width: 90px;
+  height: 90px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 28px;
+  color: var(--text);
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.1);
+}
+
+.title h1 {
+  font-size: 22px;
+  margin-bottom: 4px;
+}
+
+.title p {
+  font-size: 13px;
+  opacity: 0.9;
+  margin-bottom: 10px;
+}
+
+.badges {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.badge {
+  padding: 6px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  border: 1px solid rgba(255,255,255,0.1);
+  background: rgba(255,255,255,0.03);
+  transition: transform 0.2s ease;
+  cursor: default;
+}
+
+.badge:hover {
+  transform: translateY(-2px);
+}
+
+/* ===== Main Content ===== */
+.main {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.section-title h2 {
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.paragraph {
+  color: var(--text);
+  opacity: 0.95;
+}
+
+/* ===== Skills ===== */
+.skills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.skill {
+  padding: 8px 12px;
+  border-radius: 10px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.06);
+  font-size: 13px;
+  transition: transform 0.2s ease;
+  cursor: default;
+}
+
+.skill:hover {
+  transform: translateY(-2px);
+}
+
+/* ===== Projects Grid ===== */
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.project {
+  padding: 16px;
+  border-radius: 12px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.1);
+  transition: transform 0.2s ease;
+  cursor: pointer;
+}
+
+.project:hover {
+  transform: translateY(-3px);
+}
+
+.project-title {
+  font-weight: 700;
+  font-size: 14px;
+  margin-bottom: 6px;
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.project-desc {
+  font-size: 12px;
+  opacity: 0.9;
+  line-height: 1.5;
+  margin-bottom: 8px;
+  color: var(--text-muted);
+}
+
+.project-meta {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 8px;
+}
+
+.project-tag {
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-size: 11px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+}
+
+.star-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-size: 11px;
+  background: rgba(255,215,0,0.1);
+  border: 1px solid rgba(255,215,0,0.3);
+  color: #ffd700;
+}
+
+/* ===== Aside ===== */
+.aside {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+/* ===== Contact Items ===== */
+.contact-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  border-radius: 10px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.1);
+  transition: transform 0.2s ease;
+  cursor: pointer;
+  margin-bottom: 8px;
+}
+
+.contact-item:hover {
+  transform: translateX(4px);
+}
+
+.contact-icon {
+  font-size: 24px;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  background: rgba(255,255,255,0.04);
+  transition: transform 0.2s ease;
+}
+
+.contact-item:hover .contact-icon {
+  transform: scale(1.1);
+}
+
+.contact-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.contact-label {
+  font-size: 11px;
+  opacity: 0.7;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.contact-value {
+  font-size: 13px;
+  font-weight: 500;
+  word-break: break-all;
+}
+
+/* ===== Buttons ===== */
+.button {
+  padding: 10px 14px;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,0.3);
+  background: transparent;
+  color: var(--text);
+  text-decoration: none;
+  font-weight: 600;
+  transition: transform 0.2s ease;
+  display: inline-block;
+}
+
+.button:hover {
+  transform: translateY(-2px);
+}
+
+/* ===== Links ===== */
+a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+/* ===== Footer ===== */
+.footer {
+  grid-column: 1 / -1;
+  display: flex;
+  justify-content: center;
+  margin-top: 12px;
+  gap: 12px;
+  color: var(--text);
+  opacity: 0.8;
+  font-size: 14px;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 980px) {
+  .container {
+    grid-template-columns: 1fr;
+    padding: 15px;
+  }
+  
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .projects-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .avatar {
+    width: 70px;
+    height: 70px;
+    font-size: 24px;
+  }
+}
+</style>
+</head>
+
+<body>
+<!-- Background Scene -->
+<div class="scene">
+  <div class="bg" id="bg"></div>
+  <div class="bg-fallback" id="bgFallback"></div>
+  <div class="overlay"></div>
+</div>
+
+<!-- Main Container -->
+<div class="container">
+  
+  <!-- Header Card -->
+  <div class="header card">
+    <div class="profile">
+      <div class="avatar">S</div>
+      <div class="title">
+        <h1>Stanislav</h1>
+        <p>Python Developer · Designer · Athlete</p>
+        <div class="badges">
+          <div class="badge">Python</div>
+          <div class="badge">JavaScript</div>
+          <div class="badge">HTML/CSS</div>
+          <div class="badge">Backend</div>
+          <div class="badge">Frontend</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <main class="main">
+    
+    <!-- About Section -->
+    <section class="card" id="about">
+      <div class="section-title"><h2>About Me</h2></div>
+      <div class="paragraph">
+        I build thoughtful software with Python, focusing on backend systems, and clean integrations. I blend technical work with design sense to create maintainable, useful tools. I train regularly and stay physically active. I value consistency, simplicity, and elegant problem solving.
+      </div>
+      <div class="paragraph" style="margin-top:12px">
+        I program a lot in Python and maintain an active lifestyle through regular training. I create open-source projects, contribute to the community, and constantly learn new technologies. Always open to interesting collaborations and challenging projects.
+      </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section class="card" id="projects">
+      <div class="section-title"><h2>Projects</h2></div>
+      <div class="paragraph">Selected experiments and tools. Click to view on GitHub.</div>
+      <div class="projects-grid">
+        
+        <a href="https://github.com/toploardgg/Suggestion-bot" target="_blank" rel="noopener noreferrer" style="text-decoration:none;color:inherit">
+          <div class="project">
+            <div class="project-title">
+              <span>📨</span> Suggestion-bot
+              <div class="star-badge">⭐ Public</div>
+            </div>
+            <div class="project-desc">
+              Bot for sending ideas, suggestions, and feedback directly to the creator in a simple and anonymous way.
+            </div>
+            <div class="project-meta">
+              <div class="project-tag">Python</div>
+              <div class="project-tag">Telegram Bot</div>
+              <div class="project-tag">MIT License</div>
+            </div>
+          </div>
+        </a>
+        
+        <a href="https://github.com/toploardgg/hacker-rain" target="_blank" rel="noopener noreferrer" style="text-decoration:none;color:inherit">
+          <div class="project">
+            <div class="project-title">
+              <span>💻</span> hacker-rain
+              <div class="star-badge">⭐ Public</div>
+            </div>
+            <div class="project-desc">
+              Matrix movie hacker rain that opens in fullscreen (Borderless Window) with 0s and 1s (binary code).
+            </div>
+            <div class="project-meta">
+              <div class="project-tag">Python</div>
+              <div class="project-tag">Pygame</div>
+              <div class="project-tag">MIT License</div>
+            </div>
+          </div>
+        </a>
+        
+        <a href="https://github.com/toploardgg/toploardgg.github.io" target="_blank" rel="noopener noreferrer" style="text-decoration:none;color:inherit">
+          <div class="project">
+            <div class="project-title">
+              <span>🌐</span> Toploardgg
+              <div class="star-badge">⭐ Public</div>
+            </div>
+            <div class="project-desc">
+              Modern, interactive portfolio website with glassmorphism design and smooth animations. Fully responsive and optimized.
+            </div>
+            <div class="project-meta">
+              <div class="project-tag">HTML/CSS/JS</div>
+              <div class="project-tag">Design</div>
+            </div>
+          </div>
+        </a>
+        
+        <div class="project" style="opacity:0.6">
+          <div class="project-title">
+            <span>🚀</span> More Projects Coming
+          </div>
+          <div class="project-desc">
+            Working on new open-source tools and experiments. Stay tuned for updates!
+          </div>
+          <div class="project-meta">
+            <div class="project-tag">In Development</div>
+          </div>
+        </div>
+        
+      </div>
+      <div style="margin-top:12px">
+        <a class="button" href="https://github.com/toploardgg" target="_blank" rel="noopener noreferrer">View All on GitHub</a>
+      </div>
+    </section>
+
+    <!-- Support Section -->
+    <section class="card" id="support">
+      <div class="section-title"><h2>Support My Work</h2></div>
+      <div class="paragraph">
+        Support my work via PayPal or GitHub sponsors. Donations help me maintain and create new projects. Every contribution is greatly appreciated!
+      </div>
+      <div style="margin-top:12px;display:flex;gap:10px;flex-wrap:wrap">
+        <a class="button" href="https://www.paypal.com/donate/?hosted_button_id=4SMQQCUXN8HQE" target="_blank" rel="noopener noreferrer">Donate via PayPal</a>
+        <a class="button" href="https://github.com/toploardgg" target="_blank" rel="noopener noreferrer">Sponsor on GitHub</a>
+      </div>
+    </section>
+    
+  </main>
+
+  <!-- Sidebar -->
+  <aside class="aside">
+    
+    <!-- Professional Profile Card -->
+    <div class="card">
+      <div class="section-title"><h2>Professional Profile</h2></div>
+      <div class="paragraph">
+        Experienced with Python development, scripting, API integration, and full-stack web development. Comfortable with debugging, tooling, and iterative design. Open to collaborations on backend, frontend, and design-focused projects.
+      </div>
+      <div class="skills">
+        <div class="skill">Python</div>
+        <div class="skill">JavaScript</div>
+        <div class="skill">APIs</div>
+        <div class="skill">HTML/CSS</div>
+        <div class="skill">Backend</div>
+        <div class="skill">Frontend</div>
+        <div class="skill">Design</div>
+      </div>
+    </div>
+    
+    <!-- Contacts Card -->
+    <div class="card">
+      <h3 style="margin-bottom:14px;font-size:16px">Contacts</h3>
+      <div>
+        
+        <a href="mailto:topstasikgg@gmail.com" rel="noopener noreferrer" style="text-decoration:none;color:inherit">
+          <div class="contact-item">
+            <div class="contact-icon">📧</div>
+            <div class="contact-info">
+              <div class="contact-label">Email</div>
+              <div class="contact-value">topstasikgg@gmail.com</div>
+            </div>
+          </div>
+        </a>
+        
+        <a href="https://t.me/messagemrloard" target="_blank" rel="noopener noreferrer" style="text-decoration:none;color:inherit">
+          <div class="contact-item">
+            <div class="contact-icon">✈️</div>
+            <div class="contact-info">
+              <div class="contact-label">Telegram</div>
+              <div class="contact-value">@messagemrloard</div>
+            </div>
+          </div>
+        </a>
+        
+        <a href="https://github.com/toploardgg" target="_blank" rel="noopener noreferrer" style="text-decoration:none;color:inherit">
+          <div class="contact-item">
+            <div class="contact-icon">💻</div>
+            <div class="contact-info">
+              <div class="contact-label">GitHub</div>
+              <div class="contact-value">@toploardgg</div>
+            </div>
+          </div>
+        </a>
+        
+        <a href="https://www.paypal.com/donate/?hosted_button_id=4SMQQCUXN8HQE" target="_blank" rel="noopener noreferrer" style="text-decoration:none;color:inherit">
+          <div class="contact-item">
+            <div class="contact-icon">💳</div>
+            <div class="contact-info">
+              <div class="contact-label">PayPal</div>
+              <div class="contact-value">Donate</div>
+            </div>
+          </div>
+        </a>
+        
+      </div>
+    </div>
+    
+  </aside>
+
+  <!-- Footer -->
+  <div class="footer">
+    © 2025 Stanislav · 
+    <a href="https://github.com/toploardgg" target="_blank" rel="noopener noreferrer">GitHub</a>
+  </div>
+  
+</div>
+
+<!-- Scripts -->
+<script>
+(function() {
+  'use strict';
+  
+  // Background image loader
+  const bg = document.getElementById('bg');
+  const bgFallback = document.getElementById('bgFallback');
+  const img = new Image();
+  
+  img.src = 'background.png';
+  
+  img.onload = function() {
+    bg.style.display = 'block';
+    bgFallback.style.display = 'none';
+  };
+  
+  img.onerror = function() {
+    bg.style.display = 'none';
+    bgFallback.style.display = 'block';
+  };
+})();
+</script>
+
+</body>
+</html>
