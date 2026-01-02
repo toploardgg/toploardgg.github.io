@@ -1,0 +1,33 @@
+# robots.txt for https://toploardgg.github.io/
+
+# Allow all search engines
+User-agent: *
+Allow: /
+
+# Disallow crawling of these files/folders (if any)
+# Disallow: /private/
+# Disallow: /drafts/
+
+# Crawl-delay (optional, helps prevent server overload)
+# Crawl-delay: 1
+
+# Sitemap location
+Sitemap: https://toploardgg.github.io/sitemap.xml
+
+# Specific rules for different bots (optional)
+
+# Google
+User-agent: Googlebot
+Allow: /
+
+# Bing
+User-agent: Bingbot
+Allow: /
+
+# Yandex
+User-agent: Yandex
+Allow: /
+
+# Block bad bots (optional)
+# User-agent: BadBot
+# Disallow: /
