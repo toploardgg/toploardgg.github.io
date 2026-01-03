@@ -147,7 +147,6 @@ body.has-fixed-tabs {
   color: #e9eef8;
   font-weight: 600;
   cursor: pointer;
-  backdrop-filter: blur(5px);
   position: relative;
   z-index: 2002;
 }
@@ -208,8 +207,6 @@ body.has-fixed-tabs {
   font-size: 14px;
   outline: none;
   box-sizing: border-box;
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
 }
 
 .search-popover input:focus {
@@ -770,3 +767,4 @@ a {
     max-width: 250px;
     height: 250px;
   }
+
