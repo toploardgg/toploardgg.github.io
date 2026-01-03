@@ -140,7 +140,6 @@ body.has-fixed-tabs {
     right: 0;
     bottom: 0;
     inset: 0;
-    z-index: 2000;
     animation: fadeIn 0.2s ease;
     pointer-events: auto;
   }
