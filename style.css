@@ -41,16 +41,12 @@ body.has-fixed-tabs {
 .tabs {
   position: fixed;
   top: 0;
-  left: 0;
-  right: 0;
+  left: 20px;
+  right: 20px;
   z-index: 1000;
-  justify-content: center;
   display: flex;
-  gap: 10px;
   justify-content: center;
   padding: 10px;
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
 }
 
 .tabs-inner {
@@ -85,6 +81,10 @@ body.has-fixed-tabs {
   transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
 }
 
+.tab-button.active:hover {
+  transform: translateY(-2px);
+}
+
 .tab-button-active {
   padding: 10px 14px;
   border-radius: 10px;
@@ -97,6 +97,10 @@ body.has-fixed-tabs {
 }
 
 .tab-button:hover {
+  transform: translateY(-2px);
+}
+
+.tab-button-active:hover {
   transform: translateY(-2px);
 }
 
@@ -267,7 +271,7 @@ mark.search-highlight {
 .overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgba(70,70,70,0.3), rgba(70,70,70,0.3));
+  background: linear-gradient(180deg, rgba(70, 70, 70, 0.3), rgba(70, 70, 70, 0.7));
   z-index: 2;
 }
 
