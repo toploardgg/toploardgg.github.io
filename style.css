@@ -142,17 +142,17 @@ body.has-fixed-tabs {
     inset: 0;
     background: rgba(0, 0, 0, 0.6);
     z-index: 2000;
-    backdrop-filter: blur(2px);
+    backdrop-filter: blur(4px); /* Немного увеличил для лучшего эффекта, но не перебор */
     animation: fadeIn 0.2s ease;
     pointer-events: auto;
   }
 
-  /* Показываем поповеры и поднимаем их ПОВЕРХ overlay */
+  /* Активные поповеры на мобильных — поверх всего, чёткие */
   .func-wrapper.active .popover,
   .func-wrapper.active .search-popover,
   .func-wrapper.active .info-popover {
     display: block !important;
-    z-index: 2001 !important; /* Главное исправление — выше overlay */
+    z-index: 2001 !important; /* Выше overlay */
     position: absolute;
     top: calc(100% + 8px);
     right: 0;
@@ -161,12 +161,12 @@ body.has-fixed-tabs {
     padding: 16px;
     border-radius: 16px;
     
-    background: rgba(29, 29, 29, 0.85); /* Чуть плотнее фон, чтобы текст был читаемым */
-    backdrop-filter: blur(25px);
-    -webkit-backdrop-filter: blur(25px);
+    background: rgba(29, 29, 29, 0.95); /* Плотный тёмный фон — текст 100% чёткий */
+    backdrop-filter: blur(20px); /* Стеклянный эффект над размытым фоном */
+    -webkit-backdrop-filter: blur(20px);
 
     border: 1px solid rgba(255, 255, 255, 0.25);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.6);
   }
 }
 
@@ -180,7 +180,7 @@ body.has-fixed-tabs {
   cursor: pointer;
   backdrop-filter: blur(5px);
   position: relative;
-  z-index: 2002; /* Кнопки всегда сверху всего */
+  z-index: 2002;
 }
 
 .func-button:hover {
@@ -188,20 +188,23 @@ body.has-fixed-tabs {
   background: rgba(255,255,255,0.08);
 }
 
-.popover {
+.popover,
+.search-popover,
+.info-popover {
   position: absolute;
   top: calc(100% + 8px);
   right: 0;
   width: 300px;
+  max-width: 90vw;
   padding: 16px;
   border-radius: 16px;
-  background: rgba(29, 29, 29, 0.568);
-  backdrop-filter: blur(8px);
+  background: rgba(29, 29, 29, 0.95);
+  backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border: 1px solid rgba(255,255,255,0.25);
   box-shadow: 0 10px 30px rgba(0,0,0,0.6);
   display: none;
-  z-index: 2000;
+  z-index: 2001;
   color: #e9eef8;
 }
 
@@ -225,15 +228,6 @@ body.has-fixed-tabs {
 .info-popover {
   width: 240px;
   max-width: 90vw;
-}
-
-.search-popover,
-.info-popover {
-  display: none;
-  z-index: 2000;
-  color: #fff;
-  box-sizing: border-box;
-  overflow: hidden;
 }
 
 .search-popover input {
@@ -261,17 +255,9 @@ mark.search-highlight {
   border-radius: 4px;
 }
 
-/* Анимация появления фона */
 @keyframes fadeIn {
   from { opacity: 0; }
   to { opacity: 1; }
-}
-
-/* Hover-эффект на десктопе */
-@media (min-width: 769px) {
-  .func-wrapper:hover .popover {
-    display: block;
-  }
 }
 
 .scene {
