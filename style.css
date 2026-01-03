@@ -131,22 +131,6 @@ body.has-fixed-tabs {
   display: inline-block;
 }
 
-@media (max-width: 768px) {
-  .func-wrapper.active::before {
-    content: '';
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.6);
-    z-index: 2000;
-    backdrop-filter: blur(4px); /* Немного увеличил для лучшего эффекта, но не перебор */
-    animation: fadeIn 0.2s ease;
-    pointer-events: auto;
-  }
-
   /* Активные поповеры на мобильных — поверх всего, чёткие */
   .func-wrapper.active .popover,
   .func-wrapper.active .search-popover,
