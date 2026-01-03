@@ -157,23 +157,15 @@ body.has-fixed-tabs {
 }
 
 /* Общие стили поповера — чёткий текст, без размытия содержимого */
-.popover,
-.search-popover,
-.info-popover {
-  position: absolute;
-  top: calc(100% + 8px);
-  right: 0;
-  width: 300px;
-  max-width: 90vw;
-  padding: 16px;
-  border-radius: 16px;
-  background: rgb(29, 29, 29); /* Полностью непрозрачный тёмный фон */
-  border: 1px solid rgba(255, 255, 255, 0.25);
-  box-shadow: 0 10px 30px rgba(0,0,0,0.6);
-  display: none;
-  z-index: 2001;
-  color: #e9eef8;
+@media (hover: hover) and (pointer: fine) {
+  .func-wrapper:hover .popover,
+  .func-wrapper:hover .search-popover,
+  .func-wrapper:hover .info-popover {
+    display: block !important;
+    z-index: 2001 !important;
+  }
 }
+
 
 .info-popover p, .info-popover h3, .search-popover h3 {
   color: #ffffff;
@@ -767,4 +759,5 @@ a {
     max-width: 250px;
     height: 250px;
   }
+
 
