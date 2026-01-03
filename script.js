@@ -72,14 +72,15 @@
 
   // --- 4. Функциональные окна (Поиск/Инфо) ---
   const funcWrappers = document.querySelectorAll('.func-wrapper');
+  const isMobile = window.innerWidth <= 768; // Определяем мобильное устройство по ширине экрана
 
   funcWrappers.forEach(wrapper => {
     const input = wrapper.querySelector('#search-input');
     const btn = wrapper.querySelector('.func-button');
     const popover = wrapper.querySelector('.popover, .search-popover, .info-popover');
 
-    // Фокус для ПК при наведении
-    if (window.innerWidth > 768) {
+    // Фокус на ПК при наведении (hover)
+    if (!isMobile) {
       wrapper.addEventListener('mouseenter', () => {
         if (input) setTimeout(() => input.focus(), 300);
       });
@@ -88,49 +89,39 @@
       });
     }
 
-    // Логика клика (Открыть/Закрыть)
-    if (btn) {
+    // Логика клика ТОЛЬКО на мобильных
+    if (isMobile && btn) {
       btn.addEventListener('click', (e) => {
         e.preventDefault();
         e.stopPropagation();
-        
-        const isActive = wrapper.classList.contains('active');
 
-        // Закрываем все другие окна
-        funcWrappers.forEach(other => other.classList.remove('active'));
+        const wasActive = wrapper.classList.contains('active');
 
-        // Переключаем текущее
-        if (!isActive) {
+        // Закрываем ВСЕ окна
+        funcWrappers.forEach(w => w.classList.remove('active'));
+
+        // Если до клика окно было закрыто — открываем его
+        if (!wasActive) {
           wrapper.classList.add('active');
           if (input) setTimeout(() => input.focus(), 100);
-        } else {
-          wrapper.classList.remove('active');
-          if (input) input.blur();
         }
       });
     }
 
-    // Остановка всплытия клика внутри окна (чтобы не закрывалось при вводе текста)
+    // Предотвращаем закрытие при клике внутри поповера (важно для ввода и ссылок внутри)
     if (popover) {
-      popover.addEventListener('click', (e) => e.stopPropagation());
+      popover.addEventListener('click', (e) => {
+        e.stopPropagation();
+      });
     }
   });
 
-  // УМНОЕ ЗАКРЫТИЕ (Блокировка ссылок при активном окне)
-  document.addEventListener('click', (e) => {
-    const activeWrapper = document.querySelector('.func-wrapper.active');
-    if (activeWrapper) {
-      // Если клик был вне активного окна
-      if (!activeWrapper.contains(e.target)) {
-        // Если это была ссылка — отменяем переход
-        if (e.target.closest('a')) {
-          e.preventDefault();
-        }
-        // Закрываем окно
-        activeWrapper.classList.remove('active');
-      }
-    }
-  }, true); // true активирует стадию перехвата
+  // Закрытие при клике вне окна ТОЛЬКО на мобильных (работает с затемнённым фоном-overlay)
+  if (isMobile) {
+    document.addEventListener('click', () => {
+      funcWrappers.forEach(w => w.classList.remove('active'));
+    });
+  }
 
   // --- 5. Поиск с подсветкой ---
   function escapeRegExp(string) {
@@ -148,10 +139,18 @@
   function highlightSearch(term) {
     clearHighlight();
     if (!term.trim()) return;
+
     const regex = new RegExp(`(${escapeRegExp(term.trim())})`, 'gi');
-    const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, {
-      acceptNode: node => ['SCRIPT', 'STYLE', 'HEADER', 'BUTTON', 'INPUT'].includes(node.parentNode.tagName) ? NodeFilter.FILTER_REJECT : NodeFilter.FILTER_ACCEPT
-    });
+    const walker = document.createTreeWalker(
+      document.body,
+      NodeFilter.SHOW_TEXT,
+      {
+        acceptNode: node => 
+          ['SCRIPT', 'STYLE', 'HEADER', 'BUTTON', 'INPUT', 'MARK'].includes(node.parentNode.tagName) 
+            ? NodeFilter.FILTER_REJECT 
+            : NodeFilter.FILTER_ACCEPT
+      }
+    );
 
     const textNodes = [];
     let node;
@@ -161,7 +160,9 @@
       if (regex.test(textNode.nodeValue)) {
         const tempDiv = document.createElement('div');
         tempDiv.innerHTML = textNode.nodeValue.replace(regex, '<mark class="search-highlight">$1</mark>');
-        while (tempDiv.firstChild) textNode.parentNode.insertBefore(tempDiv.firstChild, textNode);
+        while (tempDiv.firstChild) {
+          textNode.parentNode.insertBefore(tempDiv.firstChild, textNode);
+        }
         textNode.parentNode.removeChild(textNode);
       }
     });
@@ -170,6 +171,11 @@
   const searchInput = document.getElementById('search-input');
   if (searchInput) {
     searchInput.addEventListener('input', (e) => highlightSearch(e.target.value));
+    
+    // Опционально: очистка подсветки при очистке поля
+    searchInput.addEventListener('blur', () => {
+      if (!searchInput.value.trim()) clearHighlight();
+    });
   }
 
 })();
