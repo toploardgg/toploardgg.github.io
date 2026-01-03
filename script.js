@@ -22,17 +22,26 @@
     });
   });
 
-  // --- Background loading ---
+  // --- Background loading (works for all pages) ---
   window.addEventListener('load', function() {
     const bg = document.getElementById('bg');
     const bgFallback = document.getElementById('bgFallback');
+    
+    // Determine correct path to background based on nesting level
+    const currentPath = window.location.pathname;
+    let bgPath = 'background.png';
+    
+    // If we're in a subfolder (Photos or Projects)
+    if (currentPath.includes('/Photos/') || currentPath.includes('/Projects/')) {
+      bgPath = '../background.png';
+    }
+    
     const img = new Image();
-
-    img.src = 'background.png';
+    img.src = bgPath;
 
     img.onload = function() {
       if (bg) {
-        bg.style.backgroundImage = `url('background.png')`;
+        bg.style.backgroundImage = `url('${bgPath}')`;
         bg.style.opacity = '0.5';
       }
       if (bgFallback) {
@@ -46,41 +55,111 @@
     };
   });
 
-// --- Tabs ---
-const tabButtons = document.querySelectorAll('.tab-button');
-  const currentPath = window.location.pathname.split('/').pop(); // текущий файл
+  // --- Smart Tab Navigation ---
+  const tabButtons = document.querySelectorAll('.tab-button, .tab-button-active');
+  
+  // Get base path for the project (for GitHub Pages this will be /toploardgg/)
+  const getBasePath = () => {
+    const path = window.location.pathname;
+    const parts = path.split('/').filter(Boolean);
+    
+    // For GitHub Pages, take the first part as base
+    if (parts.length > 0 && !parts[0].includes('.html')) {
+      return '/' + parts[0] + '/';
+    }
+    return '/';
+  };
+  
+  const basePath = getBasePath();
+  
+  // Determine current page
+  const getCurrentPage = () => {
+    const path = window.location.pathname;
+    if (path.includes('/Photos/')) return 'photos';
+    if (path.includes('/Projects/')) return 'projects';
+    return 'home';
+  };
+  
+  const currentPage = getCurrentPage();
 
-tabButtons.forEach(button => {
-    let target = button.getAttribute('data-url');
-    if (!target) return;
+  tabButtons.forEach(button => {
+    const dataUrl = button.getAttribute('data-url');
+    if (!dataUrl) return;
 
-    if (target.startsWith('/')) target = target.slice(1);
+    // Determine which tab this is
+    let targetPage = 'home';
+    if (dataUrl.includes('Photos')) targetPage = 'photos';
+    else if (dataUrl.includes('Projects')) targetPage = 'projects';
 
-    // переход по клику
-    button.addEventListener('click', () => {
-      const resolved = new URL(target, window.location.href);
-      window.location.href = resolved.href;
+    // Remove active class from all buttons first
+    button.classList.remove('active');
+    
+    // Highlight active tab
+    if (targetPage === currentPage) {
+      button.classList.add('active');
+    }
+
+    button.addEventListener('click', (e) => {
+      e.preventDefault();
+      
+      // If already on this page — do nothing
+      if (targetPage === currentPage) return;
+
+      // Build correct path depending on where we are now
+      let targetPath;
+      
+      if (currentPage === 'home') {
+        // From home page
+        targetPath = basePath + dataUrl;
+      } else {
+        // From subfolder - go up one level, then to target folder
+        if (targetPage === 'home') {
+          targetPath = basePath + 'index.html';
+        } else {
+          targetPath = basePath + dataUrl;
+        }
+      }
+      
+      // Clean double slashes
+      targetPath = targetPath.replace(/\/+/g, '/');
+      
+      window.location.href = targetPath;
     });
   });
 
-  // --- Func wrappers ---
+  // --- Functional windows (Search/Info) ---
   const funcWrappers = document.querySelectorAll('.func-wrapper');
 
   funcWrappers.forEach(wrapper => {
-    const button = wrapper.querySelector('.func-button');
-    if (!button) return;
-
-    button.addEventListener('click', (e) => {
-      e.stopPropagation();
-      wrapper.classList.toggle('active');
+    const input = wrapper.querySelector('#search-input');
+    
+    // Autofocus on hover
+    wrapper.addEventListener('mouseenter', () => {
+      if (input) {
+        setTimeout(() => input.focus(), 300);
+      }
     });
+
+    wrapper.addEventListener('mouseleave', () => {
+      if (input) input.blur();
+    });
+
+    // Click for mobile devices
+    const btn = wrapper.querySelector('.func-button');
+    if (btn) {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        funcWrappers.forEach(other => {
+          if (other !== wrapper) other.classList.remove('active');
+        });
+        wrapper.classList.toggle('active');
+      });
+    }
   });
 
   document.addEventListener('click', () => {
-    funcWrappers.forEach(wrapper => {
-      wrapper.classList.remove('active');
-    });
-});
+    funcWrappers.forEach(w => w.classList.remove('active'));
+  });
 
   // --- Search with highlight ---
   function escapeRegExp(string) {
@@ -106,7 +185,7 @@ tabButtons.forEach(button => {
       NodeFilter.SHOW_TEXT,
       {
         acceptNode: node => {
-          const excludeTags = ['SCRIPT', 'STYLE', 'HEADER'];
+          const excludeTags = ['SCRIPT', 'STYLE', 'HEADER', 'BUTTON', 'INPUT'];
           if (excludeTags.includes(node.parentNode.tagName)) {
             return NodeFilter.FILTER_REJECT;
           }

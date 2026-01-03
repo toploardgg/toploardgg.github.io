@@ -105,11 +105,43 @@ body.has-fixed-tabs {
   padding-top: 70px;
 }
 
-@media (max-width: 980px) {
+@media (max-width: 768px) {
   .tabs {
-    border-radius: 12px;
-    padding: 8px;
+    top: 0;
+    right: 0;
+    left: 0;
+    width: 100%;
+    border-radius: 0;
+    padding: 8px 4px;
   }
+
+  .tabs-inner {
+    justify-content: space-between;
+    gap: 6px;
+  }
+
+  .main-tabs {
+    flex: 1;
+    gap: 6px;
+  }
+
+  .tab-button {
+    flex: 1;
+    text-align: center;
+    padding: 8px 10px;
+    font-size: 13px;
+    min-width: 0;
+  }
+
+  .func-button {
+    padding: 8px 12px;
+    font-size: 16px;
+  }
+
+  .func-wrapper {
+    flex-shrink: 0;
+  }
+}
   .has-fixed-tabs {
     padding-top: 64px;
   }
@@ -226,7 +258,6 @@ body.has-fixed-tabs {
 
   border: 1px solid rgba(255, 255, 255, 0.25);
   box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-  transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
 
   display: none;
   z-index: 2000;
@@ -236,9 +267,6 @@ body.has-fixed-tabs {
 /* Состояние, когда поповер активен */
 .func-wrapper.active .search-popover,
 .func-wrapper.active .info-popover {
-  opacity: 1;
-  visibility: visible;
-  transform: translateY(0);
   display: block;
 }
 
@@ -285,12 +313,16 @@ mark.search-highlight {
 .bg {
   position: absolute;
   inset: 0;
+  /* Добавляем путь к картинке */
+  background-image: url('background.png'); 
   background-size: cover;
   background-position: center;
   filter: blur(8px);
-  opacity: 0;
+  /* Меняем 0 на 1, чтобы картинка стала видимой */
+  opacity: 1; 
   transition: opacity 0.5s ease;
   display: block;
+  z-index: 1;
 }
 
 .bg-fallback {
@@ -298,12 +330,14 @@ mark.search-highlight {
   inset: 0;
   background: linear-gradient(135deg, #161616, #fff6f6);
   display: block;
+  z-index: 0;
 }
 
 .overlay {
   position: absolute;
   inset: 0;
   background: linear-gradient(180deg, rgba(8,10,14,0.3), rgba(8,10,14,0.7));
+  z-index: 2; /* Слой затемнения поверх картинки */
 }
 
 .container {
