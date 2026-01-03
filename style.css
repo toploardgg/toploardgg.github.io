@@ -131,6 +131,21 @@ body.has-fixed-tabs {
   display: inline-block;
 }
 
+@media (max-width: 768px) {
+  .func-wrapper.active::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 2000;
+    animation: fadeIn 0.2s ease;
+    pointer-events: auto;
+  }
+
   /* Активные поповеры на мобильных — поверх всего, чёткие */
   .func-wrapper.active .popover,
   .func-wrapper.active .search-popover,
@@ -158,7 +173,6 @@ body.has-fixed-tabs {
   color: #e9eef8;
   font-weight: 600;
   cursor: pointer;
-  backdrop-filter: blur(5px);
   position: relative;
   z-index: 2002;
 }
@@ -178,7 +192,7 @@ body.has-fixed-tabs {
   max-width: 90vw;
   padding: 16px;
   border-radius: 16px;
-  background: rgba(29, 29, 29, 0.40);
+  background: rgba(29, 29, 29, 0.116);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border: 1px solid rgba(255,255,255,0.25);
@@ -212,7 +226,7 @@ body.has-fixed-tabs {
 
 .func-wrapper.active .search-popover,
 .func-wrapper.active .info-popover {
-  display: block;
+  display: none;
 }
 .search-popover input {
   width: 100%;
@@ -276,7 +290,7 @@ mark.search-highlight {
 .overlay {
   position: absolute;
   inset: 0;
-  background: rgba(0, 0, 0, 0.40);
+  background: rgba(0, 0, 0, 0.178);
   backdrop-filter: blur(15px);
   -webkit-backdrop-filter: blur(15px);
   z-index: 2;
@@ -741,7 +755,6 @@ a {
     bottom: 0;
     background: rgba(0, 0, 0, 0.6);
     z-index: 3000;
-    backdrop-filter: blur(2px);
     animation: fadeIn 0.2s ease;
     pointer-events: none;
   }
