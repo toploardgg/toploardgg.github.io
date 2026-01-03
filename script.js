@@ -6,27 +6,20 @@
 
   hoverElements.forEach(el => {
     el.addEventListener('mouseenter', () => {
-      if (el.classList.contains('card')) {
-        el.classList.add('hover-lift-card');
-      } else if (el.classList.contains('project')) {
-        el.classList.add('hover-lift-project');
-      } else if (el.classList.contains('badge') || el.classList.contains('skill') || el.classList.contains('button')) {
-        el.classList.add('hover-lift-small');
-      } else if (el.classList.contains('contact-item')) {
-        el.classList.add('hover-lift-contact');
-      }
+      if (el.classList.contains('card')) el.classList.add('hover-lift-card');
+      else if (el.classList.contains('project')) el.classList.add('hover-lift-project');
+      else if (el.classList.contains('badge') || el.classList.contains('skill') || el.classList.contains('button')) el.classList.add('hover-lift-small');
+      else if (el.classList.contains('contact-item')) el.classList.add('hover-lift-contact');
     });
-
     el.addEventListener('mouseleave', () => {
       el.classList.remove('hover-lift-card', 'hover-lift-project', 'hover-lift-small', 'hover-lift-contact');
     });
   });
 
-  // --- 2. Загрузка фона (исправление путей и прозрачности) ---
+  // --- 2. Загрузка фона ---
   window.addEventListener('load', function() {
     const bg = document.getElementById('bg');
     const bgFallback = document.getElementById('bgFallback');
-    
     const currentPath = window.location.pathname;
     let bgPath = 'background.png';
     
@@ -36,33 +29,27 @@
     
     const img = new Image();
     img.src = bgPath;
-
     img.onload = function() {
       if (bg) {
         bg.style.backgroundImage = `url('${bgPath}')`;
-        bg.style.opacity = '0.8'; // Сделали чуть ярче по вашему коду
+        bg.style.opacity = '0.8';
       }
-      if (bgFallback) {
-        bgFallback.style.display = 'none';
-      }
+      if (bgFallback) bgFallback.style.display = 'none';
     };
-
     img.onerror = function() {
       if (bg) bg.style.display = 'none';
       if (bgFallback) bgFallback.style.display = 'block';
     };
   });
 
-  // --- 3. Навигация по табам (Smart Tab Navigation) ---
+  // --- 3. Навигация по табам ---
   const tabButtons = document.querySelectorAll('.tab-button, .tab-button-active');
-  
   const getCurrentPage = () => {
     const path = window.location.pathname;
     if (path.includes('/Photos/')) return 'photos';
     if (path.includes('/Projects/')) return 'projects';
     return 'home';
   };
-  
   const currentPage = getCurrentPage();
 
   tabButtons.forEach(button => {
@@ -73,36 +60,25 @@
     if (dataUrl.includes('Photos')) targetPage = 'photos';
     else if (dataUrl.includes('Projects')) targetPage = 'projects';
 
-    button.classList.remove('active');
-    if (targetPage === currentPage) {
-      button.classList.add('active');
-    }
+    button.classList.toggle('active', targetPage === currentPage);
 
     button.addEventListener('click', (e) => {
       e.preventDefault();
       if (targetPage === currentPage) return;
-
-      let targetPath;
-      if (currentPage === 'home') {
-        targetPath = dataUrl;
-      } else if (targetPage === 'home') {
-        targetPath = '../index.html';
-      } else {
-        targetPath = '../' + dataUrl;
-      }
+      let targetPath = (currentPage === 'home') ? dataUrl : (targetPage === 'home' ? '../index.html' : '../' + dataUrl);
       window.location.href = targetPath;
     });
   });
 
   // --- 4. Функциональные окна (Поиск/Инфо) ---
-  // ИСПРАВЛЕНО: Теперь закрываются при повторном клике
   const funcWrappers = document.querySelectorAll('.func-wrapper');
 
   funcWrappers.forEach(wrapper => {
     const input = wrapper.querySelector('#search-input');
     const btn = wrapper.querySelector('.func-button');
-    
-    // Фокус для ПК
+    const popover = wrapper.querySelector('.popover, .search-popover, .info-popover');
+
+    // Фокус для ПК при наведении
     if (window.innerWidth > 768) {
       wrapper.addEventListener('mouseenter', () => {
         if (input) setTimeout(() => input.focus(), 300);
@@ -112,43 +88,49 @@
       });
     }
 
-    // Клик для мобильных и ПК (переключение)
+    // Логика клика (Открыть/Закрыть)
     if (btn) {
       btn.addEventListener('click', (e) => {
         e.preventDefault();
-        e.stopPropagation(); // Важно, чтобы не срабатывал клик по документу
+        e.stopPropagation();
         
         const isActive = wrapper.classList.contains('active');
 
-        // Закрываем все остальные окна
-        funcWrappers.forEach(other => {
-          if (other !== wrapper) other.classList.remove('active');
-        });
+        // Закрываем все другие окна
+        funcWrappers.forEach(other => other.classList.remove('active'));
 
-        // Переключаем текущее (если было открыто — закроется, если нет — откроется)
-        if (isActive) {
-          wrapper.classList.remove('active');
-          if (input) input.blur();
-        } else {
+        // Переключаем текущее
+        if (!isActive) {
           wrapper.classList.add('active');
           if (input) setTimeout(() => input.focus(), 100);
+        } else {
+          wrapper.classList.remove('active');
+          if (input) input.blur();
         }
       });
     }
 
-    // Запрещаем закрытие при клике ВНУТРИ самого окна (например, на текст или инпут)
-    const popover = wrapper.querySelector('.popover, .search-popover, .info-popover');
+    // Остановка всплытия клика внутри окна (чтобы не закрывалось при вводе текста)
     if (popover) {
-      popover.addEventListener('click', (e) => {
-        e.stopPropagation();
-      });
+      popover.addEventListener('click', (e) => e.stopPropagation());
     }
   });
 
-  // Закрытие окон при клике в любое место экрана (вне кнопок)
-  document.addEventListener('click', () => {
-    funcWrappers.forEach(w => w.classList.remove('active'));
-  });
+  // УМНОЕ ЗАКРЫТИЕ (Блокировка ссылок при активном окне)
+  document.addEventListener('click', (e) => {
+    const activeWrapper = document.querySelector('.func-wrapper.active');
+    if (activeWrapper) {
+      // Если клик был вне активного окна
+      if (!activeWrapper.contains(e.target)) {
+        // Если это была ссылка — отменяем переход
+        if (e.target.closest('a')) {
+          e.preventDefault();
+        }
+        // Закрываем окно
+        activeWrapper.classList.remove('active');
+      }
+    }
+  }, true); // true активирует стадию перехвата
 
   // --- 5. Поиск с подсветкой ---
   function escapeRegExp(string) {
@@ -166,36 +148,20 @@
   function highlightSearch(term) {
     clearHighlight();
     if (!term.trim()) return;
-
     const regex = new RegExp(`(${escapeRegExp(term.trim())})`, 'gi');
-
-    const walker = document.createTreeWalker(
-      document.body,
-      NodeFilter.SHOW_TEXT,
-      {
-        acceptNode: node => {
-          const excludeTags = ['SCRIPT', 'STYLE', 'HEADER', 'BUTTON', 'INPUT'];
-          if (excludeTags.includes(node.parentNode.tagName)) {
-            return NodeFilter.FILTER_REJECT;
-          }
-          return NodeFilter.FILTER_ACCEPT;
-        }
-      }
-    );
+    const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, {
+      acceptNode: node => ['SCRIPT', 'STYLE', 'HEADER', 'BUTTON', 'INPUT'].includes(node.parentNode.tagName) ? NodeFilter.FILTER_REJECT : NodeFilter.FILTER_ACCEPT
+    });
 
     const textNodes = [];
     let node;
-    while ((node = walker.nextNode())) {
-      textNodes.push(node);
-    }
+    while (node = walker.nextNode()) textNodes.push(node);
 
     textNodes.forEach(textNode => {
       if (regex.test(textNode.nodeValue)) {
         const tempDiv = document.createElement('div');
         tempDiv.innerHTML = textNode.nodeValue.replace(regex, '<mark class="search-highlight">$1</mark>');
-        while (tempDiv.firstChild) {
-          textNode.parentNode.insertBefore(tempDiv.firstChild, textNode);
-        }
+        while (tempDiv.firstChild) textNode.parentNode.insertBefore(tempDiv.firstChild, textNode);
         textNode.parentNode.removeChild(textNode);
       }
     });
@@ -203,9 +169,7 @@
 
   const searchInput = document.getElementById('search-input');
   if (searchInput) {
-    searchInput.addEventListener('input', (e) => {
-      highlightSearch(e.target.value);
-    });
+    searchInput.addEventListener('input', (e) => highlightSearch(e.target.value));
   }
 
 })();
