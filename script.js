@@ -73,22 +73,39 @@
   // --- 4. Функциональные окна (Поиск/Инфо) ---
   const funcWrappers = document.querySelectorAll('.func-wrapper');
 
+  // Функция определения мобильного устройства
+  const isMobile = () => window.innerWidth <= 768;
+
   funcWrappers.forEach(wrapper => {
     const input = wrapper.querySelector('#search-input');
     const btn = wrapper.querySelector('.func-button');
     const popover = wrapper.querySelector('.popover, .search-popover, .info-popover');
+
+    // Автофокус при наведении на ПК (только для поиска)
+    wrapper.addEventListener('mouseenter', () => {
+      if (input && !isMobile()) {
+        setTimeout(() => input.focus(), 300);
+      }
+    });
+
+    wrapper.addEventListener('mouseleave', () => {
+      if (input && !isMobile()) {
+        input.blur();
+      }
+    });
 
     if (btn) {
       btn.addEventListener('click', (e) => {
         e.preventDefault();
         e.stopPropagation();
 
+        // УБРАЛ ограничение — теперь клик работает и на ПК, и на мобильных
         const wasActive = wrapper.classList.contains('active');
 
         // Закрываем все окна
         funcWrappers.forEach(w => w.classList.remove('active'));
 
-        // Если было закрыто — открываем это
+        // Если было закрыто — открываем это (повторный клик = закрытие)
         if (!wasActive) {
           wrapper.classList.add('active');
           if (input) setTimeout(() => input.focus(), 100);
@@ -101,11 +118,26 @@
         e.stopPropagation();
       });
     }
+
+    // StopPropagation для всех поповеров
+    const popovers = wrapper.querySelectorAll('.popover, .search-popover, .info-popover');
+    popovers.forEach(p => {
+      p.addEventListener('click', (e) => {
+        e.stopPropagation();
+      });
+    });
   });
 
-  // Закрытие при клике вне окна — работает ВЕЗДЕ
+  // Закрытие при клике вне окна
   document.addEventListener('click', () => {
     funcWrappers.forEach(w => w.classList.remove('active'));
+  });
+
+  // При ресайзе на десктоп — убираем .active (на всякий случай)
+  window.addEventListener('resize', () => {
+    if (!isMobile()) {
+      funcWrappers.forEach(w => w.classList.remove('active'));
+    }
   });
 
   // --- 5. Поиск с подсветкой ---
