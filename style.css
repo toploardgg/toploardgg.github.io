@@ -224,10 +224,6 @@ body.has-fixed-tabs {
   max-width: 90vw;
 }
 
-.func-wrapper.active .search-popover,
-.func-wrapper.active .info-popover {
-  display: none;
-}
 .search-popover input {
   width: 100%;
   padding: 10px 12px;
