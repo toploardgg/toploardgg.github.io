@@ -1,7 +1,7 @@
 (function() {
   'use strict';
 
-  // --- Hover lifting animations ---
+  // --- 1. Анимации при наведении (Hover lifting) ---
   const hoverElements = document.querySelectorAll('.card, .project, .badge, .skill, .contact-item, .button');
 
   hoverElements.forEach(el => {
@@ -22,16 +22,14 @@
     });
   });
 
-  // --- Background loading (works for all pages) ---
+  // --- 2. Загрузка фона (исправление путей и прозрачности) ---
   window.addEventListener('load', function() {
     const bg = document.getElementById('bg');
     const bgFallback = document.getElementById('bgFallback');
     
-    // Determine correct path to background based on nesting level
     const currentPath = window.location.pathname;
     let bgPath = 'background.png';
     
-    // If we're in a subfolder (Photos or Projects)
     if (currentPath.includes('/Photos/') || currentPath.includes('/Projects/')) {
       bgPath = '../background.png';
     }
@@ -42,7 +40,7 @@
     img.onload = function() {
       if (bg) {
         bg.style.backgroundImage = `url('${bgPath}')`;
-        bg.style.opacity = '0.5';
+        bg.style.opacity = '0.8'; // Сделали чуть ярче по вашему коду
       }
       if (bgFallback) {
         bgFallback.style.display = 'none';
@@ -55,10 +53,9 @@
     };
   });
 
-  // --- Tab Navigation ---
+  // --- 3. Навигация по табам (Smart Tab Navigation) ---
   const tabButtons = document.querySelectorAll('.tab-button, .tab-button-active');
   
-  // Determine current page
   const getCurrentPage = () => {
     const path = window.location.pathname;
     if (path.includes('/Photos/')) return 'photos';
@@ -72,97 +69,88 @@
     const dataUrl = button.getAttribute('data-url');
     if (!dataUrl) return;
 
-    // Determine which tab this is based on data-url
     let targetPage = 'home';
     if (dataUrl.includes('Photos')) targetPage = 'photos';
     else if (dataUrl.includes('Projects')) targetPage = 'projects';
 
-    // Highlight active tab
+    button.classList.remove('active');
     if (targetPage === currentPage) {
       button.classList.add('active');
-    } else {
-      button.classList.remove('active');
     }
 
-    // Navigation on click
     button.addEventListener('click', (e) => {
       e.preventDefault();
-      
-      // Don't navigate if already on this page
       if (targetPage === currentPage) return;
 
-      // Build path based on current location
       let targetPath;
-      
       if (currentPage === 'home') {
-        // From home: go directly to subfolder
-        targetPath = dataUrl; // "Photos/index.html"
+        targetPath = dataUrl;
       } else if (targetPage === 'home') {
-        // From subfolder to home: go up one level
         targetPath = '../index.html';
       } else {
-        // From subfolder to subfolder: go up then to target
-        targetPath = '../' + dataUrl; // "../Photos/index.html"
+        targetPath = '../' + dataUrl;
       }
-      
       window.location.href = targetPath;
     });
   });
 
-  // --- Functional windows (Search/Info) ---
+  // --- 4. Функциональные окна (Поиск/Инфо) ---
+  // ИСПРАВЛЕНО: Теперь закрываются при повторном клике
   const funcWrappers = document.querySelectorAll('.func-wrapper');
 
   funcWrappers.forEach(wrapper => {
     const input = wrapper.querySelector('#search-input');
+    const btn = wrapper.querySelector('.func-button');
     
-    // Autofocus on hover (only for desktop)
+    // Фокус для ПК
     if (window.innerWidth > 768) {
       wrapper.addEventListener('mouseenter', () => {
-        if (input) {
-          setTimeout(() => input.focus(), 300);
-        }
+        if (input) setTimeout(() => input.focus(), 300);
       });
-
       wrapper.addEventListener('mouseleave', () => {
         if (input) input.blur();
       });
     }
 
-    // Click handler
-    const btn = wrapper.querySelector('.func-button');
+    // Клик для мобильных и ПК (переключение)
     if (btn) {
       btn.addEventListener('click', (e) => {
-        e.stopPropagation();
+        e.preventDefault();
+        e.stopPropagation(); // Важно, чтобы не срабатывал клик по документу
         
-        // Close other popovers
+        const isActive = wrapper.classList.contains('active');
+
+        // Закрываем все остальные окна
         funcWrappers.forEach(other => {
           if (other !== wrapper) other.classList.remove('active');
         });
-        
-        // Toggle current popover
-        const wasActive = wrapper.classList.contains('active');
-        wrapper.classList.toggle('active');
-        
-        // Focus search input when opened
-        if (!wasActive && input && wrapper.classList.contains('active')) {
-          setTimeout(() => input.focus(), 100);
+
+        // Переключаем текущее (если было открыто — закроется, если нет — откроется)
+        if (isActive) {
+          wrapper.classList.remove('active');
+          if (input) input.blur();
+        } else {
+          wrapper.classList.add('active');
+          if (input) setTimeout(() => input.focus(), 100);
         }
+      });
+    }
+
+    // Запрещаем закрытие при клике ВНУТРИ самого окна (например, на текст или инпут)
+    const popover = wrapper.querySelector('.popover, .search-popover, .info-popover');
+    if (popover) {
+      popover.addEventListener('click', (e) => {
+        e.stopPropagation();
       });
     }
   });
 
-  // Close popovers when clicking outside
-  document.addEventListener('click', (e) => {
-    const clickedInside = Array.from(funcWrappers).some(wrapper => {
-      return wrapper.contains(e.target);
-    });
-    
-    if (!clickedInside) {
-      funcWrappers.forEach(w => w.classList.remove('active'));
-    }
+  // Закрытие окон при клике в любое место экрана (вне кнопок)
+  document.addEventListener('click', () => {
+    funcWrappers.forEach(w => w.classList.remove('active'));
   });
 
-  // --- Search with highlight ---
+  // --- 5. Поиск с подсветкой ---
   function escapeRegExp(string) {
     return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
   }
