@@ -146,6 +146,14 @@ body.has-fixed-tabs {
     pointer-events: auto;
   }
 
+  @media (max-width: 768px) {
+    .func-wrapper:hover .popover,
+    .func-wrapper:hover .search-popover,
+    .func-wrapper:hover .info-popover {
+      display: none !important;
+    }
+  }
+
   /* Активные поповеры на мобильных — поверх всего, чёткие */
   .func-wrapper.active .popover,
   .func-wrapper.active .search-popover,
