@@ -191,7 +191,7 @@ body.has-fixed-tabs {
   padding: 16px;
   border-radius: 16px;
   
-  background: rgba(29, 29, 29, 0.95);
+  background: rgba(29, 29, 29, 0);
   backdrop-filter: blur(25px);
   -webkit-backdrop-filter: blur(25px);
 
@@ -224,6 +224,10 @@ body.has-fixed-tabs {
   -webkit-backdrop-filter: blur(10px);
 }
 
+.func-wrapper.active::before {
+  pointer-events: none;
+}
+
 .search-popover input:focus {
   border-color: #ffffff;
   background: rgba(255,255,255,0.15);
@@ -254,7 +258,7 @@ mark.search-highlight {
   background-size: cover;
   background-position: center;
   filter: blur(4px);
-  opacity: 1; 
+  opacity: 0.8; 
   transition: opacity 0.5s ease;
   display: block;
   z-index: 1;
@@ -770,4 +774,3 @@ a {
     height: 250px;
   }
 }
-
