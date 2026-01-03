@@ -4,7 +4,7 @@
   --glass-border: rgba(255,255,255,0.18);
   --text: #e9eef8;
   --text-muted: rgba(233,238,248,0.7);
-  --accent: #88d0ff;
+  --accent: #414141;
 }
 
 * {
@@ -49,10 +49,8 @@ body.has-fixed-tabs {
   gap: 10px;
   justify-content: center;
   padding: 10px;
-  background: rgba(255, 255, 255, 0);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .tabs-inner {
