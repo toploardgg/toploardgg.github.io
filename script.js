@@ -55,7 +55,7 @@
     };
   });
 
-  // --- Smart Tab Navigation ---
+  // --- Tab Navigation ---
   const tabButtons = document.querySelectorAll('.tab-button, .tab-button-active');
   
   // Determine current page
@@ -72,38 +72,37 @@
     const dataUrl = button.getAttribute('data-url');
     if (!dataUrl) return;
 
-    // Determine which tab this is
+    // Determine which tab this is based on data-url
     let targetPage = 'home';
     if (dataUrl.includes('Photos')) targetPage = 'photos';
     else if (dataUrl.includes('Projects')) targetPage = 'projects';
 
-    // Remove active class from all buttons first
-    button.classList.remove('active');
-    
     // Highlight active tab
     if (targetPage === currentPage) {
       button.classList.add('active');
+    } else {
+      button.classList.remove('active');
     }
 
+    // Navigation on click
     button.addEventListener('click', (e) => {
       e.preventDefault();
       
-      // If already on this page — do nothing
+      // Don't navigate if already on this page
       if (targetPage === currentPage) return;
 
-      // Build correct path depending on where we are now
+      // Build path based on current location
       let targetPath;
       
       if (currentPage === 'home') {
-        // From home page - direct to subfolder
-        targetPath = dataUrl;
+        // From home: go directly to subfolder
+        targetPath = dataUrl; // "Photos/index.html"
       } else if (targetPage === 'home') {
-        // From subfolder to home - go up one level
+        // From subfolder to home: go up one level
         targetPath = '../index.html';
       } else {
-        // From one subfolder to another - go up then into target
-        // Projects -> Photos: ../Photos/index.html
-        targetPath = '../' + dataUrl;
+        // From subfolder to subfolder: go up then to target
+        targetPath = '../' + dataUrl; // "../Photos/index.html"
       }
       
       window.location.href = targetPath;
@@ -129,7 +128,7 @@
       });
     }
 
-    // Click for mobile devices
+    // Click handler
     const btn = wrapper.querySelector('.func-button');
     if (btn) {
       btn.addEventListener('click', (e) => {
@@ -144,28 +143,21 @@
         const wasActive = wrapper.classList.contains('active');
         wrapper.classList.toggle('active');
         
-        // Focus search input on mobile when opened
+        // Focus search input when opened
         if (!wasActive && input && wrapper.classList.contains('active')) {
           setTimeout(() => input.focus(), 100);
         }
       });
     }
-
-    // Click on pseudo-element (backdrop) to close on mobile
-    wrapper.addEventListener('click', (e) => {
-      if (e.target === wrapper && wrapper.classList.contains('active')) {
-        wrapper.classList.remove('active');
-      }
-    });
   });
 
   // Close popovers when clicking outside
   document.addEventListener('click', (e) => {
-    const clickedInsidePopover = Array.from(funcWrappers).some(wrapper => {
+    const clickedInside = Array.from(funcWrappers).some(wrapper => {
       return wrapper.contains(e.target);
     });
     
-    if (!clickedInsidePopover) {
+    if (!clickedInside) {
       funcWrappers.forEach(w => w.classList.remove('active'));
     }
   });
