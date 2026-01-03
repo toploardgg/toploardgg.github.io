@@ -22,7 +22,7 @@ html {
 body {
   font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
   color: var(--text);
-  background: #ffffff;
+  background: #ffffff00;
   line-height: 1.6;
   height: 100%;
   overflow-x: hidden;
@@ -770,3 +770,4 @@ a {
     height: 250px;
   }
 }
+
