@@ -131,43 +131,12 @@ body.has-fixed-tabs {
   display: inline-block;
 }
 
-@media (max-width: 768px) {
-  .func-wrapper.active::before {
-    content: '';
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.6);
-    z-index: 2000;
-    backdrop-filter: blur(4px); /* Немного увеличил для лучшего эффекта, но не перебор */
-    animation: fadeIn 0.2s ease;
-    pointer-events: auto;
-  }
-
-  /* Активные поповеры на мобильных — поверх всего, чёткие */
-  .func-wrapper.active .popover,
-  .func-wrapper.active .search-popover,
-  .func-wrapper.active .info-popover {
-    display: block !important;
-    z-index: 2001 !important; /* Выше overlay */
-    position: absolute;
-    top: calc(100% + 8px);
-    right: 0;
-    width: 300px;
-    max-width: 90vw;
-    padding: 16px;
-    border-radius: 16px;
-    
-    background: rgba(29, 29, 29, 0.95); /* Плотный тёмный фон — текст 100% чёткий */
-    backdrop-filter: blur(20px); /* Стеклянный эффект над размытым фоном */
-    -webkit-backdrop-filter: blur(20px);
-
-    border: 1px solid rgba(255, 255, 255, 0.25);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.6);
-  }
+/* Показ поповера при .active — работает ВЕЗДЕ (телефон + ПК) */
+.func-wrapper.active .popover,
+.func-wrapper.active .search-popover,
+.func-wrapper.active .info-popover {
+  display: block !important;
+  z-index: 2001 !important;
 }
 
 .func-button {
@@ -188,6 +157,7 @@ body.has-fixed-tabs {
   background: rgba(255,255,255,0.08);
 }
 
+/* Общие стили поповера — чёткий текст, без размытия содержимого */
 .popover,
 .search-popover,
 .info-popover {
@@ -198,10 +168,8 @@ body.has-fixed-tabs {
   max-width: 90vw;
   padding: 16px;
   border-radius: 16px;
-  background: rgba(29, 29, 29, 0.95);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255,255,255,0.25);
+  background: rgb(29, 29, 29); /* Полностью непрозрачный тёмный фон */
+  border: 1px solid rgba(255, 255, 255, 0.25);
   box-shadow: 0 10px 30px rgba(0,0,0,0.6);
   display: none;
   z-index: 2001;
@@ -253,11 +221,6 @@ mark.search-highlight {
   background: rgba(136, 208, 255, 0.4);
   padding: 1px 4px;
   border-radius: 4px;
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
 }
 
 .scene {
