@@ -70,7 +70,7 @@
     });
   });
 
-  // --- 4. Функциональные окна (Поиск/Инфо) — ИСПРАВЛЕННАЯ ВЕРСИЯ ---
+  // --- 4. Функциональные окна (Поиск/Инфо) ---
   const funcWrappers = document.querySelectorAll('.func-wrapper');
 
   funcWrappers.forEach(wrapper => {
@@ -78,7 +78,6 @@
     const btn = wrapper.querySelector('.func-button');
     const popover = wrapper.querySelector('.popover, .search-popover, .info-popover');
 
-    // Клик по кнопке — работает ВЕЗДЕ (мобильные + ПК)
     if (btn) {
       btn.addEventListener('click', (e) => {
         e.preventDefault();
@@ -97,7 +96,6 @@
       });
     }
 
-    // Не закрываем при клике внутри поповера
     if (popover) {
       popover.addEventListener('click', (e) => {
         e.stopPropagation();
