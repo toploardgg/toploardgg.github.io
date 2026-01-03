@@ -58,20 +58,6 @@
   // --- Smart Tab Navigation ---
   const tabButtons = document.querySelectorAll('.tab-button, .tab-button-active');
   
-  // Get base path for the project (for GitHub Pages this will be /toploardgg/)
-  const getBasePath = () => {
-    const path = window.location.pathname;
-    const parts = path.split('/').filter(Boolean);
-    
-    // For GitHub Pages, take the first part as base
-    if (parts.length > 0 && !parts[0].includes('.html')) {
-      return '/' + parts[0] + '/';
-    }
-    return '/';
-  };
-  
-  const basePath = getBasePath();
-  
   // Determine current page
   const getCurrentPage = () => {
     const path = window.location.pathname;
@@ -109,42 +95,20 @@
       let targetPath;
       
       if (currentPage === 'home') {
-        // From home page - go directly to target
-        targetPath = basePath + dataUrl;
-        targetPath = targetPath.replace(/\/+/g, '/');
-        window.location.href = targetPath;
+        // From home page - direct to subfolder
+        targetPath = dataUrl;
+      } else if (targetPage === 'home') {
+        // From subfolder to home - go up one level
+        targetPath = '../index.html';
       } else {
-        // From subfolder - ALWAYS go through home page first
-        if (targetPage === 'home') {
-          // Going to home - direct
-          targetPath = basePath + 'index.html';
-          targetPath = targetPath.replace(/\/+/g, '/');
-          window.location.href = targetPath;
-        } else {
-          // Going to another folder - go through home first
-          // Step 1: Navigate to home
-          const homePath = (basePath + 'index.html').replace(/\/+/g, '/');
-          
-          // Store target in sessionStorage to navigate after home loads
-          sessionStorage.setItem('pendingNavigation', dataUrl);
-          
-          window.location.href = homePath;
-        }
+        // From one subfolder to another - go up then into target
+        // Projects -> Photos: ../Photos/index.html
+        targetPath = '../' + dataUrl;
       }
+      
+      window.location.href = targetPath;
     });
   });
-
-  // Check if there's a pending navigation after arriving at home
-  if (currentPage === 'home' && sessionStorage.getItem('pendingNavigation')) {
-    const targetUrl = sessionStorage.getItem('pendingNavigation');
-    sessionStorage.removeItem('pendingNavigation');
-    
-    // Small delay to ensure home page is visible briefly
-    setTimeout(() => {
-      const finalPath = (basePath + targetUrl).replace(/\/+/g, '/');
-      window.location.href = finalPath;
-    }, 100);
-  }
 
   // --- Functional windows (Search/Info) ---
   const funcWrappers = document.querySelectorAll('.func-wrapper');
