@@ -157,7 +157,9 @@ body.has-fixed-tabs {
     max-width: 90vw;
     padding: 16px;
     border-radius: 16px;
-
+    background: rgba(29, 29, 29, 0.116);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
     border: 1px solid rgba(255, 255, 255, 0.25);
     box-shadow: 0 10px 30px rgba(0,0,0,0.6);
   }
@@ -771,3 +773,4 @@ a {
     max-width: 250px;
     height: 250px;
   }
+
