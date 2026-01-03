@@ -207,6 +207,17 @@ body.has-fixed-tabs {
 
 .search-popover,
 .info-popover {
+
+
+  display: none;
+  z-index: 2000;
+  color: #fff;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.func-wrapper.active .search-popover,
+.func-wrapper.active .info-popover {
   position: absolute;
   top: calc(100% + 8px);
   right: 0;
@@ -221,17 +232,6 @@ body.has-fixed-tabs {
 
   border: 1px solid rgba(255, 255, 255, 0.25);
   box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-
-  display: none;
-  z-index: 2000;
-  color: #fff;
-  box-sizing: border-box;
-  overflow: hidden;
-}
-
-.func-wrapper.active .search-popover,
-.func-wrapper.active .info-popover {
-  display: block;
 }
 
 .search-popover input {
@@ -249,7 +249,7 @@ body.has-fixed-tabs {
 }
 
 .func-wrapper.active::before {
-  pointer-events: none;
+  pointer-events: block;
 }
 
 .search-popover input:focus {
@@ -265,7 +265,8 @@ mark.search-highlight {
 
 .func-wrapper:hover .popover,
 .func-wrapper.active .popover {
-  display: block;
+  display: none;
+  
 }
 
 .scene {
