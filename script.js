@@ -109,23 +109,42 @@
       let targetPath;
       
       if (currentPage === 'home') {
-        // From home page
+        // From home page - go directly to target
         targetPath = basePath + dataUrl;
+        targetPath = targetPath.replace(/\/+/g, '/');
+        window.location.href = targetPath;
       } else {
-        // From subfolder - go up one level, then to target folder
+        // From subfolder - ALWAYS go through home page first
         if (targetPage === 'home') {
+          // Going to home - direct
           targetPath = basePath + 'index.html';
+          targetPath = targetPath.replace(/\/+/g, '/');
+          window.location.href = targetPath;
         } else {
-          targetPath = basePath + dataUrl;
+          // Going to another folder - go through home first
+          // Step 1: Navigate to home
+          const homePath = (basePath + 'index.html').replace(/\/+/g, '/');
+          
+          // Store target in sessionStorage to navigate after home loads
+          sessionStorage.setItem('pendingNavigation', dataUrl);
+          
+          window.location.href = homePath;
         }
       }
-      
-      // Clean double slashes
-      targetPath = targetPath.replace(/\/+/g, '/');
-      
-      window.location.href = targetPath;
     });
   });
+
+  // Check if there's a pending navigation after arriving at home
+  if (currentPage === 'home' && sessionStorage.getItem('pendingNavigation')) {
+    const targetUrl = sessionStorage.getItem('pendingNavigation');
+    sessionStorage.removeItem('pendingNavigation');
+    
+    // Small delay to ensure home page is visible briefly
+    setTimeout(() => {
+      const finalPath = (basePath + targetUrl).replace(/\/+/g, '/');
+      window.location.href = finalPath;
+    }, 100);
+  }
 
   // --- Functional windows (Search/Info) ---
   const funcWrappers = document.querySelectorAll('.func-wrapper');
@@ -133,32 +152,58 @@
   funcWrappers.forEach(wrapper => {
     const input = wrapper.querySelector('#search-input');
     
-    // Autofocus on hover
-    wrapper.addEventListener('mouseenter', () => {
-      if (input) {
-        setTimeout(() => input.focus(), 300);
-      }
-    });
+    // Autofocus on hover (only for desktop)
+    if (window.innerWidth > 768) {
+      wrapper.addEventListener('mouseenter', () => {
+        if (input) {
+          setTimeout(() => input.focus(), 300);
+        }
+      });
 
-    wrapper.addEventListener('mouseleave', () => {
-      if (input) input.blur();
-    });
+      wrapper.addEventListener('mouseleave', () => {
+        if (input) input.blur();
+      });
+    }
 
     // Click for mobile devices
     const btn = wrapper.querySelector('.func-button');
     if (btn) {
       btn.addEventListener('click', (e) => {
         e.stopPropagation();
+        
+        // Close other popovers
         funcWrappers.forEach(other => {
           if (other !== wrapper) other.classList.remove('active');
         });
+        
+        // Toggle current popover
+        const wasActive = wrapper.classList.contains('active');
         wrapper.classList.toggle('active');
+        
+        // Focus search input on mobile when opened
+        if (!wasActive && input && wrapper.classList.contains('active')) {
+          setTimeout(() => input.focus(), 100);
+        }
       });
     }
+
+    // Click on pseudo-element (backdrop) to close on mobile
+    wrapper.addEventListener('click', (e) => {
+      if (e.target === wrapper && wrapper.classList.contains('active')) {
+        wrapper.classList.remove('active');
+      }
+    });
   });
 
-  document.addEventListener('click', () => {
-    funcWrappers.forEach(w => w.classList.remove('active'));
+  // Close popovers when clicking outside
+  document.addEventListener('click', (e) => {
+    const clickedInsidePopover = Array.from(funcWrappers).some(wrapper => {
+      return wrapper.contains(e.target);
+    });
+    
+    if (!clickedInsidePopover) {
+      funcWrappers.forEach(w => w.classList.remove('active'));
+    }
   });
 
   // --- Search with highlight ---
