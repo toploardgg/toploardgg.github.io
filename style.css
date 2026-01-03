@@ -276,8 +276,8 @@ mark.search-highlight {
   position: absolute;
   inset: 0;
   background: rgba(0, 0, 0, 0.40);
-  backdrop-filter: blur(25px);
-  -webkit-backdrop-filter: blur(25px);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
   z-index: 2;
 }
 
@@ -776,3 +776,4 @@ a {
     height: 250px;
   }
 }
+
