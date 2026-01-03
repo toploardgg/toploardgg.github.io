@@ -147,11 +147,26 @@ body.has-fixed-tabs {
     pointer-events: auto;
   }
 
-  /* Показываем поповеры только в active на мобильных */
+  /* Показываем поповеры и поднимаем их ПОВЕРХ overlay */
   .func-wrapper.active .popover,
   .func-wrapper.active .search-popover,
   .func-wrapper.active .info-popover {
     display: block !important;
+    z-index: 2001 !important; /* Главное исправление — выше overlay */
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+    width: 300px;
+    max-width: 90vw;
+    padding: 16px;
+    border-radius: 16px;
+    
+    background: rgba(29, 29, 29, 0.85); /* Чуть плотнее фон, чтобы текст был читаемым */
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
+
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
   }
 }
 
@@ -165,7 +180,7 @@ body.has-fixed-tabs {
   cursor: pointer;
   backdrop-filter: blur(5px);
   position: relative;
-  z-index: 2002;
+  z-index: 2002; /* Кнопки всегда сверху всего */
 }
 
 .func-button:hover {
@@ -221,25 +236,6 @@ body.has-fixed-tabs {
   overflow: hidden;
 }
 
-.func-wrapper.active .search-popover,
-.func-wrapper.active .info-popover {
-  position: absolute;
-  top: calc(100% + 8px);
-  right: 0;
-  width: 300px;
-  max-width: 90vw;
-  padding: 16px;
-  border-radius: 16px;
-  
-  background: rgba(29, 29, 29, 0);
-  backdrop-filter: blur(25px);
-  -webkit-backdrop-filter: blur(25px);
-
-  border: 1px solid rgba(255, 255, 255, 0.25);
-  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-  display: block; /* явно показываем в active */
-}
-
 .search-popover input {
   width: 100%;
   padding: 10px 12px;
@@ -271,7 +267,7 @@ mark.search-highlight {
   to { opacity: 1; }
 }
 
-/* Опционально: hover-эффект на десктопе (вне мобильного медиа-запроса) */
+/* Hover-эффект на десктопе */
 @media (min-width: 769px) {
   .func-wrapper:hover .popover {
     display: block;
@@ -303,7 +299,7 @@ mark.search-highlight {
   position: absolute;
   inset: 0;
   background: linear-gradient(135deg, #000000, #ffffff);
-  display: none;
+  display: block;
   z-index: 0;
 }
 
