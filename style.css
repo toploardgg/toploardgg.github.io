@@ -146,6 +146,13 @@ body.has-fixed-tabs {
     animation: fadeIn 0.2s ease;
     pointer-events: auto;
   }
+
+  /* Показываем поповеры только в active на мобильных */
+  .func-wrapper.active .popover,
+  .func-wrapper.active .search-popover,
+  .func-wrapper.active .info-popover {
+    display: block !important;
+  }
 }
 
 .func-button {
@@ -207,8 +214,6 @@ body.has-fixed-tabs {
 
 .search-popover,
 .info-popover {
-
-
   display: none;
   z-index: 2000;
   color: #fff;
@@ -232,6 +237,7 @@ body.has-fixed-tabs {
 
   border: 1px solid rgba(255, 255, 255, 0.25);
   box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+  display: block; /* явно показываем в active */
 }
 
 .search-popover input {
@@ -248,10 +254,6 @@ body.has-fixed-tabs {
   -webkit-backdrop-filter: blur(10px);
 }
 
-.func-wrapper.active::before {
-  pointer-events: block;
-}
-
 .search-popover input:focus {
   border-color: #ffffff;
   background: rgba(255,255,255,0.15);
@@ -263,10 +265,17 @@ mark.search-highlight {
   border-radius: 4px;
 }
 
-.func-wrapper:hover .popover,
-.func-wrapper.active .popover {
-  display: none;
-  
+/* Анимация появления фона */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Опционально: hover-эффект на десктопе (вне мобильного медиа-запроса) */
+@media (min-width: 769px) {
+  .func-wrapper:hover .popover {
+    display: block;
+  }
 }
 
 .scene {
