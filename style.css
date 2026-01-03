@@ -17,15 +17,17 @@ html {
   height: 100%;
   overflow-x: hidden;
   scroll-behavior: smooth;
+  background-color: #cacaca; 
 }
 
 body {
   font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
   color: var(--text);
-  background: #ffffff00;
+  background: transparent;
   line-height: 1.6;
   height: 100%;
   overflow-x: hidden;
+  -webkit-tap-highlight-color: transparent;
 }
 
 body.has-fixed-tabs {
@@ -126,6 +128,22 @@ body.has-fixed-tabs {
   display: inline-block;
 }
 
+@media (max-width: 768px) {
+  .func-wrapper.active::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 3000;
+    backdrop-filter: blur(2px);
+    animation: fadeIn 0.2s ease;
+    pointer-events: none;
+  }
+}
+
 .func-button {
   padding: 10px 14px;
   border-radius: 10px;
@@ -135,6 +153,8 @@ body.has-fixed-tabs {
   font-weight: 600;
   cursor: pointer;
   backdrop-filter: blur(5px);
+  position: relative;
+  z-index: 3005;
 }
 
 .func-button:hover {
@@ -290,6 +310,7 @@ mark.search-highlight {
   display: grid;
   grid-template-columns: 1fr 380px;
   gap: 20px;
+  margin-top: 70px;
 }
 
 .card {
@@ -735,6 +756,7 @@ a {
     z-index: 3000;
     backdrop-filter: blur(2px);
     animation: fadeIn 0.2s ease;
+    pointer-events: none;
   }
 
   @keyframes fadeIn {
@@ -750,7 +772,13 @@ a {
   .func-wrapper.active .popover,
   .func-wrapper.active .search-popover,
   .func-wrapper.active .info-popover {
+    position: fixed !important;
+    top: 65px !important;
+    left: 10px !important;
+    right: 10px !important;
+    width: auto !important;
     animation: slideDown 0.3s ease;
+    display: block;
   }
 
   @keyframes slideDown {
@@ -770,10 +798,9 @@ a {
     grid-template-columns: 1fr;
     justify-items: center;
   }
+
   .photos-grid img {
     width: 100%;
     max-width: 250px;
     height: 250px;
   }
-}
-
