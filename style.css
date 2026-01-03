@@ -133,15 +133,7 @@ body.has-fixed-tabs {
 
 @media (max-width: 768px) {
   .func-wrapper.active::before {
-    content: '';
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    inset: 0;
-    animation: fadeIn 0.2s ease;
-    pointer-events: auto;
+
   }
 
   @media (max-width: 768px) {
@@ -745,20 +737,6 @@ a {
   .search-popover input {
     width: 100%;
     box-sizing: border-box;
-  }
-
-  /* Затемнение фона когда поповер открыт */
-  .func-wrapper.active::before {
-    content: '';
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.6);
-    z-index: 3000;
-    animation: fadeIn 0.2s ease;
-    pointer-events: none;
   }
 
   @keyframes fadeIn {
