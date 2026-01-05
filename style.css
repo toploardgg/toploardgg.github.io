@@ -326,6 +326,7 @@ mark.search-highlight {
   display: flex;
   align-items: center;
   gap: 20px;
+  padding-top: calc(20px + env(safe-area-inset-top, 0px));
 }
 
 .profile {
@@ -565,6 +566,7 @@ a {
   color: var(--text);
   opacity: 0.8;
   font-size: 14px;
+  padding-bottom: env(safe-area-inset-bottom, 20px);
 }
 
 .extra-margin {
@@ -782,4 +784,5 @@ a {
     max-width: 250px;
     height: 250px;
   }
+
 
