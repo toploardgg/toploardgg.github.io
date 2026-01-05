@@ -1,787 +1,197 @@
-:root {
-  --max-width: 1200px;
-  --glass-bg: rgba(255,255,255,0.06);
-  --glass-border: rgba(255,255,255,0.18);
-  --text: #e9eef8;
-  --text-muted: rgba(233,238,248,0.7);
-  --accent: #414141;
-}
-
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-html {
-  overflow-x: hidden;
-  scroll-behavior: smooth;
-  background-color: #cacaca; 
-  height: 100%;
-  min-height: 100vh;
-  background-color: #000000;
-}
-
-body {
-  font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
-  color: var(--text);
-  background: transparent;
-  line-height: 1.6;
-  overflow-x: hidden;
-  -webkit-tap-highlight-color: transparent;
-  height: 100%;
-  min-height: 100vh;
-}
-
-body.has-fixed-tabs {
-  padding-top: 70px;
-}
-
-.icon {
-  margin-right: 6px;
-  font-size: 16px;
-  vertical-align: middle; 
-}
-
-.bottom-nav {
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-  background: rgba(255, 255, 255, 0.1); 
-  backdrop-filter: blur(10px); 
-  -webkit-backdrop-filter: blur(10px);
-}
-
-.tabs {
-  position: fixed;
-  top: 0;
-  left: 20px;
-  right: 20px;
-  z-index: 1000;
-  display: flex;
-  justify-content: center;
-  padding: 10px;
-}
-
-.tabs-inner {
-  max-width: var(--max-width);
-  width: 100%;
-  margin: 0 auto;
-  display: flex;
-  gap: 10px;
-  justify-content: center;
-  align-items: center;
-}
-
-.tab-button {
-  padding: 10px 14px;
-  border-radius: 10px;
-  border: 1px solid transparent;
-  background: rgba(255,255,255,0.03);
-  color: var(--text);
-  font-weight: 600;
-  cursor: pointer;
-  transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
-}
-
-.tab-button.active {
-  padding: 10px 14px;
-  border-radius: 10px;
-  border: 1px solid #ffffff;
-  background: rgba(255,255,255,0.1);
-  color: #ffffff;
-  font-weight: 600;
-  cursor: pointer;
-  transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
-}
-
-.tab-button.active:hover {
-  transform: translateY(-2px);
-}
-
-.tab-button-active {
-  padding: 10px 14px;
-  border-radius: 10px;
-  border: 1px solid #ffffff;
-  background: rgba(255,255,255,0.1);
-  color: #ffffff;
-  font-weight: 600;
-  cursor: pointer;
-  transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
-}
-
-.tab-button:hover {
-  transform: translateY(-2px);
-}
-
-.tab-button-active:hover {
-  transform: translateY(-2px);
-}
-
-.has-fixed-tabs {
-  padding-top: 70px;
-}
-
-.tabs-inner {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-  gap: 10px;
-}
-
-.main-tabs {
-  display: flex;
-  gap: 10px;
-}
-
-.func-wrapper {
-  position: relative;
-  display: inline-block;
-}
-
-@media (max-width: 768px) {
-  .func-wrapper.active::before {
-
-  }
-
-  @media (max-width: 768px) {
-    .func-wrapper:hover .popover,
-    .func-wrapper:hover .search-popover,
-    .func-wrapper:hover .info-popover {
-      display: none !important;
-    }
-  }
-
-  /* Активные поповеры на мобильных — поверх всего, чёткие */
-  .func-wrapper.active .popover,
-  .func-wrapper.active .search-popover,
-  .func-wrapper.active .info-popover {
-    display: block !important;
-    z-index: 2001 !important; /* Выше overlay */
-    position: absolute;
-    top: calc(100% + 8px);
-    right: 0;
-    width: 300px;
-    max-width: 90vw;
-    padding: 16px;
-    border-radius: 16px;
-    background: rgba(29, 29, 29, 0.116);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.25);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.6);
-  }
-}
-
-.func-button {
-  padding: 10px 14px;
-  border-radius: 10px;
-  border: 1px solid rgba(255,255,255,0.3);
-  background: rgba(255,255,255,0.05);
-  color: #e9eef8;
-  font-weight: 600;
-  cursor: pointer;
-  position: relative;
-  z-index: 2002;
-}
-
-.func-button:hover {
-  transform: translateY(-2px);
-  background: rgba(255,255,255,0.08);
-}
-
-.popover,
-.search-popover,
-.info-popover {
-  position: absolute;
-  top: calc(100% + 8px);
-  right: 0;
-  width: 300px;
-  max-width: 90vw;
-  padding: 16px;
-  border-radius: 16px;
-  background: rgba(29, 29, 29, 0.116);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255,255,255,0.25);
-  box-shadow: 0 10px 30px rgba(0,0,0,0.6);
-  display: none;
-  z-index: 2001;
-  color: #e9eef8;
-}
-
-.info-popover p, .info-popover h3, .search-popover h3 {
-  color: #ffffff;
-  opacity: 1;
-  word-wrap: break-word;
-  overflow-wrap: break-word;
-}
-
-.left .popover {
-  left: 0;
-  right: auto;
-}
-
-.right .popover {
-  right: 0;
-  left: auto;
-}
-
-.info-popover {
-  width: 240px;
-  max-width: 90vw;
-}
-
-.search-popover input {
-  width: 100%;
-  padding: 10px 12px;
-  border-radius: 10px;
-  border: 1px solid rgba(255,255,255,0.25);
-  background: rgba(255,255,255,0.08);
-  color: #e9eef8;
-  font-size: 14px;
-  outline: none;
-  box-sizing: border-box;
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-}
-
-.search-popover input:focus {
-  border-color: #ffffff;
-  background: rgba(255,255,255,0.15);
-}
-
-mark.search-highlight {
-  background: rgba(136, 208, 255, 0.4);
-  padding: 1px 4px;
-  border-radius: 4px;
-}
-
-.func-wrapper:hover .popover,
-.func-wrapper.active .popover {
-  display: block;
-}
-
-.scene {
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 0;
-}
-
-.bg {
-  position: absolute;
-  inset: 0;
-  background-image: url('background.png'); 
-  background-position: center;
-  background-size: cover;
-  background-attachment: fixed;
-  filter: blur(4px);
-  opacity: 0.8; 
-  transition: opacity 0.5s ease;
-  display: block;
-  z-index: 1;
-}
-
-.bg-fallback {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(135deg, #000000, #ffffff);
-  display: block;
-  z-index: 0;
-}
-
-.overlay {
-  position: absolute;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.178);
-  backdrop-filter: blur(15px);
-  -webkit-backdrop-filter: blur(15px);
-  z-index: 2;
-}
-
-.container {
-  position: relative;
-  z-index: 1;
-  max-width: var(--max-width);
-  margin: 40px auto;
-  padding: 20px;
-  display: grid;
-  grid-template-columns: 1fr 380px;
-  gap: 20px;
-  margin-top: 70px;
-}
-
-.card {
-  background: var(--glass-bg);
-  border: 1px solid var(--glass-border);
-  border-radius: 16px;
-  padding: 18px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-}
-
-.header {
-  grid-column: 1 / -1;
-  display: flex;
-  align-items: center;
-  gap: 20px;
-  padding-top: calc(20px + env(safe-area-inset-top, 0px));
-}
-
-.profile {
-  display: flex;
-  gap: 16px;
-  align-items: center;
-}
-
-.avatar {
-  width: 90px;
-  height: 90px;
-  border-radius: 14px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 700;
-  font-size: 28px;
-  color: var(--text);
-  background: rgba(255,255,255,0.03);
-  border: 1px solid rgba(255,255,255,0.1);
-}
-
-.title h1 {
-  font-size: 22px;
-  margin-bottom: 4px;
-}
-
-.title p {
-  font-size: 13px;
-  opacity: 0.9;
-  margin-bottom: 10px;
-}
-
-.badges {
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
-}
-
-.badge {
-  padding: 6px 10px;
-  border-radius: 20px;
-  font-size: 12px;
-  border: 1px solid rgba(255,255,255,0.1);
-  background: rgba(255,255,255,0.03);
-  cursor: default;
-}
-
-.main {
-  display: flex;
-  flex-direction: column;
-  gap: 18px;
-}
-
-.section-title h2 {
-  font-size: 16px;
-  margin-bottom: 10px;
-}
-
-.paragraph {
-  color: var(--text);
-  opacity: 0.95;
-}
-
-.paragraph-extra-margin {
-  margin-top: 12px;
-}
-
-.skills {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-top: 12px;
-}
-
-.skill {
-  padding: 8px 12px;
-  border-radius: 10px;
-  background: rgba(255,255,255,0.03);
-  border: 1px solid rgba(255,255,255,0.06);
-  font-size: 13px;
-  cursor: default;
-}
-
-.projects-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-auto-rows: 1fr;
-  gap: 12px;
-  margin-top: 12px;
-}
-
-.project {
-  padding: 16px;
-  border-radius: 12px;
-  background: rgba(255,255,255,0.03);
-  border: 1px solid rgba(255,255,255,0.1);
-  cursor: pointer;
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-}
-
-.project-title {
-  font-weight: 700;
-  font-size: 14px;
-  margin-bottom: 6px;
-  color: var(--text);
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  flex-wrap: wrap;
-}
-
-.project-desc {
-  font-size: 12px;
-  opacity: 0.9;
-  line-height: 1.5;
-  margin-bottom: 8px;
-  color: var(--text-muted);
-  flex-grow: 1;
-}
-
-.project-meta {
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
-  margin-top: 8px;
-}
-
-.project-tag {
-  padding: 4px 8px;
-  border-radius: 6px;
-  font-size: 11px;
-  background: rgba(255,255,255,0.04);
-  border: 1px solid rgba(255,255,255,0.08);
-  transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
-  will-change: transform;
-}
-
-.project-tag:hover {
-  transform: translateY(-4px);
-}
-
-.star-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  padding: 4px 8px;
-  border-radius: 6px;
-  font-size: 11px;
-  background: rgba(255,215,0,0.1);
-  border: 1px solid rgba(255,215,0,0.3);
-  color: #ffd700;
-}
-
-.aside {
-  display: flex;
-  flex-direction: column;
-  gap: 18px;
-}
-
-.contact-item {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 12px;
-  border-radius: 10px;
-  background: rgba(255,255,255,0.03);
-  border: 1px solid rgba(255,255,255,0.1);
-  cursor: pointer;
-  margin-bottom: 8px;
-}
-
-.contact-icon {
-  font-size: 24px;
-  width: 40px;
-  height: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 8px;
-  background: rgba(255,255,255,0.04);
-  transition: transform 0.2s ease;
-}
-
-.contact-item:hover .contact-icon {
-  transform: scale(1.1);
-}
-
-.contact-info {
-  flex: 1;
-  min-width: 0;
-}
-
-.contact-label {
-  font-size: 11px;
-  opacity: 0.7;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-}
-
-.contact-value {
-  font-size: 13px;
-  font-weight: 500;
-  word-break: break-all;
-}
-
-.button {
-  padding: 10px 14px;
-  border-radius: 10px;
-  border: 1px solid rgba(255,255,255,0.3);
-  background: transparent;
-  color: var(--text);
-  text-decoration: none;
-  font-weight: 600;
-  display: inline-block;
-}
-
-a {
-  color: var(--accent);
-  text-decoration: none;
-}
-
-.project-link,
-.contact-link {
-  text-decoration: none;
-  color: inherit;
-}
-
-.footer {
-  grid-column: 1 / -1;
-  display: flex;
-  justify-content: center;
-  margin-top: 12px;
-  gap: 12px;
-  color: var(--text);
-  opacity: 0.8;
-  font-size: 14px;
-  padding-bottom: env(safe-area-inset-bottom, 20px);
-}
-
-.extra-margin {
-  margin-top: 12px;
-}
-
-.support-buttons {
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
-}
-
-.contacts-title {
-  margin-bottom: 14px;
-  font-size: 16px;
-}
-
-.card, .project, .badge, .skill, .contact-item, .button {
-  transition: transform 0.2s ease;
-  will-change: transform;
-}
-
-.hover-lift-card {
-  transform: translateY(-4px);
-}
-
-.hover-lift-project {
-  transform: translateY(-4px);
-}
-
-.hover-lift-small {
-  transform: translateY(-2px);
-}
-
-.hover-lift-contact {
-  transform: translateX(4px);
-}
-
-/* Photos Grid */
-.photos-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 5px;
-  padding: 5px;
-  width: 100%;
-}
-
-.photos-grid img {
-  width: 250px;
-  height: 250px;
-  object-fit: cover;
-  border-radius: 16px;
-  background: var(--glass-bg);
-  border: 1px solid var(--glass-border);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-  cursor: pointer;
-  transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-  transform: translateZ(0);
-  will-change: transform;
-}
-
-.photos-grid img:hover {
-  transform: translateY(-5px) scale3d(1.02, 1.02, 1);
-}
-
-.has-fixed-photos-grid {
-  padding-top: 70px;
-}
-
-@media (max-width: 1100px) {
-  .photos-grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-
-@media (max-width: 980px) {
-  .tabs {
-    border-radius: 12px;
-    padding: 8px;
-  }
-  .has-fixed-tabs {
-    padding-top: 64px;
-  }
+<!doctype html>
+<html lang="en">
+<head>
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="theme-color" content="#121212"> ```
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Toploardgg</title>
+<link rel="icon" href="icon.png" type="image/png">
+
+<!-- SEO Meta Tags -->
+<meta name="description" content="Photo gallery showcasing training, lifestyle, and moments from my journey as a developer and athlete.">
+<meta name="keywords" content="Photography, Lifestyle, Training, Developer Life, Athlete">
+<meta name="author" content="Stanislav">
+<meta name="robots" content="index, follow">
+
+<!-- Security Headers -->
+<meta http-equiv="X-Content-Type-Options" content="nosniff">
+<meta http-equiv="X-Frame-Options" content="DENY">
+<meta http-equiv="X-XSS-Protection" content="1; mode=block">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self'; connect-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self';">
+<meta http-equiv="Permissions-Policy" content="geolocation=(), microphone=(), camera=()">
+
+<!-- Canonical URL -->
+<link rel="canonical" href="https://toploardgg.github.io/photos/">
+
+<!-- Stylesheet -->
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="has-fixed-tabs">
+  <div class="tabs">
+    <div class="tabs-inner">
+      <!-- search -->
+      <div class="func-wrapper left">
+        <button class="func-button search-btn" aria-label="Search">🔍</button>
+        <div class="popover search-popover">
+          <h3>Search</h3>
+          <input type="text" id="search-input">
+        </div>
+      </div>
+    
+      <!-- tabs -->
+      <div class="main-tabs">
+        <button class="tab-button-active" data-url="index.html">Home</button>
+        <button class="tab-button" data-url="Photos/index.html">Photos</button>
+        <button class="tab-button" data-url="Projects/index.html">Projects</button>
+      </div>
+    
+      <!-- info -->
+      <div class="func-wrapper right">
+        <button class="func-button info-btn" aria-label="About the site">і</button>
+        <div class="popover info-popover">
+          <h3>About the Site</h3>
+          <p>This is a personal portfolio website.</p>
+          <p>Created by Toploardgg on january 1, 2026.</p>
+          <p>Style — glassmorphism with blur and transparency effects.</p>
+          <p>Built with pure HTML, CSS, and JavaScript.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+<!-- Background Scene -->
+<div class="scene">
+  <div class="bg" id="bg"></div>
+  <div class="bg-fallback" id="bgFallback"></div>
+  <div class="overlay"></div>
+</div>
+<!-- Main Container -->
+<div class="container">
+
+  <!-- Header Card -->
+  <div class="header card">
+    <div class="profile">
+      <div class="avatar">S</div>
+      <div class="title">
+        <h1>Stanislav</h1>
+        <p>Python Developer · Designer · Athlete</p>
+        <div class="badges">
+          <div class="badge">Python</div>
+          <div class="badge">JavaScript</div>
+          <div class="badge">HTML/CSS</div>
+          <div class="badge">Backend</div>
+          <div class="badge">Frontend</div>
+        </div>
+      </div>
+    </div>
+  </div>
   
-  .container {
-    grid-template-columns: 1fr;
-    padding: 15px;
-    margin: 20px auto;
-  }
+  <!-- Main Content -->
+  <main class="main">
+   
+    <!-- About Section -->
+    <section class="card" id="about">
+      <div class="section-title"><h2>About Me</h2></div>
+      <div class="paragraph">
+        I build thoughtful software with Python, focusing on backend systems, and clean integrations. I blend technical work with design sense to create maintainable, useful tools. I train regularly and stay physically active. I value consistency, simplicity, and elegant problem solving.
+      </div>
+      <div class="paragraph" style="margin-top:12px">
+        I program a lot in Python and maintain an active lifestyle through regular training. I create open-source projects, contribute to the community, and constantly learn new technologies. Always open to interesting collaborations and challenging projects.
+      </div>
+    </section>
+    <!-- Support Section -->
+    <section class="card" id="support">
+      <div class="section-title"><h2>Support My Work</h2></div>
+      <div class="paragraph">
+        Support my work via PayPal or GitHub sponsors. Donations help me maintain and create new projects. Every contribution is greatly appreciated!
+      </div>
+      <div style="margin-top:12px;display:flex;gap:10px;flex-wrap:wrap">
+        <a class="button" href="https://www.paypal.com/donate/?hosted_button_id=4SMQQCUXN8HQE" target="_blank" rel="noopener noreferrer">Donate via PayPal</a>
+        <a class="button" href="https://github.com/toploardgg" target="_blank" rel="noopener noreferrer">Sponsor on GitHub</a>
+      </div>
+    </section>
+   
+  </main>
+  <!-- Sidebar -->
+  <aside class="aside">
+   
+    <!-- Professional Profile Card -->
+    <div class="card">
+      <div class="section-title"><h2>Professional Profile</h2></div>
+      <div class="paragraph">
+        Experienced with Python development, scripting, API integration, and full-stack web development. Comfortable with debugging, tooling, and iterative design. Open to collaborations on backend, frontend, and design-focused projects.
+      </div>
+      <div class="skills">
+        <div class="skill">Python</div>
+        <div class="skill">JavaScript</div>
+        <div class="skill">APIs</div>
+        <div class="skill">HTML/CSS</div>
+        <div class="skill">Backend</div>
+        <div class="skill">Frontend</div>
+        <div class="skill">Design</div>
+      </div>
+    </div>
+   
+    <!-- Contacts Card -->
+    <div class="card">
+      <h3 style="margin-bottom:14px;font-size:16px">Contacts</h3>
+      <div>
+       
+        <a href="https://topstasikgg@gmail.com" rel="noopener noreferrer" style="text-decoration:none;color:inherit">
+          <div class="contact-item">
+            <div class="contact-icon">📧</div>
+            <div class="contact-info">
+              <div class="contact-label">Email</div>
+              <div class="contact-value">topstasikgg@gmail.com</div>
+            </div>
+          </div>
+        </a>
+       
+        <a href="https://t.me/messagemrloardbot" target="_blank" rel="noopener noreferrer" style="text-decoration:none;color:inherit">
+          <div class="contact-item">
+            <div class="contact-icon">✈️</div>
+            <div class="contact-info">
+              <div class="contact-label">Telegram</div>
+              <div class="contact-value">@messagemrloardbot</div>
+            </div>
+          </div>
+        </a>
+       
+        <a href="https://github.com/toploardgg" target="_blank" rel="noopener noreferrer" style="text-decoration:none;color:inherit">
+          <div class="contact-item">
+            <div class="contact-icon">💻</div>
+            <div class="contact-info">
+              <div class="contact-label">GitHub</div>
+              <div class="contact-value">@toploardgg</div>
+            </div>
+          </div>
+        </a>
+       
+        <a href="https://www.paypal.com/donate/?hosted_button_id=4SMQQCUXN8HQE" target="_blank" rel="noopener noreferrer" style="text-decoration:none;color:inherit">
+          <div class="contact-item">
+            <div class="contact-icon">💳</div>
+            <div class="contact-info">
+              <div class="contact-label">PayPal</div>
+              <div class="contact-value">Donate</div>
+            
+            </div>
+          </div>
+        </a>
+       
+      </div>
+    </div>
+   
+  </aside>
+  <!-- Footer -->
+  <div class="footer">
+    © 2026 Stanislav ·
+    <a href="https://github.com/toploardgg" target="_blank" rel="noopener noreferrer">GitHub</a>
+  </div>
+ 
+</div>
+<script src="script.js"></script>
+</body>
+</html>
 
-  .header {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .projects-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .avatar {
-    width: 70px;
-    height: 70px;
-    font-size: 24px;
-  }
-
-  .title h1 {
-    font-size: 20px;
-  }
-
-  .title p {
-    font-size: 12px;
-  }
-}
-
-@media (max-width: 850px) {
-  .photos-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (max-width: 768px) {
-  .tabs {
-    top: 0;
-    right: 0;
-    left: 0;
-    width: 100%;
-    border-radius: 0;
-    padding: 8px 4px;
-  }
-
-  .tabs-inner {
-    justify-content: space-between;
-    gap: 6px;
-  }
-
-  .main-tabs {
-    flex: 1;
-    gap: 6px;
-  }
-
-  .tab-button {
-    flex: 1;
-    text-align: center;
-    padding: 8px 10px;
-    font-size: 13px;
-    min-width: 0;
-  }
-
-  .func-button {
-    padding: 8px 12px;
-    font-size: 16px;
-    z-index: 2002 !important;
-  }
-
-  .func-wrapper {
-    flex-shrink: 0;
-  }
-
-  /* Поповеры на мобильных */
-  .popover,
-  .search-popover,
-  .info-popover {
-    position: fixed !important;
-    top: 60px !important;
-    left: 10px !important;
-    right: 10px !important;
-    width: auto !important;
-    max-width: none !important;
-    transform: none !important;
-    z-index: 2001 !important;
-    background: rgba(29, 29, 29, 0.98);
-    box-sizing: border-box;
-  }
-
-  .search-popover h3,
-  .info-popover h3 {
-    font-size: 16px;
-    margin-bottom: 10px;
-  }
-
-  .search-popover input {
-    width: 100%;
-    box-sizing: border-box;
-  }
-
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-    }
-    to {
-      opacity: 1;
-    }
-  }
-
-  @keyframes slideDown {
-    from {
-      opacity: 0;
-      transform: translateY(-20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-}
-
-@media (max-width: 550px) {
-  .photos-grid {
-    grid-template-columns: 1fr;
-    justify-items: center;
-  }
-
-  .photos-grid img {
-    width: 100%;
-    max-width: 250px;
-    height: 250px;
-  }
 
