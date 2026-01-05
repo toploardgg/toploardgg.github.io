@@ -16,21 +16,22 @@
 html {
   overflow-x: hidden;
   scroll-behavior: smooth;
+  background-color: #cacaca; 
   height: 100%;
   min-height: 100vh;
-  overflow-x: hidden;
+  background-color: #00000000;
 }
 
 body {
-  font-family:'Montserrat', sans-serif;
-  background: #00000000;
-  color: rgba(0, 0, 0, 0);
+  font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+  color: var(--text);
+  background: transparent;
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-tap-highlight-color: transparent;
+  height: 100%;
   min-height: 100vh; 
-  display: flex;
-  justify-content: center;
-  padding: 40px 20px;
 }
-
 
 body.has-fixed-tabs {
   padding-top: 70px;
@@ -269,12 +270,6 @@ mark.search-highlight {
   z-index: 0;
 }
 
-.scene, .bg {
-  position: fixed;
-  inset: 0;
-  z-index: -1; 
-}
-
 .bg {
   position: absolute;
   inset: 0;
@@ -492,12 +487,6 @@ mark.search-highlight {
   display: flex;
   flex-direction: column;
   gap: 18px;
-}
-
-.sidebar {
-  /* Если на мобилках сайдбар сверху, добавляем отступ */
-  position: sticky;
-  top: env(safe-area-inset-top, 20px);
 }
 
 .contact-item {
