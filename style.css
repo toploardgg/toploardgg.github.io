@@ -44,7 +44,7 @@ html {
 body {
   font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif, "Segoe UI Emoji", "Apple Color Emoji", "Noto Color Emoji", "Segoe UI Symbol", sans-serif;
   color: var(--text);
-  background: transparent;
+  background: #333333;
   line-height: 1.6;
   overflow-x: hidden;
   -webkit-tap-highlight-color: transparent;
@@ -697,6 +697,7 @@ mark.search-highlight {
   align-items: center;
   gap: 20px;
   padding-top: calc(20px + env(safe-area-inset-top, 0px));
+  background-color: transparent;
 }
 
 .profile {
