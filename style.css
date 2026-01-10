@@ -257,8 +257,6 @@ body.has-fixed-tabs {
   padding: 16px;
   border-radius: 16px;
   background: rgba(29, 29, 29, 0.116);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
   border: 1px solid rgba(255,255,255,0.25);
   box-shadow: 0 10px 30px rgba(0,0,0,0.6);
   display: none;
@@ -346,6 +344,11 @@ mark.search-highlight {
   justify-content: center;
   pointer-events: none;
 }
+
+@media (max-width: 980px) {
+  .site-loader {
+    max-width: var(--max-width);
+  }
 
 .loader-overlay {
   position: absolute;
