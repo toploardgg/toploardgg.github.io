@@ -18,7 +18,8 @@ html {
   scroll-behavior: smooth;
   height: 100%;
   min-height: 100vh;
-  background: #333333 !important;
+  background: transparent !important;
+  background-color: #000000 !important;
 }
 
 /* Smooth scrollbar */
@@ -44,13 +45,15 @@ html {
 body {
   font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif, "Segoe UI Emoji", "Apple Color Emoji", "Noto Color Emoji", "Segoe UI Symbol", sans-serif;
   color: var(--text);
-  background: #333333 !important;
   line-height: 1.6;
   overflow-x: hidden;
   -webkit-tap-highlight-color: transparent;
   height: 100%;
-  min-height: 100vh;
+  padding-top: env(safe-area-inset-top);
   padding-bottom: env(safe-area-inset-bottom);
+  margin: 0;
+  padding: 0;
+  min-height: -webkit-fill-available;
 }
 
 body.has-fixed-tabs {
