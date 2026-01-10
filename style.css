@@ -18,7 +18,7 @@ html {
   scroll-behavior: smooth;
   height: 100%;
   min-height: 100vh;
-  background-color: transparent;
+  background-color: #ffffff00;
 }
 
 /* Smooth scrollbar */
