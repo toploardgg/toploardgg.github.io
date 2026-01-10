@@ -312,5 +312,22 @@
       }, remaining);
     });
   });
+  (function() {
+    const updateThemeColor = () => {
+      const bgColor = "#333333"; 
+      
+      let meta = document.querySelector('meta[name="theme-color"]');
+      if (!meta) {
+        meta = document.createElement('meta');
+        meta.setAttribute('name', 'theme-color');
+        document.head.appendChild(meta);
+      }
+      meta.setAttribute('content', bgColor);
+    };
+
+    // Запуск при загрузке и смене ориентации экрана
+    window.addEventListener('load', updateThemeColor);
+    window.addEventListener('orientationchange', updateThemeColor);
+  })();
 
 })();
