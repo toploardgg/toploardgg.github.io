@@ -312,22 +312,21 @@
       }, remaining);
     });
   });
-  (function() {
-    const updateThemeColor = () => {
-      const bgColor = "#333333"; 
-      
-      let meta = document.querySelector('meta[name="theme-color"]');
-      if (!meta) {
-        meta = document.createElement('meta');
-        meta.setAttribute('name', 'theme-color');
-        document.head.appendChild(meta);
-      }
-      meta.setAttribute('content', bgColor);
-    };
+// --- transparent ----
+  window.addEventListener('load', () => {
+    // Установка прозрачного цвета темы
+    const meta = document.createElement('meta');
+    meta.name = "theme-color";
+    // Используем прозрачность через rgba или цвет, максимально близкий к самому темному участку фона
+    meta.content = "rgba(0,0,0,0)"; 
+    document.head.appendChild(meta);
 
-    // Запуск при загрузке и смене ориентации экрана
-    window.addEventListener('load', updateThemeColor);
-    window.addEventListener('orientationchange', updateThemeColor);
-  })();
+    // Фикс для iOS Safari: принудительная перерисовка высоты
+    const fixHeight = () => {
+      document.documentElement.style.setProperty('--vh', `${window.innerHeight * 0.01}px`);
+    };
+    window.addEventListener('resize', fixHeight);
+    fixHeight();
+  });
 
 })();
