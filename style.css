@@ -18,8 +18,6 @@ html {
   scroll-behavior: smooth;
   height: 100%;
   min-height: 100vh;
-  background: transparent !important;
-  background-color: #000000 !important;
 }
 
 /* Smooth scrollbar */
@@ -109,8 +107,6 @@ body.has-fixed-tabs {
   justify-content: space-between;
   align-items: center;
   background: rgba(0,0,0,0.3);
-  backdrop-filter: blur(30px);
-  -webkit-backdrop-filter: blur(30px);
   border-radius: 20px;
   padding: 8px;
   border: 1px solid rgba(255,255,255,0.1);
@@ -232,8 +228,6 @@ body.has-fixed-tabs {
   cursor: pointer;
   position: relative;
   z-index: 2002;
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
   transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), 
               background 0.3s cubic-bezier(0.4, 0, 0.2, 1),
               box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1),
@@ -301,8 +295,6 @@ body.has-fixed-tabs {
   font-size: 14px;
   outline: none;
   box-sizing: border-box;
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
 }
 
 .search-popover input:focus {
@@ -604,28 +596,9 @@ mark.search-highlight {
 .bg-fallback {
   position: absolute;
   inset: 0;
-  background: linear-gradient(135deg, 
-    #000000 0%, 
-    #1a1a1a 25%, 
-    #333333 50%, 
-    #4d4d4d 75%, 
-    #666666 100%);
-  background-size: 400% 400%;
-  animation: gradientFlow 15s ease infinite;
+  background: linear-gradient(135deg, #000000, #ffffff);
   display: block;
   z-index: 0;
-}
-
-@keyframes gradientFlow {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
 }
 
 .overlay {
@@ -635,8 +608,6 @@ mark.search-highlight {
     rgba(0, 0, 0, 0.1) 0%, 
     rgba(0, 0, 0, 0.3) 50%, 
     rgba(0, 0, 0, 0.5) 100%);
-  backdrop-filter: blur(15px);
-  -webkit-backdrop-filter: blur(15px);
   z-index: 2;
   animation: overlayPulse 10s ease-in-out infinite;
 }
