@@ -602,6 +602,8 @@ mark.search-highlight {
 }
 
 .overlay {
+  display:none;
+  opaticy:
   position: absolute;
   inset: 0;
   background: radial-gradient(ellipse at top left, 
