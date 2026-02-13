@@ -603,7 +603,7 @@ mark.search-highlight {
 
 .overlay {
   display:none;
-  opaticy:
+  opaticy:0.5;
   position: absolute;
   inset: 0;
   background: radial-gradient(ellipse at top left, 
