@@ -26,6 +26,12 @@ body {
   padding: 0;
 }
 
+html, body {
+  height: -webkit-fill-available;
+  min-height: 100dvh;
+  overflow-x: hidden;
+}
+
 body.has-fixed-tabs {
   padding-top: 70px;
 }
