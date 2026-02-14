@@ -25,8 +25,6 @@ body {
   overflow-x: hidden;
   -webkit-tap-highlight-color: transparent;
   height: 100%;
-  padding-top: env(safe-area-inset-top);
-  padding-bottom: env(safe-area-inset-bottom);
   margin: 0;
   padding: 0;
   min-height: -webkit-fill-available;
@@ -561,17 +559,6 @@ mark.search-highlight {
   inset: 0;
   z-index: -2;
   background: radial-gradient(circle at top center, #575757, #1f1f1f);
-}
-.overlay {
-  display: none;
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(ellipse at top left, 
-    rgba(0, 0, 0, 0.1) 0%, 
-    rgba(0, 0, 0, 0.3) 50%, 
-    rgba(0, 0, 0, 0.5) 100%);
-  z-index: 2;
-  animation: overlayPulse 10s ease-in-out infinite;
 }
 
 @keyframes overlayPulse {
