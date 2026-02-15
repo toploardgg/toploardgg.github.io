@@ -1,3 +1,20 @@
+// --- Theme Toggle --- (винесено ДО всього, щоб спрацювало першим)
+const themeBtn = document.querySelector('.theme-btn');
+
+if (themeBtn) {
+  if (localStorage.getItem('theme') === 'light') {
+    document.body.classList.add('light');
+    themeBtn.textContent = '☀️';
+  }
+
+  themeBtn.addEventListener('click', () => {
+    document.body.classList.toggle('light');
+    const isLight = document.body.classList.contains('light');
+    themeBtn.textContent = isLight ? '☀️' : '🌙';
+    localStorage.setItem('theme', isLight ? 'light' : 'dark');
+  });
+}
+
 (function() {
   'use strict';
 
@@ -43,15 +60,13 @@
     };
   });
 
-  // Add background animation CSS dynamically
+  // --- Background Animation CSS ---
   const style = document.createElement('style');
   style.textContent = `
     @keyframes bgFadeIn {
       from { opacity: 0; }
       to { opacity: 0.8; }
     }
-    
-    /* Floating particles */
     .particle {
       position: fixed;
       width: 4px;
@@ -62,31 +77,21 @@
       z-index: 1;
       animation: float linear infinite;
     }
-    
     @keyframes float {
-      0% {
-        transform: translateY(0) translateX(0) scale(1);
-        opacity: 0;
-      }
-      10% {
-        opacity: 1;
-      }
-      90% {
-        opacity: 1;
-      }
-      100% {
-        transform: translateY(-100vh) translateX(-50px) scale(0.5);
-        opacity: 0;
-      }
+      0% { transform: translateY(0) translateX(0) scale(1); opacity: 0; }
+      10% { opacity: 1; }
+      90% { opacity: 1; }
+      100% { transform: translateY(-100vh) translateX(-50px) scale(0.5); opacity: 0; }
     }
   `;
   document.head.appendChild(style);
 
-  // Create floating particles
+  // --- Floating Particles ---
   function createParticles() {
-    const particleCount = 15;
     const scene = document.querySelector('.scene');
-    
+    if (!scene) return;
+
+    const particleCount = 15;
     for (let i = 0; i < particleCount; i++) {
       const particle = document.createElement('div');
       particle.className = 'particle';
@@ -98,8 +103,6 @@
       scene.appendChild(particle);
     }
   }
-
-  // Initialize particles after a short delay
   setTimeout(createParticles, 1000);
 
   // --- Tab Navigation ---
@@ -125,7 +128,6 @@
         e.preventDefault();
         const targetClass = button.getAttribute('data-target');
         const targetElement = document.querySelector('.' + targetClass) || document.querySelector('#' + targetClass);
-
         if (targetElement) {
           isScrolling = true;
           setActiveTab(targetClass);
@@ -135,56 +137,81 @@
       });
     });
 
-    const observer = new IntersectionObserver((entries) => {
-      if (isScrolling) return;
+    // --- ФІКС: зберігаємо ratio кожної секції в Map ---
+    // Так завжди знаємо яка секція найбільше видна, а не тільки "що змінилось"
+    const ratioMap = new Map();
 
+    const updateActiveTab = () => {
       let maxRatio = 0;
-      let bestEntry = null;
+      let bestSection = null;
 
-      entries.forEach(entry => {
-        if (entry.isIntersecting && entry.intersectionRatio > maxRatio) {
-          maxRatio = entry.intersectionRatio;
-          bestEntry = entry;
+      sections.forEach(section => {
+        const ratio = ratioMap.get(section) || 0;
+        if (ratio > maxRatio) {
+          maxRatio = ratio;
+          bestSection = section;
         }
       });
 
-      if (bestEntry) {
+      if (bestSection) {
         const matchingBtn = Array.from(buttons).find(btn => {
           const target = btn.getAttribute('data-target');
-          return bestEntry.target.classList.contains(target) || bestEntry.target.id === target;
+          return bestSection.classList.contains(target) || bestSection.id === target;
         });
-
         if (matchingBtn) setActiveTab(matchingBtn.getAttribute('data-target'));
       }
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      if (isScrolling) return;
+
+      // Оновлюємо ratio для кожної секції що змінила стан
+      entries.forEach(entry => {
+        ratioMap.set(entry.target, entry.intersectionRatio);
+      });
+
+      // Вибираємо секцію з найбільшим ratio серед ВСІХ секцій
+      updateActiveTab();
     }, {
       root: null,
-      rootMargin: '-30% 0px -30% 0px',
-      threshold: [0, 0.1, 0.25, 0.5, 0.75, 1]
+      rootMargin: '0px',
+      threshold: Array.from({ length: 21 }, (_, i) => i * 0.05) // 0, 0.05, 0.10 ... 1.0
     });
 
-    sections.forEach(section => observer.observe(section));
+    sections.forEach(section => {
+      ratioMap.set(section, 0);
+      observer.observe(section);
+    });
 
+    // Перевірка при старті
     const checkInitialPosition = () => {
       const scrollPosition = window.scrollY + (window.innerHeight / 3);
       sections.forEach(sec => {
         const top = sec.offsetTop;
         const bottom = top + sec.offsetHeight;
         if (scrollPosition >= top && scrollPosition <= bottom) {
-          const targetClass = Array.from(buttons).find(btn => {
+          const matchingBtn = Array.from(buttons).find(btn => {
             const t = btn.getAttribute('data-target');
             return sec.classList.contains(t) || sec.id === t;
           });
-          if (targetClass) setActiveTab(targetClass.getAttribute('data-target'));
+          if (matchingBtn) setActiveTab(matchingBtn.getAttribute('data-target'));
         }
       });
     };
-
     checkInitialPosition();
   });
 
-  // --- Functional Popovers (Search/Info) ---
+  // --- Functional Popovers ---
   const isMobile = () => window.innerWidth <= 768;
   const funcWrappers = document.querySelectorAll('.func-wrapper');
+
+  const clearHighlight = () => {
+    document.querySelectorAll('mark.search-highlight').forEach(mark => {
+      const parent = mark.parentNode;
+      parent.replaceChild(document.createTextNode(mark.textContent), mark);
+      parent.normalize();
+    });
+  };
 
   funcWrappers.forEach(wrapper => {
     const input = wrapper.querySelector('#search-input');
@@ -197,22 +224,18 @@
 
     wrapper.addEventListener('mouseleave', () => {
       if (input && !isMobile()) input.blur();
-      // НЕ очищаем подсветку при отведении мыши
     });
 
     if (btn) {
       btn.addEventListener('click', (e) => {
         e.preventDefault();
         e.stopPropagation();
-
         const wasActive = wrapper.classList.contains('active');
-        
         if (!wasActive) {
           funcWrappers.forEach(w => w.classList.remove('active'));
           wrapper.classList.add('active');
           if (input) setTimeout(() => input.focus(), 100);
         } else {
-          // Очистка подсветки ТОЛЬКО при закрытии окна поиска
           wrapper.classList.remove('active');
           if (input) {
             clearHighlight();
@@ -228,10 +251,8 @@
   });
 
   document.addEventListener('click', () => {
-    // Очистка подсветки ТОЛЬКО при закрытии окна (клик вне)
     const searchWrapper = document.querySelector('.func-wrapper.left');
     const searchInput = document.getElementById('search-input');
-    
     if (searchWrapper && searchWrapper.classList.contains('active')) {
       searchWrapper.classList.remove('active');
       if (searchInput) {
@@ -239,7 +260,6 @@
         searchInput.value = '';
       }
     }
-    
     funcWrappers.forEach(w => w.classList.remove('active'));
   });
 
@@ -247,32 +267,21 @@
     if (!isMobile()) funcWrappers.forEach(w => w.classList.remove('active'));
   });
 
-  // --- Search Functionality ---
+  // --- Search ---
   const escapeRegExp = (str) => str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-
-  const clearHighlight = () => {
-    document.querySelectorAll('mark.search-highlight').forEach(mark => {
-      const parent = mark.parentNode;
-      parent.replaceChild(document.createTextNode(mark.textContent), mark);
-      parent.normalize();
-    });
-  };
 
   const highlightSearch = (term) => {
     clearHighlight();
     if (!term.trim()) return;
-
     const regex = new RegExp(`(${escapeRegExp(term.trim())})`, 'gi');
     const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, {
-      acceptNode: node => ['SCRIPT', 'STYLE', 'HEADER', 'BUTTON', 'INPUT'].includes(node.parentNode.tagName) 
-        ? NodeFilter.FILTER_REJECT 
+      acceptNode: node => ['SCRIPT', 'STYLE', 'HEADER', 'BUTTON', 'INPUT'].includes(node.parentNode.tagName)
+        ? NodeFilter.FILTER_REJECT
         : NodeFilter.FILTER_ACCEPT
     });
-
     const textNodes = [];
     let node;
     while (node = walker.nextNode()) textNodes.push(node);
-
     textNodes.forEach(textNode => {
       if (regex.test(textNode.nodeValue)) {
         const tempDiv = document.createElement('div');
@@ -292,16 +301,12 @@
   document.addEventListener('DOMContentLoaded', () => {
     const loader = document.getElementById('site-loader');
     if (!loader) return;
-
     document.body.style.overflow = 'hidden';
-
     const MIN_SHOW = 3000;
     const start = Date.now();
-
     window.addEventListener('load', () => {
       const elapsed = Date.now() - start;
       const remaining = Math.max(0, MIN_SHOW - elapsed);
-
       setTimeout(() => {
         loader.classList.add('reverse');
         setTimeout(() => {
@@ -312,16 +317,14 @@
       }, remaining);
     });
   });
-// --- transparent ----
+
+  // --- Viewport Height Fix ---
   window.addEventListener('load', () => {
-    // Установка прозрачного цвета темы
     const meta = document.createElement('meta');
     meta.name = "theme-color";
-    // Используем прозрачность через rgba или цвет, максимально близкий к самому темному участку фона
-    meta.content = "rgba(0,0,0,0)"; 
+    meta.content = "rgba(0,0,0,0)";
     document.head.appendChild(meta);
 
-    // Фикс для iOS Safari: принудительная перерисовка высоты
     const fixHeight = () => {
       document.documentElement.style.setProperty('--vh', `${window.innerHeight * 0.01}px`);
     };
@@ -330,3 +333,28 @@
   });
 
 })();
+
+// --- Lightbox ---
+const lightbox = document.getElementById('lightbox');
+const lightboxImg = document.getElementById('lightbox-img');
+
+if (lightbox && lightboxImg) {
+  document.querySelectorAll('.photo-item img').forEach(img => {
+    img.addEventListener('click', () => {
+      lightboxImg.src = img.src;
+      lightbox.classList.add('active');
+    });
+  });
+
+  document.querySelector('.lightbox-overlay')?.addEventListener('click', () => {
+    lightbox.classList.remove('active');
+  });
+
+  document.querySelector('.lightbox-close')?.addEventListener('click', () => {
+    lightbox.classList.remove('active');
+  });
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') lightbox.classList.remove('active');
+  });
+}

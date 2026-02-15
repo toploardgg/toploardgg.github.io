@@ -39,14 +39,7 @@
       </div>
     
       <div class="func-wrapper right">
-        <button class="func-button info-btn" aria-label="About the site">і</button>
-        <div class="popover info-popover">
-          <h3>About the Site</h3>
-          <p>This is a personal portfolio website.</p>
-          <p>Created by Toploardgg on January 1, 2026.</p>
-          <p>Style — glassmorphism with blur and transparency effects.</p>
-          <p>Built with pure HTML, CSS, and JavaScript.</p>
-        </div>
+        <button class="func-button theme-btn" aria-label="Toggle theme">🌙</button>
       </div>
     </div>
   </div>
@@ -143,12 +136,12 @@
       <div class="card">
         <h3 class="contacts-title">Contacts</h3>
         <div>
-          <a href="mailto:topstasikgg@gmail.com" rel="noopener noreferrer" class="contact-link">
+          <a href="mailto:stanislavworksite@gmail.com" rel="noopener noreferrer" class="contact-link">
             <div class="contact-item">
               <div class="contact-icon">📧</div>
               <div class="contact-info">
                 <div class="contact-label">Email</div>
-                <div class="contact-value">topstasikgg@gmail.com</div>
+                <div class="contact-value">stanislavworksite@gmail.com</div>
               </div>
             </div>
           </a>
@@ -306,8 +299,18 @@
     <div class="footer">
       © 2026 Stanislav ·
       <a href="https://github.com/toploardgg" target="_blank" rel="noopener noreferrer">GitHub</a>
+      <a href="about.html" class="about">About the Site</a>
+      </div>
     </div>
   </div>
+
+<div class="lightbox" id="lightbox">
+  <div class="lightbox-overlay"></div>
+  <img class="lightbox-img" id="lightbox-img" src="" alt="">
+  <button class="lightbox-close">✕</button>
+  <button class="lightbox-arrow lightbox-arrow--prev" id="lightbox-prev">&#8592;</button>
+  <button class="lightbox-arrow lightbox-arrow--next" id="lightbox-next">&#8594;</button>
+</div>
 
   <script src="script.js"></script>
 </body>
