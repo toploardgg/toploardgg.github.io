@@ -1,0 +1,503 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+        />
+        <meta name="robots" content="noindex" />
+        <title>404 — Toploardgg</title>
+        <link rel="icon" href="icon.png" type="image/png" />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+            crossorigin="anonymous"
+        />
+        <link rel="stylesheet" href="style.css" />
+        <style>
+            .page-404 {
+                min-height: 100dvh;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                text-align: center;
+                padding: 40px 20px;
+                gap: 0;
+            }
+
+            .err-code {
+                font-size: clamp(100px, 22vw, 180px);
+                font-weight: 800;
+                letter-spacing: -4px;
+                line-height: 1;
+                background: linear-gradient(
+                    135deg,
+                    rgba(255, 255, 255, 0.9) 0%,
+                    rgba(255, 255, 255, 0.2) 100%
+                );
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                background-clip: text;
+                animation: fadeInUp 0.7s cubic-bezier(0.4, 0, 0.2, 1) both;
+                animation-delay: 0.05s;
+                user-select: none;
+            }
+
+            .err-title {
+                font-size: clamp(18px, 4vw, 26px);
+                font-weight: 700;
+                color: #fff;
+                margin: 8px 0 12px;
+                animation: fadeInUp 0.7s cubic-bezier(0.4, 0, 0.2, 1) both;
+                animation-delay: 0.15s;
+            }
+
+            .err-desc {
+                font-size: 14px;
+                color: rgba(233, 238, 248, 0.55);
+                max-width: 340px;
+                line-height: 1.6;
+                margin-bottom: 36px;
+                animation: fadeInUp 0.7s cubic-bezier(0.4, 0, 0.2, 1) both;
+                animation-delay: 0.22s;
+            }
+
+            .err-actions {
+                display: flex;
+                gap: 12px;
+                flex-wrap: wrap;
+                justify-content: center;
+                animation: fadeInUp 0.7s cubic-bezier(0.4, 0, 0.2, 1) both;
+                animation-delay: 0.3s;
+            }
+
+            .err-btn {
+                display: inline-flex;
+                align-items: center;
+                gap: 8px;
+                padding: 12px 22px;
+                border-radius: 14px;
+                font-size: 13px;
+                font-weight: 600;
+                text-decoration: none;
+                cursor: pointer;
+                border: 1px solid rgba(255, 255, 255, 0.18);
+                background: rgba(255, 255, 255, 0.07);
+                color: #e9eef8;
+                transition:
+                    transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                    background 0.3s,
+                    border-color 0.3s,
+                    box-shadow 0.3s;
+                backdrop-filter: blur(12px);
+                -webkit-backdrop-filter: blur(12px);
+                position: relative;
+                overflow: hidden;
+            }
+
+            .err-btn::before {
+                content: "";
+                position: absolute;
+                top: 0;
+                left: -100%;
+                width: 100%;
+                height: 100%;
+                background: linear-gradient(
+                    90deg,
+                    transparent,
+                    rgba(255, 255, 255, 0.1),
+                    transparent
+                );
+                transition: left 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            }
+
+            .err-btn:hover::before {
+                left: 100%;
+            }
+
+            .err-btn:hover {
+                transform: translateY(-3px);
+                background: rgba(255, 255, 255, 0.12);
+                border-color: rgba(255, 255, 255, 0.28);
+                box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+                color: #fff;
+            }
+
+            .err-btn.primary {
+                background: rgba(255, 255, 255, 0.12);
+                border-color: rgba(255, 255, 255, 0.25);
+            }
+
+            .err-glitch {
+                position: relative;
+                display: inline-block;
+            }
+
+            .err-glitch::before,
+            .err-glitch::after {
+                content: "404";
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                background: linear-gradient(
+                    135deg,
+                    rgba(255, 255, 255, 0.9) 0%,
+                    rgba(255, 255, 255, 0.2) 100%
+                );
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                background-clip: text;
+            }
+
+            .become {
+                text-decoration: none;
+                color: var(--text);
+                padding: 5px 20px;
+                border-radius: 14px;
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                background: transparent;
+                font-weight: 600;
+                cursor: pointer;
+                display: inline-block;
+                position: relative;
+                overflow: hidden;
+                backdrop-filter: blur(10px);
+                -webkit-backdrop-filter: blur(10px);
+                transition:
+                    transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                    background 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                    border-color 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                    box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                    color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+                will-change: transform;
+            }
+
+            .become::before {
+                content: "";
+                position: absolute;
+                top: 0;
+                left: -100%;
+                width: 100%;
+                height: 100%;
+                background: linear-gradient(
+                    90deg,
+                    transparent,
+                    rgba(255, 255, 255, 0.15),
+                    transparent
+                );
+                animation: shimmer 2.5s ease-in-out infinite;
+            }
+
+            .become:hover {
+                transform: translateY(-2px) scale(1.05);
+                background: rgba(255, 255, 255, 0.05);
+                border-color: rgba(255, 255, 255, 0.15);
+                box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+                color: #ffffff;
+            }
+
+            .err-glitch::before {
+                animation: glitch1 3.5s infinite;
+                clip-path: polygon(0 20%, 100% 20%, 100% 40%, 0 40%);
+            }
+            .err-glitch::after {
+                animation: glitch2 3.5s infinite;
+                clip-path: polygon(0 60%, 100% 60%, 100% 75%, 0 75%);
+            }
+
+            @keyframes glitch1 {
+                0%,
+                90%,
+                100% {
+                    transform: translate(0);
+                    opacity: 0;
+                }
+                92% {
+                    transform: translate(-4px, 1px);
+                    opacity: 0.6;
+                }
+                95% {
+                    transform: translate(3px, -1px);
+                    opacity: 0.4;
+                }
+                97% {
+                    transform: translate(-2px, 2px);
+                    opacity: 0.5;
+                }
+            }
+            @keyframes glitch2 {
+                0%,
+                90%,
+                100% {
+                    transform: translate(0);
+                    opacity: 0;
+                }
+                93% {
+                    transform: translate(4px, -2px);
+                    opacity: 0.5;
+                }
+                96% {
+                    transform: translate(-3px, 1px);
+                    opacity: 0.35;
+                }
+                98% {
+                    transform: translate(2px, -1px);
+                    opacity: 0.4;
+                }
+            }
+
+            .err-orbit {
+                position: relative;
+                width: 220px;
+                height: 220px;
+                margin: 0 auto 16px;
+                animation: fadeInUp 0.7s cubic-bezier(0.4, 0, 0.2, 1) both;
+            }
+
+            .err-orbit-ring {
+                position: absolute;
+                inset: 0;
+                border-radius: 50%;
+                border: 1px solid rgba(255, 255, 255, 0.07);
+            }
+
+            .err-orbit-ring:nth-child(2) {
+                inset: 24px;
+                border-color: rgba(255, 255, 255, 0.05);
+                animation: spin 12s linear infinite;
+            }
+
+            .err-orbit-ring:nth-child(3) {
+                inset: 50px;
+                border-color: rgba(255, 255, 255, 0.04);
+                animation: spin 8s linear infinite reverse;
+            }
+
+            .err-dot {
+                position: absolute;
+                width: 7px;
+                height: 7px;
+                border-radius: 50%;
+                background: rgba(255, 255, 255, 0.45);
+                top: 50%;
+                left: 50%;
+                transform-origin: 0 0;
+            }
+
+            .err-dot:nth-child(4) {
+                margin: -84px 0 0 -84px;
+                animation: orbit1 6s linear infinite;
+            }
+
+            .err-dot:nth-child(5) {
+                width: 5px;
+                height: 5px;
+                background: rgba(255, 255, 255, 0.25);
+                margin: -60px 0 0 -60px;
+                animation: orbit2 4s linear infinite reverse;
+            }
+
+            @keyframes orbit1 {
+                from {
+                    transform: rotate(0deg) translateX(84px);
+                }
+                to {
+                    transform: rotate(360deg) translateX(84px);
+                }
+            }
+            @keyframes orbit2 {
+                from {
+                    transform: rotate(0deg) translateX(60px);
+                }
+                to {
+                    transform: rotate(360deg) translateX(60px);
+                }
+            }
+            @keyframes spin {
+                from {
+                    transform: rotate(0deg);
+                }
+                to {
+                    transform: rotate(360deg);
+                }
+            }
+
+            .err-center-icon {
+                position: absolute;
+                inset: 0;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 32px;
+                color: rgba(255, 255, 255, 0.15);
+            }
+
+            .tab-button {
+                display: inline-block;
+                text-decoration: none;
+                padding: 10px 20px;
+                border-radius: 14px;
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                background: transparent;
+                color: var(--text);
+                font-weight: 600;
+                cursor: pointer;
+                transition:
+                    transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                    background 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                    border-color 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                    color 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                    box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+                position: relative;
+                overflow: hidden;
+                backdrop-filter: blur(10px);
+                -webkit-backdrop-filter: blur(10px);
+                max-height: 35px;
+            }
+
+            /* Light theme */
+            body.light .err-code {
+                background: linear-gradient(
+                    135deg,
+                    rgba(0, 0, 0, 0.85) 0%,
+                    rgba(0, 0, 0, 0.3) 100%
+                );
+                -webkit-background-clip: text;
+                background-clip: text;
+                -webkit-text-fill-color: transparent;
+            }
+            body.light .err-glitch::before,
+            body.light .err-glitch::after {
+                background: linear-gradient(
+                    135deg,
+                    rgba(0, 0, 0, 0.85) 0%,
+                    rgba(0, 0, 0, 0.3) 100%
+                );
+                -webkit-background-clip: text;
+                background-clip: text;
+                -webkit-text-fill-color: transparent;
+            }
+            body.light .err-title {
+                color: #111;
+            }
+            body.light .err-desc {
+                color: rgba(0, 0, 0, 0.45);
+            }
+            body.light .err-btn {
+                background: rgba(255, 255, 255, 0.6);
+                border-color: rgba(0, 0, 0, 0.14);
+                color: #1a1a1a;
+            }
+            body.light .err-btn:hover {
+                background: rgba(255, 255, 255, 0.9);
+                border-color: rgba(0, 0, 0, 0.25);
+                color: #000;
+            }
+            body.light .err-btn.primary {
+                background: rgba(255, 255, 255, 0.8);
+                border-color: rgba(0, 0, 0, 0.2);
+            }
+            body.light .err-orbit-ring {
+                border-color: rgba(0, 0, 0, 0.06);
+            }
+            body.light .err-dot {
+                background: rgba(0, 0, 0, 0.2);
+            }
+            body.light .err-center-icon {
+                color: rgba(0, 0, 0, 0.08);
+            }
+        </style>
+    </head>
+    <body>
+        <!-- Navigation -->
+        <div class="tabs">
+            <div class="tabs-inner">
+                <div class="func-wrapper left">
+                    <button class="func-button search-btn" aria-label="Search">
+                        🔍
+                    </button>
+                    <div class="popover search-popover">
+                        <h3>Search</h3>
+                        <input type="text" id="search-input" />
+                    </div>
+                </div>
+
+                <a href="index.html" class="become">Home</a>
+
+                <div class="func-wrapper right">
+                    <button
+                        class="func-button theme-btn"
+                        aria-label="Toggle theme"
+                    >
+                        <i class="fa-solid fa-moon"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="page-404">
+            <div class="err-orbit">
+                <div class="err-orbit-ring"></div>
+                <div class="err-orbit-ring"></div>
+                <div class="err-orbit-ring"></div>
+                <div class="err-dot"></div>
+                <div class="err-dot"></div>
+                <div class="err-center-icon">
+                    <i class="fa-solid fa-satellite-dish"></i>
+                </div>
+            </div>
+
+            <div class="err-code">
+                <span class="err-glitch">404</span>
+            </div>
+
+            <div class="err-title">Page not found</div>
+
+            <p class="err-desc">
+                This page doesn't exist or was moved.<br />
+                Let's get you back on track.
+            </p>
+
+            <div class="err-actions">
+                <a class="err-btn primary" href="index.html">
+                    <i class="fa-solid fa-house"></i> Go Home
+                </a>
+                <a
+                    class="err-btn"
+                    href="https://github.com/toploardgg"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    <i class="fa-brands fa-github"></i> GitHub
+                </a>
+            </div>
+        </div>
+
+        <script>
+            const themeBtn = document.querySelector(".theme-btn");
+            if (themeBtn) {
+                const updateIcon = (isLight) => {
+                    themeBtn.innerHTML = isLight
+                        ? '<i class="fa-solid fa-sun"></i>'
+                        : '<i class="fa-solid fa-moon"></i>';
+                };
+                const saved = localStorage.getItem("theme");
+                if (saved === "light") {
+                    document.body.classList.add("light");
+                    updateIcon(true);
+                } else {
+                    updateIcon(false);
+                }
+                themeBtn.addEventListener("click", () => {
+                    document.body.classList.toggle("light");
+                    const isLight = document.body.classList.contains("light");
+                    updateIcon(isLight);
+                    localStorage.setItem("theme", isLight ? "light" : "dark");
+                });
+            }
+        </script>
+    </body>
+</html>

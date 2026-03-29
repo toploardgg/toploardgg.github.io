@@ -1,0 +1,975 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+        />
+        <meta name="robots" content="noindex, nofollow" />
+        <title>Stats — Toploardgg</title>
+        <link rel="icon" href="icon.png" type="image/png" />
+        <meta
+            name="description"
+            content="Development statistics and language breakdown for Toploardgg's portfolio site."
+        />
+        <meta property="og:title" content="Dev Stats — Toploardgg" />
+        <meta
+            property="og:description"
+            content="Language breakdown and project statistics."
+        />
+        <meta property="og:url" content="https://toploardgg.github.io/stats" />
+        <meta property="og:type" content="website" />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+            crossorigin="anonymous"
+        />
+        <link rel="stylesheet" href="style.css" />
+        <style>
+            .chart-wrap {
+                width: 100%;
+                padding: 0;
+            }
+            .chart-header {
+                display: flex;
+                justify-content: space-between;
+                align-items: flex-end;
+                margin-bottom: 16px;
+                flex-wrap: wrap;
+                gap: 8px;
+            }
+            .chart-stat {
+                display: flex;
+                flex-direction: column;
+                gap: 2px;
+            }
+            .chart-stat-val {
+                font-size: 28px;
+                font-weight: 700;
+                color: #fff;
+                line-height: 1;
+            }
+            .chart-stat-label {
+                font-size: 11px;
+                color: rgba(233, 238, 248, 0.4);
+                text-transform: uppercase;
+                letter-spacing: 0.7px;
+            }
+            .chart-filters {
+                display: flex;
+                gap: 6px;
+            }
+            .become {
+                text-decoration: none;
+                color: var(--text);
+                padding: 5px 20px;
+                border-radius: 14px;
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                background: transparent;
+                font-weight: 600;
+                cursor: pointer;
+                display: inline-block;
+                position: relative;
+                overflow: hidden;
+                backdrop-filter: blur(10px);
+                -webkit-backdrop-filter: blur(10px);
+                transition:
+                    transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                    background 0.3s,
+                    border-color 0.3s,
+                    box-shadow 0.3s,
+                    color 0.3s;
+                will-change: transform;
+            }
+            .become::before {
+                content: "";
+                position: absolute;
+                top: 0;
+                left: -100%;
+                width: 100%;
+                height: 100%;
+                background: linear-gradient(
+                    90deg,
+                    transparent,
+                    rgba(255, 255, 255, 0.15),
+                    transparent
+                );
+                animation: shimmer 2.5s ease-in-out infinite;
+            }
+            .become:hover {
+                transform: translateY(-2px) scale(1.05);
+                background: rgba(255, 255, 255, 0.05);
+                border-color: rgba(255, 255, 255, 0.15);
+                box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+                color: #fff;
+            }
+            .cf {
+                padding: 5px 12px;
+                border-radius: 8px;
+                font-size: 11px;
+                font-weight: 600;
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                background: transparent;
+                color: rgba(233, 238, 248, 0.5);
+                cursor: pointer;
+                transition:
+                    background 0.2s,
+                    color 0.2s,
+                    border-color 0.2s;
+                font-family: inherit;
+            }
+            .cf.active,
+            .cf:hover {
+                background: rgba(255, 255, 255, 0.08);
+                color: #e9eef8;
+                border-color: rgba(255, 255, 255, 0.2);
+            }
+            .svg-wrap {
+                width: 100%;
+                position: relative;
+                overflow: hidden;
+            }
+            svg {
+                width: 100%;
+                display: block;
+                overflow: visible;
+            }
+            .chart-line {
+                fill: none;
+                stroke: url(#lineGrad);
+                stroke-width: 2;
+                stroke-linejoin: round;
+                stroke-linecap: round;
+                transition: d 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            }
+            .chart-area {
+                fill: url(#areaGrad);
+                transition: d 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            }
+            .grid-line {
+                stroke: rgba(255, 255, 255, 0.05);
+                stroke-width: 1;
+            }
+            .axis-label {
+                fill: rgba(233, 238, 248, 0.3);
+                font-size: 10px;
+                font-family: inherit;
+            }
+            .tooltip {
+                position: absolute;
+                pointer-events: none;
+                background: rgba(15, 15, 25, 0.85);
+                border: 1px solid rgba(255, 255, 255, 0.12);
+                border-radius: 10px;
+                padding: 8px 12px;
+                font-size: 12px;
+                color: #e9eef8;
+                backdrop-filter: blur(12px);
+                -webkit-backdrop-filter: blur(12px);
+                display: none;
+                white-space: nowrap;
+                z-index: 10;
+            }
+            .tooltip strong {
+                display: block;
+                font-size: 14px;
+                font-weight: 700;
+                margin-bottom: 1px;
+            }
+            .tooltip span {
+                color: rgba(233, 238, 248, 0.5);
+                font-size: 11px;
+            }
+            .cursor-line {
+                stroke: rgba(255, 255, 255, 0.15);
+                stroke-width: 1;
+                stroke-dasharray: 4 3;
+                display: none;
+            }
+            .cursor-dot {
+                fill: #fff;
+                r: 4;
+                display: none;
+            }
+            .stats-page {
+                max-width: 860px;
+                margin: 100px auto 60px;
+                padding: 0 20px;
+            }
+            .stats-hero {
+                text-align: center;
+                margin-bottom: 40px;
+                animation: fadeInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1) both;
+            }
+            .stats-hero h1 {
+                font-size: clamp(22px, 5vw, 32px);
+                font-weight: 700;
+                color: #fff;
+                margin-bottom: 8px;
+            }
+            .stats-hero p {
+                font-size: 14px;
+                color: rgba(233, 238, 248, 0.5);
+            }
+            .stats-grid {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 16px;
+                margin-bottom: 16px;
+            }
+            .stat-card {
+                background: var(--glass-bg);
+                border: 1px solid var(--glass-border);
+                border-radius: 16px;
+                padding: 20px 22px;
+                animation: fadeInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1) both;
+            }
+            .stat-card-label {
+                font-size: 12px;
+                font-weight: 500;
+                color: rgba(233, 238, 248, 0.45);
+                text-transform: uppercase;
+                letter-spacing: 0.8px;
+                margin-bottom: 8px;
+            }
+            .stat-card-value {
+                font-size: 32px;
+                font-weight: 700;
+                color: #fff;
+                line-height: 1;
+            }
+            .stat-card-sub {
+                font-size: 12px;
+                color: rgba(233, 238, 248, 0.35);
+                margin-top: 4px;
+            }
+            .chart-card {
+                background: var(--glass-bg);
+                border: 1px solid var(--glass-border);
+                border-radius: 16px;
+                padding: 24px;
+                margin-bottom: 16px;
+                animation: fadeInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1) both;
+                animation-delay: 0.1s;
+            }
+            .chart-title {
+                font-size: 15px;
+                font-weight: 600;
+                color: rgba(233, 238, 248, 0.9);
+                margin-bottom: 20px;
+            }
+            .donut-wrap {
+                display: flex;
+                align-items: center;
+                gap: 32px;
+                flex-wrap: wrap;
+            }
+            .donut-svg-wrap {
+                flex-shrink: 0;
+                position: relative;
+                width: 180px;
+                height: 180px;
+            }
+            .donut-svg-wrap svg {
+                transform: rotate(-90deg);
+            }
+            .donut-center {
+                position: absolute;
+                inset: 0;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                pointer-events: none;
+            }
+            .donut-center-num {
+                font-size: 28px;
+                font-weight: 700;
+                color: #fff;
+                line-height: 1;
+            }
+            .donut-center-label {
+                font-size: 11px;
+                color: rgba(233, 238, 248, 0.4);
+                margin-top: 2px;
+            }
+            .legend {
+                display: flex;
+                flex-direction: column;
+                gap: 12px;
+                flex: 1;
+                min-width: 160px;
+            }
+            .legend-item {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                cursor: default;
+            }
+            .legend-dot {
+                width: 10px;
+                height: 10px;
+                border-radius: 3px;
+                flex-shrink: 0;
+            }
+            .legend-name {
+                font-size: 13px;
+                font-weight: 500;
+                color: rgba(233, 238, 248, 0.85);
+                flex: 1;
+            }
+            .legend-pct {
+                font-size: 13px;
+                font-weight: 600;
+                color: rgba(233, 238, 248, 0.6);
+            }
+            .legend-lines {
+                font-size: 11px;
+                color: rgba(233, 238, 248, 0.3);
+            }
+            .bar-list {
+                display: flex;
+                flex-direction: column;
+                gap: 14px;
+            }
+            .bar-item {
+                display: flex;
+                flex-direction: column;
+                gap: 5px;
+            }
+            .bar-meta {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+            .bar-label {
+                font-size: 12px;
+                font-weight: 500;
+                color: rgba(233, 238, 248, 0.7);
+            }
+            .bar-val {
+                font-size: 12px;
+                color: rgba(233, 238, 248, 0.4);
+            }
+            .bar-track {
+                height: 6px;
+                background: rgba(255, 255, 255, 0.06);
+                border-radius: 6px;
+                overflow: hidden;
+            }
+            .bar-fill {
+                height: 100%;
+                border-radius: 6px;
+                transform-origin: left;
+                animation: barGrow 0.9s cubic-bezier(0.4, 0, 0.2, 1) both;
+            }
+            @keyframes barGrow {
+                from {
+                    transform: scaleX(0);
+                }
+                to {
+                    transform: scaleX(1);
+                }
+            }
+            .security-card {
+                background: var(--glass-bg);
+                border: 1px solid var(--glass-border);
+                border-radius: 16px;
+                padding: 20px 22px;
+                animation: fadeInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1) both;
+                animation-delay: 0.2s;
+            }
+            .security-list {
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+                margin-top: 14px;
+            }
+            .security-item {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                font-size: 13px;
+                color: rgba(233, 238, 248, 0.65);
+            }
+            .security-item i {
+                font-size: 14px;
+                color: rgba(100, 220, 150, 0.8);
+                width: 18px;
+                flex-shrink: 0;
+            }
+            .security-item i.warn {
+                color: rgba(255, 180, 80, 0.8);
+            }
+
+            body.light .stats-hero h1 {
+                color: #111;
+            }
+            body.light .stats-hero p {
+                color: rgba(0, 0, 0, 0.4);
+            }
+            body.light .stat-card-label {
+                color: rgba(0, 0, 0, 0.4);
+            }
+            body.light .stat-card-value {
+                color: #111;
+            }
+            body.light .stat-card-sub {
+                color: rgba(0, 0, 0, 0.3);
+            }
+            body.light .chart-title {
+                color: #1a1a1a;
+            }
+            body.light .chart-stat-val {
+                color: #111;
+            }
+            body.light .chart-stat-label {
+                color: rgba(0, 0, 0, 0.4);
+            }
+            body.light .donut-center-num {
+                color: #111;
+            }
+            body.light .donut-center-label {
+                color: rgba(0, 0, 0, 0.4);
+            }
+            body.light .legend-name {
+                color: rgba(0, 0, 0, 0.8);
+            }
+            body.light .legend-pct {
+                color: rgba(0, 0, 0, 0.5);
+            }
+            body.light .legend-lines {
+                color: rgba(0, 0, 0, 0.25);
+            }
+            body.light .bar-label {
+                color: rgba(0, 0, 0, 0.6);
+            }
+            body.light .bar-val {
+                color: rgba(0, 0, 0, 0.35);
+            }
+            body.light .bar-track {
+                background: rgba(0, 0, 0, 0.07);
+            }
+            body.light .security-item {
+                color: rgba(0, 0, 0, 0.55);
+            }
+
+            @media (max-width: 600px) {
+                .stats-grid {
+                    grid-template-columns: 1fr 1fr;
+                }
+                .donut-wrap {
+                    justify-content: center;
+                }
+            }
+            @media (max-width: 420px) {
+                .stats-grid {
+                    grid-template-columns: 1fr;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <div class="tabs">
+            <div class="tabs-inner">
+                <div class="func-wrapper left">
+                    <button class="func-button search-btn" aria-label="Search">
+                        🔍
+                    </button>
+                    <div class="popover search-popover">
+                        <h3>Search</h3>
+                        <input type="text" id="search-input" />
+                    </div>
+                </div>
+                <a href="/" class="become">Home</a>
+                <div class="func-wrapper right">
+                    <button
+                        class="func-button theme-btn"
+                        aria-label="Toggle theme"
+                    >
+                        <i class="fa-solid fa-moon"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="stats-page">
+            <div class="stats-hero">
+                <h1>Dev Stats</h1>
+                <p>
+                    Language breakdown and project overview for this portfolio
+                </p>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-card-label">Total lines</div>
+                    <div class="stat-card-value" id="stat-total">—</div>
+                    <div class="stat-card-sub">across all source files</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-card-label">Source files</div>
+                    <div class="stat-card-value" id="stat-files">—</div>
+                    <div class="stat-card-sub">html · css · js · py</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-card-label">Public projects</div>
+                    <div class="stat-card-value">4</div>
+                    <div class="stat-card-sub">on GitHub</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-card-label">Years coding</div>
+                    <div class="stat-card-value">2+</div>
+                    <div class="stat-card-sub">self-taught</div>
+                </div>
+            </div>
+
+            <div class="chart-card">
+                <div class="chart-title">Language breakdown</div>
+                <div class="donut-wrap">
+                    <div class="donut-svg-wrap">
+                        <svg
+                            width="180"
+                            height="180"
+                            viewBox="0 0 180 180"
+                            id="donutSvg"
+                        ></svg>
+                        <div class="donut-center">
+                            <div class="donut-center-num">100%</div>
+                            <div class="donut-center-label">this site</div>
+                        </div>
+                    </div>
+                    <div class="legend" id="legend">
+                        <!-- filled by JS -->
+                    </div>
+                </div>
+            </div>
+
+            <div class="chart-card" style="animation-delay: 0.15s">
+                <div class="chart-title">Work hours — 2 years</div>
+                <div class="chart-wrap">
+                    <div class="chart-header">
+                        <div class="chart-stat">
+                            <div class="chart-stat-val" id="totalHours">—</div>
+                            <div class="chart-stat-label">total hours</div>
+                        </div>
+                        <div class="chart-stat">
+                            <div class="chart-stat-val" id="avgHours">—</div>
+                            <div class="chart-stat-label">avg / day</div>
+                        </div>
+                        <div class="chart-filters">
+                            <button class="cf" data-range="30">1M</button>
+                            <button class="cf" data-range="90">3M</button>
+                            <button class="cf" data-range="180">6M</button>
+                            <button class="cf active" data-range="365">
+                                1Y
+                            </button>
+                            <button class="cf" data-range="730">2Y</button>
+                        </div>
+                    </div>
+                    <div class="svg-wrap" id="svgWrap">
+                        <svg
+                            id="chart"
+                            height="220"
+                            viewBox="0 0 800 220"
+                            preserveAspectRatio="none"
+                        >
+                            <defs>
+                                <linearGradient
+                                    id="lineGrad"
+                                    x1="0"
+                                    y1="0"
+                                    x2="1"
+                                    y2="0"
+                                >
+                                    <stop offset="0%" stop-color="#a78bfa" />
+                                    <stop offset="100%" stop-color="#60a5fa" />
+                                </linearGradient>
+                                <linearGradient
+                                    id="areaGrad"
+                                    x1="0"
+                                    y1="0"
+                                    x2="0"
+                                    y2="1"
+                                >
+                                    <stop
+                                        offset="0%"
+                                        stop-color="#a78bfa"
+                                        stop-opacity="0.18"
+                                    />
+                                    <stop
+                                        offset="100%"
+                                        stop-color="#a78bfa"
+                                        stop-opacity="0"
+                                    />
+                                </linearGradient>
+                            </defs>
+                            <g id="gridLines"></g>
+                            <path class="chart-area" id="areaPath" />
+                            <path class="chart-line" id="linePath" />
+                            <line
+                                class="cursor-line"
+                                id="cursorLine"
+                                y1="0"
+                                y2="220"
+                            />
+                            <circle class="cursor-dot" id="cursorDot" />
+                            <g id="axisLabels"></g>
+                            <rect
+                                id="hitArea"
+                                fill="transparent"
+                                x="0"
+                                y="0"
+                                width="800"
+                                height="220"
+                            />
+                        </svg>
+                        <div class="tooltip" id="tooltip"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="chart-card" style="animation-delay: 0.2s">
+                <div class="chart-title">File sizes</div>
+                <div class="bar-list" id="barList"></div>
+            </div>
+
+            <div class="security-card">
+                <div class="chart-title">Security checklist</div>
+                <div class="security-list">
+                    <div class="security-item">
+                        <i class="fa-solid fa-check"></i> IP-based ban system
+                        for comments
+                    </div>
+                    <div class="security-item">
+                        <i class="fa-solid fa-check"></i> Email domain
+                        validation (DNS lookup)
+                    </div>
+                    <div class="security-item">
+                        <i class="fa-solid fa-check"></i> Delete tokens stored
+                        only client-side
+                    </div>
+                    <div class="security-item">
+                        <i class="fa-solid fa-check"></i> Input length limits on
+                        all fields
+                    </div>
+                    <div class="security-item">
+                        <i class="fa-solid fa-check"></i> HTML escaping on
+                        comment output
+                    </div>
+                    <div class="security-item">
+                        <i class="fa-solid fa-check"></i> Rate limit — 3
+                        comments per month per IP
+                    </div>
+                    <div class="security-item">
+                        <i class="fa-solid fa-check"></i> noindex on stats and
+                        404 pages
+                    </div>
+                    <div class="security-item">
+                        <i class="fa-solid fa-check warn"></i> No HTTPS locally
+                        (use reverse proxy in prod)
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div style="max-width: 860px; margin: 0 auto 40px; padding: 0 20px">
+            <div class="footer">
+                © 2026 Stanislav ·
+                <a
+                    href="https://github.com/toploardgg"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    >GitHub</a
+                >
+                <a href="/about">About the Site</a>
+            </div>
+        </div>
+
+        <script>
+            // ── Theme ──
+            const themeBtn = document.querySelector(".theme-btn");
+            if (themeBtn) {
+                const updateIcon = (isLight) => {
+                    themeBtn.innerHTML = isLight
+                        ? '<i class="fa-solid fa-sun"></i>'
+                        : '<i class="fa-solid fa-moon"></i>';
+                };
+                const saved = localStorage.getItem("theme");
+                if (saved === "light") {
+                    document.body.classList.add("light");
+                    updateIcon(true);
+                } else {
+                    updateIcon(false);
+                }
+                themeBtn.addEventListener("click", () => {
+                    document.body.classList.toggle("light");
+                    const isLight = document.body.classList.contains("light");
+                    updateIcon(isLight);
+                    localStorage.setItem("theme", isLight ? "light" : "dark");
+                });
+            }
+
+            // ── Stats from API ──
+            const CIRC = 2 * Math.PI * 70;
+            const LANG_COLOR = {
+                CSS: "#a78bfa",
+                JavaScript: "#f59e0b",
+                HTML: "#34d399",
+                Python: "#60a5fa",
+            };
+            const FILE_LABEL = {
+                CSS: "style.css",
+                JavaScript: "script.js",
+                HTML: "HTML files",
+                Python: "app.py",
+            };
+
+            fetch("/api/stats")
+                .then((r) => r.json())
+                .then((data) => {
+                    const total = data.reduce((s, d) => s + d.lines, 0);
+                    document.getElementById("stat-total").textContent =
+                        total.toLocaleString();
+                    document.getElementById("stat-files").textContent =
+                        data.length;
+
+                    const sorted = [...data].sort((a, b) => b.lines - a.lines);
+                    const maxLines = sorted[0].lines;
+
+                    // ── Donut ──
+                    const svgEl = document.getElementById("donutSvg");
+                    svgEl.innerHTML = "";
+                    let offset = 0;
+                    sorted.forEach(({ lang, lines }) => {
+                        const arc = (lines / total) * CIRC;
+                        const circle = document.createElementNS(
+                            "http://www.w3.org/2000/svg",
+                            "circle",
+                        );
+                        circle.setAttribute("cx", "90");
+                        circle.setAttribute("cy", "90");
+                        circle.setAttribute("r", "70");
+                        circle.setAttribute("fill", "none");
+                        circle.setAttribute(
+                            "stroke",
+                            LANG_COLOR[lang] || "#fff",
+                        );
+                        circle.setAttribute("stroke-width", "22");
+                        circle.setAttribute(
+                            "stroke-dasharray",
+                            arc + " " + (CIRC - arc),
+                        );
+                        circle.setAttribute("stroke-dashoffset", -offset);
+                        svgEl.appendChild(circle);
+                        offset += arc;
+                    });
+
+                    // ── Legend ──
+                    document.getElementById("legend").innerHTML = sorted
+                        .map(({ lang, lines }) => {
+                            const pct = Math.round((lines / total) * 100);
+                            return `
+                            <div class="legend-item">
+                                <div class="legend-dot" style="background:${LANG_COLOR[lang] || "#fff"}"></div>
+                                <div class="legend-name">${lang}</div>
+                                <div class="legend-lines">${lines.toLocaleString()} ln</div>
+                                <div class="legend-pct">${pct}%</div>
+                            </div>`;
+                        })
+                        .join("");
+
+                    // ── Bars ──
+                    document.getElementById("barList").innerHTML = sorted
+                        .map(
+                            ({ lang, lines }, i) => `
+                        <div class="bar-item">
+                            <div class="bar-meta">
+                                <span class="bar-label">${FILE_LABEL[lang] || lang}</span>
+                                <span class="bar-val">${lines.toLocaleString()} lines</span>
+                            </div>
+                            <div class="bar-track">
+                                <div class="bar-fill" style="width:${((lines / maxLines) * 100).toFixed(1)}%;background:${LANG_COLOR[lang] || "#fff"};animation-delay:${i * 0.05}s"></div>
+                            </div>
+                        </div>`,
+                        )
+                        .join("");
+                })
+                .catch(() => {
+                    document.getElementById("stat-total").textContent = "N/A";
+                    document.getElementById("stat-files").textContent = "N/A";
+                });
+
+            // ── Work hours chart ──
+            function genData() {
+                const days = 730,
+                    data = [],
+                    now = new Date();
+                let momentum = 4;
+                for (let i = days - 1; i >= 0; i--) {
+                    const d = new Date(now);
+                    d.setDate(d.getDate() - i);
+                    const isWeekend = d.getDay() === 0 || d.getDay() === 6;
+                    const seasonal =
+                        d.getMonth() >= 5 && d.getMonth() <= 7 ? 0.7 : 1;
+                    momentum += (Math.random() - 0.5) * 3;
+                    momentum = Math.max(0.5, Math.min(12, momentum));
+                    const roll = Math.random();
+                    let hours;
+                    if (roll < 0.08) hours = 0;
+                    else if (roll < 0.15) hours = Math.random() * 2;
+                    else if (roll > 0.92) hours = 11 + Math.random() * 4;
+                    else {
+                        hours =
+                            momentum * seasonal * (isWeekend ? 0.6 : 1) +
+                            (Math.random() - 0.4) * 3;
+                        hours = Math.max(0, hours);
+                    }
+                    data.push({
+                        date: new Date(d),
+                        hours: Math.min(15, Math.round(hours * 10) / 10),
+                    });
+                }
+                return data;
+            }
+
+            const ALL_DATA = genData();
+            let currentRange = 365;
+
+            function getSlice(range) {
+                return ALL_DATA.slice(ALL_DATA.length - range);
+            }
+
+            function buildPaths(data) {
+                const W = 800,
+                    H = 220,
+                    pad = { top: 14, bottom: 28, left: 4, right: 4 },
+                    maxH = 15;
+                const innerW = W - pad.left - pad.right,
+                    innerH = H - pad.top - pad.bottom;
+                const pts = data.map((d, i) => [
+                    pad.left + (i / (data.length - 1)) * innerW,
+                    pad.top + (1 - d.hours / maxH) * innerH,
+                ]);
+                function spline(pts, t = 0.3) {
+                    if (pts.length < 2) return "";
+                    let d = `M ${pts[0][0]},${pts[0][1]}`;
+                    for (let i = 0; i < pts.length - 1; i++) {
+                        const p0 = pts[Math.max(i - 1, 0)],
+                            p1 = pts[i],
+                            p2 = pts[i + 1],
+                            p3 = pts[Math.min(i + 2, pts.length - 1)];
+                        d += ` C ${p1[0] + (p2[0] - p0[0]) * t},${p1[1] + (p2[1] - p0[1]) * t} ${p2[0] - (p3[0] - p1[0]) * t},${p2[1] - (p3[1] - p1[1]) * t} ${p2[0]},${p2[1]}`;
+                    }
+                    return d;
+                }
+                const linePath = spline(pts);
+                const areaPath =
+                    linePath +
+                    ` L ${pts[pts.length - 1][0]},${H - pad.bottom} L ${pts[0][0]},${H - pad.bottom} Z`;
+                return { linePath, areaPath, pts, pad, W, H, innerH };
+            }
+
+            function buildGrid(pad, H, W, innerH) {
+                const gl = document.getElementById("gridLines"),
+                    al = document.getElementById("axisLabels");
+                gl.innerHTML = "";
+                al.innerHTML = "";
+                [0, 3, 6, 9, 12, 15].forEach((h) => {
+                    const y = pad.top + (1 - h / 15) * innerH;
+                    const line = document.createElementNS(
+                        "http://www.w3.org/2000/svg",
+                        "line",
+                    );
+                    line.setAttribute("class", "grid-line");
+                    line.setAttribute("x1", pad.left);
+                    line.setAttribute("x2", W - pad.right);
+                    line.setAttribute("y1", y);
+                    line.setAttribute("y2", y);
+                    gl.appendChild(line);
+                    const text = document.createElementNS(
+                        "http://www.w3.org/2000/svg",
+                        "text",
+                    );
+                    text.setAttribute("class", "axis-label");
+                    text.setAttribute("x", pad.left - 2);
+                    text.setAttribute("y", y + 3);
+                    text.setAttribute("text-anchor", "end");
+                    text.textContent = h + "h";
+                    al.appendChild(text);
+                });
+            }
+
+            function render(range) {
+                const data = getSlice(range);
+                const { linePath, areaPath, pts, pad, W, H, innerH } =
+                    buildPaths(data);
+                document.getElementById("linePath").setAttribute("d", linePath);
+                document.getElementById("areaPath").setAttribute("d", areaPath);
+                buildGrid(pad, H, W, innerH);
+                const total = data.reduce((s, d) => s + d.hours, 0);
+                document.getElementById("totalHours").textContent =
+                    Math.round(total).toLocaleString() + "h";
+                document.getElementById("avgHours").textContent =
+                    (total / data.length).toFixed(1) + "h";
+                const svg = document.getElementById("chart");
+                const tooltip = document.getElementById("tooltip");
+                const cursorLine = document.getElementById("cursorLine");
+                const cursorDot = document.getElementById("cursorDot");
+                document.getElementById("hitArea").onmousemove = (e) => {
+                    const rect = svg.getBoundingClientRect();
+                    const mx = (e.clientX - rect.left) * (800 / rect.width);
+                    const i = Math.max(
+                        0,
+                        Math.min(
+                            data.length - 1,
+                            Math.round(
+                                ((mx - pad.left) / (W - pad.left - pad.right)) *
+                                    (data.length - 1),
+                            ),
+                        ),
+                    );
+                    const pt = pts[i],
+                        d = data[i];
+                    cursorLine.setAttribute("x1", pt[0]);
+                    cursorLine.setAttribute("x2", pt[0]);
+                    cursorLine.style.display = "block";
+                    cursorDot.setAttribute("cx", pt[0]);
+                    cursorDot.setAttribute("cy", pt[1]);
+                    cursorDot.style.display = "block";
+                    tooltip.innerHTML = `<strong>${d.hours}h worked</strong><span>${d.date.toLocaleDateString("en-US", { day: "2-digit", month: "short", year: "numeric" })}</span>`;
+                    tooltip.style.display = "block";
+                    const sr = document
+                        .getElementById("svgWrap")
+                        .getBoundingClientRect();
+                    const tx = (pt[0] / 800) * sr.width,
+                        ty = (pt[1] / 220) * sr.height;
+                    tooltip.style.left =
+                        (tx > sr.width / 2
+                            ? tx - tooltip.offsetWidth - 12
+                            : tx + 12) + "px";
+                    tooltip.style.top = Math.max(0, ty - 36) + "px";
+                };
+                document.getElementById("hitArea").onmouseleave = () => {
+                    tooltip.style.display = "none";
+                    cursorLine.style.display = "none";
+                    cursorDot.style.display = "none";
+                };
+            }
+
+            document.querySelectorAll(".cf").forEach((btn) => {
+                btn.addEventListener("click", () => {
+                    document
+                        .querySelectorAll(".cf")
+                        .forEach((b) => b.classList.remove("active"));
+                    btn.classList.add("active");
+                    currentRange = parseInt(btn.dataset.range);
+                    render(currentRange);
+                });
+            });
+
+            render(currentRange);
+        </script>
+    </body>
+</html>

@@ -1,317 +1,631 @@
 <!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="color-scheme" content="dark">
-    <title>Toploardgg</title>
-    <link rel="icon" href="icon.png" type="image/png">
-    <meta name="description" content="Photo gallery showcasing training, lifestyle, and moments from my journey as a developer and athlete.">
-    <meta name="keywords" content="Photography, Lifestyle, Training, Developer Life, Athlete">
-    <meta name="author" content="Stanislav">
-    <meta name="robots" content="index, follow">
-    <meta http-equiv="X-Content-Type-Options" content="nosniff">
-    <meta http-equiv="X-Frame-Options" content="DENY">
-    <meta http-equiv="X-XSS-Protection" content="1; mode=block">
-    <meta name="referrer" content="strict-origin-when-cross-origin">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self'; connect-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self';">
-    <meta http-equiv="Permissions-Policy" content="geolocation=(), microphone=(), camera=()">
-    <link rel="canonical" href="https://toploardgg.github.io/">
-    <link rel="stylesheet" href="style.css">
-</head>
-<body class="has-fixed-tabs">
-  <!-- Navigation Tabs -->
-  <div class="tabs">
-    <div class="tabs-inner">
-      <div class="func-wrapper left">
-        <button class="func-button search-btn" aria-label="Search">🔍</button>
-        <div class="popover search-popover">
-          <h3>Search</h3>
-          <input type="text" id="search-input">
-        </div>
-      </div>
-    
-      <div class="main-tabs">
-        <button class="tab-button" data-target="container">Home</button>
-        <button class="tab-button" data-target="Photos">Photos</button>
-        <button class="tab-button" data-target="projects-section">Projects</button>
-      </div>
-    
-      <div class="func-wrapper right">
-        <button class="func-button theme-btn" aria-label="Toggle theme">🌙</button>
-      </div>
-    </div>
-  </div>
+    <head>
+        <meta charset="UTF-8" />
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+        />
+        <meta
+            name="apple-mobile-web-app-status-bar-style"
+            content="black-translucent"
+        />
+        <meta name="color-scheme" content="dark" />
+        <title>Toploardgg</title>
+        <link rel="icon" href="icon.png" type="image/png" />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+            crossorigin="anonymous"
+        />
+        <meta
+            name="description"
+            content="Photo gallery showcasing training, lifestyle, and moments from my journey as a developer and athlete."
+        />
+        <meta
+            name="keywords"
+            content="Photography, Lifestyle, Training, Developer Life, Athlete"
+        />
+        <meta name="author" content="Stanislav" />
+        <meta name="robots" content="index, follow" />
+        <meta name="referrer" content="strict-origin-when-cross-origin" />
+        <meta
+            property="og:title"
+            content="Toploardgg — Python Dev & Designer"
+        />
+        <meta
+            property="og:description"
+            content="Portfolio of Stanislav. Python, JS, open-source projects."
+        />
+        <meta
+            property="og:image"
+            content="https://toploardgg.github.io/photopin.png"
+        />
+        <meta property="og:url" content="https://toploardgg.github.io/" />
+        <meta property="og:type" content="website" />
+        <link rel="canonical" href="https://toploardgg.github.io/" />
+        <link rel="stylesheet" href="style.css" />
+    </head>
+    <body class="has-fixed-tabs">
+        <!-- Navigation Tabs -->
+        <div class="tabs">
+            <div class="tabs-inner">
+                <div class="func-wrapper left">
+                    <button
+                        type="button"
+                        class="func-button search-btn"
+                        aria-label="Open search"
+                    >
+                        <i class="fa-solid fa-search" aria-hidden="true"></i>
+                    </button>
+                    <div class="popover search-popover">
+                        <h3>Search</h3>
+                        <input type="text" id="search-input" />
+                    </div>
+                </div>
 
-  <div class="bg"></div>
+                <div class="main-tabs">
+                    <button class="tab-button" data-target="pin">Home</button>
+                    <button class="tab-button" data-target="Photos">
+                        Photos
+                    </button>
+                    <button class="tab-button" data-target="projects-section">
+                        Projects
+                    </button>
+                </div>
 
-  <!-- Site Loader -->
-  <div id="site-loader" class="site-loader">
-    <div class="loader-overlay"></div>
-    <div class="loader-content">
-      <div class="loader-avatar">S</div>
-      <div class="loader-row">
-        <span class="loader-left">Toploardgg</span>
-        <span class="loader-center">Website</span>
-        <span class="loader-right">Portfolio</span>
-      </div>
-      <div class="loader-link">
-        <img src="https://twemoji.maxcdn.com/v/latest/svg/1f310.svg" alt="🌐">
-        <span>www.Toploardgg.com</span>
-      </div>
-    </div>
-  </div>
+                <div class="func-wrapper right">
+                    <button
+                        class="func-button theme-btn"
+                        aria-label="Toggle theme"
+                    >
+                        <i class="fa-solid fa-moon"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
 
-  <!-- Home Section -->
-  <div class="container">
-    <div class="header card">
-      <div class="profile">
-        <div class="avatar">S</div>
-        <div class="title">
-          <h1>Stanislav</h1>
-          <p>Python Developer · Designer · Athlete</p>
-          <div class="badges">
-            <div class="badge">Python</div>
-            <div class="badge">JavaScript</div>
-            <div class="badge">HTML/CSS</div>
-            <div class="badge">Backend</div>
-            <div class="badge">Frontend</div>
-          </div>
+        <!-- Site Loader -->
+        <div id="site-loader" class="site-loader">
+            <div class="loader-overlay"></div>
+            <div class="loader-content">
+                <div class="loader-avatar">S</div>
+                <div class="loader-row">
+                    <span class="loader-left">Toploardgg</span>
+                    <span class="loader-center">Website</span>
+                    <span class="loader-right">Portfolio</span>
+                </div>
+                <div class="loader-link">
+                    <img
+                        src="https://twemoji.maxcdn.com/v/latest/svg/1f310.svg"
+                        alt="🌐"
+                    />
+                    <span>www.Toploardgg.com</span>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-  
-    <main class="main">
-      <section class="card" id="about">
-        <div class="section-title"><h2>About Me</h2></div>
-        <div class="paragraph">
-          I build thoughtful software with Python,
-          I have been programming for more than two years and I am self-taught.
-           I have many projects that I have not published yet but will be ready soon.
-           focusing on backend systems, and clean integrations.
-            I blend technical work with design sense to create maintainable,
-             useful tools. I train regularly and stay physically active.
-              I value consistency, simplicity, and elegant problem solving.
-        </div>
-        <div class="paragraph paragraph-extra-margin">
-          I program a lot in Python and maintain an active lifestyle through regular training.
-           I create open-source projects, contribute to the community,
-            and constantly learn new technologies.
-            Always open to interesting collaborations and challenging projects.
-        </div>
-      </section>
 
-      <section class="card" id="support">
-        <div class="section-title"><h2>Support My Work</h2></div>
-        <div class="paragraph">
-          Support my work via PayPal or GitHub sponsors.
-           Donations help me maintain and create new projects.
-            Every contribution is greatly appreciated!
+        <div class="pin">
+            <div class="pin-text">
+                <h1>Toploardgg</h1>
+                <p class="pin-tagline">Python Dev · Designer · Athlete</p>
+            </div>
+            <img
+                src="photopin.png"
+                alt="pin"
+                loading="lazy"
+                onerror="this.style.display = 'none'"
+            />
         </div>
-        <div class="support-buttons">
-          <a class="button" href="https://www.paypal.com/donate/?hosted_button_id=4SMQQCUXN8HQE" target="_blank" rel="noopener noreferrer">Donate via PayPal</a>
-          <a class="button" href="https://github.com/toploardgg" target="_blank" rel="noopener noreferrer">Sponsor on GitHub</a>
-        </div>
-      </section>
-    </main>
 
-    <aside class="aside">
-      <div class="card">
-        <div class="section-title"><h2>Professional Profile</h2></div>
-        <div class="paragraph">
-          Experienced with Python development, scripting, API integration, and full-stack web development. Comfortable with debugging, tooling, and iterative design. Open to collaborations on backend, frontend, and design-focused projects.
-        </div>
-        <div class="skills">
-          <div class="skill">Python</div>
-          <div class="skill">JavaScript</div>
-          <div class="skill">APIs</div>
-          <div class="skill">HTML/CSS</div>
-          <div class="skill">Backend</div>
-          <div class="skill">Frontend</div>
-          <div class="skill">Design</div>
-        </div>
-      </div>
-   
-      <div class="card">
-        <h3 class="contacts-title">Contacts</h3>
-        <div>
-          <a href="mailto:stanislavworksite@gmail.com" rel="noopener noreferrer" class="contact-link">
-            <div class="contact-item">
-              <div class="contact-icon">📧</div>
-              <div class="contact-info">
-                <div class="contact-label">Email</div>
-                <div class="contact-value">stanislavworksite@gmail.com</div>
-              </div>
-            </div>
-          </a>
-          
-          <a href="https://t.me/messagemrloardbot" target="_blank" rel="noopener noreferrer" class="contact-link">
-            <div class="contact-item">
-              <div class="contact-icon">✈️</div>
-              <div class="contact-info">
-                <div class="contact-label">Telegram</div>
-                <div class="contact-value">@messagemrloardbot</div>
-              </div>
-            </div>
-          </a>
-          
-          <a href="https://github.com/toploardgg" target="_blank" rel="noopener noreferrer" class="contact-link">
-            <div class="contact-item">
-              <div class="contact-icon">💻</div>
-              <div class="contact-info">
-                <div class="contact-label">GitHub</div>
-                <div class="contact-value">@toploardgg</div>
-              </div>
-            </div>
-          </a>
-          
-          <a href="https://www.paypal.com/donate/?hosted_button_id=4SMQQCUXN8HQE" target="_blank" rel="noopener noreferrer" class="contact-link">
-            <div class="contact-item">
-              <div class="contact-icon">💳</div>
-              <div class="contact-info">
-                <div class="contact-label">PayPal</div>
-                <div class="contact-value">Donate</div>
-              </div>
-            </div>
-          </a>
-        </div>
-      </div>
-    </aside>
-  </div>
+        <!-- Home Section -->
+        <div class="container">
+            <div class="header card">
+                <div class="profile">
+                    <div class="avatar">S</div>
+                    <div class="title">
+                        <h1>Stanislav</h1>
+                        <p>Python Developer · Designer · Athlete</p>
 
-  <!-- Photos Section -->
-  <div class="Photos">
-    <div class="container single-column">
-      <div class="section-title"><h1>Photos</h1></div>
-      <div class="photos-grid">
-        <div class="photo-item">
-          <img src="photo.png" alt="Photo 1" loading="lazy" onerror="this.style.display='none'">
-          <p>Kali linux experience</p>
-        </div>
-        <div class="photo-item">
-          <img src="photo1.png" alt="Photo 2" loading="lazy" onerror="this.style.display='none'">
-          <p>Photo from the holiday</p>
-        </div>
-        <div class="photo-item">
-          <img src="photo2.png" alt="Photo 3" loading="lazy" onerror="this.style.display='none'">
-          <p>shooting practice</p>
-        </div>
-        <div class="photo-item">
-          <img src="photo3.png" alt="Photo 4" loading="lazy" onerror="this.style.display='none'">
-          <p>vibe photo</p>
-        </div>
-        <div class="photo-item">
-          <img src="photo4.png" alt="Photo 5" loading="lazy" onerror="this.style.display='none'">
-          <p></p>
-        </div>
-        <div class="photo-item">
-          <img src="photo5.png" alt="Photo 6" loading="lazy" onerror="this.style.display='none'">
-          <p></p>
-        </div>
-      </div>
-    </div>
-  </div>
+                        <div class="stats-row">
+                            <a class="stat" data-img="2024.png">
+                                <span class="text-default"
+                                    >2+ Years Coding</span
+                                >
+                                <span class="text-hover"
+                                    >See my first project</span
+                                >
+                            </a>
+                            <span class="divider">|</span>
 
-  <!-- Projects Section -->
-  <div class="container single-column">
-    <div class="projects-section">
-      <header class="page-header">
-        <h1>My Projects</h1>
-        <p>Open-source tools, experiments, and creative coding</p>
-      </header>
+                            <a class="stat" href="#projects-grid"
+                                >15+ Projects</a
+                            >
+                            <span class="divider">|</span>
 
-      <div class="projects-grid">
-        <a href="https://github.com/toploardgg/Suggestion-bot" target="_blank" rel="noopener noreferrer" class="project-link">
-          <div class="project">
-            <div class="project-title">
-              <span>📨</span> Suggestion-bot
-              <div class="star-badge">⭐ Public</div>
+                            <a
+                                class="stat"
+                                href="https://en.wikipedia.org/wiki/Open-source_software"
+                                target="_blank"
+                                >Open Source Contributor</a
+                            >
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="project-desc">
-              Bot for sending ideas, suggestions, and feedback directly to the creator in a simple and anonymous way.
-            </div>
-            <div class="project-meta">
-              <div class="project-tag">Python</div>
-              <div class="project-tag">Telegram Bot</div>
-              <div class="project-tag">MIT License</div>
-            </div>
-          </div>
-        </a>
-     
-        <a href="https://github.com/toploardgg/hacker-rain" target="_blank" rel="noopener noreferrer" class="project-link">
-          <div class="project">
-            <div class="project-title">
-              <span>💻</span> hacker-rain
-              <div class="star-badge">⭐ Public</div>
-            </div>
-            <div class="project-desc">
-              Matrix movie hacker rain that opens in fullscreen (Borderless Window) with 0s and 1s (binary code).
-            </div>
-            <div class="project-meta">
-              <div class="project-tag">Python</div>
-              <div class="project-tag">Pygame</div>
-              <div class="project-tag">MIT License</div>
-            </div>
-          </div>
-        </a>
-     
-        <a href="https://github.com/toploardgg/toploardgg.github.io" target="_blank" rel="noopener noreferrer" class="project-link">
-          <div class="project">
-            <div class="project-title">
-              <span>🌐</span> Toploardgg
-              <div class="star-badge">⭐ Public</div>
-            </div>
-            <div class="project-desc">
-              Modern, interactive portfolio website with glassmorphism design and smooth animations. Fully responsive and optimized for all devices.
-            </div>
-            <div class="project-meta">
-              <div class="project-tag">HTML/CSS/JS</div>
-              <div class="project-tag">Design</div>
-              <div class="project-tag">MIT License</div>
-            </div>
-          </div>
-        </a>
-     
-        <a href="https://github.com/toploardgg/loard" target="_blank" rel="noopener noreferrer" class="project-link">
-          <div class="project">
-            <div class="project-title">
-              <span>🌐</span> LOARDw
-              <div class="star-badge">⭐ Public</div>
-            </div>
-            <div class="project-desc">
-              An internet utility for viewing almost all information about the internet. The password is only shown when connected to the network.
-            </div>
-            <div class="project-meta">
-              <div class="project-tag">Python</div>
-              <div class="project-tag">WiFi</div>
-              <div class="project-tag">MIT License</div>
-            </div>
-          </div>
-        </a>
-      </div>
-    </div>
 
-    <div class="view-all-wrapper">
-      <a class="button" href="https://github.com/toploardgg?tab=repositories" target="_blank" rel="noopener noreferrer">View All Repositories on GitHub →</a>
-    </div>
-  
-    <div class="footer">
-      © 2026 Stanislav ·
-      <a href="https://github.com/toploardgg" target="_blank" rel="noopener noreferrer">GitHub</a>
-      <a href="about.html" class="about">About the Site</a>
-      </div>
-    </div>
-  </div>
+            <main class="main">
+                <section class="card" id="about">
+                    <div class="section-title"><h2>About Me</h2></div>
+                    <div class="paragraph">
+                        I build thoughtful software with Python, I have been
+                        programming for more than two years and I am
+                        self-taught. I have many projects that I have not
+                        published yet but will be ready soon. Focusing on
+                        backend systems, and clean integrations. I blend
+                        technical work with design sense to create maintainable,
+                        useful tools. I train regularly and stay physically
+                        active. I value consistency, simplicity, and elegant
+                        problem solving. I've been learning programming for over
+                        two years.
+                    </div>
+                    <div class="paragraph paragraph-extra-margin">
+                        I program a lot in Python and maintain an active
+                        lifestyle through regular training. I create open-source
+                        projects, contribute to the community, and constantly
+                        learn new technologies. Always open to interesting
+                        collaborations and challenging projects.
+                    </div>
+                </section>
 
-<div class="lightbox" id="lightbox">
-  <div class="lightbox-overlay"></div>
-  <img class="lightbox-img" id="lightbox-img" src="" alt="">
-  <button class="lightbox-close">✕</button>
-  <button class="lightbox-arrow lightbox-arrow--prev" id="lightbox-prev">&#8592;</button>
-  <button class="lightbox-arrow lightbox-arrow--next" id="lightbox-next">&#8594;</button>
-</div>
+                <section class="card" id="support">
+                    <div class="section-title"><h2>Support My Work</h2></div>
+                    <div class="paragraph">
+                        Support my work via PayPal or GitHub sponsors. Donations
+                        help me maintain and create new projects. Every
+                        contribution is greatly appreciated!
+                    </div>
+                    <div class="support-buttons">
+                        <a
+                            class="button"
+                            href="https://www.paypal.com/donate/?hosted_button_id=4SMQQCUXN8HQE"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            >Donate via PayPal</a
+                        >
+                        <a
+                            class="button"
+                            href="https://github.com/toploardgg"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            >Sponsor on GitHub</a
+                        >
+                    </div>
+                </section>
+                <section class="stats">
+                    <div class="section-title"><h2>Dev Stats</h2></div>
+                    <div class="paragraph">
+                        Language breakdown, file sizes and work hours.
+                    </div>
+                    <div class="support-buttons">
+                        <a class="button" href="/stats.html">View Stats →</a>
+                    </div>
+                </section>
+            </main>
 
-  <script src="script.js"></script>
-</body>
+            <aside class="aside">
+                <div class="card">
+                    <div class="section-title">
+                        <h2>Professional Profile</h2>
+                    </div>
+                    <div class="paragraph">
+                        Experienced with Python development, scripting, API
+                        integration, and full-stack web development. Comfortable
+                        with debugging, tooling, and iterative design. Open to
+                        collaborations on backend, frontend, and design-focused
+                        projects.
+                    </div>
+                    <div class="skills">
+                        <div class="skill">Python</div>
+                        <div class="skill">JavaScript</div>
+                        <div class="skill">APIs</div>
+                        <div class="skill">HTML/CSS</div>
+                        <div class="skill">Backend</div>
+                        <div class="skill">Frontend</div>
+                        <div class="skill">Design</div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3 class="contacts-title">Contacts</h3>
+                    <div>
+                        <a
+                            href="mailto:stanislavworksite@gmail.com"
+                            rel="noopener noreferrer"
+                            class="contact-link"
+                        >
+                            <div class="contact-item">
+                                <div class="contact-icon">
+                                    <i class="fa-solid fa-envelope"></i>
+                                </div>
+                                <div class="contact-info">
+                                    <div class="contact-label">Email</div>
+                                    <div class="contact-value">
+                                        stanislavworksite@gmail.com
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+
+                        <a
+                            href="https://t.me/messagemrloardbot"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="contact-link"
+                        >
+                            <div class="contact-item">
+                                <div class="contact-icon">
+                                    <i class="fa-brands fa-telegram"></i>
+                                </div>
+                                <div class="contact-info">
+                                    <div class="contact-label">Telegram</div>
+                                    <div class="contact-value">
+                                        @messagemrloardbot
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+
+                        <a
+                            href="https://github.com/toploardgg"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="contact-link"
+                        >
+                            <div class="contact-item">
+                                <div class="contact-icon">
+                                    <i class="fa-brands fa-github"></i>
+                                </div>
+                                <div class="contact-info">
+                                    <div class="contact-label">GitHub</div>
+                                    <div class="contact-value">@toploardgg</div>
+                                </div>
+                            </div>
+                        </a>
+
+                        <a
+                            href="https://www.paypal.com/donate/?hosted_button_id=4SMQQCUXN8HQE"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="contact-link"
+                        >
+                            <div class="contact-item">
+                                <div class="contact-icon">
+                                    <i class="fa-brands fa-paypal"></i>
+                                </div>
+                                <div class="contact-info">
+                                    <div class="contact-label">PayPal</div>
+                                    <div class="contact-value">Donate</div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </aside>
+        </div>
+
+        <!-- Photos Section -->
+        <div class="Photos">
+            <div class="container single-column">
+                <div class="section-title"><h1>Photos</h1></div>
+                <div class="photos-grid">
+                    <div class="photo-item">
+                        <img
+                            src="photo.png"
+                            alt="Photo 1"
+                            loading="lazy"
+                            onerror="this.style.display = 'none'"
+                        />
+                        <p>Kali linux experience</p>
+                    </div>
+                    <div class="photo-item">
+                        <img
+                            src="photo1.png"
+                            alt="Photo 2"
+                            loading="lazy"
+                            onerror="this.style.display = 'none'"
+                        />
+                        <p>Photo from the holiday</p>
+                    </div>
+                    <div class="photo-item">
+                        <img
+                            src="photo2.png"
+                            alt="Photo 3"
+                            loading="lazy"
+                            onerror="this.style.display = 'none'"
+                        />
+                        <p>shooting practice</p>
+                    </div>
+                    <div class="photo-item">
+                        <img
+                            src="photo3.png"
+                            alt="Photo 4"
+                            loading="lazy"
+                            onerror="this.style.display = 'none'"
+                        />
+                        <p>vibe photo</p>
+                    </div>
+                    <div class="photo-item">
+                        <img
+                            src="photo4.png"
+                            alt="Photo 5"
+                            loading="lazy"
+                            onerror="this.style.display = 'none'"
+                        />
+                        <p></p>
+                    </div>
+                    <div class="photo-item">
+                        <img
+                            src="photo5.png"
+                            alt="Photo 6"
+                            loading="lazy"
+                            onerror="this.style.display = 'none'"
+                        />
+                        <p></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Projects Section -->
+        <div class="container single-column">
+            <div class="projects-section">
+                <header class="page-header">
+                    <h1>My Projects</h1>
+                    <p>Open-source tools, experiments, and creative coding</p>
+                </header>
+
+                <div class="projects-grid" id="projects-grid">
+                    <a
+                        href="https://github.com/toploardgg/Suggestion-bot"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="project-link"
+                    >
+                        <div class="project">
+                            <div class="project-title">
+                                <i class="fa-solid fa-paper-plane"></i>
+                                Suggestion-bot
+                                <div class="star-badge">⭐ Public</div>
+                            </div>
+                            <div class="project-desc">
+                                Bot for sending ideas, suggestions, and feedback
+                                directly to the creator in a simple and
+                                anonymous way.
+                            </div>
+                            <div class="project-meta">
+                                <div class="project-tag">Python</div>
+                                <div class="project-tag">Telegram Bot</div>
+                                <div class="project-tag">MIT License</div>
+                            </div>
+                        </div>
+                    </a>
+
+                    <a
+                        href="https://github.com/toploardgg/hacker-rain"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="project-link"
+                    >
+                        <div class="project">
+                            <div class="project-title">
+                                <i class="fa-solid fa-terminal"></i> hacker-rain
+                                <div class="star-badge">⭐ Public</div>
+                            </div>
+                            <div class="project-desc">
+                                Matrix movie hacker rain that opens in
+                                fullscreen (Borderless Window) with 0s and 1s
+                                (binary code).
+                            </div>
+                            <div class="project-meta">
+                                <div class="project-tag">Python</div>
+                                <div class="project-tag">Pygame</div>
+                                <div class="project-tag">MIT License</div>
+                            </div>
+                        </div>
+                    </a>
+
+                    <a
+                        href="https://github.com/toploardgg/toploardgg.github.io"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="project-link"
+                    >
+                        <div class="project">
+                            <div class="project-title">
+                                <i class="fa-solid fa-globe"></i> Toploardgg
+                                <div class="star-badge">⭐ Public</div>
+                            </div>
+                            <div class="project-desc">
+                                Modern, interactive portfolio website with
+                                glassmorphism design and smooth animations.
+                                Fully responsive and optimized for all devices.
+                            </div>
+                            <div class="project-meta">
+                                <div class="project-tag">HTML/CSS/JS</div>
+                                <div class="project-tag">Design</div>
+                                <div class="project-tag">MIT License</div>
+                            </div>
+                        </div>
+                    </a>
+
+                    <a
+                        href="https://github.com/toploardgg/loard"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="project-link"
+                    >
+                        <div class="project">
+                            <div class="project-title">
+                                <i class="fa-solid fa-wifi"></i> LOARDw
+                                <div class="star-badge">⭐ Public</div>
+                            </div>
+                            <div class="project-desc">
+                                An internet utility for viewing almost all
+                                information about the internet. The password is
+                                only shown when connected to the network.
+                            </div>
+                            <div class="project-meta">
+                                <div class="project-tag">Python</div>
+                                <div class="project-tag">WiFi</div>
+                                <div class="project-tag">MIT License</div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <div class="view-all-wrapper">
+                <a
+                    class="button"
+                    href="https://github.com/toploardgg?tab=repositories"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    >View All Repositories on GitHub →</a
+                >
+            </div>
+        </div>
+
+        <!-- Comments Section -->
+        <div class="comments-section" id="comments-section">
+            <div class="container single-column">
+                <div class="section-title"><h1>Comments</h1></div>
+
+                <div class="comments-layout">
+                    <!-- Form card -->
+                    <div class="comment-form-card card">
+                        <h2 class="comment-form-heading">Leave a comment</h2>
+
+                        <div class="comment-rate-banner" id="commentRateBanner">
+                            <i class="fa-solid fa-circle-info"></i>
+                            <span id="commentRateText"
+                                >You can post up to 3 comments per month.</span
+                            >
+                        </div>
+
+                        <div class="comment-field-row">
+                            <label class="c-label">
+                                <input
+                                    type="text"
+                                    class="c-input"
+                                    id="c-name"
+                                    placeholder="Your name"
+                                    autocomplete="off"
+                                    maxlength="60"
+                                />
+                                <span class="c-icon"
+                                    ><i class="fa-solid fa-user"></i
+                                ></span>
+                            </label>
+                            <label class="c-label">
+                                <input
+                                    type="email"
+                                    class="c-input"
+                                    id="c-email"
+                                    placeholder="Email"
+                                    autocomplete="off"
+                                    maxlength="120"
+                                />
+                                <span class="c-icon"
+                                    ><i class="fa-solid fa-envelope"></i
+                                ></span>
+                            </label>
+                        </div>
+
+                        <div class="c-textarea-wrap">
+                            <textarea
+                                id="c-text"
+                                placeholder="Write your comment…"
+                                maxlength="1000"
+                            ></textarea>
+                            <span class="c-char-count" id="charCount"
+                                >0 / 1000</span
+                            >
+                        </div>
+
+                        <div class="c-photo-wrap" id="c-photo-drop">
+                            <input
+                                type="file"
+                                id="c-photo"
+                                accept="image/png, image/jpeg"
+                                style="display: none"
+                            />
+                            <div class="c-photo-inner">
+                                <i class="fa-solid fa-cloud-arrow-up"></i>
+                                <span class="c-photo-hint"
+                                    >Drag & drop or
+                                    <label for="c-photo" class="c-photo-click"
+                                        >click to upload</label
+                                    ></span
+                                >
+                                <span class="c-photo-sub"
+                                    >PNG or JPG · max 10 MB</span
+                                >
+                            </div>
+                            <span id="c-photo-name" class="c-photo-name"></span>
+                        </div>
+
+                        <p
+                            class="comment-error"
+                            id="commentError"
+                            aria-live="polite"
+                        ></p>
+
+                        <button class="comment-submit btn" id="commentSubmit">
+                            <i class="fa-solid fa-paper-plane"></i>&nbsp;
+                            Publish Comment
+                        </button>
+                    </div>
+
+                    <!-- Comments list -->
+                    <div class="comment-list" id="commentList"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="container single-column">
+            <div class="footer">
+                © 2026 Stanislav ·
+                <a
+                    href="https://github.com/toploardgg"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    >GitHub</a
+                >
+                <a href="about.html">About the Site</a>
+            </div>
+        </div>
+
+        <!-- Lightbox -->
+        <div class="lightbox" id="lightbox">
+            <div class="lightbox-overlay"></div>
+            <img class="lightbox-img" id="lightbox-img" src="" alt="" />
+            <button class="lightbox-close">✕</button>
+            <button
+                class="lightbox-arrow lightbox-arrow--prev"
+                id="lightbox-prev"
+            >
+                &#8592;
+            </button>
+            <button
+                class="lightbox-arrow lightbox-arrow--next"
+                id="lightbox-next"
+            >
+                &#8594;
+            </button>
+        </div>
+
+        <script src="script.js"></script>
+    </body>
 </html>
