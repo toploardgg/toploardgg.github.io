@@ -28,26 +28,42 @@
         <meta http-equiv="X-XSS-Protection" content="1; mode=block" />
         <meta name="referrer" content="strict-origin-when-cross-origin" />
         <meta
-            http-equiv="Content-Security-Policy"
-            content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self'; connect-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self';"
-        />
+http-equiv="Content-Security-Policy"
+content="
+default-src 'self';
+script-src 'self' 'unsafe-inline';
+style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com;
+img-src 'self' data: https:;
+font-src 'self' https://cdnjs.cloudflare.com;
+connect-src 'self';
+frame-ancestors 'none';
+base-uri 'self';
+form-action 'self';
+"
+/>
         <meta
             http-equiv="Permissions-Policy"
             content="geolocation=(), microphone=(), camera=()"
         />
+        
         <link rel="canonical" href="https://toploardgg.github.io/" />
         <link rel="stylesheet" href="style.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     </head>
     <body class="has-fixed-tabs">
         <!--background-->
         <div class="bg"></div>
 
-        <!-- Navigation Tabs -->
+        <!-- Navigation -->
         <div class="tabs">
             <div class="tabs-inner">
                 <div class="func-wrapper left">
-                    <button class="func-button search-btn" aria-label="Search">
-                        🔍
+                    <button
+                        type="button"
+                        class="func-button search-btn"
+                        aria-label="Open search"
+                    >
+                        <i class="fa-solid fa-search" aria-hidden="true"></i>
                     </button>
                     <div class="popover search-popover">
                         <h3>Search</h3>
