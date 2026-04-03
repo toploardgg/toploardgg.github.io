@@ -128,16 +128,13 @@ function showToast(msg, type) {
   // Hover Effects
   // ─────────────────────────────────────────
   const hoverMap = {
-    card: "hover-lift-card",
     project: "hover-lift-project",
-    badge: "hover-lift-small",
-    skill: "hover-lift-small",
     button: "hover-lift-small",
     "contact-item": "hover-lift-contact",
   };
 
   document
-    .querySelectorAll(".card, .project, .badge, .skill, .contact-item, .button")
+    .querySelectorAll(".project, .contact-item, .button")
     .forEach((el) => {
       const hoverClass = Object.keys(hoverMap).find((key) =>
         el.classList.contains(key),
@@ -870,7 +867,7 @@ if (lightbox) {
     function observe() {
       document
         .querySelectorAll(
-          ".card, .project, .photo-item, .c-card, .contact-item, .badge, .skill, " +
+          ".project, .photo-item, .c-card, .contact-item, " +
             ".section-title, .paragraph, .support-buttons, .view-all-wrapper, " +
             ".comment-form-card, .comment-list",
         )
