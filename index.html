@@ -6,21 +6,20 @@
   <title>Toploardgg — Minecraft Server</title>
 
   <!-- SEO -->
-  <meta name="description" content="Toploardgg is a Minecraft survival server. Join us at 176.105.206.143:25565 for epic gameplay, community events, and more." />
+  <meta name="description" content="Toploardgg — a Minecraft survival server. Join at 176.105.206.143:25565 for an epic community experience." />
   <meta name="keywords" content="Minecraft server, Toploardgg, survival, multiplayer, 176.105.206.143" />
   <meta name="author" content="Toploardgg" />
   <meta name="robots" content="index, follow" />
 
   <!-- Open Graph -->
   <meta property="og:title" content="Toploardgg — Minecraft Server" />
-  <meta property="og:description" content="Join the Toploardgg Minecraft server at 176.105.206.143:25565" />
+  <meta property="og:description" content="Join the Toploardgg Minecraft server. 176.105.206.143:25565" />
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://toploardgg.mc/" />
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="Toploardgg — Minecraft Server" />
-  <meta name="twitter:description" content="Join the Toploardgg Minecraft server at 176.105.206.143:25565" />
+  <meta name="twitter:description" content="Join Toploardgg at 176.105.206.143:25565" />
 
   <!-- Security -->
   <meta http-equiv="X-Content-Type-Options" content="nosniff" />
@@ -28,1722 +27,1369 @@
   <meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline' fonts.googleapis.com fonts.gstatic.com api.mcsrvstat.us; img-src 'self' data: api.mcsrvstat.us;" />
 
   <!-- Favicon -->
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%23000'/><rect x='8' y='8' width='16' height='16' fill='%23fff'/><rect x='12' y='12' width='4' height='4' fill='%23000'/><rect x='16' y='12' width='4' height='4' fill='%23000'/><rect x='10' y='20' width='12' height='2' fill='%23000'/></svg>" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%231c1c1e'/><rect x='8' y='8' width='16' height='16' fill='%23fff' rx='2'/><rect x='11' y='11' width='4' height='4' fill='%231c1c1e'/><rect x='17' y='11' width='4' height='4' fill='%231c1c1e'/><rect x='12' y='19' width='8' height='2' fill='%231c1c1e'/></svg>" />
 
-  <!-- Google Font -->
+  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323:wght@400&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,700&family=Instrument+Serif:ital@1&display=swap" rel="stylesheet" />
 
   <style>
-    /* ============================================================
-       CSS CUSTOM PROPERTIES — LIGHT MODE (DEFAULT)
-    ============================================================ */
+    /* =========================================================
+       DESIGN TOKENS
+    ========================================================= */
     :root {
-      --bg:          #ffffff;
-      --bg-alt:      #f0f0f0;
-      --bg-card:     #fafafa;
-      --border:      #111111;
-      --border-dim:  #888888;
-      --text:        #111111;
-      --text-muted:  #555555;
-      --accent:      #111111;
-      --accent-inv:  #ffffff;
-      --pixel-size:  3px;
-      --radius:      0px;
-      --shadow:      4px 4px 0px #111111;
-      --shadow-lg:   8px 8px 0px #111111;
-      --font-pixel:  'Press Start 2P', monospace;
-      --font-mono:   'VT323', monospace;
-      --trans:       background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+      --bg:           #f5f5f7;
+      --bg-card:      #ffffff;
+      --bg-elevated:  #ffffff;
+      --bg-subtle:    #e8e8ed;
+      --text:         #1d1d1f;
+      --text-2:       #6e6e73;
+      --text-3:       #aeaeb2;
+      --border:       rgba(0,0,0,0.08);
+      --border-med:   rgba(0,0,0,0.13);
+      --shadow-sm:    0 1px 3px rgba(0,0,0,0.07), 0 1px 2px rgba(0,0,0,0.04);
+      --shadow-md:    0 4px 16px rgba(0,0,0,0.07), 0 1px 4px rgba(0,0,0,0.04);
+      --shadow-lg:    0 12px 40px rgba(0,0,0,0.09), 0 4px 12px rgba(0,0,0,0.05);
+      --shadow-xl:    0 24px 64px rgba(0,0,0,0.11), 0 8px 24px rgba(0,0,0,0.06);
+      --green:        #34c759;
+      --red:          #ff3b30;
+      --radius-sm:    10px;
+      --radius-md:    16px;
+      --radius-lg:    20px;
+      --radius-xl:    28px;
+      --nav-bg:       rgba(245,245,247,0.80);
+      --nav-blur:     blur(24px) saturate(1.8);
+      --transition:   0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     [data-theme="dark"] {
-      --bg:         #0a0a0a;
-      --bg-alt:     #141414;
-      --bg-card:    #1a1a1a;
-      --border:     #eeeeee;
-      --border-dim: #666666;
-      --text:       #eeeeee;
-      --text-muted: #999999;
-      --accent:     #eeeeee;
-      --accent-inv: #0a0a0a;
-      --shadow:     4px 4px 0px #eeeeee;
-      --shadow-lg:  8px 8px 0px #eeeeee;
+      --bg:           #000000;
+      --bg-card:      #1c1c1e;
+      --bg-elevated:  #2c2c2e;
+      --bg-subtle:    #3a3a3c;
+      --text:         #f5f5f7;
+      --text-2:       #aeaeb2;
+      --text-3:       #636366;
+      --border:       rgba(255,255,255,0.07);
+      --border-med:   rgba(255,255,255,0.12);
+      --shadow-sm:    0 1px 3px rgba(0,0,0,0.5);
+      --shadow-md:    0 4px 16px rgba(0,0,0,0.55);
+      --shadow-lg:    0 12px 40px rgba(0,0,0,0.65);
+      --shadow-xl:    0 24px 64px rgba(0,0,0,0.75);
+      --nav-bg:       rgba(0,0,0,0.75);
     }
 
-    /* ============================================================
-       RESET & BASE
-    ============================================================ */
+    /* =========================================================
+       RESET
+    ========================================================= */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    html { scroll-behavior: smooth; }
-
+    html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
     body {
-      background-color: var(--bg);
+      background: var(--bg);
       color: var(--text);
-      font-family: var(--font-pixel);
-      font-size: 10px;
-      line-height: 1.8;
-      transition: var(--trans);
+      font-family: 'Figtree', -apple-system, BlinkMacSystemFont, sans-serif;
+      font-size: 17px;
+      line-height: 1.6;
+      transition: background var(--transition), color var(--transition);
       overflow-x: hidden;
     }
+    a { color: inherit; text-decoration: none; }
+    button { font-family: inherit; cursor: pointer; }
+    img { display: block; max-width: 100%; }
 
-    /* PIXEL GRID BACKGROUND */
-    body::before {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background-image:
-        linear-gradient(var(--border-dim) 1px, transparent 1px),
-        linear-gradient(90deg, var(--border-dim) 1px, transparent 1px);
-      background-size: 32px 32px;
-      opacity: 0.04;
-      pointer-events: none;
-      z-index: 0;
-    }
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: var(--bg-subtle); border-radius: 99px; }
 
-    /* SCANLINES OVERLAY */
-    body::after {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background: repeating-linear-gradient(
-        0deg,
-        transparent,
-        transparent 2px,
-        rgba(0,0,0,0.03) 2px,
-        rgba(0,0,0,0.03) 4px
-      );
-      pointer-events: none;
-      z-index: 0;
-    }
-
-    /* ============================================================
+    /* =========================================================
        UTILITY
-    ============================================================ */
-    .container {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 0 24px;
-      position: relative;
-      z-index: 1;
-    }
-
+    ========================================================= */
     .sr-only {
       position: absolute; width: 1px; height: 1px;
       padding: 0; margin: -1px; overflow: hidden;
       clip: rect(0,0,0,0); white-space: nowrap; border: 0;
     }
+    .container { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
 
-    .pixel-border {
-      border: 2px solid var(--border);
-      box-shadow: var(--shadow);
-    }
-
-    .pixel-border-lg {
-      border: 3px solid var(--border);
-      box-shadow: var(--shadow-lg);
-    }
-
-    /* ============================================================
+    /* =========================================================
        ANIMATIONS
-    ============================================================ */
-    @keyframes fadeInUp {
+    ========================================================= */
+    @keyframes fadeUp {
       from { opacity: 0; transform: translateY(24px); }
       to   { opacity: 1; transform: translateY(0); }
     }
-
     @keyframes fadeIn {
       from { opacity: 0; }
       to   { opacity: 1; }
     }
-
-    @keyframes pulse {
-      0%, 100% { opacity: 1; transform: scale(1); }
-      50%       { opacity: 0.5; transform: scale(0.85); }
+    @keyframes scaleIn {
+      from { opacity: 0; transform: scale(0.97); }
+      to   { opacity: 1; transform: scale(1); }
     }
-
-    @keyframes blink {
-      0%, 100% { opacity: 1; }
-      50%       { opacity: 0; }
+    @keyframes pulseDot {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(52,199,89,0.5); }
+      50%       { box-shadow: 0 0 0 6px rgba(52,199,89,0); }
     }
-
-    @keyframes marquee {
-      from { transform: translateX(100%); }
-      to   { transform: translateX(-100%); }
-    }
-
-    @keyframes pixelIn {
-      0%   { clip-path: inset(0 100% 0 0); }
-      100% { clip-path: inset(0 0% 0 0); }
-    }
-
     @keyframes spin {
-      from { transform: rotate(0deg); }
-      to   { transform: rotate(360deg); }
+      to { transform: rotate(360deg); }
     }
 
-    @keyframes countdown-bar {
-      from { width: 100%; }
-      to   { width: 0%; }
-    }
-
-    /* ============================================================
-       TICKER
-    ============================================================ */
-    .ticker {
-      background: var(--border);
-      color: var(--accent-inv);
-      overflow: hidden;
-      height: 28px;
-      display: flex;
-      align-items: center;
-      position: relative;
-      z-index: 10;
-    }
-
-    .ticker__label {
-      flex-shrink: 0;
-      padding: 0 12px;
-      font-family: var(--font-pixel);
-      font-size: 7px;
-      letter-spacing: 1px;
-      border-right: 2px solid var(--bg);
-      height: 100%;
-      display: flex;
-      align-items: center;
-    }
-
-    .ticker__track {
-      overflow: hidden;
-      flex: 1;
-      height: 100%;
-      display: flex;
-      align-items: center;
-    }
-
-    .ticker__content {
-      white-space: nowrap;
-      font-family: var(--font-mono);
-      font-size: 16px;
-      animation: marquee 24s linear infinite;
-      letter-spacing: 2px;
-    }
-
-    /* ============================================================
-       NAVIGATION
-    ============================================================ */
+    /* =========================================================
+       NAV
+    ========================================================= */
     .nav {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      background: var(--bg);
-      border-bottom: 2px solid var(--border);
-      transition: var(--trans);
+      position: fixed;
+      inset-block-start: 0;
+      inset-inline: 0;
+      z-index: 200;
+      background: var(--nav-bg);
+      backdrop-filter: var(--nav-blur);
+      -webkit-backdrop-filter: var(--nav-blur);
+      border-bottom: 1px solid var(--border);
+      transition: background var(--transition);
     }
 
     .nav__inner {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      height: 56px;
+      height: 52px;
     }
 
     .nav__logo {
-      font-family: var(--font-pixel);
-      font-size: 9px;
+      font-size: 15px;
+      font-weight: 800;
+      letter-spacing: -0.4px;
       color: var(--text);
-      text-decoration: none;
-      letter-spacing: 1px;
+      transition: opacity 0.2s;
+    }
+    .nav__logo:hover { opacity: 0.6; }
+
+    .nav__center {
+      display: flex;
+      align-items: center;
+      gap: 2px;
+    }
+
+    .nav__link {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-2);
+      padding: 6px 12px;
+      border-radius: 8px;
+      transition: background 0.2s, color 0.2s;
+    }
+    .nav__link:hover { background: var(--bg-subtle); color: var(--text); }
+
+    .nav__right {
       display: flex;
       align-items: center;
       gap: 10px;
     }
 
-    .nav__logo-icon {
-      width: 28px;
-      height: 28px;
-      background: var(--text);
-      display: inline-block;
+    /* Toggle switch */
+    .theme-switch {
       position: relative;
+      width: 36px;
+      height: 20px;
+      background: var(--bg-subtle);
+      border-radius: 99px;
+      border: none;
+      cursor: pointer;
+      transition: background var(--transition);
       flex-shrink: 0;
-      image-rendering: pixelated;
     }
-
-    /* Pixel creeper face */
-    .nav__logo-icon::before,
-    .nav__logo-icon::after {
+    .theme-switch::after {
       content: '';
       position: absolute;
-      background: var(--bg);
+      top: 2px; left: 2px;
+      width: 16px; height: 16px;
+      background: var(--bg-card);
+      border-radius: 50%;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+      transition: transform var(--transition);
     }
+    [data-theme="dark"] .theme-switch::after { transform: translateX(16px); }
 
-    .nav__logo-icon::before {
-      width: 8px; height: 6px;
-      top: 6px; left: 4px;
-      box-shadow: 12px 0 0 var(--bg);
-    }
-
-    .nav__logo-icon::after {
-      width: 12px; height: 4px;
-      top: 16px; left: 8px;
-      box-shadow: -4px -4px 0 var(--bg), 4px -4px 0 var(--bg);
-    }
-
-    .nav__links {
-      display: flex;
-      gap: 2px;
-      list-style: none;
+    .nav__cta {
+      display: inline-flex;
       align-items: center;
-    }
-
-    .nav__link {
-      font-family: var(--font-pixel);
-      font-size: 7px;
-      color: var(--text-muted);
-      text-decoration: none;
-      padding: 6px 10px;
-      border: 2px solid transparent;
-      transition: color 0.15s, border-color 0.15s, background 0.15s;
-      letter-spacing: 0.5px;
-    }
-
-    .nav__link:hover,
-    .nav__link:focus {
-      color: var(--text);
-      border-color: var(--border);
-      background: var(--bg-alt);
-      outline: none;
-    }
-
-    .theme-toggle {
-      background: var(--bg);
-      border: 2px solid var(--border);
-      color: var(--text);
-      font-family: var(--font-pixel);
-      font-size: 7px;
-      padding: 6px 10px;
-      cursor: pointer;
-      transition: background 0.15s, color 0.15s;
-      letter-spacing: 0.5px;
-    }
-
-    .theme-toggle:hover,
-    .theme-toggle:focus {
-      background: var(--border);
+      background: var(--text);
       color: var(--bg);
-      outline: none;
+      font-size: 13px;
+      font-weight: 700;
+      padding: 7px 18px;
+      border-radius: 99px;
+      border: none;
+      transition: opacity 0.2s, transform 0.15s;
     }
+    .nav__cta:hover { opacity: 0.82; transform: scale(1.02); }
 
+    /* Mobile hamburger */
     .nav__hamburger {
       display: none;
       flex-direction: column;
       gap: 5px;
       background: none;
       border: none;
-      cursor: pointer;
       padding: 4px;
     }
-
     .nav__hamburger span {
       display: block;
-      width: 24px;
-      height: 2px;
+      width: 22px; height: 2px;
       background: var(--text);
-      transition: var(--trans);
+      border-radius: 2px;
+      transition: var(--transition);
     }
+    .nav__mobile-panel {
+      display: none;
+      position: fixed;
+      top: 52px; left: 0; right: 0;
+      background: var(--nav-bg);
+      backdrop-filter: var(--nav-blur);
+      -webkit-backdrop-filter: var(--nav-blur);
+      border-bottom: 1px solid var(--border);
+      padding: 12px 24px 20px;
+      z-index: 199;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .nav__mobile-panel.open { display: flex; }
+    .nav__mobile-panel .nav__link { display: block; padding: 10px 12px; }
+    .nav__mobile-panel .nav__cta { margin-top: 6px; width: fit-content; }
 
-    /* ============================================================
+    /* =========================================================
        HERO
-    ============================================================ */
+    ========================================================= */
     .hero {
-      padding: 80px 0 60px;
-      border-bottom: 2px solid var(--border);
+      padding-top: 148px;
+      padding-bottom: 100px;
+      text-align: center;
       position: relative;
       overflow: hidden;
     }
 
-    .hero__bg-blocks {
+    .hero::before {
+      content: '';
       position: absolute;
-      inset: 0;
+      inset: -60% -40%;
+      background:
+        radial-gradient(ellipse 55% 45% at 15% 25%, rgba(160,160,185,0.14) 0%, transparent 65%),
+        radial-gradient(ellipse 45% 55% at 85% 75%, rgba(140,140,165,0.11) 0%, transparent 65%),
+        radial-gradient(ellipse 35% 50% at 55% 5%,  rgba(190,190,210,0.09) 0%, transparent 60%);
       pointer-events: none;
     }
 
-    .hero__block {
-      position: absolute;
-      background: var(--border);
-      opacity: 0.04;
-      image-rendering: pixelated;
+    [data-theme="dark"] .hero::before {
+      background:
+        radial-gradient(ellipse 55% 45% at 15% 25%, rgba(80,80,110,0.20) 0%, transparent 65%),
+        radial-gradient(ellipse 45% 55% at 85% 75%, rgba(60,60,90,0.16) 0%, transparent 65%),
+        radial-gradient(ellipse 35% 50% at 55% 5%,  rgba(100,100,130,0.13) 0%, transparent 60%);
     }
 
-    .hero__block:nth-child(1) { width: 64px; height: 64px; top: 10%; left: 5%; }
-    .hero__block:nth-child(2) { width: 32px; height: 32px; top: 60%; left: 8%; }
-    .hero__block:nth-child(3) { width: 96px; height: 96px; top: 20%; right: 4%; }
-    .hero__block:nth-child(4) { width: 48px; height: 48px; bottom: 10%; right: 12%; }
-    .hero__block:nth-child(5) { width: 32px; height: 32px; top: 5%; right: 20%; }
-    .hero__block:nth-child(6) { width: 64px; height: 64px; bottom: 15%; left: 15%; }
-
-    .hero__content {
-      max-width: 800px;
-      animation: fadeInUp 0.7s ease both;
+    .hero__pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-med);
+      border-radius: 99px;
+      padding: 6px 16px 6px 10px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-2);
+      margin-bottom: 36px;
+      box-shadow: var(--shadow-sm);
+      animation: fadeIn 0.6s ease both;
     }
-
-    .hero__badge {
-      display: inline-block;
-      border: 2px solid var(--border);
-      font-size: 7px;
-      padding: 4px 10px;
-      margin-bottom: 24px;
-      letter-spacing: 2px;
-      color: var(--text-muted);
+    .hero__pill-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--green);
+      animation: pulseDot 2.5s ease-in-out infinite;
+      flex-shrink: 0;
     }
 
     .hero__title {
-      font-family: var(--font-pixel);
-      font-size: clamp(18px, 4vw, 36px);
-      line-height: 1.5;
+      font-size: clamp(44px, 8.5vw, 88px);
+      font-weight: 900;
+      letter-spacing: -2.5px;
+      line-height: 1.02;
       color: var(--text);
-      margin-bottom: 20px;
-      letter-spacing: 2px;
+      margin-bottom: 24px;
+      animation: fadeUp 0.65s 0.08s ease both;
+    }
+    .hero__title em {
+      font-family: 'Instrument Serif', Georgia, serif;
+      font-style: italic;
+      font-weight: 400;
+      letter-spacing: -1px;
     }
 
-    .hero__title .cursor {
-      display: inline-block;
-      width: 3px;
-      height: 1em;
-      background: var(--text);
-      vertical-align: middle;
-      animation: blink 1s step-end infinite;
-      margin-left: 4px;
-    }
-
-    .hero__tagline {
-      font-family: var(--font-mono);
-      font-size: 22px;
-      color: var(--text-muted);
-      margin-bottom: 36px;
-      letter-spacing: 2px;
-      animation: fadeInUp 0.7s 0.15s ease both;
+    .hero__sub {
+      font-size: clamp(17px, 2.5vw, 21px);
+      color: var(--text-2);
+      font-weight: 400;
+      max-width: 520px;
+      margin: 0 auto 48px;
+      line-height: 1.55;
+      animation: fadeUp 0.65s 0.18s ease both;
     }
 
     .hero__actions {
       display: flex;
+      justify-content: center;
       gap: 12px;
       flex-wrap: wrap;
-      animation: fadeInUp 0.7s 0.25s ease both;
+      animation: fadeUp 0.65s 0.28s ease both;
     }
 
-    .btn {
-      font-family: var(--font-pixel);
-      font-size: 8px;
-      padding: 12px 20px;
-      border: 2px solid var(--border);
-      cursor: pointer;
-      text-decoration: none;
+    /* =========================================================
+       BUTTONS
+    ========================================================= */
+    .btn-primary {
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      transition: transform 0.1s, box-shadow 0.1s, background 0.15s, color 0.15s;
-      letter-spacing: 1px;
-      box-shadow: var(--shadow);
+      background: var(--text);
+      color: var(--bg);
+      font-size: 15px;
+      font-weight: 700;
+      padding: 14px 28px;
+      border-radius: 99px;
+      border: none;
+      box-shadow: var(--shadow-md);
+      transition: opacity 0.2s, transform 0.15s;
     }
+    .btn-primary:hover { opacity: 0.82; transform: scale(1.02); }
+    .btn-primary:active { transform: scale(0.98); }
 
-    .btn--primary {
-      background: var(--border);
-      color: var(--accent-inv);
-    }
-
-    .btn--primary:hover,
-    .btn--primary:focus {
-      transform: translate(-2px, -2px);
-      box-shadow: var(--shadow-lg);
-      outline: none;
-    }
-
-    .btn--secondary {
-      background: var(--bg);
+    .btn-ghost {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--bg-card);
       color: var(--text);
+      font-size: 15px;
+      font-weight: 600;
+      padding: 14px 28px;
+      border-radius: 99px;
+      border: 1px solid var(--border-med);
+      box-shadow: var(--shadow-sm);
+      transition: background 0.2s, box-shadow 0.2s, transform 0.15s;
     }
+    .btn-ghost:hover { background: var(--bg-subtle); box-shadow: var(--shadow-md); transform: scale(1.02); }
+    .btn-ghost:active { transform: scale(0.98); }
 
-    .btn--secondary:hover,
-    .btn--secondary:focus {
-      background: var(--bg-alt);
-      transform: translate(-2px, -2px);
-      box-shadow: var(--shadow-lg);
-      outline: none;
-    }
+    /* =========================================================
+       SECTION LAYOUT
+    ========================================================= */
+    .section { padding: 96px 0; }
 
-    .btn:active {
-      transform: translate(2px, 2px);
-      box-shadow: none;
-    }
-
-    /* ============================================================
-       SECTION HEADERS
-    ============================================================ */
-    .section-header {
-      margin-bottom: 40px;
-    }
-
-    .section-label {
-      font-size: 7px;
-      color: var(--text-muted);
-      letter-spacing: 3px;
+    .section-eyebrow {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 1.4px;
+      text-transform: uppercase;
+      color: var(--text-3);
       margin-bottom: 10px;
       display: block;
     }
-
     .section-title {
-      font-family: var(--font-pixel);
-      font-size: clamp(12px, 2.5vw, 18px);
+      font-size: clamp(28px, 4vw, 46px);
+      font-weight: 800;
+      letter-spacing: -1.2px;
+      line-height: 1.08;
       color: var(--text);
+      margin-bottom: 14px;
+    }
+    .section-sub {
+      font-size: 17px;
+      color: var(--text-2);
       line-height: 1.6;
-      letter-spacing: 1px;
+      max-width: 480px;
     }
+    .section-header { margin-bottom: 52px; }
 
-    .section-divider {
-      width: 40px;
-      height: 3px;
-      background: var(--border);
-      margin-top: 12px;
-    }
-
-    /* ============================================================
-       STATUS PANEL
-    ============================================================ */
+    /* =========================================================
+       STATUS
+    ========================================================= */
     #status {
-      padding: 64px 0;
-      border-bottom: 2px solid var(--border);
-    }
-
-    .status-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 0;
-      border: 2px solid var(--border);
-      box-shadow: var(--shadow-lg);
-      animation: fadeInUp 0.5s ease both;
-    }
-
-    .status-main {
-      border-right: 2px solid var(--border);
-      padding: 32px;
       background: var(--bg-card);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
     }
 
-    .status-sidebar {
-      padding: 32px;
+    .status-card {
       background: var(--bg-card);
+      border-radius: var(--radius-xl);
+      border: 1px solid var(--border-med);
+      box-shadow: var(--shadow-xl);
+      overflow: hidden;
+      animation: scaleIn 0.5s 0.1s ease both;
+    }
+
+    /* Loading */
+    .status-loader {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 80px 32px;
+      gap: 18px;
+    }
+    .status-loader__spinner {
+      width: 28px; height: 28px;
+      border: 2.5px solid var(--bg-subtle);
+      border-top-color: var(--text-2);
+      border-radius: 50%;
+      animation: spin 0.75s linear infinite;
+    }
+    .status-loader p {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-2);
+    }
+
+    /* Status header bar */
+    .status-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 28px;
+      border-bottom: 1px solid var(--border);
+      gap: 16px;
+      flex-wrap: wrap;
     }
 
     .status-indicator {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 24px;
-    }
-
-    .status-dot {
-      width: 12px;
-      height: 12px;
-      background: var(--text-muted);
-      flex-shrink: 0;
-    }
-
-    .status-dot.online {
-      background: var(--text);
-      animation: pulse 2s ease-in-out infinite;
-    }
-
-    .status-dot.offline {
-      background: var(--text-muted);
-    }
-
-    .status-label {
-      font-family: var(--font-pixel);
-      font-size: 9px;
-      color: var(--text);
-      letter-spacing: 1px;
-    }
-
-    .status-motd {
-      font-family: var(--font-mono);
-      font-size: 20px;
-      color: var(--text-muted);
-      border-left: 3px solid var(--border);
-      padding-left: 12px;
-      margin: 16px 0;
-      line-height: 1.4;
-      word-break: break-word;
-    }
-
-    .status-stats {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-      margin-top: 20px;
-    }
-
-    .stat-cell {
-      border: 2px solid var(--border);
-      padding: 12px;
-      background: var(--bg-alt);
-    }
-
-    .stat-cell__label {
-      font-size: 6px;
-      color: var(--text-muted);
-      letter-spacing: 2px;
-      display: block;
-      margin-bottom: 6px;
-    }
-
-    .stat-cell__value {
-      font-family: var(--font-mono);
-      font-size: 22px;
-      color: var(--text);
-      letter-spacing: 1px;
-    }
-
-    /* PLAYER LIST */
-    .player-list-title {
-      font-size: 7px;
-      color: var(--text-muted);
-      letter-spacing: 2px;
-      margin-bottom: 12px;
-    }
-
-    .player-list {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-      max-height: 260px;
-      overflow-y: auto;
-    }
-
-    .player-list::-webkit-scrollbar { width: 4px; }
-    .player-list::-webkit-scrollbar-track { background: var(--bg-alt); }
-    .player-list::-webkit-scrollbar-thumb { background: var(--border-dim); }
-
-    .player-item {
-      display: flex;
+      display: inline-flex;
       align-items: center;
       gap: 8px;
-      padding: 6px 8px;
-      background: var(--bg-alt);
-      border: 1px solid var(--border-dim);
-      font-family: var(--font-mono);
-      font-size: 16px;
-      letter-spacing: 1px;
-      color: var(--text);
-      animation: fadeIn 0.3s ease both;
+      font-size: 13px;
+      font-weight: 700;
+      padding: 6px 14px;
+      border-radius: 99px;
     }
-
-    .player-avatar {
-      width: 16px;
-      height: 16px;
-      background: var(--border);
+    .status-indicator.is-online {
+      background: rgba(52,199,89,0.10);
+      color: #1c8a3a;
+    }
+    [data-theme="dark"] .status-indicator.is-online {
+      background: rgba(52,199,89,0.14);
+      color: #34c759;
+    }
+    .status-indicator.is-offline {
+      background: rgba(255,59,48,0.09);
+      color: #c0392b;
+    }
+    [data-theme="dark"] .status-indicator.is-offline {
+      background: rgba(255,59,48,0.14);
+      color: #ff3b30;
+    }
+    .status-dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: currentColor;
       flex-shrink: 0;
-      image-rendering: pixelated;
     }
+    .is-online .status-dot { animation: pulseDot 2.2s ease-in-out infinite; }
 
-    .player-item img {
-      width: 16px;
-      height: 16px;
-      image-rendering: pixelated;
-    }
-
-    /* REFRESH */
-    .status-footer {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-top: 20px;
-      padding-top: 16px;
-      border-top: 1px solid var(--border-dim);
-      flex-wrap: wrap;
-      gap: 10px;
-    }
-
-    .refresh-info {
-      font-family: var(--font-mono);
-      font-size: 14px;
-      color: var(--text-muted);
-      letter-spacing: 1px;
-    }
-
-    .refresh-bar-wrap {
+    .status-motd {
       flex: 1;
-      min-width: 80px;
-      height: 4px;
-      background: var(--bg-alt);
-      border: 1px solid var(--border-dim);
-      overflow: hidden;
-    }
-
-    .refresh-bar {
-      height: 100%;
-      background: var(--border);
-      width: 100%;
-    }
-
-    .refresh-bar.animating {
-      animation: countdown-bar 30s linear forwards;
+      font-size: 15px;
+      font-style: italic;
+      font-family: 'Instrument Serif', Georgia, serif;
+      color: var(--text-2);
+      min-width: 0;
     }
 
     .refresh-btn {
-      background: none;
-      border: 2px solid var(--border-dim);
-      color: var(--text-muted);
-      font-family: var(--font-pixel);
-      font-size: 6px;
-      padding: 4px 8px;
-      cursor: pointer;
-      transition: border-color 0.15s, color 0.15s;
-      letter-spacing: 1px;
+      background: var(--bg-subtle);
+      border: none;
+      border-radius: 8px;
+      padding: 7px 16px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-2);
+      transition: background 0.2s, color 0.2s;
+      flex-shrink: 0;
     }
+    .refresh-btn:hover { background: var(--border-med); color: var(--text); }
+    .refresh-btn:disabled { opacity: 0.4; cursor: default; }
 
-    .refresh-btn:hover,
-    .refresh-btn:focus {
-      border-color: var(--border);
-      color: var(--text);
-      outline: none;
-    }
-
-    /* SKELETON LOADING */
-    .skeleton {
-      background: linear-gradient(90deg, var(--bg-alt) 25%, var(--bg-card) 50%, var(--bg-alt) 75%);
-      background-size: 200% 100%;
-      animation: shimmer 1.5s infinite;
-      display: block;
-    }
-
-    @keyframes shimmer {
-      from { background-position: 200% 0; }
-      to   { background-position: -200% 0; }
-    }
-
-    .status-loading {
-      text-align: center;
-      padding: 32px;
-    }
-
-    .status-loading__spinner {
-      width: 24px;
-      height: 24px;
-      border: 3px solid var(--border-dim);
-      border-top-color: var(--border);
-      display: inline-block;
-      animation: spin 0.8s linear infinite;
-      margin-bottom: 12px;
-    }
-
-    .status-loading__text {
-      font-size: 7px;
-      color: var(--text-muted);
-      letter-spacing: 2px;
-    }
-
-    /* ERROR */
-    .status-error {
-      grid-column: 1/-1;
-      padding: 40px;
-      text-align: center;
-    }
-
-    .status-error__icon {
-      display: block;
-      font-size: 32px;
-      margin-bottom: 16px;
-      color: var(--text-muted);
-      font-family: var(--font-pixel);
-    }
-
-    .status-error__text {
-      font-size: 8px;
-      color: var(--text-muted);
-      letter-spacing: 1px;
-    }
-
-    /* ============================================================
-       FEATURES
-    ============================================================ */
-    #features {
-      padding: 64px 0;
-      border-bottom: 2px solid var(--border);
-    }
-
-    .features-grid {
+    /* Stats grid */
+    .status-stats {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 0;
-      border: 2px solid var(--border);
-      box-shadow: var(--shadow-lg);
+      grid-template-columns: repeat(4, 1fr);
+      border-bottom: 1px solid var(--border);
+    }
+    .stat-cell {
+      padding: 28px 24px;
+      border-right: 1px solid var(--border);
+    }
+    .stat-cell:last-child { border-right: none; }
+    .stat-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      color: var(--text-3);
+      margin-bottom: 10px;
+      display: block;
+    }
+    .stat-val {
+      font-size: 28px;
+      font-weight: 800;
+      letter-spacing: -0.8px;
+      color: var(--text);
+      line-height: 1;
+    }
+    .stat-val.compact { font-size: 18px; letter-spacing: -0.3px; }
+    .stat-val .muted { font-size: 16px; color: var(--text-3); font-weight: 500; }
+
+    /* Players */
+    .status-players {
+      padding: 24px 28px;
+    }
+    .players-heading {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      color: var(--text-3);
+      margin-bottom: 14px;
+    }
+    .players-wrap {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .player-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      background: var(--bg-subtle);
+      border-radius: 99px;
+      padding: 5px 12px 5px 5px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-2);
+      animation: fadeIn 0.3s ease both;
+    }
+    .player-chip img {
+      width: 20px; height: 20px;
+      border-radius: 4px;
+      image-rendering: pixelated;
+    }
+    .player-chip__fallback {
+      width: 20px; height: 20px;
+      background: var(--border-med);
+      border-radius: 4px;
+      flex-shrink: 0;
+    }
+    .players-empty-note {
+      font-size: 14px;
+      color: var(--text-3);
+      font-weight: 500;
     }
 
-    .feature-card {
-      padding: 28px;
+    /* Error */
+    .status-error {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 80px 32px;
+      text-align: center;
+      gap: 10px;
+    }
+    .status-error__title {
+      font-size: 19px;
+      font-weight: 700;
+      color: var(--text);
+    }
+    .status-error__desc {
+      font-size: 14px;
+      color: var(--text-2);
+      max-width: 320px;
+      line-height: 1.65;
+      margin-bottom: 6px;
+    }
+
+    /* =========================================================
+       FEATURES
+    ========================================================= */
+    #features { background: var(--bg); }
+
+    .features-bento {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: auto auto;
+      gap: 16px;
+    }
+
+    .f-card {
       background: var(--bg-card);
-      border-right: 2px solid var(--border);
-      border-bottom: 2px solid var(--border);
-      transition: background 0.2s;
-      animation: fadeInUp 0.5s ease both;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 30px 26px;
+      box-shadow: var(--shadow-sm);
+      transition: box-shadow var(--transition), transform var(--transition), border-color var(--transition);
+      animation: fadeUp 0.5s ease both;
     }
-
-    .feature-card:hover {
-      background: var(--bg-alt);
+    .f-card:hover {
+      box-shadow: var(--shadow-lg);
+      transform: translateY(-3px);
+      border-color: var(--border-med);
     }
+    .f-card--span2 { grid-column: span 2; }
 
-    .feature-card:last-child { border-right: none; }
-
-    .feature-icon {
-      width: 40px;
-      height: 40px;
-      border: 2px solid var(--border);
-      background: var(--bg);
-      margin-bottom: 16px;
+    .f-icon {
+      width: 46px; height: 46px;
+      border-radius: 12px;
+      background: var(--bg-subtle);
       display: flex;
       align-items: center;
       justify-content: center;
-      position: relative;
-      overflow: hidden;
+      font-size: 22px;
+      margin-bottom: 18px;
+      flex-shrink: 0;
     }
-
-    /* Pixel art block icons via CSS */
-    .icon-grass { background: var(--bg-alt); }
-    .icon-grass::after {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 10px;
-      background: var(--border);
-    }
-
-    .icon-diamond {
-      background: var(--bg-alt);
-    }
-    .icon-diamond::before {
-      content: '';
-      position: absolute;
-      width: 14px; height: 14px;
-      border: 2px solid var(--border);
-      transform: rotate(45deg);
-    }
-
-    .icon-sword {
-      background: var(--bg-alt);
-    }
-    .icon-sword::before {
-      content: '';
-      position: absolute;
-      width: 4px; height: 20px;
-      background: var(--border);
-    }
-    .icon-sword::after {
-      content: '';
-      position: absolute;
-      width: 14px; height: 4px;
-      background: var(--border);
-      top: 8px;
-    }
-
-    .icon-map {
-      background: var(--bg-alt);
-    }
-    .icon-map::before {
-      content: '';
-      position: absolute;
-      width: 20px; height: 14px;
-      border: 2px solid var(--border);
-    }
-    .icon-map::after {
-      content: '';
-      position: absolute;
-      width: 8px; height: 2px;
-      background: var(--border);
-      top: 12px; left: 6px;
-      box-shadow: 0 4px 0 var(--border);
-    }
-
-    .icon-shield {
-      background: var(--bg-alt);
-    }
-    .icon-shield::before {
-      content: '';
-      position: absolute;
-      width: 16px; height: 10px;
-      border: 2px solid var(--border);
-      border-bottom: none;
-      top: 6px;
-    }
-    .icon-shield::after {
-      content: '';
-      position: absolute;
-      width: 4px; height: 6px;
-      border-left: 2px solid var(--border);
-      border-right: 2px solid var(--border);
-      border-bottom: 2px solid var(--border);
-      bottom: 6px;
-    }
-
-    .icon-chest {
-      background: var(--bg-alt);
-    }
-    .icon-chest::before {
-      content: '';
-      position: absolute;
-      width: 20px; height: 14px;
-      border: 2px solid var(--border);
-      top: 6px;
-    }
-    .icon-chest::after {
-      content: '';
-      position: absolute;
-      width: 6px; height: 4px;
-      border: 2px solid var(--border);
-      top: 50%; left: 50%;
-      transform: translate(-50%, -50%);
-    }
-
-    .feature-name {
-      font-family: var(--font-pixel);
-      font-size: 8px;
+    .f-name {
+      font-size: 17px;
+      font-weight: 700;
+      letter-spacing: -0.3px;
       color: var(--text);
-      margin-bottom: 10px;
-      letter-spacing: 1px;
+      margin-bottom: 7px;
+    }
+    .f-desc {
+      font-size: 15px;
+      color: var(--text-2);
+      line-height: 1.65;
     }
 
-    .feature-desc {
-      font-family: var(--font-mono);
-      font-size: 16px;
-      color: var(--text-muted);
-      line-height: 1.5;
-      letter-spacing: 0.5px;
-    }
-
-    /* ============================================================
+    /* =========================================================
        HOW TO JOIN
-    ============================================================ */
+    ========================================================= */
     #join {
-      padding: 64px 0;
-      border-bottom: 2px solid var(--border);
+      background: var(--bg-card);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
     }
 
-    .join-layout {
+    .join-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 40px;
+      gap: 72px;
+      align-items: start;
     }
 
+    /* Steps */
     .steps {
       display: flex;
       flex-direction: column;
-      gap: 0;
-      border: 2px solid var(--border);
-      box-shadow: var(--shadow-lg);
     }
-
     .step {
       display: flex;
-      gap: 16px;
-      padding: 20px 24px;
-      border-bottom: 2px solid var(--border);
-      background: var(--bg-card);
-      transition: background 0.2s;
-      animation: fadeInUp 0.5s ease both;
+      gap: 20px;
+      padding: 22px 0;
+      border-bottom: 1px solid var(--border);
+      animation: fadeUp 0.5s ease both;
     }
-
-    .step:last-child { border-bottom: none; }
-
-    .step:hover { background: var(--bg-alt); }
+    .step:first-child { padding-top: 0; }
+    .step:last-child  { border-bottom: none; padding-bottom: 0; }
 
     .step__num {
-      font-family: var(--font-pixel);
-      font-size: 14px;
-      color: var(--text-muted);
       flex-shrink: 0;
-      min-width: 28px;
-    }
-
-    .step__body {}
-
-    .step__title {
-      font-family: var(--font-pixel);
-      font-size: 8px;
-      color: var(--text);
-      margin-bottom: 6px;
-      letter-spacing: 1px;
-    }
-
-    .step__desc {
-      font-family: var(--font-mono);
-      font-size: 16px;
-      color: var(--text-muted);
-      letter-spacing: 0.5px;
-    }
-
-    .join-info {
+      width: 30px; height: 30px;
+      border-radius: 50%;
+      background: var(--bg-subtle);
       display: flex;
-      flex-direction: column;
-      gap: 16px;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 800;
+      color: var(--text-2);
     }
-
-    .ip-box {
-      border: 3px solid var(--border);
-      background: var(--bg-alt);
-      padding: 20px 24px;
-      box-shadow: var(--shadow-lg);
-    }
-
-    .ip-box__label {
-      font-size: 6px;
-      color: var(--text-muted);
-      letter-spacing: 3px;
-      display: block;
-      margin-bottom: 8px;
-    }
-
-    .ip-box__value {
-      font-family: var(--font-mono);
-      font-size: 28px;
+    .step__title {
+      font-size: 16px;
+      font-weight: 700;
       color: var(--text);
-      letter-spacing: 2px;
+      margin-bottom: 4px;
+      letter-spacing: -0.2px;
+    }
+    .step__desc {
+      font-size: 15px;
+      color: var(--text-2);
+      line-height: 1.65;
+    }
+
+    /* Connect card (right) */
+    .connect-card {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-med);
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow-xl);
+      overflow: hidden;
+      position: sticky;
+      top: 68px;
+    }
+
+    /* macOS-style titlebar */
+    .cc-titlebar {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      padding: 14px 18px;
+      border-bottom: 1px solid var(--border);
+      background: var(--bg-subtle);
+    }
+    .cc-dot {
+      width: 12px; height: 12px;
+      border-radius: 50%;
+    }
+    .cc-dot:nth-child(1) { background: #ff5f57; }
+    .cc-dot:nth-child(2) { background: #febc2e; }
+    .cc-dot:nth-child(3) { background: #28c840; }
+
+    .cc-body { padding: 26px 24px 28px; }
+
+    .cc-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      color: var(--text-3);
+      margin-bottom: 8px;
+      display: block;
+    }
+    .cc-ip {
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      color: var(--text);
+      margin-bottom: 18px;
       word-break: break-all;
     }
-
-    .ip-box__actions {
+    .cc-btns {
       display: flex;
       gap: 8px;
-      margin-top: 14px;
+      flex-wrap: wrap;
+      margin-bottom: 26px;
     }
-
     .copy-btn {
-      font-family: var(--font-pixel);
-      font-size: 6px;
-      padding: 6px 12px;
-      border: 2px solid var(--border);
-      background: var(--bg);
-      color: var(--text);
+      background: var(--bg-subtle);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 8px 16px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-2);
       cursor: pointer;
-      letter-spacing: 1px;
-      transition: background 0.15s, color 0.15s;
+      transition: background 0.18s, color 0.18s, border-color 0.18s;
     }
-
-    .copy-btn:hover,
-    .copy-btn:focus {
-      background: var(--border);
-      color: var(--accent-inv);
-      outline: none;
-    }
-
+    .copy-btn:hover { background: var(--text); color: var(--bg); border-color: var(--text); }
     .copy-btn.copied {
+      background: rgba(52,199,89,0.10);
+      color: #1c8a3a;
+      border-color: rgba(52,199,89,0.25);
+    }
+    [data-theme="dark"] .copy-btn.copied { color: #34c759; }
+
+    .cc-divider {
+      height: 1px;
       background: var(--border);
-      color: var(--accent-inv);
+      margin-bottom: 20px;
     }
-
-    .version-badge {
-      border: 2px solid var(--border-dim);
-      padding: 10px 16px;
-      background: var(--bg-card);
+    .cc-meta { display: flex; flex-direction: column; gap: 0; }
+    .cc-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 11px 0;
+      border-bottom: 1px solid var(--border);
     }
+    .cc-row:last-child { border-bottom: none; }
+    .cc-row-k { font-size: 14px; color: var(--text-2); font-weight: 500; }
+    .cc-row-v { font-size: 14px; color: var(--text); font-weight: 700; }
 
-    .version-badge__label {
-      font-size: 6px;
-      color: var(--text-muted);
-      letter-spacing: 2px;
-      display: block;
-      margin-bottom: 4px;
-    }
-
-    .version-badge__val {
-      font-family: var(--font-mono);
-      font-size: 20px;
-      color: var(--text);
-      letter-spacing: 1px;
-    }
-
-    /* ============================================================
+    /* =========================================================
        FOOTER
-    ============================================================ */
+    ========================================================= */
     footer {
-      border-top: 2px solid var(--border);
-      padding: 40px 0 28px;
       background: var(--bg-card);
+      border-top: 1px solid var(--border);
+      padding: 52px 0 32px;
     }
 
-    .footer-grid {
+    .footer-top {
       display: grid;
       grid-template-columns: 2fr 1fr 1fr;
-      gap: 40px;
+      gap: 56px;
+      padding-bottom: 40px;
       margin-bottom: 32px;
+      border-bottom: 1px solid var(--border);
     }
 
-    .footer-brand__name {
-      font-family: var(--font-pixel);
-      font-size: 11px;
-      color: var(--text);
-      display: block;
-      margin-bottom: 10px;
-      letter-spacing: 1px;
-    }
-
-    .footer-brand__desc {
-      font-family: var(--font-mono);
+    .footer-brand-name {
       font-size: 16px;
-      color: var(--text-muted);
-      line-height: 1.6;
-      letter-spacing: 0.5px;
+      font-weight: 800;
+      color: var(--text);
+      letter-spacing: -0.3px;
+      margin-bottom: 10px;
+      display: block;
+    }
+    .footer-brand-text {
+      font-size: 14px;
+      color: var(--text-2);
+      line-height: 1.7;
+      max-width: 280px;
     }
 
-    .footer-col__title {
-      font-family: var(--font-pixel);
-      font-size: 7px;
-      color: var(--text);
-      letter-spacing: 2px;
+    .footer-col-title {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--text-3);
       margin-bottom: 14px;
     }
-
-    .footer-col__links {
+    .footer-links {
       list-style: none;
       display: flex;
       flex-direction: column;
-      gap: 8px;
+      gap: 10px;
     }
-
-    .footer-col__links a {
-      font-family: var(--font-mono);
-      font-size: 16px;
-      color: var(--text-muted);
-      text-decoration: none;
-      letter-spacing: 1px;
-      transition: color 0.15s;
+    .footer-links a {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-2);
+      transition: color 0.18s;
     }
-
-    .footer-col__links a:hover,
-    .footer-col__links a:focus {
-      color: var(--text);
-      outline: none;
-    }
+    .footer-links a:hover { color: var(--text); }
 
     .footer-bottom {
-      border-top: 1px solid var(--border-dim);
-      padding-top: 20px;
       display: flex;
       justify-content: space-between;
       align-items: center;
       flex-wrap: wrap;
       gap: 12px;
     }
-
-    .footer-copy {
-      font-family: var(--font-mono);
-      font-size: 14px;
-      color: var(--text-muted);
-      letter-spacing: 1px;
-    }
-
+    .footer-copy { font-size: 13px; color: var(--text-3); font-weight: 500; }
     .footer-ip {
-      font-family: var(--font-mono);
-      font-size: 14px;
-      color: var(--text-muted);
-      letter-spacing: 1px;
-      border: 1px solid var(--border-dim);
-      padding: 4px 10px;
+      font-size: 13px; font-weight: 600;
+      color: var(--text-2);
+      background: var(--bg-subtle);
+      padding: 4px 12px;
+      border-radius: 6px;
     }
 
-    /* ============================================================
+    /* =========================================================
        RESPONSIVE
-    ============================================================ */
-    @media (max-width: 768px) {
-      .nav__links { display: none; flex-direction: column; position: fixed; top: 56px; left: 0; right: 0; background: var(--bg); border-bottom: 2px solid var(--border); padding: 12px 0; z-index: 99; gap: 0; }
-      .nav__links.open { display: flex; }
-      .nav__link { padding: 10px 20px; border: none; border-bottom: 1px solid var(--border-dim); }
-      .nav__hamburger { display: flex; }
+    ========================================================= */
+    @media (max-width: 960px) {
+      .status-stats { grid-template-columns: repeat(2, 1fr); }
+      .stat-cell:nth-child(2) { border-right: none; }
+      .stat-cell:nth-child(3),
+      .stat-cell:nth-child(4) { border-top: 1px solid var(--border); }
+      .stat-cell:nth-child(4) { border-right: none; }
 
-      .status-grid { grid-template-columns: 1fr; }
-      .status-main { border-right: none; border-bottom: 2px solid var(--border); }
-      .status-stats { grid-template-columns: 1fr 1fr; }
-
-      .join-layout { grid-template-columns: 1fr; }
-
-      .footer-grid { grid-template-columns: 1fr; gap: 24px; }
-      .footer-bottom { flex-direction: column; align-items: flex-start; }
-
-      .features-grid { grid-template-columns: 1fr 1fr; }
-      .feature-card:nth-child(even) { border-right: none; }
+      .features-bento { grid-template-columns: repeat(2, 1fr); }
+      .f-card--span2 { grid-column: span 2; }
     }
 
-    @media (max-width: 480px) {
-      .features-grid { grid-template-columns: 1fr; }
-      .feature-card { border-right: none; }
-      .status-stats { grid-template-columns: 1fr; }
-      .hero__title { font-size: 14px; }
+    @media (max-width: 720px) {
+      .join-grid { grid-template-columns: 1fr; gap: 40px; }
+      .connect-card { position: static; }
+      .footer-top { grid-template-columns: 1fr 1fr; gap: 32px; }
+    }
+
+    @media (max-width: 600px) {
+      .nav__center, .nav__right { display: none; }
+      .nav__hamburger { display: flex; }
+      .nav__mobile-shown { display: flex !important; }
+
+      .hero { padding-top: 106px; padding-bottom: 68px; }
+      .hero__title { letter-spacing: -1.5px; }
+
+      .features-bento { grid-template-columns: 1fr; }
+      .f-card--span2 { grid-column: span 1; }
+
+      .status-stats { grid-template-columns: repeat(2, 1fr); }
+
+      .footer-top { grid-template-columns: 1fr; }
+      .footer-bottom { flex-direction: column; align-items: flex-start; }
     }
   </style>
 </head>
+
 <body data-theme="light">
 
-  <!-- TICKER -->
-  <div class="ticker" aria-hidden="true">
-    <span class="ticker__label">LIVE</span>
-    <div class="ticker__track">
-      <span class="ticker__content" id="ticker-text">
-        TOPLOARDGG SERVER &nbsp;&nbsp; IP: 176.105.206.143:25565 &nbsp;&nbsp; JOIN NOW &nbsp;&nbsp; MINECRAFT SURVIVAL &nbsp;&nbsp; TOPLOARDGG SERVER &nbsp;&nbsp; IP: 176.105.206.143:25565
-      </span>
-    </div>
-  </div>
-
-  <!-- NAV -->
+  <!-- ═══════════════ NAV ═══════════════ -->
   <nav class="nav" role="navigation" aria-label="Main navigation">
     <div class="container nav__inner">
-      <a href="#" class="nav__logo" aria-label="Toploardgg Home">
-        <span class="nav__logo-icon" aria-hidden="true"></span>
-        TOPLOARDGG
-      </a>
+      <a href="#" class="nav__logo" aria-label="Toploardgg home">Toploardgg</a>
 
-      <ul class="nav__links" id="nav-links" role="list">
-        <li><a href="#status" class="nav__link">STATUS</a></li>
-        <li><a href="#features" class="nav__link">FEATURES</a></li>
-        <li><a href="#join" class="nav__link">JOIN</a></li>
-        <li>
-          <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
-            [ DARK ]
-          </button>
-        </li>
-      </ul>
+      <div class="nav__center" role="list" aria-label="Navigation links">
+        <a href="#status"   class="nav__link" role="listitem">Status</a>
+        <a href="#features" class="nav__link" role="listitem">Features</a>
+        <a href="#join"     class="nav__link" role="listitem">Join</a>
+      </div>
 
-      <button class="nav__hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-links">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
+      <div class="nav__right">
+        <button class="theme-switch" id="theme-toggle" aria-label="Toggle dark / light mode"></button>
+        <a href="#join" class="nav__cta">Play Now</a>
+      </div>
+
+      <!-- Mobile toggle (visible only on small screens via JS class) -->
+      <div style="display:none; align-items:center; gap:10px;" id="nav-mobile-controls">
+        <button class="theme-switch" id="theme-toggle-mob" aria-label="Toggle dark / light mode"></button>
+        <button class="nav__hamburger" id="hamburger" aria-label="Toggle navigation menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
     </div>
   </nav>
 
+  <!-- Mobile flyout -->
+  <div class="nav__mobile-panel" id="mobile-panel" role="menu">
+    <a href="#status"   class="nav__link" role="menuitem">Status</a>
+    <a href="#features" class="nav__link" role="menuitem">Features</a>
+    <a href="#join"     class="nav__link" role="menuitem">Join</a>
+    <a href="#join"     class="nav__cta"  role="menuitem">Play Now</a>
+  </div>
+
   <main>
 
-    <!-- HERO -->
+    <!-- ═══════════════ HERO ═══════════════ -->
     <section class="hero" aria-labelledby="hero-title">
-      <div class="hero__bg-blocks" aria-hidden="true">
-        <div class="hero__block"></div>
-        <div class="hero__block"></div>
-        <div class="hero__block"></div>
-        <div class="hero__block"></div>
-        <div class="hero__block"></div>
-        <div class="hero__block"></div>
-      </div>
+      <div class="container" style="position:relative;z-index:1;">
 
+        <div class="hero__pill" id="hero-pill">
+          <span class="hero__pill-dot" aria-hidden="true"></span>
+          Minecraft Java Server
+        </div>
+
+        <h1 class="hero__title" id="hero-title">
+          Your World.<br><em>Your Rules.</em>
+        </h1>
+
+        <p class="hero__sub">
+          Toploardgg is a community-driven survival server built for players who value real gameplay over shortcuts. No pay-to-win. Just Minecraft.
+        </p>
+
+        <div class="hero__actions">
+          <a href="#join"   class="btn-primary">How to Join</a>
+          <a href="#status" class="btn-ghost">Server Status</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════ STATUS ═══════════════ -->
+    <section id="status" class="section" aria-labelledby="status-title">
       <div class="container">
-        <div class="hero__content">
-          <span class="hero__badge">MINECRAFT MULTIPLAYER SERVER</span>
+        <div class="section-header">
+          <span class="section-eyebrow">Real-time</span>
+          <h2 class="section-title" id="status-title">Server Status</h2>
+          <p class="section-sub">Live data directly from the server, fetched on demand.</p>
+        </div>
 
-          <h1 class="hero__title" id="hero-title">
-            TOPLOARDGG<span class="cursor" aria-hidden="true"></span>
-          </h1>
-
-          <p class="hero__tagline">
-            BUILD. SURVIVE. CONQUER. YOUR WORLD AWAITS.
-          </p>
-
-          <div class="hero__actions">
-            <a href="#join" class="btn btn--primary">
-              HOW TO JOIN
-            </a>
-            <a href="#status" class="btn btn--secondary">
-              SERVER STATUS
-            </a>
+        <div class="status-card" id="status-panel" role="region" aria-label="Server status" aria-live="polite">
+          <div class="status-loader" id="initial-loader">
+            <div class="status-loader__spinner" aria-hidden="true"></div>
+            <p>Connecting to server&hellip;</p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- STATUS -->
-    <section id="status" aria-labelledby="status-heading">
-      <div class="container" style="padding-top: 64px; padding-bottom: 64px;">
+    <!-- ═══════════════ FEATURES ═══════════════ -->
+    <section id="features" class="section" aria-labelledby="features-title">
+      <div class="container">
         <div class="section-header">
-          <span class="section-label">REAL-TIME</span>
-          <h2 class="section-title" id="status-heading">SERVER STATUS</h2>
-          <div class="section-divider"></div>
+          <span class="section-eyebrow">What we offer</span>
+          <h2 class="section-title" id="features-title">Built for real players.</h2>
+          <p class="section-sub">A well-maintained server with only the features that actually matter.</p>
         </div>
 
-        <div class="status-grid pixel-border-lg" id="status-panel">
-          <!-- Filled by JS -->
-          <div class="status-loading" id="status-loading" style="grid-column:1/-1;">
-            <div class="status-loading__spinner" aria-hidden="true"></div>
-            <p class="status-loading__text">FETCHING SERVER DATA...</p>
+        <div class="features-bento">
+          <div class="f-card f-card--span2" style="animation-delay:.04s">
+            <div class="f-icon" aria-hidden="true">&#127758;</div>
+            <p class="f-name">Survival World</p>
+            <p class="f-desc">A persistent, ever-expanding world where your builds and progression carry real weight. No resets without a community vote. What you build is yours to keep.</p>
+          </div>
+
+          <div class="f-card" style="animation-delay:.08s">
+            <div class="f-icon" aria-hidden="true">&#128205;</div>
+            <p class="f-name">Land Claim</p>
+            <p class="f-desc">Simple, reliable grief protection so you can focus on building, not worrying.</p>
+          </div>
+
+          <div class="f-card" style="animation-delay:.12s">
+            <div class="f-icon" aria-hidden="true">&#127381;</div>
+            <p class="f-name">Economy</p>
+            <p class="f-desc">Player-driven market. Trade items, set up shops, and grow your wealth through skill.</p>
+          </div>
+
+          <div class="f-card" style="animation-delay:.16s">
+            <div class="f-icon" aria-hidden="true">&#9876;&#65039;</div>
+            <p class="f-name">PvP Arenas</p>
+            <p class="f-desc">Dedicated combat zones to test your skills without risking your survival gear.</p>
+          </div>
+
+          <div class="f-card" style="animation-delay:.20s">
+            <div class="f-icon" aria-hidden="true">&#127881;</div>
+            <p class="f-name">Seasonal Events</p>
+            <p class="f-desc">Build contests, community challenges and special modes with unique rewards.</p>
+          </div>
+
+          <div class="f-card" style="animation-delay:.24s">
+            <div class="f-icon" aria-hidden="true">&#128312;</div>
+            <p class="f-name">Live Map</p>
+            <p class="f-desc">Dynmap browser view. Explore the world and plan your next build from any device.</p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- FEATURES -->
-    <section id="features" aria-labelledby="features-heading">
-      <div class="container" style="padding-top: 64px; padding-bottom: 64px;">
-        <div class="section-header">
-          <span class="section-label">WHAT WE OFFER</span>
-          <h2 class="section-title" id="features-heading">SERVER FEATURES</h2>
-          <div class="section-divider"></div>
-        </div>
+    <!-- ═══════════════ HOW TO JOIN ═══════════════ -->
+    <section id="join" class="section" aria-labelledby="join-title">
+      <div class="container">
+        <div class="join-grid">
 
-        <div class="features-grid">
-          <div class="feature-card">
-            <div class="feature-icon icon-grass" aria-hidden="true"></div>
-            <h3 class="feature-name">SURVIVAL MODE</h3>
-            <p class="feature-desc">Classic hardcore survival with no hand-holding. Gather, craft, build and defend your world from the ground up.</p>
-          </div>
-
-          <div class="feature-card">
-            <div class="feature-icon icon-diamond" aria-hidden="true"></div>
-            <h3 class="feature-name">ECONOMY</h3>
-            <p class="feature-desc">Player-driven market system. Trade items, set up shops, and build your in-game wealth through skill and commerce.</p>
-          </div>
-
-          <div class="feature-card">
-            <div class="feature-icon icon-sword" aria-hidden="true"></div>
-            <h3 class="feature-name">PVP ARENAS</h3>
-            <p class="feature-desc">Dedicated PvP zones for those who want to test their combat skills against the sharpest players on the server.</p>
-          </div>
-
-          <div class="feature-card">
-            <div class="feature-icon icon-map" aria-hidden="true"></div>
-            <h3 class="feature-name">LIVE MAP</h3>
-            <p class="feature-desc">Real-time Dynmap browser view of the entire world. Explore explored territory and scout build locations remotely.</p>
-          </div>
-
-          <div class="feature-card">
-            <div class="feature-icon icon-shield" aria-hidden="true"></div>
-            <h3 class="feature-name">LAND CLAIM</h3>
-            <p class="feature-desc">Protect your builds with a simple land claiming system. No grief, no stress. Your creations stay yours.</p>
-          </div>
-
-          <div class="feature-card" style="border-right:2px solid var(--border);">
-            <div class="feature-icon icon-chest" aria-hidden="true"></div>
-            <h3 class="feature-name">EVENTS</h3>
-            <p class="feature-desc">Seasonal community events, build contests, and special game modes with exclusive rewards and bragging rights.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- JOIN -->
-    <section id="join" aria-labelledby="join-heading">
-      <div class="container" style="padding-top: 64px; padding-bottom: 64px;">
-        <div class="section-header">
-          <span class="section-label">GET STARTED</span>
-          <h2 class="section-title" id="join-heading">HOW TO JOIN</h2>
-          <div class="section-divider"></div>
-        </div>
-
-        <div class="join-layout">
-          <!-- STEPS -->
+          <!-- Left: steps -->
           <div>
-            <ol class="steps" aria-label="Steps to join the server">
-              <li class="step">
-                <span class="step__num" aria-hidden="true">01</span>
-                <div class="step__body">
-                  <h3 class="step__title">LAUNCH MINECRAFT</h3>
-                  <p class="step__desc">Open the Minecraft Java Edition launcher and log in with your Microsoft or Mojang account.</p>
+            <div class="section-header" style="margin-bottom:36px;">
+              <span class="section-eyebrow">Get started</span>
+              <h2 class="section-title" id="join-title">Join in<br>four steps.</h2>
+            </div>
+
+            <ol class="steps" aria-label="Steps to join the Minecraft server">
+              <li class="step" style="animation-delay:.04s">
+                <span class="step__num" aria-hidden="true">1</span>
+                <div>
+                  <p class="step__title">Launch Minecraft Java Edition</p>
+                  <p class="step__desc">Open the Minecraft Java launcher and sign in with your Microsoft or Mojang account.</p>
                 </div>
               </li>
-              <li class="step">
-                <span class="step__num" aria-hidden="true">02</span>
-                <div class="step__body">
-                  <h3 class="step__title">GO TO MULTIPLAYER</h3>
-                  <p class="step__desc">From the main menu, click "Multiplayer" then click "Add Server" at the bottom of the screen.</p>
+              <li class="step" style="animation-delay:.09s">
+                <span class="step__num" aria-hidden="true">2</span>
+                <div>
+                  <p class="step__title">Go to Multiplayer</p>
+                  <p class="step__desc">From the main menu click "Multiplayer", then "Add Server" at the bottom of the list.</p>
                 </div>
               </li>
-              <li class="step">
-                <span class="step__num" aria-hidden="true">03</span>
-                <div class="step__body">
-                  <h3 class="step__title">ENTER THE SERVER IP</h3>
-                  <p class="step__desc">Type the server address into the "Server Address" field exactly as shown in the box below, then click Done.</p>
+              <li class="step" style="animation-delay:.14s">
+                <span class="step__num" aria-hidden="true">3</span>
+                <div>
+                  <p class="step__title">Enter the server address</p>
+                  <p class="step__desc">Paste the IP address from the card on the right into the Server Address field, then click Done.</p>
                 </div>
               </li>
-              <li class="step">
-                <span class="step__num" aria-hidden="true">04</span>
-                <div class="step__body">
-                  <h3 class="step__title">CONNECT & PLAY</h3>
+              <li class="step" style="animation-delay:.19s">
+                <span class="step__num" aria-hidden="true">4</span>
+                <div>
+                  <p class="step__title">Select and connect</p>
                   <p class="step__desc">Select Toploardgg from your server list and click Join Server. Welcome to the community.</p>
                 </div>
               </li>
             </ol>
           </div>
 
-          <!-- IP BOX -->
-          <div class="join-info">
-            <div class="ip-box" role="region" aria-label="Server connection details">
-              <span class="ip-box__label">SERVER ADDRESS</span>
-              <div class="ip-box__value" id="ip-display" aria-live="polite">176.105.206.143:25565</div>
-              <div class="ip-box__actions">
-                <button class="copy-btn" id="copy-ip" aria-label="Copy server IP address to clipboard">
-                  COPY IP
-                </button>
-                <button class="copy-btn" id="copy-port" aria-label="Copy port to clipboard">
-                  COPY PORT
-                </button>
+          <!-- Right: connect card -->
+          <div>
+            <div class="connect-card" role="region" aria-label="Server connection details">
+              <div class="cc-titlebar" aria-hidden="true">
+                <span class="cc-dot"></span>
+                <span class="cc-dot"></span>
+                <span class="cc-dot"></span>
+              </div>
+
+              <div class="cc-body">
+                <span class="cc-label">Server Address</span>
+                <div class="cc-ip" id="cc-ip">176.105.206.143:25565</div>
+
+                <div class="cc-btns">
+                  <button class="copy-btn" id="copy-ip-btn" aria-label="Copy server IP to clipboard">Copy IP</button>
+                  <button class="copy-btn" id="copy-port-btn" aria-label="Copy port to clipboard">Copy Port</button>
+                </div>
+
+                <div class="cc-divider"></div>
+
+                <div class="cc-meta">
+                  <div class="cc-row">
+                    <span class="cc-row-k">Port</span>
+                    <span class="cc-row-v">25565</span>
+                  </div>
+                  <div class="cc-row">
+                    <span class="cc-row-k">Version</span>
+                    <span class="cc-row-v" id="version-join">Java Edition</span>
+                  </div>
+                  <div class="cc-row">
+                    <span class="cc-row-k">Mode</span>
+                    <span class="cc-row-v">Survival</span>
+                  </div>
+                  <div class="cc-row">
+                    <span class="cc-row-k">Status</span>
+                    <span class="cc-row-v" id="join-status-val">Checking...</span>
+                  </div>
+                </div>
               </div>
             </div>
-
-            <div class="version-badge">
-              <span class="version-badge__label">RECOMMENDED VERSION</span>
-              <span class="version-badge__val" id="version-info-join">LOADING...</span>
-            </div>
-
-            <div class="version-badge">
-              <span class="version-badge__label">SERVER SOFTWARE</span>
-              <span class="version-badge__val">JAVA EDITION</span>
-            </div>
           </div>
+
         </div>
       </div>
     </section>
 
   </main>
 
-  <!-- FOOTER -->
+  <!-- ═══════════════ FOOTER ═══════════════ -->
   <footer role="contentinfo">
     <div class="container">
-      <div class="footer-grid">
-        <div class="footer-brand">
-          <span class="footer-brand__name">TOPLOARDGG</span>
-          <p class="footer-brand__desc">
-            A Minecraft survival server built for players who want a genuine experience.
-            No pay-to-win. No nonsense. Just good gameplay and a solid community.
-          </p>
+      <div class="footer-top">
+        <div>
+          <span class="footer-brand-name">Toploardgg</span>
+          <p class="footer-brand-text">A community-driven Minecraft survival server. No pay-to-win, no bloat. Just genuine gameplay and good people.</p>
         </div>
 
-        <nav aria-label="Footer navigation">
-          <h3 class="footer-col__title">NAVIGATION</h3>
-          <ul class="footer-col__links" role="list">
-            <li><a href="#status">SERVER STATUS</a></li>
-            <li><a href="#features">FEATURES</a></li>
-            <li><a href="#join">HOW TO JOIN</a></li>
+        <nav aria-label="Footer site navigation">
+          <p class="footer-col-title">Navigate</p>
+          <ul class="footer-links" role="list">
+            <li><a href="#status">Status</a></li>
+            <li><a href="#features">Features</a></li>
+            <li><a href="#join">How to Join</a></li>
           </ul>
         </nav>
 
         <div>
-          <h3 class="footer-col__title">COMMUNITY</h3>
-          <ul class="footer-col__links" role="list">
-            <li><a href="#" aria-label="Discord (coming soon)">DISCORD</a></li>
-            <li><a href="#" aria-label="Twitter (coming soon)">TWITTER</a></li>
-            <li><a href="#" aria-label="Reddit (coming soon)">REDDIT</a></li>
+          <p class="footer-col-title">Community</p>
+          <ul class="footer-links" role="list">
+            <li><a href="#" aria-label="Discord (coming soon)">Discord</a></li>
+            <li><a href="#" aria-label="Twitter (coming soon)">Twitter</a></li>
+            <li><a href="#" aria-label="Reddit (coming soon)">Reddit</a></li>
           </ul>
         </div>
       </div>
 
       <div class="footer-bottom">
-        <p class="footer-copy">
-          &copy; <span id="copy-year"></span> TOPLOARDGG. ALL RIGHTS RESERVED.
-        </p>
-        <span class="footer-ip" aria-label="Server IP address">
-          IP: 176.105.206.143:25565
-        </span>
+        <p class="footer-copy">&copy; <span id="copy-year"></span> Toploardgg. All rights reserved.</p>
+        <span class="footer-ip" aria-label="Server IP address">176.105.206.143:25565</span>
       </div>
     </div>
   </footer>
 
+  <!-- ═══════════════ SCRIPTS ═══════════════ -->
   <script>
     'use strict';
 
-    /* ============================================================
-       THEME TOGGLE
-    ============================================================ */
-    const root      = document.documentElement.querySelector('body');
-    const themeBtn  = document.getElementById('theme-toggle');
-    const THEME_KEY = 'toploardgg-theme';
+    /* ── THEME ─────────────────────────────────────────── */
+    const body   = document.body;
+    const TKEY   = 'tplg-theme';
+    const themeToggles = [
+      document.getElementById('theme-toggle'),
+      document.getElementById('theme-toggle-mob')
+    ];
 
-    function applyTheme(theme) {
-      root.setAttribute('data-theme', theme);
-      themeBtn.textContent = theme === 'dark' ? '[ LIGHT ]' : '[ DARK ]';
-      localStorage.setItem(THEME_KEY, theme);
+    function applyTheme(t) {
+      body.setAttribute('data-theme', t);
+      localStorage.setItem(TKEY, t);
     }
+    applyTheme(localStorage.getItem(TKEY) || 'light');
+    themeToggles.forEach(btn => btn && btn.addEventListener('click', () => {
+      applyTheme(body.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+    }));
 
-    const savedTheme = localStorage.getItem(THEME_KEY) || 'light';
-    applyTheme(savedTheme);
+    /* ── RESPONSIVE NAV ────────────────────────────────── */
+    const navMobileControls = document.getElementById('nav-mobile-controls');
+    const navCenter         = document.querySelector('.nav__center');
+    const navRight          = document.querySelector('.nav__right');
+    const mobilePanel       = document.getElementById('mobile-panel');
+    const hamburger         = document.getElementById('hamburger');
 
-    themeBtn.addEventListener('click', () => {
-      const current = root.getAttribute('data-theme');
-      applyTheme(current === 'dark' ? 'light' : 'dark');
+    function handleResize() {
+      const mobile = window.innerWidth <= 600;
+      navMobileControls.style.display = mobile ? 'flex' : 'none';
+      if (navCenter) navCenter.style.display = mobile ? 'none' : 'flex';
+      if (navRight)  navRight.style.display  = mobile ? 'none' : 'flex';
+      if (!mobile) { mobilePanel.classList.remove('open'); }
+    }
+    handleResize();
+    window.addEventListener('resize', handleResize);
+
+    hamburger && hamburger.addEventListener('click', () => {
+      const open = mobilePanel.classList.toggle('open');
+      hamburger.setAttribute('aria-expanded', String(open));
     });
 
-    /* ============================================================
-       HAMBURGER
-    ============================================================ */
-    const hamburger = document.getElementById('hamburger');
-    const navLinks  = document.getElementById('nav-links');
-
-    hamburger.addEventListener('click', () => {
-      const open = navLinks.classList.toggle('open');
-      hamburger.setAttribute('aria-expanded', open);
-    });
-
-    // Close on nav link click (mobile)
-    navLinks.querySelectorAll('.nav__link').forEach(link => {
-      link.addEventListener('click', () => {
-        navLinks.classList.remove('open');
-        hamburger.setAttribute('aria-expanded', false);
+    mobilePanel.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => {
+        mobilePanel.classList.remove('open');
+        hamburger && hamburger.setAttribute('aria-expanded', 'false');
       });
     });
 
-    /* ============================================================
-       COPY BUTTONS
-    ============================================================ */
-    function copyToClipboard(text, btn, label) {
-      navigator.clipboard.writeText(text).then(() => {
-        const orig = btn.textContent;
-        btn.textContent = 'COPIED!';
-        btn.classList.add('copied');
-        setTimeout(() => {
-          btn.textContent = orig;
-          btn.classList.remove('copied');
-        }, 2000);
-      }).catch(() => {
-        // fallback
-        const ta = document.createElement('textarea');
-        ta.value = text;
-        ta.style.position = 'fixed';
-        ta.style.opacity = '0';
-        document.body.appendChild(ta);
-        ta.select();
-        document.execCommand('copy');
-        document.body.removeChild(ta);
-        const orig = btn.textContent;
-        btn.textContent = 'COPIED!';
-        btn.classList.add('copied');
-        setTimeout(() => {
-          btn.textContent = orig;
-          btn.classList.remove('copied');
-        }, 2000);
-      });
-    }
-
-    document.getElementById('copy-ip').addEventListener('click', function() {
-      copyToClipboard('176.105.206.143:25565', this);
-    });
-
-    document.getElementById('copy-port').addEventListener('click', function() {
-      copyToClipboard('25565', this);
-    });
-
-    /* ============================================================
-       FOOTER YEAR
-    ============================================================ */
+    /* ── FOOTER YEAR ───────────────────────────────────── */
     document.getElementById('copy-year').textContent = new Date().getFullYear();
 
-    /* ============================================================
-       SERVER STATUS
-    ============================================================ */
-    const API_URL     = 'https://api.mcsrvstat.us/3/176.105.206.143:25565';
-    const REFRESH_INT = 30;
+    /* ── COPY BUTTONS ──────────────────────────────────── */
+    function copyText(text, btn) {
+      const orig = btn.textContent;
+      const done = () => {
+        btn.textContent = 'Copied!';
+        btn.classList.add('copied');
+        setTimeout(() => { btn.textContent = orig; btn.classList.remove('copied'); }, 2000);
+      };
+      navigator.clipboard
+        ? navigator.clipboard.writeText(text).then(done).catch(done)
+        : (() => {
+            const t = Object.assign(document.createElement('textarea'), {
+              value: text, style: 'position:fixed;opacity:0'
+            });
+            document.body.appendChild(t); t.select();
+            document.execCommand('copy'); document.body.removeChild(t); done();
+          })();
+    }
 
-    let countdownTimer = null;
-    let refreshTimer   = null;
-    let countdownSec   = REFRESH_INT;
+    document.getElementById('copy-ip-btn').addEventListener('click', function() {
+      copyText('176.105.206.143:25565', this);
+    });
+    document.getElementById('copy-port-btn').addEventListener('click', function() {
+      copyText('25565', this);
+    });
 
-    function stripMotd(raw) {
+    /* ── SERVER STATUS ─────────────────────────────────── */
+    const API   = 'https://api.mcsrvstat.us/3/176.105.206.143:25565';
+    const panel = document.getElementById('status-panel');
+
+    function sanitize(str) {
+      if (!str) return '';
+      const el = document.createElement('div');
+      el.textContent = str;
+      return el.innerHTML;
+    }
+
+    function cleanMotd(raw) {
       if (!raw) return '';
-      // Strip Minecraft color codes § and §x sequences
+      if (Array.isArray(raw)) raw = raw.join(' ');
       return raw.replace(/§[0-9a-fklmnor]/gi, '').trim();
     }
 
-    function buildStatusHTML(data) {
-      const online  = data && data.online;
-      const players = online ? (data.players || {}) : {};
-      const online_count = players.online !== undefined ? players.online : 'N/A';
-      const max_count    = players.max    !== undefined ? players.max    : 'N/A';
-      const version      = online && data.version ? data.version : 'N/A';
-      const motd_raw     = online && data.motd && data.motd.clean
-                           ? (Array.isArray(data.motd.clean) ? data.motd.clean.join(' ') : data.motd.clean)
-                           : (online ? 'Toploardgg Server' : 'Server offline');
-      const motd         = stripMotd(motd_raw) || 'Toploardgg Server';
-      const ping         = online && data.debug && data.debug.ping ? data.debug.ping + ' ms' : 'N/A';
-      const world        = online && data.map ? data.map : 'N/A';
-      const player_list  = (online && players.list) ? players.list : [];
+    function renderStatus(data) {
+      const online = !!(data && data.online);
+      const pl     = online ? (data.players || {}) : {};
+      const count  = pl.online !== undefined ? pl.online : '—';
+      const max    = pl.max    !== undefined ? pl.max    : '—';
+      const ver    = online && data.version ? sanitize(data.version) : '—';
+      const ping   = online && data.debug && data.debug.ping ? data.debug.ping + ' ms' : '—';
+      const world  = online && data.map ? sanitize(data.map) : '—';
+      const motdRaw = online && data.motd && data.motd.clean ? data.motd.clean : '';
+      const motd   = sanitize(cleanMotd(motdRaw) || 'Toploardgg Minecraft Server');
+      const list   = (online && pl.list) ? pl.list : [];
 
-      // Update version in join section
-      const verJoin = document.getElementById('version-info-join');
-      if (verJoin) verJoin.textContent = version !== 'N/A' ? version : 'JAVA EDITION';
+      // Update join card
+      const vj = document.getElementById('version-join');
+      if (vj && ver !== '—') vj.textContent = ver;
+      const jsv = document.getElementById('join-status-val');
+      if (jsv) jsv.textContent = online ? 'Online' : 'Offline';
 
-      let playerListHTML = '';
-      if (player_list.length > 0) {
-        const items = player_list.map(p => {
-          const name = typeof p === 'object' ? (p.name || 'Unknown') : p;
-          const uuid = typeof p === 'object' ? p.uuid : null;
-          const avatarSrc = uuid
-            ? `https://api.mcsrvstat.us/icon/${name}`
-            : null;
-          return `
-            <li class="player-item">
-              ${avatarSrc
-                ? `<img src="${avatarSrc}" alt="" aria-hidden="true" width="16" height="16" onerror="this.style.display='none'">`
-                : `<span class="player-avatar" aria-hidden="true"></span>`}
+      // Build players HTML
+      let playersSection = '';
+      if (online) {
+        let inner = '';
+        if (list.length > 0) {
+          inner = list.map(p => {
+            const name = sanitize(typeof p === 'object' ? (p.name || 'Unknown') : String(p));
+            return `<span class="player-chip">
+              <img src="https://api.mcsrvstat.us/icon/${encodeURIComponent(name.replace(/&amp;/g,'&'))}"
+                   alt="" aria-hidden="true" width="20" height="20"
+                   onerror="this.style.display='none'">
               ${name}
-            </li>`;
-        }).join('');
-        playerListHTML = `
-          <p class="player-list-title" aria-label="${player_list.length} players online">
-            ONLINE PLAYERS [${player_list.length}]
-          </p>
-          <ul class="player-list" aria-label="List of online players">
-            ${items}
-          </ul>`;
-      } else if (online) {
-        playerListHTML = `
-          <p class="player-list-title">ONLINE PLAYERS</p>
-          <p style="font-family:var(--font-mono);font-size:16px;color:var(--text-muted);letter-spacing:1px;">
-            ${online_count > 0 ? 'Player list hidden by server.' : 'No players online right now.'}
-          </p>`;
-      } else {
-        playerListHTML = `
-          <p class="player-list-title">ONLINE PLAYERS</p>
-          <p style="font-family:var(--font-mono);font-size:16px;color:var(--text-muted);letter-spacing:1px;">
-            Server is offline.
-          </p>`;
+            </span>`;
+          }).join('');
+        } else {
+          inner = `<span class="players-empty-note">${count > 0 ? 'Player list is hidden by the server.' : 'No players online right now.'}</span>`;
+        }
+
+        playersSection = `
+          <div class="status-players">
+            <p class="players-heading">${list.length > 0 ? `Players online &mdash; ${list.length}` : 'Online players'}</p>
+            <div class="players-wrap">${inner}</div>
+          </div>`;
       }
 
-      return `
-        <div class="status-main">
-          <div class="status-indicator">
-            <span class="status-dot ${online ? 'online' : 'offline'}" role="img" aria-label="${online ? 'Server online' : 'Server offline'}"></span>
-            <span class="status-label">${online ? 'SERVER ONLINE' : 'SERVER OFFLINE'}</span>
+      panel.innerHTML = `
+        <div class="status-bar">
+          <span class="status-indicator ${online ? 'is-online' : 'is-offline'}"
+                role="status" aria-label="Server is ${online ? 'online' : 'offline'}">
+            <span class="status-dot" aria-hidden="true"></span>
+            ${online ? 'Online' : 'Offline'}
+          </span>
+          <p class="status-motd" aria-label="Message of the day">${motd}</p>
+          <button class="refresh-btn" id="refresh-btn" aria-label="Refresh server status">Refresh</button>
+        </div>
+
+        <div class="status-stats" role="list" aria-label="Server statistics">
+          <div class="stat-cell" role="listitem">
+            <span class="stat-label">Players</span>
+            <span class="stat-val">${count}<span class="muted"> / ${max}</span></span>
           </div>
-
-          <p class="status-motd" aria-label="Message of the day">${motd || 'No MOTD available'}</p>
-
-          <div class="status-stats">
-            <div class="stat-cell">
-              <span class="stat-cell__label">PLAYERS</span>
-              <span class="stat-cell__value">${online_count} / ${max_count}</span>
-            </div>
-            <div class="stat-cell">
-              <span class="stat-cell__label">VERSION</span>
-              <span class="stat-cell__value" style="font-size:16px;">${version}</span>
-            </div>
-            <div class="stat-cell">
-              <span class="stat-cell__label">PING</span>
-              <span class="stat-cell__value">${ping}</span>
-            </div>
-            <div class="stat-cell">
-              <span class="stat-cell__label">MAP / WORLD</span>
-              <span class="stat-cell__value" style="font-size:16px;">${world}</span>
-            </div>
+          <div class="stat-cell" role="listitem">
+            <span class="stat-label">Version</span>
+            <span class="stat-val compact">${ver}</span>
           </div>
-
-          <div class="status-footer">
-            <span class="refresh-info" aria-live="polite" id="countdown-label">REFRESH IN <span id="countdown">${REFRESH_INT}</span>s</span>
-            <div class="refresh-bar-wrap" aria-hidden="true">
-              <div class="refresh-bar" id="refresh-bar"></div>
-            </div>
-            <button class="refresh-btn" id="manual-refresh" aria-label="Manually refresh server status">
-              REFRESH
-            </button>
+          <div class="stat-cell" role="listitem">
+            <span class="stat-label">Ping</span>
+            <span class="stat-val">${ping}</span>
+          </div>
+          <div class="stat-cell" role="listitem">
+            <span class="stat-label">World</span>
+            <span class="stat-val compact">${world}</span>
           </div>
         </div>
 
-        <div class="status-sidebar">
-          ${playerListHTML}
-        </div>
+        ${playersSection}
       `;
+
+      document.getElementById('refresh-btn').addEventListener('click', function() {
+        this.disabled = true;
+        this.textContent = 'Refreshing…';
+        panel.innerHTML = `<div class="status-loader"><div class="status-loader__spinner"></div><p>Connecting to server&hellip;</p></div>`;
+        fetchStatus();
+      });
     }
 
-    function buildErrorHTML() {
-      return `
+    function renderError() {
+      panel.innerHTML = `
         <div class="status-error" role="alert">
-          <span class="status-error__icon" aria-hidden="true">X X</span>
-          <p class="status-error__text">
-            UNABLE TO REACH SERVER STATUS API.<br>
-            CHECK YOUR CONNECTION OR TRY AGAIN SHORTLY.
-          </p>
-          <button class="btn btn--secondary" id="retry-btn" style="margin-top:20px;font-size:7px;" aria-label="Retry fetching server status">
-            RETRY
+          <p class="status-error__title">Unable to reach server</p>
+          <p class="status-error__desc">Could not fetch the server status. Check your connection or try again in a moment.</p>
+          <button class="btn-ghost" id="retry-btn" style="font-size:14px;padding:10px 22px;" aria-label="Retry fetching server status">
+            Try again
           </button>
         </div>`;
-    }
-
-    function startCountdown() {
-      clearInterval(countdownTimer);
-      countdownSec = REFRESH_INT;
-
-      // restart bar animation
-      const bar = document.getElementById('refresh-bar');
-      if (bar) {
-        bar.classList.remove('animating');
-        void bar.offsetWidth; // reflow
-        bar.classList.add('animating');
-      }
-
-      countdownTimer = setInterval(() => {
-        countdownSec--;
-        const el = document.getElementById('countdown');
-        if (el) el.textContent = countdownSec;
-        if (countdownSec <= 0) {
-          clearInterval(countdownTimer);
-        }
-      }, 1000);
+      document.getElementById('retry-btn').addEventListener('click', () => {
+        panel.innerHTML = `<div class="status-loader"><div class="status-loader__spinner"></div><p>Connecting to server&hellip;</p></div>`;
+        fetchStatus();
+      });
     }
 
     async function fetchStatus() {
-      const panel = document.getElementById('status-panel');
-
       try {
-        const controller = new AbortController();
-        const timeout = setTimeout(() => controller.abort(), 10000);
-
-        const res  = await fetch(API_URL, { signal: controller.signal });
-        clearTimeout(timeout);
-
-        if (!res.ok) throw new Error('API error: ' + res.status);
-
+        const ctrl = new AbortController();
+        const tid  = setTimeout(() => ctrl.abort(), 10000);
+        const res  = await fetch(API, { signal: ctrl.signal });
+        clearTimeout(tid);
+        if (!res.ok) throw new Error('HTTP ' + res.status);
         const data = await res.json();
-        panel.innerHTML = buildStatusHTML(data);
-      } catch (err) {
-        panel.innerHTML = buildErrorHTML();
-        const retryBtn = document.getElementById('retry-btn');
-        if (retryBtn) retryBtn.addEventListener('click', () => {
-          panel.innerHTML = '<div class="status-loading" id="status-loading" style="grid-column:1/-1;"><div class="status-loading__spinner"></div><p class="status-loading__text">FETCHING SERVER DATA...</p></div>';
-          scheduleRefresh();
-        });
-        return;
+        renderStatus(data);
+      } catch {
+        renderError();
       }
-
-      // Bind manual refresh
-      const manualBtn = document.getElementById('manual-refresh');
-      if (manualBtn) {
-        manualBtn.addEventListener('click', () => {
-          clearInterval(countdownTimer);
-          clearTimeout(refreshTimer);
-          panel.innerHTML = '<div class="status-loading" id="status-loading" style="grid-column:1/-1;"><div class="status-loading__spinner"></div><p class="status-loading__text">FETCHING SERVER DATA...</p></div>';
-          scheduleRefresh();
-        });
-      }
-
-      startCountdown();
     }
 
-    function scheduleRefresh() {
-      clearTimeout(refreshTimer);
-      fetchStatus().then(() => {
-        refreshTimer = setTimeout(scheduleRefresh, REFRESH_INT * 1000);
-      });
-    }
-
-    // Initial fetch
-    scheduleRefresh();
-
-    /* ============================================================
-       SMOOTH SCROLL KEYBOARD ACCESS
-    ============================================================ */
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('keydown', e => {
-        if (e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault();
-          const target = document.querySelector(anchor.getAttribute('href'));
-          if (target) target.focus({ preventScroll: false });
-        }
-      });
-    });
+    fetchStatus();
   </script>
 
 </body>
