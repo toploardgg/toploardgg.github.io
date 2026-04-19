@@ -1,612 +1,1750 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta
-            name="viewport"
-            content="width=device-width, initial-scale=1.0, viewport-fit=cover"
-        />
-        <meta
-            name="apple-mobile-web-app-status-bar-style"
-            content="black-translucent"
-        />
-        <meta name="color-scheme" content="dark light">
-        <title>Toploardgg</title>
-        <link rel="icon" href="icon.png" type="image/png" />
-        <link
-            rel="stylesheet"
-            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
-            crossorigin="anonymous"
-        />
-        <meta
-            name="description"
-            content="Photo gallery showcasing training, lifestyle, and moments from my journey as a developer and athlete."
-        />
-        <meta
-            name="keywords"
-            content="Photography, Lifestyle, Training, Developer Life, Athlete"
-        />
-        <meta name="author" content="Stanislav" />
-        <meta name="robots" content="index, follow" />
-        <meta name="referrer" content="strict-origin-when-cross-origin" />
-        <meta
-            property="og:title"
-            content="Toploardgg — Python Dev & Designer"
-        />
-        <meta
-            property="og:description"
-            content="Portfolio of Stanislav. Python, JS, open-source projects."
-        />
-        <meta
-            property="og:image"
-            content="https://toploardgg.github.io/photopin.png"
-        />
-        <meta property="og:url" content="https://toploardgg.github.io/" />
-        <meta property="og:type" content="website" />
-        <link rel="canonical" href="https://toploardgg.github.io/" />
-        <link rel="stylesheet" href="style.css" />
-    </head>
-    <body class="has-fixed-tabs">
-        <!-- Navigation Tabs -->
-        <div class="tabs">
-            <div class="tabs-inner">
-                <div class="func-wrapper left">
-                    <button
-                        type="button"
-                        class="func-button search-btn"
-                        aria-label="Open search"
-                    >
-                        <i class="fa-solid fa-search" aria-hidden="true"></i>
-                    </button>
-                    <div class="popover search-popover">
-                        <h3>Search</h3>
-                        <input type="text" id="search-input" />
-                    </div>
-                </div>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Toploardgg — Minecraft Server</title>
 
-                <div class="main-tabs">
-                    <button class="tab-button" data-target="pin">Home</button>
-                    <button class="tab-button" data-target="Photos">
-                        Photos
-                    </button>
-                    <button class="tab-button" data-target="projects-section">
-                        Projects
-                    </button>
-                </div>
+  <!-- SEO -->
+  <meta name="description" content="Toploardgg is a Minecraft survival server. Join us at 176.105.206.143:25565 for epic gameplay, community events, and more." />
+  <meta name="keywords" content="Minecraft server, Toploardgg, survival, multiplayer, 176.105.206.143" />
+  <meta name="author" content="Toploardgg" />
+  <meta name="robots" content="index, follow" />
 
-                <div class="func-wrapper right">
-                    <button
-                        class="func-button theme-btn"
-                        aria-label="Toggle theme"
-                    >
-                        <i class="fa-solid fa-moon"></i>
-                    </button>
-                </div>
-            </div>
+  <!-- Open Graph -->
+  <meta property="og:title" content="Toploardgg — Minecraft Server" />
+  <meta property="og:description" content="Join the Toploardgg Minecraft server at 176.105.206.143:25565" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://toploardgg.mc/" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Toploardgg — Minecraft Server" />
+  <meta name="twitter:description" content="Join the Toploardgg Minecraft server at 176.105.206.143:25565" />
+
+  <!-- Security -->
+  <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline' fonts.googleapis.com fonts.gstatic.com api.mcsrvstat.us; img-src 'self' data: api.mcsrvstat.us;" />
+
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%23000'/><rect x='8' y='8' width='16' height='16' fill='%23fff'/><rect x='12' y='12' width='4' height='4' fill='%23000'/><rect x='16' y='12' width='4' height='4' fill='%23000'/><rect x='10' y='20' width='12' height='2' fill='%23000'/></svg>" />
+
+  <!-- Google Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323:wght@400&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ============================================================
+       CSS CUSTOM PROPERTIES — LIGHT MODE (DEFAULT)
+    ============================================================ */
+    :root {
+      --bg:          #ffffff;
+      --bg-alt:      #f0f0f0;
+      --bg-card:     #fafafa;
+      --border:      #111111;
+      --border-dim:  #888888;
+      --text:        #111111;
+      --text-muted:  #555555;
+      --accent:      #111111;
+      --accent-inv:  #ffffff;
+      --pixel-size:  3px;
+      --radius:      0px;
+      --shadow:      4px 4px 0px #111111;
+      --shadow-lg:   8px 8px 0px #111111;
+      --font-pixel:  'Press Start 2P', monospace;
+      --font-mono:   'VT323', monospace;
+      --trans:       background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+    }
+
+    [data-theme="dark"] {
+      --bg:         #0a0a0a;
+      --bg-alt:     #141414;
+      --bg-card:    #1a1a1a;
+      --border:     #eeeeee;
+      --border-dim: #666666;
+      --text:       #eeeeee;
+      --text-muted: #999999;
+      --accent:     #eeeeee;
+      --accent-inv: #0a0a0a;
+      --shadow:     4px 4px 0px #eeeeee;
+      --shadow-lg:  8px 8px 0px #eeeeee;
+    }
+
+    /* ============================================================
+       RESET & BASE
+    ============================================================ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-pixel);
+      font-size: 10px;
+      line-height: 1.8;
+      transition: var(--trans);
+      overflow-x: hidden;
+    }
+
+    /* PIXEL GRID BACKGROUND */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(var(--border-dim) 1px, transparent 1px),
+        linear-gradient(90deg, var(--border-dim) 1px, transparent 1px);
+      background-size: 32px 32px;
+      opacity: 0.04;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* SCANLINES OVERLAY */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(0,0,0,0.03) 2px,
+        rgba(0,0,0,0.03) 4px
+      );
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ============================================================
+       UTILITY
+    ============================================================ */
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 24px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .sr-only {
+      position: absolute; width: 1px; height: 1px;
+      padding: 0; margin: -1px; overflow: hidden;
+      clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+    }
+
+    .pixel-border {
+      border: 2px solid var(--border);
+      box-shadow: var(--shadow);
+    }
+
+    .pixel-border-lg {
+      border: 3px solid var(--border);
+      box-shadow: var(--shadow-lg);
+    }
+
+    /* ============================================================
+       ANIMATIONS
+    ============================================================ */
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50%       { opacity: 0.5; transform: scale(0.85); }
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50%       { opacity: 0; }
+    }
+
+    @keyframes marquee {
+      from { transform: translateX(100%); }
+      to   { transform: translateX(-100%); }
+    }
+
+    @keyframes pixelIn {
+      0%   { clip-path: inset(0 100% 0 0); }
+      100% { clip-path: inset(0 0% 0 0); }
+    }
+
+    @keyframes spin {
+      from { transform: rotate(0deg); }
+      to   { transform: rotate(360deg); }
+    }
+
+    @keyframes countdown-bar {
+      from { width: 100%; }
+      to   { width: 0%; }
+    }
+
+    /* ============================================================
+       TICKER
+    ============================================================ */
+    .ticker {
+      background: var(--border);
+      color: var(--accent-inv);
+      overflow: hidden;
+      height: 28px;
+      display: flex;
+      align-items: center;
+      position: relative;
+      z-index: 10;
+    }
+
+    .ticker__label {
+      flex-shrink: 0;
+      padding: 0 12px;
+      font-family: var(--font-pixel);
+      font-size: 7px;
+      letter-spacing: 1px;
+      border-right: 2px solid var(--bg);
+      height: 100%;
+      display: flex;
+      align-items: center;
+    }
+
+    .ticker__track {
+      overflow: hidden;
+      flex: 1;
+      height: 100%;
+      display: flex;
+      align-items: center;
+    }
+
+    .ticker__content {
+      white-space: nowrap;
+      font-family: var(--font-mono);
+      font-size: 16px;
+      animation: marquee 24s linear infinite;
+      letter-spacing: 2px;
+    }
+
+    /* ============================================================
+       NAVIGATION
+    ============================================================ */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--bg);
+      border-bottom: 2px solid var(--border);
+      transition: var(--trans);
+    }
+
+    .nav__inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 56px;
+    }
+
+    .nav__logo {
+      font-family: var(--font-pixel);
+      font-size: 9px;
+      color: var(--text);
+      text-decoration: none;
+      letter-spacing: 1px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .nav__logo-icon {
+      width: 28px;
+      height: 28px;
+      background: var(--text);
+      display: inline-block;
+      position: relative;
+      flex-shrink: 0;
+      image-rendering: pixelated;
+    }
+
+    /* Pixel creeper face */
+    .nav__logo-icon::before,
+    .nav__logo-icon::after {
+      content: '';
+      position: absolute;
+      background: var(--bg);
+    }
+
+    .nav__logo-icon::before {
+      width: 8px; height: 6px;
+      top: 6px; left: 4px;
+      box-shadow: 12px 0 0 var(--bg);
+    }
+
+    .nav__logo-icon::after {
+      width: 12px; height: 4px;
+      top: 16px; left: 8px;
+      box-shadow: -4px -4px 0 var(--bg), 4px -4px 0 var(--bg);
+    }
+
+    .nav__links {
+      display: flex;
+      gap: 2px;
+      list-style: none;
+      align-items: center;
+    }
+
+    .nav__link {
+      font-family: var(--font-pixel);
+      font-size: 7px;
+      color: var(--text-muted);
+      text-decoration: none;
+      padding: 6px 10px;
+      border: 2px solid transparent;
+      transition: color 0.15s, border-color 0.15s, background 0.15s;
+      letter-spacing: 0.5px;
+    }
+
+    .nav__link:hover,
+    .nav__link:focus {
+      color: var(--text);
+      border-color: var(--border);
+      background: var(--bg-alt);
+      outline: none;
+    }
+
+    .theme-toggle {
+      background: var(--bg);
+      border: 2px solid var(--border);
+      color: var(--text);
+      font-family: var(--font-pixel);
+      font-size: 7px;
+      padding: 6px 10px;
+      cursor: pointer;
+      transition: background 0.15s, color 0.15s;
+      letter-spacing: 0.5px;
+    }
+
+    .theme-toggle:hover,
+    .theme-toggle:focus {
+      background: var(--border);
+      color: var(--bg);
+      outline: none;
+    }
+
+    .nav__hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+    }
+
+    .nav__hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--text);
+      transition: var(--trans);
+    }
+
+    /* ============================================================
+       HERO
+    ============================================================ */
+    .hero {
+      padding: 80px 0 60px;
+      border-bottom: 2px solid var(--border);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero__bg-blocks {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
+
+    .hero__block {
+      position: absolute;
+      background: var(--border);
+      opacity: 0.04;
+      image-rendering: pixelated;
+    }
+
+    .hero__block:nth-child(1) { width: 64px; height: 64px; top: 10%; left: 5%; }
+    .hero__block:nth-child(2) { width: 32px; height: 32px; top: 60%; left: 8%; }
+    .hero__block:nth-child(3) { width: 96px; height: 96px; top: 20%; right: 4%; }
+    .hero__block:nth-child(4) { width: 48px; height: 48px; bottom: 10%; right: 12%; }
+    .hero__block:nth-child(5) { width: 32px; height: 32px; top: 5%; right: 20%; }
+    .hero__block:nth-child(6) { width: 64px; height: 64px; bottom: 15%; left: 15%; }
+
+    .hero__content {
+      max-width: 800px;
+      animation: fadeInUp 0.7s ease both;
+    }
+
+    .hero__badge {
+      display: inline-block;
+      border: 2px solid var(--border);
+      font-size: 7px;
+      padding: 4px 10px;
+      margin-bottom: 24px;
+      letter-spacing: 2px;
+      color: var(--text-muted);
+    }
+
+    .hero__title {
+      font-family: var(--font-pixel);
+      font-size: clamp(18px, 4vw, 36px);
+      line-height: 1.5;
+      color: var(--text);
+      margin-bottom: 20px;
+      letter-spacing: 2px;
+    }
+
+    .hero__title .cursor {
+      display: inline-block;
+      width: 3px;
+      height: 1em;
+      background: var(--text);
+      vertical-align: middle;
+      animation: blink 1s step-end infinite;
+      margin-left: 4px;
+    }
+
+    .hero__tagline {
+      font-family: var(--font-mono);
+      font-size: 22px;
+      color: var(--text-muted);
+      margin-bottom: 36px;
+      letter-spacing: 2px;
+      animation: fadeInUp 0.7s 0.15s ease both;
+    }
+
+    .hero__actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      animation: fadeInUp 0.7s 0.25s ease both;
+    }
+
+    .btn {
+      font-family: var(--font-pixel);
+      font-size: 8px;
+      padding: 12px 20px;
+      border: 2px solid var(--border);
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: transform 0.1s, box-shadow 0.1s, background 0.15s, color 0.15s;
+      letter-spacing: 1px;
+      box-shadow: var(--shadow);
+    }
+
+    .btn--primary {
+      background: var(--border);
+      color: var(--accent-inv);
+    }
+
+    .btn--primary:hover,
+    .btn--primary:focus {
+      transform: translate(-2px, -2px);
+      box-shadow: var(--shadow-lg);
+      outline: none;
+    }
+
+    .btn--secondary {
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    .btn--secondary:hover,
+    .btn--secondary:focus {
+      background: var(--bg-alt);
+      transform: translate(-2px, -2px);
+      box-shadow: var(--shadow-lg);
+      outline: none;
+    }
+
+    .btn:active {
+      transform: translate(2px, 2px);
+      box-shadow: none;
+    }
+
+    /* ============================================================
+       SECTION HEADERS
+    ============================================================ */
+    .section-header {
+      margin-bottom: 40px;
+    }
+
+    .section-label {
+      font-size: 7px;
+      color: var(--text-muted);
+      letter-spacing: 3px;
+      margin-bottom: 10px;
+      display: block;
+    }
+
+    .section-title {
+      font-family: var(--font-pixel);
+      font-size: clamp(12px, 2.5vw, 18px);
+      color: var(--text);
+      line-height: 1.6;
+      letter-spacing: 1px;
+    }
+
+    .section-divider {
+      width: 40px;
+      height: 3px;
+      background: var(--border);
+      margin-top: 12px;
+    }
+
+    /* ============================================================
+       STATUS PANEL
+    ============================================================ */
+    #status {
+      padding: 64px 0;
+      border-bottom: 2px solid var(--border);
+    }
+
+    .status-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      border: 2px solid var(--border);
+      box-shadow: var(--shadow-lg);
+      animation: fadeInUp 0.5s ease both;
+    }
+
+    .status-main {
+      border-right: 2px solid var(--border);
+      padding: 32px;
+      background: var(--bg-card);
+    }
+
+    .status-sidebar {
+      padding: 32px;
+      background: var(--bg-card);
+    }
+
+    .status-indicator {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    .status-dot {
+      width: 12px;
+      height: 12px;
+      background: var(--text-muted);
+      flex-shrink: 0;
+    }
+
+    .status-dot.online {
+      background: var(--text);
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    .status-dot.offline {
+      background: var(--text-muted);
+    }
+
+    .status-label {
+      font-family: var(--font-pixel);
+      font-size: 9px;
+      color: var(--text);
+      letter-spacing: 1px;
+    }
+
+    .status-motd {
+      font-family: var(--font-mono);
+      font-size: 20px;
+      color: var(--text-muted);
+      border-left: 3px solid var(--border);
+      padding-left: 12px;
+      margin: 16px 0;
+      line-height: 1.4;
+      word-break: break-word;
+    }
+
+    .status-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 20px;
+    }
+
+    .stat-cell {
+      border: 2px solid var(--border);
+      padding: 12px;
+      background: var(--bg-alt);
+    }
+
+    .stat-cell__label {
+      font-size: 6px;
+      color: var(--text-muted);
+      letter-spacing: 2px;
+      display: block;
+      margin-bottom: 6px;
+    }
+
+    .stat-cell__value {
+      font-family: var(--font-mono);
+      font-size: 22px;
+      color: var(--text);
+      letter-spacing: 1px;
+    }
+
+    /* PLAYER LIST */
+    .player-list-title {
+      font-size: 7px;
+      color: var(--text-muted);
+      letter-spacing: 2px;
+      margin-bottom: 12px;
+    }
+
+    .player-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      max-height: 260px;
+      overflow-y: auto;
+    }
+
+    .player-list::-webkit-scrollbar { width: 4px; }
+    .player-list::-webkit-scrollbar-track { background: var(--bg-alt); }
+    .player-list::-webkit-scrollbar-thumb { background: var(--border-dim); }
+
+    .player-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 8px;
+      background: var(--bg-alt);
+      border: 1px solid var(--border-dim);
+      font-family: var(--font-mono);
+      font-size: 16px;
+      letter-spacing: 1px;
+      color: var(--text);
+      animation: fadeIn 0.3s ease both;
+    }
+
+    .player-avatar {
+      width: 16px;
+      height: 16px;
+      background: var(--border);
+      flex-shrink: 0;
+      image-rendering: pixelated;
+    }
+
+    .player-item img {
+      width: 16px;
+      height: 16px;
+      image-rendering: pixelated;
+    }
+
+    /* REFRESH */
+    .status-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 20px;
+      padding-top: 16px;
+      border-top: 1px solid var(--border-dim);
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .refresh-info {
+      font-family: var(--font-mono);
+      font-size: 14px;
+      color: var(--text-muted);
+      letter-spacing: 1px;
+    }
+
+    .refresh-bar-wrap {
+      flex: 1;
+      min-width: 80px;
+      height: 4px;
+      background: var(--bg-alt);
+      border: 1px solid var(--border-dim);
+      overflow: hidden;
+    }
+
+    .refresh-bar {
+      height: 100%;
+      background: var(--border);
+      width: 100%;
+    }
+
+    .refresh-bar.animating {
+      animation: countdown-bar 30s linear forwards;
+    }
+
+    .refresh-btn {
+      background: none;
+      border: 2px solid var(--border-dim);
+      color: var(--text-muted);
+      font-family: var(--font-pixel);
+      font-size: 6px;
+      padding: 4px 8px;
+      cursor: pointer;
+      transition: border-color 0.15s, color 0.15s;
+      letter-spacing: 1px;
+    }
+
+    .refresh-btn:hover,
+    .refresh-btn:focus {
+      border-color: var(--border);
+      color: var(--text);
+      outline: none;
+    }
+
+    /* SKELETON LOADING */
+    .skeleton {
+      background: linear-gradient(90deg, var(--bg-alt) 25%, var(--bg-card) 50%, var(--bg-alt) 75%);
+      background-size: 200% 100%;
+      animation: shimmer 1.5s infinite;
+      display: block;
+    }
+
+    @keyframes shimmer {
+      from { background-position: 200% 0; }
+      to   { background-position: -200% 0; }
+    }
+
+    .status-loading {
+      text-align: center;
+      padding: 32px;
+    }
+
+    .status-loading__spinner {
+      width: 24px;
+      height: 24px;
+      border: 3px solid var(--border-dim);
+      border-top-color: var(--border);
+      display: inline-block;
+      animation: spin 0.8s linear infinite;
+      margin-bottom: 12px;
+    }
+
+    .status-loading__text {
+      font-size: 7px;
+      color: var(--text-muted);
+      letter-spacing: 2px;
+    }
+
+    /* ERROR */
+    .status-error {
+      grid-column: 1/-1;
+      padding: 40px;
+      text-align: center;
+    }
+
+    .status-error__icon {
+      display: block;
+      font-size: 32px;
+      margin-bottom: 16px;
+      color: var(--text-muted);
+      font-family: var(--font-pixel);
+    }
+
+    .status-error__text {
+      font-size: 8px;
+      color: var(--text-muted);
+      letter-spacing: 1px;
+    }
+
+    /* ============================================================
+       FEATURES
+    ============================================================ */
+    #features {
+      padding: 64px 0;
+      border-bottom: 2px solid var(--border);
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 0;
+      border: 2px solid var(--border);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .feature-card {
+      padding: 28px;
+      background: var(--bg-card);
+      border-right: 2px solid var(--border);
+      border-bottom: 2px solid var(--border);
+      transition: background 0.2s;
+      animation: fadeInUp 0.5s ease both;
+    }
+
+    .feature-card:hover {
+      background: var(--bg-alt);
+    }
+
+    .feature-card:last-child { border-right: none; }
+
+    .feature-icon {
+      width: 40px;
+      height: 40px;
+      border: 2px solid var(--border);
+      background: var(--bg);
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Pixel art block icons via CSS */
+    .icon-grass { background: var(--bg-alt); }
+    .icon-grass::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 10px;
+      background: var(--border);
+    }
+
+    .icon-diamond {
+      background: var(--bg-alt);
+    }
+    .icon-diamond::before {
+      content: '';
+      position: absolute;
+      width: 14px; height: 14px;
+      border: 2px solid var(--border);
+      transform: rotate(45deg);
+    }
+
+    .icon-sword {
+      background: var(--bg-alt);
+    }
+    .icon-sword::before {
+      content: '';
+      position: absolute;
+      width: 4px; height: 20px;
+      background: var(--border);
+    }
+    .icon-sword::after {
+      content: '';
+      position: absolute;
+      width: 14px; height: 4px;
+      background: var(--border);
+      top: 8px;
+    }
+
+    .icon-map {
+      background: var(--bg-alt);
+    }
+    .icon-map::before {
+      content: '';
+      position: absolute;
+      width: 20px; height: 14px;
+      border: 2px solid var(--border);
+    }
+    .icon-map::after {
+      content: '';
+      position: absolute;
+      width: 8px; height: 2px;
+      background: var(--border);
+      top: 12px; left: 6px;
+      box-shadow: 0 4px 0 var(--border);
+    }
+
+    .icon-shield {
+      background: var(--bg-alt);
+    }
+    .icon-shield::before {
+      content: '';
+      position: absolute;
+      width: 16px; height: 10px;
+      border: 2px solid var(--border);
+      border-bottom: none;
+      top: 6px;
+    }
+    .icon-shield::after {
+      content: '';
+      position: absolute;
+      width: 4px; height: 6px;
+      border-left: 2px solid var(--border);
+      border-right: 2px solid var(--border);
+      border-bottom: 2px solid var(--border);
+      bottom: 6px;
+    }
+
+    .icon-chest {
+      background: var(--bg-alt);
+    }
+    .icon-chest::before {
+      content: '';
+      position: absolute;
+      width: 20px; height: 14px;
+      border: 2px solid var(--border);
+      top: 6px;
+    }
+    .icon-chest::after {
+      content: '';
+      position: absolute;
+      width: 6px; height: 4px;
+      border: 2px solid var(--border);
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .feature-name {
+      font-family: var(--font-pixel);
+      font-size: 8px;
+      color: var(--text);
+      margin-bottom: 10px;
+      letter-spacing: 1px;
+    }
+
+    .feature-desc {
+      font-family: var(--font-mono);
+      font-size: 16px;
+      color: var(--text-muted);
+      line-height: 1.5;
+      letter-spacing: 0.5px;
+    }
+
+    /* ============================================================
+       HOW TO JOIN
+    ============================================================ */
+    #join {
+      padding: 64px 0;
+      border-bottom: 2px solid var(--border);
+    }
+
+    .join-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+    }
+
+    .steps {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      border: 2px solid var(--border);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .step {
+      display: flex;
+      gap: 16px;
+      padding: 20px 24px;
+      border-bottom: 2px solid var(--border);
+      background: var(--bg-card);
+      transition: background 0.2s;
+      animation: fadeInUp 0.5s ease both;
+    }
+
+    .step:last-child { border-bottom: none; }
+
+    .step:hover { background: var(--bg-alt); }
+
+    .step__num {
+      font-family: var(--font-pixel);
+      font-size: 14px;
+      color: var(--text-muted);
+      flex-shrink: 0;
+      min-width: 28px;
+    }
+
+    .step__body {}
+
+    .step__title {
+      font-family: var(--font-pixel);
+      font-size: 8px;
+      color: var(--text);
+      margin-bottom: 6px;
+      letter-spacing: 1px;
+    }
+
+    .step__desc {
+      font-family: var(--font-mono);
+      font-size: 16px;
+      color: var(--text-muted);
+      letter-spacing: 0.5px;
+    }
+
+    .join-info {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .ip-box {
+      border: 3px solid var(--border);
+      background: var(--bg-alt);
+      padding: 20px 24px;
+      box-shadow: var(--shadow-lg);
+    }
+
+    .ip-box__label {
+      font-size: 6px;
+      color: var(--text-muted);
+      letter-spacing: 3px;
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    .ip-box__value {
+      font-family: var(--font-mono);
+      font-size: 28px;
+      color: var(--text);
+      letter-spacing: 2px;
+      word-break: break-all;
+    }
+
+    .ip-box__actions {
+      display: flex;
+      gap: 8px;
+      margin-top: 14px;
+    }
+
+    .copy-btn {
+      font-family: var(--font-pixel);
+      font-size: 6px;
+      padding: 6px 12px;
+      border: 2px solid var(--border);
+      background: var(--bg);
+      color: var(--text);
+      cursor: pointer;
+      letter-spacing: 1px;
+      transition: background 0.15s, color 0.15s;
+    }
+
+    .copy-btn:hover,
+    .copy-btn:focus {
+      background: var(--border);
+      color: var(--accent-inv);
+      outline: none;
+    }
+
+    .copy-btn.copied {
+      background: var(--border);
+      color: var(--accent-inv);
+    }
+
+    .version-badge {
+      border: 2px solid var(--border-dim);
+      padding: 10px 16px;
+      background: var(--bg-card);
+    }
+
+    .version-badge__label {
+      font-size: 6px;
+      color: var(--text-muted);
+      letter-spacing: 2px;
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .version-badge__val {
+      font-family: var(--font-mono);
+      font-size: 20px;
+      color: var(--text);
+      letter-spacing: 1px;
+    }
+
+    /* ============================================================
+       FOOTER
+    ============================================================ */
+    footer {
+      border-top: 2px solid var(--border);
+      padding: 40px 0 28px;
+      background: var(--bg-card);
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 40px;
+      margin-bottom: 32px;
+    }
+
+    .footer-brand__name {
+      font-family: var(--font-pixel);
+      font-size: 11px;
+      color: var(--text);
+      display: block;
+      margin-bottom: 10px;
+      letter-spacing: 1px;
+    }
+
+    .footer-brand__desc {
+      font-family: var(--font-mono);
+      font-size: 16px;
+      color: var(--text-muted);
+      line-height: 1.6;
+      letter-spacing: 0.5px;
+    }
+
+    .footer-col__title {
+      font-family: var(--font-pixel);
+      font-size: 7px;
+      color: var(--text);
+      letter-spacing: 2px;
+      margin-bottom: 14px;
+    }
+
+    .footer-col__links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .footer-col__links a {
+      font-family: var(--font-mono);
+      font-size: 16px;
+      color: var(--text-muted);
+      text-decoration: none;
+      letter-spacing: 1px;
+      transition: color 0.15s;
+    }
+
+    .footer-col__links a:hover,
+    .footer-col__links a:focus {
+      color: var(--text);
+      outline: none;
+    }
+
+    .footer-bottom {
+      border-top: 1px solid var(--border-dim);
+      padding-top: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .footer-copy {
+      font-family: var(--font-mono);
+      font-size: 14px;
+      color: var(--text-muted);
+      letter-spacing: 1px;
+    }
+
+    .footer-ip {
+      font-family: var(--font-mono);
+      font-size: 14px;
+      color: var(--text-muted);
+      letter-spacing: 1px;
+      border: 1px solid var(--border-dim);
+      padding: 4px 10px;
+    }
+
+    /* ============================================================
+       RESPONSIVE
+    ============================================================ */
+    @media (max-width: 768px) {
+      .nav__links { display: none; flex-direction: column; position: fixed; top: 56px; left: 0; right: 0; background: var(--bg); border-bottom: 2px solid var(--border); padding: 12px 0; z-index: 99; gap: 0; }
+      .nav__links.open { display: flex; }
+      .nav__link { padding: 10px 20px; border: none; border-bottom: 1px solid var(--border-dim); }
+      .nav__hamburger { display: flex; }
+
+      .status-grid { grid-template-columns: 1fr; }
+      .status-main { border-right: none; border-bottom: 2px solid var(--border); }
+      .status-stats { grid-template-columns: 1fr 1fr; }
+
+      .join-layout { grid-template-columns: 1fr; }
+
+      .footer-grid { grid-template-columns: 1fr; gap: 24px; }
+      .footer-bottom { flex-direction: column; align-items: flex-start; }
+
+      .features-grid { grid-template-columns: 1fr 1fr; }
+      .feature-card:nth-child(even) { border-right: none; }
+    }
+
+    @media (max-width: 480px) {
+      .features-grid { grid-template-columns: 1fr; }
+      .feature-card { border-right: none; }
+      .status-stats { grid-template-columns: 1fr; }
+      .hero__title { font-size: 14px; }
+    }
+  </style>
+</head>
+<body data-theme="light">
+
+  <!-- TICKER -->
+  <div class="ticker" aria-hidden="true">
+    <span class="ticker__label">LIVE</span>
+    <div class="ticker__track">
+      <span class="ticker__content" id="ticker-text">
+        TOPLOARDGG SERVER &nbsp;&nbsp; IP: 176.105.206.143:25565 &nbsp;&nbsp; JOIN NOW &nbsp;&nbsp; MINECRAFT SURVIVAL &nbsp;&nbsp; TOPLOARDGG SERVER &nbsp;&nbsp; IP: 176.105.206.143:25565
+      </span>
+    </div>
+  </div>
+
+  <!-- NAV -->
+  <nav class="nav" role="navigation" aria-label="Main navigation">
+    <div class="container nav__inner">
+      <a href="#" class="nav__logo" aria-label="Toploardgg Home">
+        <span class="nav__logo-icon" aria-hidden="true"></span>
+        TOPLOARDGG
+      </a>
+
+      <ul class="nav__links" id="nav-links" role="list">
+        <li><a href="#status" class="nav__link">STATUS</a></li>
+        <li><a href="#features" class="nav__link">FEATURES</a></li>
+        <li><a href="#join" class="nav__link">JOIN</a></li>
+        <li>
+          <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
+            [ DARK ]
+          </button>
+        </li>
+      </ul>
+
+      <button class="nav__hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-links">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
+
+  <main>
+
+    <!-- HERO -->
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero__bg-blocks" aria-hidden="true">
+        <div class="hero__block"></div>
+        <div class="hero__block"></div>
+        <div class="hero__block"></div>
+        <div class="hero__block"></div>
+        <div class="hero__block"></div>
+        <div class="hero__block"></div>
+      </div>
+
+      <div class="container">
+        <div class="hero__content">
+          <span class="hero__badge">MINECRAFT MULTIPLAYER SERVER</span>
+
+          <h1 class="hero__title" id="hero-title">
+            TOPLOARDGG<span class="cursor" aria-hidden="true"></span>
+          </h1>
+
+          <p class="hero__tagline">
+            BUILD. SURVIVE. CONQUER. YOUR WORLD AWAITS.
+          </p>
+
+          <div class="hero__actions">
+            <a href="#join" class="btn btn--primary">
+              HOW TO JOIN
+            </a>
+            <a href="#status" class="btn btn--secondary">
+              SERVER STATUS
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- STATUS -->
+    <section id="status" aria-labelledby="status-heading">
+      <div class="container" style="padding-top: 64px; padding-bottom: 64px;">
+        <div class="section-header">
+          <span class="section-label">REAL-TIME</span>
+          <h2 class="section-title" id="status-heading">SERVER STATUS</h2>
+          <div class="section-divider"></div>
         </div>
 
-        <!-- Site Loader -->
-        <div id="site-loader" class="site-loader">
-            <div class="loader-overlay"></div>
-            <div class="loader-content">
-                <div class="loader-avatar">S</div>
-                <div class="loader-row">
-                    <span class="loader-left">Toploardgg</span>
-                    <span class="loader-center">Website</span>
-                    <span class="loader-right">Portfolio</span>
-                </div>
-                <div class="loader-link">
-                    <img
-                        src="https://twemoji.maxcdn.com/v/latest/svg/1f310.svg"
-                        alt="🌐"
-                    />
-                    <span>www.Toploardgg.com</span>
-                </div>
-            </div>
+        <div class="status-grid pixel-border-lg" id="status-panel">
+          <!-- Filled by JS -->
+          <div class="status-loading" id="status-loading" style="grid-column:1/-1;">
+            <div class="status-loading__spinner" aria-hidden="true"></div>
+            <p class="status-loading__text">FETCHING SERVER DATA...</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FEATURES -->
+    <section id="features" aria-labelledby="features-heading">
+      <div class="container" style="padding-top: 64px; padding-bottom: 64px;">
+        <div class="section-header">
+          <span class="section-label">WHAT WE OFFER</span>
+          <h2 class="section-title" id="features-heading">SERVER FEATURES</h2>
+          <div class="section-divider"></div>
         </div>
 
-        <div class="pin">
-            <div class="pin-text">
-                <h1>Toploardgg</h1>
-                <p class="pin-tagline">Python Dev · Designer · Athlete</p>
-            </div>
-            <img
-                src="photopin.png"
-                alt="pin"
-                loading="lazy"
-                onerror="this.style.display = 'none'"
-            />
+        <div class="features-grid">
+          <div class="feature-card">
+            <div class="feature-icon icon-grass" aria-hidden="true"></div>
+            <h3 class="feature-name">SURVIVAL MODE</h3>
+            <p class="feature-desc">Classic hardcore survival with no hand-holding. Gather, craft, build and defend your world from the ground up.</p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon icon-diamond" aria-hidden="true"></div>
+            <h3 class="feature-name">ECONOMY</h3>
+            <p class="feature-desc">Player-driven market system. Trade items, set up shops, and build your in-game wealth through skill and commerce.</p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon icon-sword" aria-hidden="true"></div>
+            <h3 class="feature-name">PVP ARENAS</h3>
+            <p class="feature-desc">Dedicated PvP zones for those who want to test their combat skills against the sharpest players on the server.</p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon icon-map" aria-hidden="true"></div>
+            <h3 class="feature-name">LIVE MAP</h3>
+            <p class="feature-desc">Real-time Dynmap browser view of the entire world. Explore explored territory and scout build locations remotely.</p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon icon-shield" aria-hidden="true"></div>
+            <h3 class="feature-name">LAND CLAIM</h3>
+            <p class="feature-desc">Protect your builds with a simple land claiming system. No grief, no stress. Your creations stay yours.</p>
+          </div>
+
+          <div class="feature-card" style="border-right:2px solid var(--border);">
+            <div class="feature-icon icon-chest" aria-hidden="true"></div>
+            <h3 class="feature-name">EVENTS</h3>
+            <p class="feature-desc">Seasonal community events, build contests, and special game modes with exclusive rewards and bragging rights.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- JOIN -->
+    <section id="join" aria-labelledby="join-heading">
+      <div class="container" style="padding-top: 64px; padding-bottom: 64px;">
+        <div class="section-header">
+          <span class="section-label">GET STARTED</span>
+          <h2 class="section-title" id="join-heading">HOW TO JOIN</h2>
+          <div class="section-divider"></div>
         </div>
 
-        <!-- Home Section -->
-        <div class="container">
-            <div class="header card">
-                <div class="profile">
-                    <div class="avatar">S</div>
-                    <div class="title">
-                        <h1>Stanislav</h1>
-                        <p>Python Developer · Designer · Athlete</p>
-
-                        <div class="stats-row">
-                        <button type="button" class="stat" data-img="2024.png">
-                            <span class="text-default">2+ Years Coding</span>
-                            <span class="text-hover">See my first project</span>
-                        </button>
-                            <span class="divider">|</span>
-
-                            <a class="stat" href="#projects-grid"
-                                >15+ Projects</a
-                            >
-                            <span class="divider">|</span>
-
-                            <a
-                                class="stat"
-                                href="https://en.wikipedia.org/wiki/Open-source_software"
-                                target="_blank"
-                                >Open Source Contributor</a
-                            >
-                        </div>
-                    </div>
+        <div class="join-layout">
+          <!-- STEPS -->
+          <div>
+            <ol class="steps" aria-label="Steps to join the server">
+              <li class="step">
+                <span class="step__num" aria-hidden="true">01</span>
+                <div class="step__body">
+                  <h3 class="step__title">LAUNCH MINECRAFT</h3>
+                  <p class="step__desc">Open the Minecraft Java Edition launcher and log in with your Microsoft or Mojang account.</p>
                 </div>
+              </li>
+              <li class="step">
+                <span class="step__num" aria-hidden="true">02</span>
+                <div class="step__body">
+                  <h3 class="step__title">GO TO MULTIPLAYER</h3>
+                  <p class="step__desc">From the main menu, click "Multiplayer" then click "Add Server" at the bottom of the screen.</p>
+                </div>
+              </li>
+              <li class="step">
+                <span class="step__num" aria-hidden="true">03</span>
+                <div class="step__body">
+                  <h3 class="step__title">ENTER THE SERVER IP</h3>
+                  <p class="step__desc">Type the server address into the "Server Address" field exactly as shown in the box below, then click Done.</p>
+                </div>
+              </li>
+              <li class="step">
+                <span class="step__num" aria-hidden="true">04</span>
+                <div class="step__body">
+                  <h3 class="step__title">CONNECT & PLAY</h3>
+                  <p class="step__desc">Select Toploardgg from your server list and click Join Server. Welcome to the community.</p>
+                </div>
+              </li>
+            </ol>
+          </div>
+
+          <!-- IP BOX -->
+          <div class="join-info">
+            <div class="ip-box" role="region" aria-label="Server connection details">
+              <span class="ip-box__label">SERVER ADDRESS</span>
+              <div class="ip-box__value" id="ip-display" aria-live="polite">176.105.206.143:25565</div>
+              <div class="ip-box__actions">
+                <button class="copy-btn" id="copy-ip" aria-label="Copy server IP address to clipboard">
+                  COPY IP
+                </button>
+                <button class="copy-btn" id="copy-port" aria-label="Copy port to clipboard">
+                  COPY PORT
+                </button>
+              </div>
             </div>
 
-            <main class="main">
-                <section class="card" id="about">
-                    <div class="section-title"><h2>About Me</h2></div>
-                    <div class="paragraph">
-                        I build thoughtful software with Python, I have been
-                        programming for more than two years and I am
-                        self-taught. I have many projects that I have not
-                        published yet but will be ready soon. Focusing on
-                        backend systems, and clean integrations. I blend
-                        technical work with design sense to create maintainable,
-                        useful tools. I train regularly and stay physically
-                        active. I value consistency, simplicity, and elegant
-                        problem solving. I've been learning programming for over
-                        two years.
-                    </div>
-                    <div class="paragraph paragraph-extra-margin">
-                        I program a lot in Python and maintain an active
-                        lifestyle through regular training. I create open-source
-                        projects, contribute to the community, and constantly
-                        learn new technologies. Always open to interesting
-                        collaborations and challenging projects.
-                    </div>
-                </section>
+            <div class="version-badge">
+              <span class="version-badge__label">RECOMMENDED VERSION</span>
+              <span class="version-badge__val" id="version-info-join">LOADING...</span>
+            </div>
 
-                <section class="card" id="support">
-                    <div class="section-title"><h2>Support My Work</h2></div>
-                    <div class="paragraph">
-                        Support my work via PayPal or GitHub sponsors. Donations
-                        help me maintain and create new projects. Every
-                        contribution is greatly appreciated!
-                    </div>
-                    <div class="support-buttons">
-                        <a
-                            class="button"
-                            href="https://www.paypal.com/donate/?hosted_button_id=4SMQQCUXN8HQE"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            >Donate via PayPal</a
-                        >
-                        <a
-                            class="button"
-                            href="https://github.com/toploardgg"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            >Sponsor on GitHub</a
-                        >
-                    </div>
-                </section>
-                <section class="stats">
-                    <div class="section-title"><h2>Dev Stats</h2></div>
-                    <div class="paragraph">
-                        Language breakdown, file sizes and work hours.
-                    </div>
-                    <div class="support-buttons">
-                        <a class="button" href="/stats.html">View Stats →</a>
-                    </div>
-                </section>
-            </main>
+            <div class="version-badge">
+              <span class="version-badge__label">SERVER SOFTWARE</span>
+              <span class="version-badge__val">JAVA EDITION</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-            <aside class="aside">
-                <div class="card">
-                    <div class="section-title">
-                        <h2>Professional Profile</h2>
-                    </div>
-                    <div class="paragraph">
-                        Experienced with Python development, scripting, API
-                        integration, and full-stack web development. Comfortable
-                        with debugging, tooling, and iterative design. Open to
-                        collaborations on backend, frontend, and design-focused
-                        projects.
-                    </div>
-                        <div class="skills">
-                            <a class="skill" href="https://en.wikipedia.org/wiki/Python_(programming_language)">Python</a>
-                            <a class="skill" href="https://en.wikipedia.org/wiki/JavaScript">JavaScript</a>
-                            <a class="skill" href="https://en.wikipedia.org/wiki/API">APIs</a>
-                            <a class="skill" href="https://en.wikipedia.org/wiki/HTML">HTML/CSS</a>
-                            <a class="skill" href="https://en.wikipedia.org/wiki/Backend">Backend</a>
-                            <a class="skill" href="https://en.wikipedia.org/wiki/Frontend_web_development">Frontend</a>
-                            <a class="skill" href="https://en.wikipedia.org/wiki/Design">Design</a>
-                        </div>
-                </div>
+  </main>
 
-                <div class="card">
-                    <h3 class="contacts-title">Contacts</h3>
-                    <div>
-                        <a
-                            href="mailto:stanislavworksite@gmail.com"
-                            rel="noopener noreferrer"
-                            class="contact-link"
-                        >
-                            <div class="contact-item">
-                                <div class="contact-icon">
-                                    <i class="fa-solid fa-envelope"></i>
-                                </div>
-                                <div class="contact-info">
-                                    <div class="contact-label">Email</div>
-                                    <div class="contact-value">
-                                        stanislavworksite@gmail.com
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-
-                        <a
-                            href="https://t.me/messagemrloardbot"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            class="contact-link"
-                        >
-                            <div class="contact-item">
-                                <div class="contact-icon">
-                                    <i class="fa-brands fa-telegram"></i>
-                                </div>
-                                <div class="contact-info">
-                                    <div class="contact-label">Telegram</div>
-                                    <div class="contact-value">
-                                        @messagemrloardbot
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-
-                        <a
-                            href="https://github.com/toploardgg"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            class="contact-link"
-                        >
-                            <div class="contact-item">
-                                <div class="contact-icon">
-                                    <i class="fa-brands fa-github"></i>
-                                </div>
-                                <div class="contact-info">
-                                    <div class="contact-label">GitHub</div>
-                                    <div class="contact-value">@toploardgg</div>
-                                </div>
-                            </div>
-                        </a>
-
-                        <a
-                            href="https://www.paypal.com/donate/?hosted_button_id=4SMQQCUXN8HQE"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            class="contact-link"
-                        >
-                            <div class="contact-item">
-                                <div class="contact-icon">
-                                    <i class="fa-brands fa-paypal"></i>
-                                </div>
-                                <div class="contact-info">
-                                    <div class="contact-label">PayPal</div>
-                                    <div class="contact-value">Donate</div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-            </aside>
+  <!-- FOOTER -->
+  <footer role="contentinfo">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <span class="footer-brand__name">TOPLOARDGG</span>
+          <p class="footer-brand__desc">
+            A Minecraft survival server built for players who want a genuine experience.
+            No pay-to-win. No nonsense. Just good gameplay and a solid community.
+          </p>
         </div>
 
-        <!-- Photos Section -->
-        <div class="Photos">
-            <div class="container single-column">
-                <div class="section-title"><h1>Photos</h1></div>
-                <div class="photos-grid">
-                    <div class="photo-item">
-                        <img
-                            src="photo.png"
-                            alt="Photo 1"
-                            loading="lazy"
-                            onerror="this.style.display = 'none'"
-                        />
-                        <p>Kali linux experience</p>
-                    </div>
-                    <div class="photo-item">
-                        <img
-                            src="photo1.png"
-                            alt="Photo 2"
-                            loading="lazy"
-                            onerror="this.style.display = 'none'"
-                        />
-                        <p>Photo from the holiday</p>
-                    </div>
-                    <div class="photo-item">
-                        <img
-                            src="photo2.png"
-                            alt="Photo 3"
-                            loading="lazy"
-                            onerror="this.style.display = 'none'"
-                        />
-                        <p>Project "Hacker Rain"</p>
-                    </div>
-                    <div class="photo-item">
-                        <img
-                            src="photo3.png"
-                            alt="Photo 4"
-                            loading="lazy"
-                            onerror="this.style.display = 'none'"
-                        />
-                        <p>vibe photo</p>
-                    </div>
-                </div>
-            </div>
+        <nav aria-label="Footer navigation">
+          <h3 class="footer-col__title">NAVIGATION</h3>
+          <ul class="footer-col__links" role="list">
+            <li><a href="#status">SERVER STATUS</a></li>
+            <li><a href="#features">FEATURES</a></li>
+            <li><a href="#join">HOW TO JOIN</a></li>
+          </ul>
+        </nav>
+
+        <div>
+          <h3 class="footer-col__title">COMMUNITY</h3>
+          <ul class="footer-col__links" role="list">
+            <li><a href="#" aria-label="Discord (coming soon)">DISCORD</a></li>
+            <li><a href="#" aria-label="Twitter (coming soon)">TWITTER</a></li>
+            <li><a href="#" aria-label="Reddit (coming soon)">REDDIT</a></li>
+          </ul>
         </div>
+      </div>
 
-        <!-- Projects Section -->
-        <div class="container single-column">
-            <div class="projects-section">
-                <header class="page-header">
-                    <h1>My Projects</h1>
-                    <p>Open-source tools, experiments, and creative coding.</p>
-                    <p>Most projects are temporarily unpublished.</p>
-                </header>
+      <div class="footer-bottom">
+        <p class="footer-copy">
+          &copy; <span id="copy-year"></span> TOPLOARDGG. ALL RIGHTS RESERVED.
+        </p>
+        <span class="footer-ip" aria-label="Server IP address">
+          IP: 176.105.206.143:25565
+        </span>
+      </div>
+    </div>
+  </footer>
 
-                <div class="projects-grid" id="projects-grid">
-                    <a
-                        href="https://github.com/toploardgg/Suggestion-bot"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        class="project-link"
-                    >
-                        <div class="project">
-                            <div class="project-title">
-                                <i class="fa-solid fa-paper-plane"></i>
-                                Suggestion-bot
-                                <div class="star-badge">⭐ Public</div>
-                            </div>
-                            <div class="project-desc">
-                                Bot for sending ideas, suggestions, and feedback
-                                directly to the creator in a simple and
-                                anonymous way.
-                            </div>
-                            <div class="project-meta">
-                                <div class="project-tag">Python</div>
-                                <div class="project-tag">Telegram Bot</div>
-                                <div class="project-tag">MIT License</div>
-                            </div>
-                        </div>
-                    </a>
+  <script>
+    'use strict';
 
-                    <a
-                        href="https://github.com/toploardgg/hacker-rain"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        class="project-link"
-                    >
-                        <div class="project">
-                            <div class="project-title">
-                                <i class="fa-solid fa-terminal"></i> hacker-rain
-                                <div class="star-badge">⭐ Public</div>
-                            </div>
-                            <div class="project-desc">
-                                Matrix movie hacker rain that opens in
-                                fullscreen (Borderless Window) with 0s and 1s
-                                (binary code).
-                            </div>
-                            <div class="project-meta">
-                                <div class="project-tag">Python</div>
-                                <div class="project-tag">Pygame</div>
-                                <div class="project-tag">MIT License</div>
-                            </div>
-                        </div>
-                    </a>
+    /* ============================================================
+       THEME TOGGLE
+    ============================================================ */
+    const root      = document.documentElement.querySelector('body');
+    const themeBtn  = document.getElementById('theme-toggle');
+    const THEME_KEY = 'toploardgg-theme';
 
-                    <a
-                        href="https://github.com/toploardgg/toploardgg.github.io"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        class="project-link"
-                    >
-                        <div class="project">
-                            <div class="project-title">
-                                <i class="fa-solid fa-globe"></i> Toploardgg
-                                <div class="star-badge">⭐ Public</div>
-                            </div>
-                            <div class="project-desc">
-                                Modern, interactive portfolio website with
-                                glassmorphism design and smooth animations.
-                                Fully responsive and optimized for all devices.
-                            </div>
-                            <div class="project-meta">
-                                <div class="project-tag">HTML/CSS/JS</div>
-                                <div class="project-tag">Design</div>
-                                <div class="project-tag">MIT License</div>
-                            </div>
-                        </div>
-                    </a>
+    function applyTheme(theme) {
+      root.setAttribute('data-theme', theme);
+      themeBtn.textContent = theme === 'dark' ? '[ LIGHT ]' : '[ DARK ]';
+      localStorage.setItem(THEME_KEY, theme);
+    }
 
-                    <a
-                        href="https://github.com/toploardgg/loard"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        class="project-link"
-                    >
-                        <div class="project">
-                            <div class="project-title">
-                                <i class="fa-solid fa-wifi"></i> LOARDw
-                                <div class="star-badge">⭐ Public</div>
-                            </div>
-                            <div class="project-desc">
-                                An internet utility for viewing almost all
-                                information about the internet. The password is
-                                only shown when connected to the network.
-                            </div>
-                            <div class="project-meta">
-                                <div class="project-tag">Python</div>
-                                <div class="project-tag">WiFi</div>
-                                <div class="project-tag">MIT License</div>
-                            </div>
-                        </div>
-                    </a>
-                </div>
+    const savedTheme = localStorage.getItem(THEME_KEY) || 'light';
+    applyTheme(savedTheme);
+
+    themeBtn.addEventListener('click', () => {
+      const current = root.getAttribute('data-theme');
+      applyTheme(current === 'dark' ? 'light' : 'dark');
+    });
+
+    /* ============================================================
+       HAMBURGER
+    ============================================================ */
+    const hamburger = document.getElementById('hamburger');
+    const navLinks  = document.getElementById('nav-links');
+
+    hamburger.addEventListener('click', () => {
+      const open = navLinks.classList.toggle('open');
+      hamburger.setAttribute('aria-expanded', open);
+    });
+
+    // Close on nav link click (mobile)
+    navLinks.querySelectorAll('.nav__link').forEach(link => {
+      link.addEventListener('click', () => {
+        navLinks.classList.remove('open');
+        hamburger.setAttribute('aria-expanded', false);
+      });
+    });
+
+    /* ============================================================
+       COPY BUTTONS
+    ============================================================ */
+    function copyToClipboard(text, btn, label) {
+      navigator.clipboard.writeText(text).then(() => {
+        const orig = btn.textContent;
+        btn.textContent = 'COPIED!';
+        btn.classList.add('copied');
+        setTimeout(() => {
+          btn.textContent = orig;
+          btn.classList.remove('copied');
+        }, 2000);
+      }).catch(() => {
+        // fallback
+        const ta = document.createElement('textarea');
+        ta.value = text;
+        ta.style.position = 'fixed';
+        ta.style.opacity = '0';
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand('copy');
+        document.body.removeChild(ta);
+        const orig = btn.textContent;
+        btn.textContent = 'COPIED!';
+        btn.classList.add('copied');
+        setTimeout(() => {
+          btn.textContent = orig;
+          btn.classList.remove('copied');
+        }, 2000);
+      });
+    }
+
+    document.getElementById('copy-ip').addEventListener('click', function() {
+      copyToClipboard('176.105.206.143:25565', this);
+    });
+
+    document.getElementById('copy-port').addEventListener('click', function() {
+      copyToClipboard('25565', this);
+    });
+
+    /* ============================================================
+       FOOTER YEAR
+    ============================================================ */
+    document.getElementById('copy-year').textContent = new Date().getFullYear();
+
+    /* ============================================================
+       SERVER STATUS
+    ============================================================ */
+    const API_URL     = 'https://api.mcsrvstat.us/3/176.105.206.143:25565';
+    const REFRESH_INT = 30;
+
+    let countdownTimer = null;
+    let refreshTimer   = null;
+    let countdownSec   = REFRESH_INT;
+
+    function stripMotd(raw) {
+      if (!raw) return '';
+      // Strip Minecraft color codes § and §x sequences
+      return raw.replace(/§[0-9a-fklmnor]/gi, '').trim();
+    }
+
+    function buildStatusHTML(data) {
+      const online  = data && data.online;
+      const players = online ? (data.players || {}) : {};
+      const online_count = players.online !== undefined ? players.online : 'N/A';
+      const max_count    = players.max    !== undefined ? players.max    : 'N/A';
+      const version      = online && data.version ? data.version : 'N/A';
+      const motd_raw     = online && data.motd && data.motd.clean
+                           ? (Array.isArray(data.motd.clean) ? data.motd.clean.join(' ') : data.motd.clean)
+                           : (online ? 'Toploardgg Server' : 'Server offline');
+      const motd         = stripMotd(motd_raw) || 'Toploardgg Server';
+      const ping         = online && data.debug && data.debug.ping ? data.debug.ping + ' ms' : 'N/A';
+      const world        = online && data.map ? data.map : 'N/A';
+      const player_list  = (online && players.list) ? players.list : [];
+
+      // Update version in join section
+      const verJoin = document.getElementById('version-info-join');
+      if (verJoin) verJoin.textContent = version !== 'N/A' ? version : 'JAVA EDITION';
+
+      let playerListHTML = '';
+      if (player_list.length > 0) {
+        const items = player_list.map(p => {
+          const name = typeof p === 'object' ? (p.name || 'Unknown') : p;
+          const uuid = typeof p === 'object' ? p.uuid : null;
+          const avatarSrc = uuid
+            ? `https://api.mcsrvstat.us/icon/${name}`
+            : null;
+          return `
+            <li class="player-item">
+              ${avatarSrc
+                ? `<img src="${avatarSrc}" alt="" aria-hidden="true" width="16" height="16" onerror="this.style.display='none'">`
+                : `<span class="player-avatar" aria-hidden="true"></span>`}
+              ${name}
+            </li>`;
+        }).join('');
+        playerListHTML = `
+          <p class="player-list-title" aria-label="${player_list.length} players online">
+            ONLINE PLAYERS [${player_list.length}]
+          </p>
+          <ul class="player-list" aria-label="List of online players">
+            ${items}
+          </ul>`;
+      } else if (online) {
+        playerListHTML = `
+          <p class="player-list-title">ONLINE PLAYERS</p>
+          <p style="font-family:var(--font-mono);font-size:16px;color:var(--text-muted);letter-spacing:1px;">
+            ${online_count > 0 ? 'Player list hidden by server.' : 'No players online right now.'}
+          </p>`;
+      } else {
+        playerListHTML = `
+          <p class="player-list-title">ONLINE PLAYERS</p>
+          <p style="font-family:var(--font-mono);font-size:16px;color:var(--text-muted);letter-spacing:1px;">
+            Server is offline.
+          </p>`;
+      }
+
+      return `
+        <div class="status-main">
+          <div class="status-indicator">
+            <span class="status-dot ${online ? 'online' : 'offline'}" role="img" aria-label="${online ? 'Server online' : 'Server offline'}"></span>
+            <span class="status-label">${online ? 'SERVER ONLINE' : 'SERVER OFFLINE'}</span>
+          </div>
+
+          <p class="status-motd" aria-label="Message of the day">${motd || 'No MOTD available'}</p>
+
+          <div class="status-stats">
+            <div class="stat-cell">
+              <span class="stat-cell__label">PLAYERS</span>
+              <span class="stat-cell__value">${online_count} / ${max_count}</span>
             </div>
-
-            <div class="view-all-wrapper">
-                <a
-                    class="button"
-                    href="https://github.com/toploardgg?tab=repositories"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    >View All Repositories on GitHub →</a
-                >
+            <div class="stat-cell">
+              <span class="stat-cell__label">VERSION</span>
+              <span class="stat-cell__value" style="font-size:16px;">${version}</span>
             </div>
-        </div>
-
-        <!-- Comments Section -->
-        <div class="comments-section" id="comments-section">
-            <div class="container single-column">
-                <div class="section-title">
-                    <h1>Comments</h1>
-                </div>
-
-                <div class="comments-layout">
-                    <!-- Form card -->
-                    <div class="comment-form-card card">
-                        <h2 class="comment-form-heading">Leave a comment</h2>
-
-                        <div class="comment-rate-banner" id="commentRateBanner">
-                            <i class="fa-solid fa-circle-info"></i>
-                            <span id="commentRateText"
-                                >You can post up to 3 comments per month.</span
-                            >
-                        </div>
-
-                        <div class="comment-field-row">
-                            <label class="c-label">
-                                <input
-                                    type="text"
-                                    class="c-input"
-                                    id="c-name"
-                                    placeholder="Your name"
-                                    autocomplete="off"
-                                    maxlength="60"
-                                />
-                                <span class="c-icon"
-                                    ><i class="fa-solid fa-user"></i
-                                ></span>
-                            </label>
-                            <label class="c-label">
-                                <input
-                                    type="email"
-                                    class="c-input"
-                                    id="c-email"
-                                    placeholder="Email"
-                                    autocomplete="off"
-                                    maxlength="120"
-                                />
-                                <span class="c-icon"
-                                    ><i class="fa-solid fa-envelope"></i
-                                ></span>
-                            </label>
-                        </div>
-
-                        <div class="c-textarea-wrap">
-                            <textarea
-                                id="c-text"
-                                placeholder="Write your comment…"
-                                maxlength="1000"
-                            ></textarea>
-                            <span class="c-char-count" id="charCount"
-                                >0 / 1000</span
-                            >
-                        </div>
-
-                        <div class="c-photo-wrap" id="c-photo-drop">
-                            <input
-                                type="file"
-                                id="c-photo"
-                                accept="image/png, image/jpeg"
-                                style="display: none"
-                            />
-                            <div class="c-photo-inner">
-                                <i class="fa-solid fa-cloud-arrow-up"></i>
-                                <span class="c-photo-hint"
-                                    >Drag & drop or
-                                    <label for="c-photo" class="c-photo-click"
-                                        >click to upload</label
-                                    ></span
-                                >
-                                <span class="c-photo-sub"
-                                    >PNG or JPG · max 10 MB</span
-                                >
-                            </div>
-                            <span id="c-photo-name" class="c-photo-name"></span>
-                        </div>
-
-                        <p
-                            class="comment-error"
-                            id="commentError"
-                            aria-live="polite"
-                        ></p>
-
-                        <button class="comment-submit btn" id="commentSubmit">
-                            <i class="fa-solid fa-paper-plane"></i>&nbsp;
-                            Publish Comment
-                        </button>
-                    </div>
-
-                    <!-- Comments list -->
-                    <div class="comment-list" id="commentList"></div>
-                </div>
+            <div class="stat-cell">
+              <span class="stat-cell__label">PING</span>
+              <span class="stat-cell__value">${ping}</span>
             </div>
-        </div>
-
-        <!-- Footer -->
-        <div class="container single-column">
-            <div class="footer">
-                © 2026 Stanislav ·
-                <a
-                    href="https://github.com/toploardgg"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    >GitHub</a
-                >
-                <a href="about.html">About the Site</a>
+            <div class="stat-cell">
+              <span class="stat-cell__label">MAP / WORLD</span>
+              <span class="stat-cell__value" style="font-size:16px;">${world}</span>
             </div>
-        </div>
+          </div>
 
-        <!-- Lightbox -->
-        <div class="lightbox" id="lightbox">
-            <div class="lightbox-overlay"></div>
-            <img class="lightbox-img" id="lightbox-img" src="" alt="" />
-            <button class="lightbox-close">✕</button>
-            <button
-                class="lightbox-arrow lightbox-arrow--prev"
-                id="lightbox-prev"
-            >
-                &#8592;
+          <div class="status-footer">
+            <span class="refresh-info" aria-live="polite" id="countdown-label">REFRESH IN <span id="countdown">${REFRESH_INT}</span>s</span>
+            <div class="refresh-bar-wrap" aria-hidden="true">
+              <div class="refresh-bar" id="refresh-bar"></div>
+            </div>
+            <button class="refresh-btn" id="manual-refresh" aria-label="Manually refresh server status">
+              REFRESH
             </button>
-            <button
-                class="lightbox-arrow lightbox-arrow--next"
-                id="lightbox-next"
-            >
-                &#8594;
-            </button>
+          </div>
         </div>
 
-        <script src="script.js"></script>
-    </body>
+        <div class="status-sidebar">
+          ${playerListHTML}
+        </div>
+      `;
+    }
+
+    function buildErrorHTML() {
+      return `
+        <div class="status-error" role="alert">
+          <span class="status-error__icon" aria-hidden="true">X X</span>
+          <p class="status-error__text">
+            UNABLE TO REACH SERVER STATUS API.<br>
+            CHECK YOUR CONNECTION OR TRY AGAIN SHORTLY.
+          </p>
+          <button class="btn btn--secondary" id="retry-btn" style="margin-top:20px;font-size:7px;" aria-label="Retry fetching server status">
+            RETRY
+          </button>
+        </div>`;
+    }
+
+    function startCountdown() {
+      clearInterval(countdownTimer);
+      countdownSec = REFRESH_INT;
+
+      // restart bar animation
+      const bar = document.getElementById('refresh-bar');
+      if (bar) {
+        bar.classList.remove('animating');
+        void bar.offsetWidth; // reflow
+        bar.classList.add('animating');
+      }
+
+      countdownTimer = setInterval(() => {
+        countdownSec--;
+        const el = document.getElementById('countdown');
+        if (el) el.textContent = countdownSec;
+        if (countdownSec <= 0) {
+          clearInterval(countdownTimer);
+        }
+      }, 1000);
+    }
+
+    async function fetchStatus() {
+      const panel = document.getElementById('status-panel');
+
+      try {
+        const controller = new AbortController();
+        const timeout = setTimeout(() => controller.abort(), 10000);
+
+        const res  = await fetch(API_URL, { signal: controller.signal });
+        clearTimeout(timeout);
+
+        if (!res.ok) throw new Error('API error: ' + res.status);
+
+        const data = await res.json();
+        panel.innerHTML = buildStatusHTML(data);
+      } catch (err) {
+        panel.innerHTML = buildErrorHTML();
+        const retryBtn = document.getElementById('retry-btn');
+        if (retryBtn) retryBtn.addEventListener('click', () => {
+          panel.innerHTML = '<div class="status-loading" id="status-loading" style="grid-column:1/-1;"><div class="status-loading__spinner"></div><p class="status-loading__text">FETCHING SERVER DATA...</p></div>';
+          scheduleRefresh();
+        });
+        return;
+      }
+
+      // Bind manual refresh
+      const manualBtn = document.getElementById('manual-refresh');
+      if (manualBtn) {
+        manualBtn.addEventListener('click', () => {
+          clearInterval(countdownTimer);
+          clearTimeout(refreshTimer);
+          panel.innerHTML = '<div class="status-loading" id="status-loading" style="grid-column:1/-1;"><div class="status-loading__spinner"></div><p class="status-loading__text">FETCHING SERVER DATA...</p></div>';
+          scheduleRefresh();
+        });
+      }
+
+      startCountdown();
+    }
+
+    function scheduleRefresh() {
+      clearTimeout(refreshTimer);
+      fetchStatus().then(() => {
+        refreshTimer = setTimeout(scheduleRefresh, REFRESH_INT * 1000);
+      });
+    }
+
+    // Initial fetch
+    scheduleRefresh();
+
+    /* ============================================================
+       SMOOTH SCROLL KEYBOARD ACCESS
+    ============================================================ */
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('keydown', e => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          const target = document.querySelector(anchor.getAttribute('href'));
+          if (target) target.focus({ preventScroll: false });
+        }
+      });
+    });
+  </script>
+
+</body>
 </html>
