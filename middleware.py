@@ -49,30 +49,30 @@ def _get_client_ip(request) -> str:
 # ─────────────────────────────────────────────────────────────────────────────
 # 1. HTTP → HTTPS
 # ─────────────────────────────────────────────────────────────────────────────
-#class HttpsRedirectMiddleware:
-#    """
-#    Redirects plain HTTP to HTTPS on production.
-#    Skips redirect for localhost / 127.0.0.1 / ::1 and when DEBUG=True.
-#    """
-#    LOCAL_HOSTS = {"localhost", "127.0.0.1", "::1"}
-#
-#    def __init__(self, get_response):
-#        self.get_response = get_response
-#
-#    def __call__(self, request):
-#        host = request.get_host().split(":")[0]
-#        proto = request.META.get("HTTP_X_FORWARDED_PROTO", "")
-#
-#        # Використовуємо settings.DEBUG (а не голий DEBUG — це була помилка)
-#        if host in self.LOCAL_HOSTS or settings.DEBUG:
-#            return self.get_response(request)
-#
-#        if proto == "http":
-#            secure_url = request.build_absolute_uri().replace("http://", "https://", 1)
-#            return redirect(secure_url, permanent=True)
-#
-#        return self.get_response(request)
-#
+class HttpsRedirectMiddleware:
+    """
+    Redirects plain HTTP to HTTPS on production.
+    Skips redirect for localhost / 127.0.0.1 / ::1 and when DEBUG=True.
+    """
+    LOCAL_HOSTS = {"localhost", "127.0.0.1", "::1"}
+
+    def __init__(self, get_response):
+        self.get_response = get_response
+
+    def __call__(self, request):
+        host = request.get_host().split(":")[0]
+        proto = request.META.get("HTTP_X_FORWARDED_PROTO", "")
+
+        # Використовуємо settings.DEBUG (а не голий DEBUG — це була помилка)
+        if host in self.LOCAL_HOSTS or settings.DEBUG:
+            return self.get_response(request)
+
+        if proto == "http":
+            secure_url = request.build_absolute_uri().replace("http://", "https://", 1)
+            return redirect(secure_url, permanent=True)
+
+        return self.get_response(request)
+
 
 # ─────────────────────────────────────────────────────────────────────────────
 # 2. Security Headers

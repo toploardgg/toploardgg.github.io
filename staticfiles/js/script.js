@@ -11,11 +11,21 @@ function getCsrfToken() {
 // Theme Toggle
 
 // ─────────────────────────────────────────
+const getSystemTheme = () =>
+  window.matchMedia &&
+    window.matchMedia("(prefers-color-scheme: light)").matches
+    ? "light"
+    : "dark";
+
 document.addEventListener("DOMContentLoaded", () => {
   const themeBtn = document.querySelector(".theme-btn");
 
   const savedTheme = localStorage.getItem("theme");
-  const isLight = savedTheme === "light";
+
+  const isLight =
+    savedTheme !== null
+      ? savedTheme === "light"
+      : getSystemTheme() === "light";
 
   const applyTheme = (light) => {
     if (light) {
@@ -853,7 +863,7 @@ if (lightbox) {
           btn.classList.add("liked");
           if (icon) icon.textContent = "♥";
         }
-      } catch (_) {}
+      } catch (_) { }
     }
 
     btn.addEventListener("click", async () => {
@@ -871,7 +881,7 @@ if (lightbox) {
             setTimeout(() => btn.classList.remove("pop"), 300);
           }
         }
-      } catch (_) {}
+      } catch (_) { }
     });
 
     if (document.querySelector(".blog-img")) {
@@ -913,8 +923,8 @@ if (lightbox) {
       document
         .querySelectorAll(
           ".project, .photo-item, .c-card, .contact-item, " +
-            ".section-title, .paragraph, .support-buttons, .view-all-wrapper, " +
-            ".comment-form-card, .comment-list",
+          ".section-title, .paragraph, .support-buttons, .view-all-wrapper, " +
+          ".comment-form-card, .comment-list",
         )
         .forEach((el, i) => {
           el.classList.add("reveal");

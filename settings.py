@@ -6,8 +6,9 @@ from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent
 
+
 # ─── Core ─────────────────────────────────────────────────────────────────────
-SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY")
+SECRET_KEY = "django-insecure-dev-key"
 if not SECRET_KEY:
     raise RuntimeError(
         "DJANGO_SECRET_KEY environment variable is not set. "
@@ -69,6 +70,7 @@ DATABASES = {
         "CONN_MAX_AGE": 60,
     }
 }
+
 # ─── Static files ─────────────────────────────────────────────────────────────
 STATIC_URL = "/static/"
 STATICFILES_DIRS = [BASE_DIR / "static"]
@@ -90,21 +92,27 @@ if DEBUG:
     SECURE_HSTS_INCLUDE_SUBDOMAINS = False
     SECURE_HSTS_PRELOAD = False
 else:
-    SECURE_PROXY_SSL_HEADER = None # ("HTTP_X_FORWARDED_PROTO", "https")
-    SESSION_COOKIE_SECURE = False
-    CSRF_COOKIE_SECURE = False
-    SECURE_SSL_REDIRECT = False
-    SECURE_HSTS_SECONDS = 0
-    SECURE_HSTS_INCLUDE_SUBDOMAINS = False
-    SECURE_HSTS_PRELOAD = False
+    SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https") # ("HTTP_X_FORWARDED_PROTO", "https")
+    SESSION_COOKIE_SECURE = True
+    CSRF_COOKIE_SECURE = True
+    SECURE_SSL_REDIRECT = True
+    SECURE_HSTS_SECONDS = 31536000
+    SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+    SECURE_HSTS_PRELOAD = True
 
 SESSION_COOKIE_HTTPONLY = True
 SESSION_COOKIE_SAMESITE = "Lax"
-CSRF_COOKIE_HTTPONLY = False   # False — щоб JS міг читати токен
+CSRF_COOKIE_HTTPONLY = True  # False — щоб JS міг читати токен
 CSRF_COOKIE_SAMESITE = "Lax"
 SECURE_BROWSER_XSS_FILTER = True
 SECURE_CONTENT_TYPE_NOSNIFF = True
 X_FRAME_OPTIONS = "DENY"
+CSRF_TRUSTED_ORIGINS = [
+    'https://toploardgg.duckdns.org',
+    'http://toploardgg.duckdns.org',
+]
+
+CSRF_TRUSTED_ORIGINS.append('https://176.105.206.143')
 
 # ─── Logging ──────────────────────────────────────────────────────────────────
 LOGGING = {

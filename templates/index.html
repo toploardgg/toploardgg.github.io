@@ -1,84 +1,44 @@
 {% load static %}
 <!doctype html>
 <html lang="en">
+
     <head>
         <meta charset="UTF-8" />
-        <meta
-            name="viewport"
-            content="width=device-width, initial-scale=1.0, viewport-fit=cover"
-        />
-        <meta
-            name="apple-mobile-web-app-status-bar-style"
-            content="black-translucent"
-        />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
         <meta name="color-scheme" content="dark light" />
+        <meta name="theme-color" content="#000000">
         <title>Toploardgg</title>
         <link rel="icon" href="{% static 'img/icon.png' %}" type="image/png" />
-        <link
-            rel="stylesheet"
-            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
-            crossorigin="anonymous"
-        />
-        <meta
-            name="description"
-            content="Photo gallery showcasing training, lifestyle, and moments from my journey as a developer and athlete."
-        />
-        <meta
-            name="keywords"
-            content="Photography, Lifestyle, Training, Developer Life, Athlete"
-        />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+            crossorigin="anonymous" />
+        <meta name="description"
+            content="Photo gallery showcasing training, lifestyle, and moments from my journey as a developer and athlete." />
+        <meta name="keywords" content="Photography, Lifestyle, Training, Developer Life, Athlete" />
         <meta name="author" content="Stanislav" />
         <meta name="robots" content="index, follow" />
         <meta name="referrer" content="strict-origin-when-cross-origin" />
-        <meta
-            property="og:title"
-            content="Toploardgg — Python Dev & Designer"
-        />
-        <meta
-            property="og:description"
-            content="Portfolio of Stanislav. Python, JS, open-source projects."
-        />
-        <meta
-            property="og:image"
-            content="https://toploardgg.github.io/photopin.png"
-        />
+        <meta property="og:title" content="Toploardgg — Python Dev & Designer" />
+        <meta property="og:description" content="Portfolio of Stanislav. Python, JS, open-source projects." />
+        <meta property="og:image" content="https://toploardgg.github.io/photopin.png" />
 
         <meta property="og:url" content="https://toploardgg.github.io/" />
         <meta property="og:type" content="website" />
         <link rel="canonical" href="https://toploardgg.github.io/" />
-        <link rel="stylesheet" href="/static/css/style.css" />
-        <link rel="stylesheet" href="/static/css/style-light.css" />
-        <link
-            rel="alternate"
-            href="http://toploardgg.duckdns.org/"
-            hreflang="en"
-        />
-        <link
-            rel="alternate"
-            href="http://toploardgg.duckdns.org/ru/"
-            hreflang="ru"
-        />
-        <link
-            rel="alternate"
-            href="http://toploardgg.duckdns.org/uk/"
-            hreflang="uk"
-        />
-        <link
-            rel="alternate"
-            href="http://toploardgg.duckdns.org/"
-            hreflang="x-default"
-        />
+        <link rel="stylesheet" href="{% static 'css/style.css' %}">
+        <link rel="stylesheet" href="{% static 'css/style-light.css' %}">
+        <link rel="alternate" href="http://toploardgg.duckdns.org/" hreflang="en" />
+        <link rel="alternate" href="http://toploardgg.duckdns.org/ru/" hreflang="ru" />
+        <link rel="alternate" href="http://toploardgg.duckdns.org/uk/" hreflang="uk" />
+        <link rel="alternate" href="http://toploardgg.duckdns.org/" hreflang="x-default" />
     </head>
+
     <body class="has-fixed-tabs">
         <!-- Navigation Tabs -->
         <div class="tabs">
             <div class="tabs-inner">
                 <div class="func-wrapper left">
-                    <button
-                        type="button"
-                        class="func-button search-btn"
-                        aria-label="Open search"
-                    >
+                    <button type="button" class="func-button search-btn" aria-label="Open search">
                         <i class="fa-solid fa-search" aria-hidden="true"></i>
                     </button>
                     <div class="popover search-popover">
@@ -98,10 +58,7 @@
                 </div>
 
                 <div class="func-wrapper right">
-                    <button
-                        class="func-button theme-btn"
-                        aria-label="Toggle theme"
-                    >
+                    <button class="func-button theme-btn" aria-label="Toggle theme">
                         <i class="fa-solid fa-moon"></i>
                     </button>
                 </div>
@@ -119,10 +76,7 @@
                     <span class="loader-right">Portfolio</span>
                 </div>
                 <div class="loader-link">
-                    <img
-                        src="https://twemoji.maxcdn.com/v/latest/svg/1f310.svg"
-                        alt="🌐"
-                    />
+                    <img src="https://twemoji.maxcdn.com/v/latest/svg/1f310.svg" alt="🌐" />
                     <span>www.Toploardgg.com</span>
                 </div>
             </div>
@@ -133,12 +87,7 @@
                 <h1>Toploardgg</h1>
                 <p class="pin-tagline">Python Dev · Designer · Athlete</p>
             </div>
-            <img
-                src="{% static 'img/photopin.png' %}"
-                alt="pin"
-                loading="lazy"
-                onerror="this.style.display = 'none'"
-            />
+            <img src="{% static 'img/photopin.png' %}" alt="pin" loading="lazy" onerror="this.style.display = 'none'" />
         </div>
 
         <!-- Home Section -->
@@ -149,41 +98,29 @@
                     <div class="title">
                         <h1>Stanislav</h1>
                         <p>Python Developer · Designer · Athlete</p>
-
                         <div class="stats-row">
-                            <button
-                                type="button"
-                                class="stat"
-                                data-img="{% static 'img/2024.png' %}"
-                            >
-                                <span class="text-default"
-                                    >2+ Years Coding</span
-                                >
-                                <span class="text-hover"
-                                    >See my first project</span
-                                >
+                            <button type="button" class="stat" data-img="{% static 'img/2024.png' %}">
+                                <span class="text-default">2+ Years Coding</span>
+                                <span class="text-hover">See my first project</span>
                             </button>
                             <span class="divider">|</span>
 
-                            <a class="stat" href="#projects-grid"
-                                >15+ Projects</a
-                            >
+                            <a class="stat" href="#projects-grid">15+ Projects</a>
                             <span class="divider">|</span>
 
-                            <a
-                                class="stat"
-                                href="https://en.wikipedia.org/wiki/Open-source_software"
-                                target="_blank"
-                                >Open Source Contributor</a
-                            >
+                            <a class="stat" href="https://en.wikipedia.org/wiki/Open-source_software"
+                                target="_blank">Open Source Contributor</a>
                         </div>
+
                     </div>
                 </div>
             </div>
 
             <main class="main">
                 <section class="card" id="about">
-                    <div class="section-title"><h2>About Me</h2></div>
+                    <div class="section-title">
+                        <h2>About Me</h2>
+                    </div>
                     <div class="paragraph">
                         I build thoughtful software with Python, I have been
                         programming for more than two years and I am
@@ -206,7 +143,9 @@
                 </section>
 
                 <section class="card" id="support">
-                    <div class="section-title"><h2>Support My Work</h2></div>
+                    <div class="section-title">
+                        <h2>Support My Work</h2>
+                    </div>
                     <div class="paragraph">
                         Support my work via PayPal or GitHub sponsors. Donations
                         help me maintain and create new projects and I'll be
@@ -214,31 +153,23 @@
                         contribution is greatly appreciated!
                     </div>
                     <div class="support-buttons">
-                        <a
-                            class="button"
-                            href="https://www.paypal.com/donate/?hosted_button_id=4SMQQCUXN8HQE"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            >Donate via PayPal</a
-                        >
-                        <a
-                            class="button"
-                            href="https://github.com/toploardgg"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            >Sponsor on GitHub</a
-                        >
+                        <a class="button" href="https://www.paypal.com/donate/?hosted_button_id=4SMQQCUXN8HQE"
+                            target="_blank" rel="noopener noreferrer">Donate via PayPal</a>
+                        <a class="button" href="https://github.com/toploardgg" target="_blank"
+                            rel="noopener noreferrer">Sponsor on GitHub</a>
                     </div>
                 </section>
                 <section class="stats">
-                    <div class="section-title"><h2>Dev Stats</h2></div>
+                    <div class="section-title">
+                        <h2>Dev Stats</h2>
+                    </div>
                     <div class="paragraph">
                         Language breakdown, file sizes and work hours.
                     </div>
-<div class="support-buttons">
-    <a class="button" href="{% url 'config' %}">View Setup →</a>
-    <a class="button" href="{% url 'stats' %}">View Stats →</a>
-</div>
+                    <div class="support-buttons">
+                        <a class="button" href="{% url 'config' %}">View Setup →</a>
+                        <a class="button" href="{% url 'stats' %}">View Stats →</a>
+                    </div>
                 </section>
             </main>
 
@@ -255,52 +186,20 @@
                         projects.
                     </div>
                     <div class="skills">
-                        <a
-                            class="skill"
-                            href="https://en.wikipedia.org/wiki/Python_(programming_language)"
-                            >Python</a
-                        >
-                        <a
-                            class="skill"
-                            href="https://en.wikipedia.org/wiki/JavaScript"
-                            >JavaScript</a
-                        >
-                        <a
-                            class="skill"
-                            href="https://en.wikipedia.org/wiki/API"
-                            >APIs</a
-                        >
-                        <a
-                            class="skill"
-                            href="https://en.wikipedia.org/wiki/HTML"
-                            >HTML/CSS</a
-                        >
-                        <a
-                            class="skill"
-                            href="https://en.wikipedia.org/wiki/Backend"
-                            >Backend</a
-                        >
-                        <a
-                            class="skill"
-                            href="https://en.wikipedia.org/wiki/Frontend_web_development"
-                            >Frontend</a
-                        >
-                        <a
-                            class="skill"
-                            href="https://en.wikipedia.org/wiki/Design"
-                            >Design</a
-                        >
+                        <a class="skill" href="https://en.wikipedia.org/wiki/Python_(programming_language)">Python</a>
+                        <a class="skill" href="https://en.wikipedia.org/wiki/JavaScript">JavaScript</a>
+                        <a class="skill" href="https://en.wikipedia.org/wiki/API">APIs</a>
+                        <a class="skill" href="https://en.wikipedia.org/wiki/HTML">HTML/CSS</a>
+                        <a class="skill" href="https://en.wikipedia.org/wiki/Backend">Backend</a>
+                        <a class="skill" href="https://en.wikipedia.org/wiki/Frontend_web_development">Frontend</a>
+                        <a class="skill" href="https://en.wikipedia.org/wiki/Design">Design</a>
                     </div>
                 </div>
 
                 <div class="card">
                     <h3 class="contacts-title">Contacts</h3>
                     <div>
-                        <a
-                            href="mailto:stanislavworksite@gmail.com"
-                            rel="noopener noreferrer"
-                            class="contact-link"
-                        >
+                        <a href="mailto:stanislavworksite@gmail.com" rel="noopener noreferrer" class="contact-link">
                             <div class="contact-item">
                                 <div class="contact-icon">
                                     <i class="fa-solid fa-envelope"></i>
@@ -314,12 +213,8 @@
                             </div>
                         </a>
 
-                        <a
-                            href="https://t.me/messagemrloardbot"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            class="contact-link"
-                        >
+                        <a href="https://t.me/messagemrloardbot" target="_blank" rel="noopener noreferrer"
+                            class="contact-link">
                             <div class="contact-item">
                                 <div class="contact-icon">
                                     <i class="fa-brands fa-telegram"></i>
@@ -333,12 +228,8 @@
                             </div>
                         </a>
 
-                        <a
-                            href="https://github.com/toploardgg"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            class="contact-link"
-                        >
+                        <a href="https://github.com/toploardgg" target="_blank" rel="noopener noreferrer"
+                            class="contact-link">
                             <div class="contact-item">
                                 <div class="contact-icon">
                                     <i class="fa-brands fa-github"></i>
@@ -350,12 +241,8 @@
                             </div>
                         </a>
 
-                        <a
-                            href="https://www.paypal.com/donate/?hosted_button_id=4SMQQCUXN8HQE"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            class="contact-link"
-                        >
+                        <a href="https://www.paypal.com/donate/?hosted_button_id=4SMQQCUXN8HQE" target="_blank"
+                            rel="noopener noreferrer" class="contact-link">
                             <div class="contact-item">
                                 <div class="contact-icon">
                                     <i class="fa-brands fa-paypal"></i>
@@ -374,42 +261,28 @@
         <!-- Photos Section -->
         <div class="Photos">
             <div class="container single-column">
-                <div class="section-title"><h1>Photos</h1></div>
+                <div class="section-title">
+                    <h1>Photos</h1>
+                </div>
                 <div class="photos-grid">
                     <div class="photo-item">
-                        <img
-                            src='{% static "img/photo.png" %}'
-                            alt="Photo 1"
-                            loading="lazy"
-                            onerror="this.style.display = 'none'"
-                        />
+                        <img src='{% static "img/photo.png" %}' alt="Photo 1" loading="lazy"
+                            onerror="this.style.display = 'none'" />
                         <p>Kali linux experience</p>
                     </div>
                     <div class="photo-item">
-                        <img
-                            src='{% static "img/photo1.png" %}'
-                            alt="Photo 2"
-                            loading="lazy"
-                            onerror="this.style.display = 'none'"
-                        />
+                        <img src='{% static "img/photo1.png" %}' alt="Photo 2" loading="lazy"
+                            onerror="this.style.display = 'none'" />
                         <p>Photo from the holiday</p>
                     </div>
                     <div class="photo-item">
-                        <img
-                            src='{% static "img/photo2.png" %}'
-                            alt="Photo 3"
-                            loading="lazy"
-                            onerror="this.style.display = 'none'"
-                        />
+                        <img src='{% static "img/photo2.png" %}' alt="Photo 3" loading="lazy"
+                            onerror="this.style.display = 'none'" />
                         <p>Project "Hacker Rain"</p>
                     </div>
                     <div class="photo-item">
-                        <img
-                            src='{% static "img/photo3.png" %}'
-                            alt="Photo 4"
-                            loading="lazy"
-                            onerror="this.style.display = 'none'"
-                        />
+                        <img src='{% static "img/photo3.png" %}' alt="Photo 4" loading="lazy"
+                            onerror="this.style.display = 'none'" />
                         <p>vibe photo</p>
                     </div>
                 </div>
@@ -422,16 +295,11 @@
                 <header class="page-header">
                     <h1>My Projects</h1>
                     <p>Open-source tools, experiments, and creative coding.</p>
-                    <p>Most projects are temporarily unpublished.</p>
                 </header>
 
                 <div class="projects-grid" id="projects-grid">
-                    <a
-                        href="https://github.com/toploardgg/Suggestion-bot"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        class="project-link"
-                    >
+                    <a href="https://github.com/toploardgg/Suggestion-bot" target="_blank" rel="noopener noreferrer"
+                        class="project-link">
                         <div class="project">
                             <div class="project-title">
                                 <i class="fa-solid fa-paper-plane"></i>
@@ -451,12 +319,8 @@
                         </div>
                     </a>
 
-                    <a
-                        href="https://github.com/toploardgg/hacker-rain"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        class="project-link"
-                    >
+                    <a href="https://github.com/toploardgg/hacker-rain" target="_blank" rel="noopener noreferrer"
+                        class="project-link">
                         <div class="project">
                             <div class="project-title">
                                 <i class="fa-solid fa-terminal"></i> hacker-rain
@@ -475,12 +339,8 @@
                         </div>
                     </a>
 
-                    <a
-                        href="https://github.com/toploardgg/toploardgg.github.io"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        class="project-link"
-                    >
+                    <a href="https://github.com/toploardgg/toploardgg.github.io" target="_blank"
+                        rel="noopener noreferrer" class="project-link">
                         <div class="project">
                             <div class="project-title">
                                 <i class="fa-solid fa-globe"></i> Toploardgg
@@ -499,12 +359,8 @@
                         </div>
                     </a>
 
-                    <a
-                        href="https://github.com/toploardgg/loard"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        class="project-link"
-                    >
+                    <a href="https://github.com/toploardgg/loard" target="_blank" rel="noopener noreferrer"
+                        class="project-link">
                         <div class="project">
                             <div class="project-title">
                                 <i class="fa-solid fa-wifi"></i> LOARDw
@@ -526,13 +382,8 @@
             </div>
 
             <div class="view-all-wrapper">
-                <a
-                    class="button"
-                    href="https://github.com/toploardgg?tab=repositories"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    >View All Repositories on GitHub →</a
-                >
+                <a class="button" href="https://github.com/toploardgg?tab=repositories" target="_blank"
+                    rel="noopener noreferrer">View All Repositories on GitHub →</a>
             </div>
         </div>
 
@@ -550,78 +401,39 @@
 
                         <div class="comment-rate-banner" id="commentRateBanner">
                             <i class="fa-solid fa-circle-info"></i>
-                            <span id="commentRateText"
-                                >You can post up to 3 comments per month.</span
-                            >
+                            <span id="commentRateText">You can post up to 3 comments per month.</span>
                         </div>
 
                         <div class="comment-field-row">
                             <label class="c-label">
-                                <input
-                                    type="text"
-                                    class="c-input"
-                                    id="c-name"
-                                    placeholder="Your name"
-                                    autocomplete="off"
-                                    maxlength="60"
-                                />
-                                <span class="c-icon"
-                                    ><i class="fa-solid fa-user"></i
-                                ></span>
+                                <input type="text" class="c-input" id="c-name" placeholder="Your name"
+                                    autocomplete="off" maxlength="60" />
+                                <span class="c-icon"><i class="fa-solid fa-user"></i></span>
                             </label>
                             <label class="c-label">
-                                <input
-                                    type="email"
-                                    class="c-input"
-                                    id="c-email"
-                                    placeholder="Email"
-                                    autocomplete="off"
-                                    maxlength="120"
-                                />
-                                <span class="c-icon"
-                                    ><i class="fa-solid fa-envelope"></i
-                                ></span>
+                                <input type="email" class="c-input" id="c-email" placeholder="Email" autocomplete="off"
+                                    maxlength="120" />
+                                <span class="c-icon"><i class="fa-solid fa-envelope"></i></span>
                             </label>
                         </div>
 
                         <div class="c-textarea-wrap">
-                            <textarea
-                                id="c-text"
-                                placeholder="Write your comment…"
-                                maxlength="1000"
-                            ></textarea>
-                            <span class="c-char-count" id="charCount"
-                                >0 / 1000</span
-                            >
+                            <textarea id="c-text" placeholder="Write your comment…" maxlength="1000"></textarea>
+                            <span class="c-char-count" id="charCount">0 / 1000</span>
                         </div>
 
                         <div class="c-photo-wrap" id="c-photo-drop">
-                            <input
-                                type="file"
-                                id="c-photo"
-                                accept="image/png, image/jpeg"
-                                style="display: none"
-                            />
+                            <input type="file" id="c-photo" accept="image/png, image/jpeg" style="display: none" />
                             <div class="c-photo-inner">
                                 <i class="fa-solid fa-cloud-arrow-up"></i>
-                                <span class="c-photo-hint"
-                                    >Drag & drop or
-                                    <label for="c-photo" class="c-photo-click"
-                                        >click to upload</label
-                                    ></span
-                                >
-                                <span class="c-photo-sub"
-                                    >PNG or JPG · max 10 MB</span
-                                >
+                                <span class="c-photo-hint">Drag & drop or
+                                    <label for="c-photo" class="c-photo-click">click to upload</label></span>
+                                <span class="c-photo-sub">PNG or JPG · max 10 MB</span>
                             </div>
                             <span id="c-photo-name" class="c-photo-name"></span>
                         </div>
 
-                        <p
-                            class="comment-error"
-                            id="commentError"
-                            aria-live="polite"
-                        ></p>
+                        <p class="comment-error" id="commentError" aria-live="polite"></p>
 
                         <button class="comment-submit btn" id="commentSubmit">
                             <i class="fa-solid fa-paper-plane"></i>&nbsp;
@@ -642,23 +454,12 @@
                     <h1>Blog</h1>
                 </div>
                 <div class="blog-card">
-                    <img
-                        class="blog-img"
-                        src="{% static 'img/blog.png' %}"
-                        alt="Blog"
-                        loading="lazy"
-                        onerror="this.style.display = 'none'"
-                    />
+                    <img class="blog-img" src="{% static 'img/blog.png' %}" alt="Blog" loading="lazy"
+                        onerror="this.style.display = 'none'" />
                     <div class="blog-footer">
-                        <button
-                            class="blog-like-btn"
-                            id="blogLikeBtn"
-                            aria-label="Like"
-                        >
+                        <button class="blog-like-btn" id="blogLikeBtn" aria-label="Like">
                             <span class="blog-like-icon">♡</span>
-                            <span class="blog-like-count" id="blogLikeCount"
-                                >0</span
-                            >
+                            <span class="blog-like-count" id="blogLikeCount">0</span>
                         </button>
                         <p class="blog-text">
                             it's boring being ill all the time
@@ -672,12 +473,7 @@
         <div class="container single-column">
             <div class="footer">
                 © 2026 Stanislav ·
-                <a
-                    href="https://github.com/toploardgg"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    >GitHub</a
-                >
+                <a href="https://github.com/toploardgg" target="_blank" rel="noopener noreferrer">GitHub</a>
                 <a href="{% url 'about' %}">About the Site</a>
             </div>
         </div>
@@ -687,20 +483,15 @@
             <div class="lightbox-overlay"></div>
             <img class="lightbox-img" id="lightbox-img" src="" alt="" />
             <button class="lightbox-close">✕</button>
-            <button
-                class="lightbox-arrow lightbox-arrow--prev"
-                id="lightbox-prev"
-            >
+            <button class="lightbox-arrow lightbox-arrow--prev" id="lightbox-prev">
                 &#8592;
             </button>
-            <button
-                class="lightbox-arrow lightbox-arrow--next"
-                id="lightbox-next"
-            >
+            <button class="lightbox-arrow lightbox-arrow--next" id="lightbox-next">
                 &#8594;
             </button>
         </div>
 
         <script src="{% static 'js/script.js' %}"></script>
     </body>
+
 </html>

@@ -6,47 +6,88 @@ function getCsrfToken() {
   return match ? decodeURIComponent(match[1]) : "";
 }
 
-//─────────────────────────────────────────
-
-// Theme Toggle
-
 // ─────────────────────────────────────────
-const getSystemTheme = () =>
-  window.matchMedia &&
-    window.matchMedia("(prefers-color-scheme: light)").matches
-    ? "light"
-    : "dark";
-
+// Theme Toggle
+// ─────────────────────────────────────────
 document.addEventListener("DOMContentLoaded", () => {
   const themeBtn = document.querySelector(".theme-btn");
 
-  const savedTheme = localStorage.getItem("theme");
+  let savedTheme = localStorage.getItem("theme");
 
-  const isLight =
-    savedTheme !== null
-      ? savedTheme === "light"
-      : getSystemTheme() === "light";
+  if (!savedTheme) {
+    savedTheme = window.matchMedia("(prefers-color-scheme: dark)").matches
+      ? "dark"
+      : "light";
+  }
 
-  const applyTheme = (light) => {
-    if (light) {
-      document.body.classList.add("light");
-      if (themeBtn) themeBtn.innerHTML = '<i class="fa-solid fa-sun"></i>';
-    } else {
-      document.body.classList.remove("light");
-      if (themeBtn) themeBtn.innerHTML = '<i class="fa-solid fa-moon"></i>';
+  const applyTheme = (theme) => {
+    const isLight = theme === "light";
+
+    document.body.classList.toggle("light", isLight);
+
+    document.documentElement.style.colorScheme = isLight
+      ? "light"
+      : "dark";
+
+    document.body.style.backgroundColor = isLight
+      ? "#ffffff"
+      : "#0f1115";
+
+    document.body.style.color = isLight
+      ? "#000000"
+      : "#ffffff";
+
+    document.querySelectorAll("*").forEach((el) => {
+      const style = window.getComputedStyle(el);
+
+      if (
+        !isLight &&
+        (
+          style.color === "rgb(0, 0, 0)" ||
+          style.color === "rgb(17, 17, 17)" ||
+          style.color === "rgb(34, 34, 34)"
+        )
+      ) {
+        el.style.color = "#ffffff";
+      }
+
+      if (
+        isLight &&
+        style.color === "rgb(255, 255, 255)"
+      ) {
+        el.style.color = "#000000";
+      }
+    });
+
+    if (themeBtn) {
+      themeBtn.innerHTML = isLight
+        ? '<i class="fa-solid fa-sun"></i>'
+        : '<i class="fa-solid fa-moon"></i>';
     }
   };
 
-  applyTheme(isLight);
+  applyTheme(savedTheme);
 
   if (themeBtn) {
     themeBtn.addEventListener("click", () => {
-      const nowLight = !document.body.classList.contains("light");
-      applyTheme(nowLight);
-      localStorage.setItem("theme", nowLight ? "light" : "dark");
+      const newTheme = document.body.classList.contains("light")
+        ? "dark"
+        : "light";
+
+      localStorage.setItem("theme", newTheme);
+      applyTheme(newTheme);
     });
   }
+
+  window
+    .matchMedia("(prefers-color-scheme: dark)")
+    .addEventListener("change", (e) => {
+      if (!localStorage.getItem("theme")) {
+        applyTheme(e.matches ? "dark" : "light");
+      }
+    });
 });
+
 // ─────────────────────────────────────────
 // Toast
 // ─────────────────────────────────────────
@@ -863,7 +904,7 @@ if (lightbox) {
           btn.classList.add("liked");
           if (icon) icon.textContent = "♥";
         }
-      } catch (_) { }
+      } catch (_) {}
     }
 
     btn.addEventListener("click", async () => {
@@ -881,7 +922,7 @@ if (lightbox) {
             setTimeout(() => btn.classList.remove("pop"), 300);
           }
         }
-      } catch (_) { }
+      } catch (_) {}
     });
 
     if (document.querySelector(".blog-img")) {
@@ -923,8 +964,8 @@ if (lightbox) {
       document
         .querySelectorAll(
           ".project, .photo-item, .c-card, .contact-item, " +
-          ".section-title, .paragraph, .support-buttons, .view-all-wrapper, " +
-          ".comment-form-card, .comment-list",
+            ".section-title, .paragraph, .support-buttons, .view-all-wrapper, " +
+            ".comment-form-card, .comment-list",
         )
         .forEach((el, i) => {
           el.classList.add("reveal");
